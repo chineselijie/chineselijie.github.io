@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>FTP服务 | Li Jie&#39;s blog</title>
+  <meta name="keywords" content=" linux进阶 ">
+  <meta name="description" content="FTP服务 | Li Jie&#39;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Li Jie&#39;s blog">
+<meta property="og:url" content="https://github.com/chineselijie/about/index.html">
+<meta property="og:site_name" content="Li Jie&#39;s blog">
+<meta property="og:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-28T17:25:29.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Li Jie&#39;s blog">
+<meta name="twitter:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Li Jie</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="facebook" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-facebook"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/ff56736de7cf" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(41)</small></div></li>
+    
+        
+            
+            <li><div data-rel="linux基础">linux基础<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="python">python<small>(8)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="linux进阶">linux进阶<small>(12)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="linux运维">linux运维<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="41">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux基础</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux进阶</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux运维</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/1.RHEL 7.4 实验环境搭建/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="RHEL 7.4 实验环境搭建">RHEL 7.4 实验环境搭建</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/11.linux--网络进阶管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="网络进阶管理">网络进阶管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/2.python--计算机数据存储与进制/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python 计算机数据存储与进制">python 计算机数据存储与进制</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/7.linux--正则表达式/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="正则表达式">正则表达式</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/7.谈Python变量和数据类型/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="谈Python变量和数据类型">谈Python变量和数据类型</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/9.linux--shell脚本进阶/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本进阶">shell脚本进阶</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/1.linux--openssh/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="openssh">openssh</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/08/29/1.linux--初步熟悉RHEL 8/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="初步熟悉RHEL 8">初步熟悉RHEL 8</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/1.python--python基础理论讲解/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python基础理论讲解">python基础理论讲解</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/08/29/1.网络--子网划分/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="子网划分">子网划分</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/10.linux--shell脚本笔记(脚本)/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本笔记(脚本)">shell脚本笔记(脚本)</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/11.linux--ISCSI服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="ISCSI服务">ISCSI服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/14.linux--LVM磁盘管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="LVM磁盘管理">LVM磁盘管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/15.linux--linux基础练习/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="linux基础练习">linux基础练习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/16.linux--RHCSA模拟/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="RHCSA复习">RHCSA复习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/2.linux--FTP服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="FTP服务">FTP服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/2.rsync/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="rsync">rsync</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/3.linux--samba服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="samba服务">samba服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/3.python--第一章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第一章">python第一章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/3.zabbix/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="zabbix">zabbix</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/4.linux--权限管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="权限管理">权限管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/5.linux--linux计划任务/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux计划任务">Linux计划任务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/6.linux--httpd服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="httpd服务">httpd服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/6.python--第四章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第四章">python第四章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/8.linux--shell脚本基础/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本基础">shell脚本基础</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/8.linux--软件管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="软件管理">软件管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/8.python的文件处理/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python文件处理">python文件处理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/12.linux--源码安装包管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="源码安装管理">源码安装管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/2.基础linux命令/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux基础命令">Linux基础命令</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/4.linux--NFS服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="NFS服务">NFS服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/4.python--第二章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第二章">python第二章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/5.linux--MariaDB数据库/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="MariaDB数据库">MariaDB数据库</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/5.python--第三章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第三章">python第三章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/6.linux--yum工具的使用/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="yum工具的使用">yum工具的使用</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/7.linux--用户和组管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="用户和组管理">用户和组管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/1.linux--LNMP/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="LNMP">LNMP</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/13.linux--linux系统磁盘管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux系统磁盘管理">Linux系统磁盘管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/9.linux--linux进程管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="linux进程管理">linux进程管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/3.linux--linux基础/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux基础">Linux基础</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/10.linux--网络基础管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="网络基础管理">网络基础管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/13.linux--RHCE  认证考试练习/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="RHCE 认证考试练习">RHCE 认证考试练习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-2.linux--FTP服务" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">FTP服务</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="linux进阶">linux进阶</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color3">linux进阶</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-08-22 20:18:33'>2019-08-29 23:44</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP简介"><span class="toc-text">FTP简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP架构"><span class="toc-text">FTP架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP数据连接模式"><span class="toc-text">FTP数据连接模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户认证"><span class="toc-text">用户认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vsftpd"><span class="toc-text">vsftpd</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vsftpd安装"><span class="toc-text">vsftpd安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vsftpd配置"><span class="toc-text">vsftpd配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vsftpd虚拟用户配置"><span class="toc-text">vsftpd虚拟用户配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#练习"><span class="toc-text">练习</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>关于作者</strong></p>
+<p><strong>周李杰</strong>，最后一批90后，现居<strong>湖北武汉</strong></p>
+<p>孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。</p>
+<p>兴趣众多，然无一精通。正努力成为一个有趣的人。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>[TOC]</p>
+<h2 id="FTP简介"><a href="#FTP简介" class="headerlink" title="FTP简介"></a>FTP简介</h2><p>网络文件共享服务主流的主要有三种，分别是<strong>ftp</strong>、<strong>nfs</strong>、<strong>samba</strong></p>
+<p><strong>FTP</strong>:<a href="https://baike.baidu.com/item/ftp/13839?fr=aladdin" target="_blank" rel="noopener"><strong>文件传输协议</strong>（英文：<strong>F</strong>ile <strong>T</strong>ransfer <strong>P</strong>rotocol，缩写：<strong>FTP</strong>）</a>是用于在<a href="https://baike.baidu.com/item/网络" target="_blank" rel="noopener">网络</a>上进行文件传输的一套标准协议，使用客户/服务器模式。它属于<a href="https://baike.baidu.com/item/网络传输协议" target="_blank" rel="noopener">网络传输协议</a>的<a href="https://baike.baidu.com/item/应用层" target="_blank" rel="noopener">应用层</a>。文件传送（file transfer）和文件访问（file access）之间的区别在于：前者由FTP提供，后者由如NFS等应用系统提供。</p>
+<p>FTP是一个8位的客户端-服务器协议，能操作任何类型的文件而不需要进一步处理，就像MIME或Unicode一样。但是，FTP有着极高的延时，这意味着，从开始请求到第一次接收需求数据之间的时间，会非常长；并且不时的必须执行一些冗长的登录进程。</p>
+<p>在使用FTP时候，用户经常会遇到两种概念：</p>
+<ul>
+<li>上传</li>
+</ul>
+<blockquote>
+<p>将自己电脑上的文件拷贝到远端主机上</p>
+</blockquote>
+<ul>
+<li>下载</li>
+</ul>
+<blockquote>
+<p>从远端主机拷贝文件到自己的电脑上面</p>
+</blockquote>
+<h2 id="FTP架构"><a href="#FTP架构" class="headerlink" title="FTP架构"></a>FTP架构</h2><p>FTP工作于应用层，它监听tcp的21号端口，是一种c/s架构的应用程序。其有多种客户端和服务端的应用程序</p>
+<ul>
+<li><p>客户端工具</p>
+<ul>
+<li>ftp</li>
+<li>liftp，lftpget</li>
+<li>wget，curl</li>
+<li>filezilla</li>
+<li>gftp(linux GUI)</li>
+<li>商业软件(flashftp,cuteftp)</li>
+</ul>
+</li>
+<li><p>服务端软件</p>
+<ul>
+<li>wu-ftpd</li>
+<li>proftpd(提供web接口的一种ftp服务端程序)</li>
+<li>pureftp</li>
+<li>vsftpd(Very Secure)</li>
+<li>ServU(windows平台的一种强大ftp服务端程序)</li>
+</ul>
+</li>
+</ul>
+<h2 id="FTP数据连接模式"><a href="#FTP数据连接模式" class="headerlink" title="FTP数据连接模式"></a>FTP数据连接模式</h2><p>ftp有2种数据连接模式：</p>
+<ul>
+<li>命令连接：是指文件管理类命令，始终在线的持久性连接，直到用户退出登录为止</li>
+<li>数据连接：是指数据传输，按需创建及关闭的连接<ul>
+<li>数据传输格式：<ul>
+<li>文件传输</li>
+<li>二进制传输</li>
+</ul>
+</li>
+<li>数据传输模式：<ul>
+<li>主动模式：由服务器端创建数据连接</li>
+<li>被动模式：由客户端创建数据连接</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>主动模式下</p>
+<ul>
+<li>命令连接：</li>
+</ul>
+<p>客户端以大于1023的随机端口去连接ftp服务端的21号端口</p>
+<p>1024 –&gt; 21 建立命令连接</p>
+<ul>
+<li>数据连接：</li>
+</ul>
+<p>服务端以自己的20号端口去连接客户端建立命令连接时的端口+1的端口号</p>
+<p>20 –&gt; 1025 建立数据连接 </p>
+</li>
+<li><p>被动模式下</p>
+<ul>
+<li>命令连接</li>
+</ul>
+<p>客户端以一个随机端口(1110)来连接服务器端的21号端口，之后服务器会返回一个告知客户端连接服务端的哪个端口号</p>
+<p>1110 –&gt; 21 (告知客户端连接哪一个端口)</p>
+<ul>
+<li>数据连接</li>
+</ul>
+<p>客户端以创建命令连接的端口+1 (1110 + 1)的端口号去连接服务器端通过命令连接告知自己的一个随机端口号来创建数据连接</p>
+<p>1111 –&gt; （服务端告知自己的端口）</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>注意：</strong></p>
+<p>主动模式有个弊端，因为客户端的端口是随机的，如果客户端开了防火墙，那么服务器端去连接客户端创建数据连接时就可能会被拒绝。</p>
+</blockquote>
+<h2 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h2><p>FTP的用户主要有三种：</p>
+<ul>
+<li>虚拟用户：仅用于访问某特定服务中的资源</li>
+<li>系统用户：可以登录系统的真实用户</li>
+<li>匿名用户</li>
+</ul>
+<h2 id="vsftpd"><a href="#vsftpd" class="headerlink" title="vsftpd"></a>vsftpd</h2><h3 id="vsftpd安装"><a href="#vsftpd安装" class="headerlink" title="vsftpd安装"></a>vsftpd安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># yum install -y vsftpd</span></span><br><span class="line">........</span><br><span class="line">已安装:</span><br><span class="line">  vsftpd.x86_64 0:3.0.2-22.el7</span><br><span class="line"></span><br><span class="line">完毕！</span><br></pre></td></tr></table></figure>
+
+<h3 id="vsftpd配置"><a href="#vsftpd配置" class="headerlink" title="vsftpd配置"></a>vsftpd配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件目录</span></span><br><span class="line">[root@client111 ~]<span class="comment"># ls -ld /etc/vsftpd</span></span><br><span class="line">drwxr-xr-x. 2 root root 88 6月  27 15:45 /etc/vsftpd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主配置文件</span></span><br><span class="line">[root@client111 ~]<span class="comment"># ls -l /etc/vsftpd/vsftpd.conf</span></span><br><span class="line">-rw-------. 1 root root 5030 8月   3 2017 /etc/vsftpd/vsftpd.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># vsftpd用户认证配置文件</span></span><br><span class="line">[root@client111 ~]<span class="comment"># ls -l /etc/pam.d/vsftpd</span></span><br><span class="line">-rw-r--r--. 1 root root 335 8月   3 2017 /etc/pam.d/vsftpd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 匿名用户（映射为ftp用户）的共享资源位置是/var/ftp</span></span><br><span class="line"><span class="comment"># 系统用户通过ftp访问的资源位置为用户的家目录</span></span><br><span class="line"><span class="comment"># 虚拟用户通过ftp访问的资源位置为给虚拟用户指定的映射成为的系统用户的家目录</span></span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable=YES				启用匿名用户登陆</span><br><span class="line">anon_upload_enable=YES			允许匿名用户上传</span><br><span class="line">anon_mkdir_write_enable=YES		允许匿名用户创建目录，但是不能删除</span><br><span class="line">anon_other_write_enable=YES		允许匿名用户创建和删除目录</span><br><span class="line">local_enable=YES					启用本地用户登陆</span><br><span class="line">write_enable=YES					允许本地用户有写权限</span><br><span class="line">local_umask=022					通过FTP上传文件的默认遮罩码</span><br><span class="line">chroot_local_user=YES				禁锢所有FTP本地用户只能在其家目录中</span><br><span class="line">chroot_list_enable=YES			开启禁锢文件列表；需要与chroot_list_file参数一起使用</span><br><span class="line">chroot_list_file=/etc/vsftp/chroot_list	 指定禁锢列表文件路径；在此文件里面的用户将被禁锢在其家目录中</span><br><span class="line">allow_writeable_chroot=YES		允许被禁锢的用户家目录有写权限</span><br><span class="line">xferlog_enable=YES				是否启用传输日志，记录FTP传输过程</span><br><span class="line">xferlog_std_format=YES			传输日志是否使用标准格式</span><br><span class="line">xferlog_file=/var/<span class="built_in">log</span>/xferlog		指定传输日志存储的位置</span><br><span class="line">chown_uploads=YES					是否启用改变上传文件属性的功能</span><br><span class="line">chown_username=whoever			指定要将上传的文件的属主改为哪个用户，此用户必须在系统中存在</span><br><span class="line">pam_service_name=vsftpd			指定vsftp使用/etc/pam.d下的哪个pam配置文件进行用户认证</span><br><span class="line">userlist_enable=YES				是否启用控制用户登陆的列表文件：默认为/etc/vsftpd/user_list文件</span><br><span class="line">userlist_deny=YES					是否拒绝userlist指定的列表文件中存在的用户登陆FTP</span><br><span class="line">max_cients=`<span class="comment">#`					最大并发连接数</span></span><br><span class="line">max_per_ip=`<span class="comment">#`					每个IP可同时发起的并发请求数</span></span><br><span class="line">anon_max_rate						匿名用户的最大传输速率，单位是‘字节/秒’</span><br><span class="line">local_max_rate					本地用户的最大传输速率，单位是‘字节/秒’</span><br><span class="line">dirmessage_enable=YES				启用某目录下的.message描述信息</span><br><span class="line"><span class="comment">#假设有一个目录，在此目录下面创建一个名为.message的文件，在此文件内写入一些描述信息之后切换出目录，目录会自动显示.message文件中的内容</span></span><br><span class="line"></span><br><span class="line">message_file						设置访问一个目录时获得的目录信息文件的文件名，默认是.message</span><br><span class="line">idle_session_timeout=600			设置默认的断开不活跃session的时间</span><br><span class="line">data_connection_timeout=120		设置数据传输超时时间</span><br><span class="line">ftpd_banner=<span class="string">"Welcome to chenlf FTP service."</span>	定制欢迎信息，登陆FTP时自动显示</span><br></pre></td></tr></table></figure>
+
+<h3 id="vsftpd虚拟用户配置"><a href="#vsftpd虚拟用户配置" class="headerlink" title="vsftpd虚拟用户配置"></a>vsftpd虚拟用户配置</h3><ul>
+<li><p>虚拟用户的配置：</p>
+<ul>
+<li>所有的虚拟用户会被统一映射为一个指定的系统账号，访问的共享位置即为此系统账号的家目录</li>
+<li>各虚拟用户可被赋予不同的访问权限，通过匿名用户的权限控制参数进行指定</li>
+<li>虚拟用户账号的存储方式：<ul>
+<li>文件：编辑文件，此文件需要为<a href="https://baike.baidu.com/item/Hash/390310" target="_blank" rel="noopener">编码hash格式</a>。<ul>
+<li>文件奇数行为用户</li>
+<li>偶数行为密码</li>
+</ul>
+</li>
+<li>关系型数据库的表中：<ul>
+<li>通过即时查询数据库完成用户认证</li>
+<li>mysql库：pam要依赖于pam_mysql软件，可以通过epel源yum安装</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>vsftpd虚拟用户的配置步骤：</p>
+<ul>
+<li>安装依赖的程序</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># cd /etc/yum.repos.d/</span></span><br><span class="line">[root@client111 yum.repos.d]<span class="comment"># wget http://mirrors.163.com/.help/CentOS7-Base-163.repo</span></span><br><span class="line">[root@client111 yum.repos.d]<span class="comment"># vim CentOS7-Base-163.repo</span></span><br><span class="line">[root@client111 yum.repos.d]<span class="comment"># tail -n 5 CentOS7-Base-163.repo</span></span><br><span class="line">name=CentOS-<span class="variable">$releasever</span> - Plus - 163.com</span><br><span class="line">baseurl=http://mirrors.163.com/centos/<span class="variable">$releasever</span>/centosplus/<span class="variable">$basearch</span>/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1   <span class="comment"># 此处将0改为1</span></span><br><span class="line">gpgkey=http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-7</span><br><span class="line">[root@client111 yum.repos.d]<span class="comment"># yum clean all</span></span><br><span class="line">[root@client111 yum.repos.d]<span class="comment"># yum install -y epel-release</span></span><br><span class="line">[root@client111 yum.repos.d]<span class="comment"># yum install -y vsftpd</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建文本格式的用户名以及密码</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 yum.repos.d]<span class="comment"># cd /etc/vsftpd/</span></span><br><span class="line">[root@client111 vsftpd]<span class="comment"># vim vu.list</span></span><br><span class="line">[root@client111 vsftpd]<span class="comment"># cat vu.list</span></span><br><span class="line">123</span><br><span class="line">123321</span><br><span class="line">abc</span><br><span class="line">123321</span><br><span class="line"><span class="comment"># 用户和密码一一对应，前面为账户，后面为密码</span></span><br><span class="line">[root@client111 vsftpd]<span class="comment"># id 123</span></span><br><span class="line">id: 123: no such user</span><br><span class="line">[root@client111 vsftpd]<span class="comment"># id abc</span></span><br><span class="line">id: abc: no such user</span><br><span class="line"><span class="comment"># 账户在系统中没有创建过</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装db4工具</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 vsftpd]<span class="comment"># yum install -y db4*</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用db4工具将刚才编辑的vu.list转换成数据库文件(vu.db)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-T 表示转换		-t 表示加密方式使用<span class="built_in">hash</span>算法加密</span><br><span class="line">[root@client111 vsftpd]<span class="comment"># db_load -T -t hash -f /etc/vsftpd/vu.list /etc/vsftpd/vu.db</span></span><br><span class="line">[root@client111 vsftpd]<span class="comment"># ls</span></span><br><span class="line">ftpusers  user_list  vsftpd.conf  vsftpd_conf_migrate.sh  vu.db  vu.list</span><br><span class="line">[root@client111 vsftpd]<span class="comment"># file vu.*</span></span><br><span class="line">vu.db:   Berkeley DB (Hash, version 9, native byte-order)</span><br><span class="line">vu.list: ASCII text</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为防止数据泄露，将文件权限设置为600</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 vsftpd]<span class="comment"># chmod 600 vu.*</span></span><br><span class="line">[root@client111 vsftpd]<span class="comment"># ls -l vu.*</span></span><br><span class="line">-rw-------. 1 root root 12288 6月  27 17:16 vu.db</span><br><span class="line">-rw-------. 1 root root    22 6月  27 17:08 vu.list</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加虚拟用户的映射账号，创建ftp的根目录</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 vsftpd]<span class="comment"># useradd -d /file -s /sbin/nologin vftp</span></span><br><span class="line">[root@client111 vsftpd]<span class="comment"># cd /</span></span><br><span class="line">[root@client111 /]<span class="comment"># ls -ld file</span></span><br><span class="line">drwx------. 3 vftp vftp 78 6月  27 17:32 file</span><br><span class="line">[root@client111 /]<span class="comment"># chmod 755 file</span></span><br><span class="line">[root@client111 /]<span class="comment"># ls -ld file</span></span><br><span class="line">drwxr-xr-x. 3 vftp vftp 78 6月  27 17:32 file</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>备份vsftpd用户认证配置文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 pam.d]<span class="comment"># cp /etc/pam.d/vsftpd&#123;,.bak&#125;</span></span><br><span class="line">[root@client111 pam.d]<span class="comment"># ls vsftpd*</span></span><br><span class="line">vsftpd  vsftpd.bak</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为虚拟用户建立pam认证</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 pam.d]<span class="comment"># vim /etc/pam.d/vsftpd</span></span><br><span class="line">[root@client111 pam.d]<span class="comment"># cat /etc/pam.d/vsftpd</span></span><br><span class="line"><span class="comment">#%PAM-1.0</span></span><br><span class="line">auth required pam_userdb.so db=/etc/vsftpd/vu</span><br><span class="line">account required pam_userdb.so db=/etc/vsftpd/vu</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改vsftpd配置文件,添加虚拟用户支持</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 pam.d]<span class="comment"># vim /etc/vsftpd/vsftpd.conf</span></span><br><span class="line">[root@client111 pam.d]<span class="comment"># tail -n 2 /etc/vsftpd/vsftpd.conf</span></span><br><span class="line">guest_enable=YES</span><br><span class="line">guest_username=vftp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为不同的虚拟用户建立独立的配置文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 pam.d]<span class="comment"># vim /etc/vsftpd/vsftpd.conf</span></span><br><span class="line">[root@client111 pam.d]<span class="comment"># tail -n 2 /etc/vsftpd/vsftpd.conf</span></span><br><span class="line">user_config_dir=/etc/vsftpd/vusers_dir</span><br><span class="line">allow_writeable_chroot=YES</span><br></pre></td></tr></table></figure>
+
+<p>上述配置配置完成之后，转到/etc/vsftpd/vusers_dir目录中为每个虚拟用户分别建立配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 pam.d]<span class="comment"># mkdir /etc/vsftpd/vusers_dir</span></span><br><span class="line">[root@client111 pam.d]<span class="comment"># cd /etc/vsftpd/vusers_dir</span></span><br><span class="line">[root@client111 vusers_dir]<span class="comment"># ls</span></span><br><span class="line">[root@client111 vusers_dir]<span class="comment"># touch 123</span></span><br><span class="line">[root@client111 vusers_dir]<span class="comment"># touch abc</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置虚拟用户123能上传和下载，而abc可以上传文件和创建目录、以及下载。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 vusers_dir]<span class="comment"># vim 123</span></span><br><span class="line">[root@client111 vusers_dir]<span class="comment"># vim abc</span></span><br><span class="line">[root@client111 vusers_dir]<span class="comment"># cat 123</span></span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">[root@client111 vusers_dir]<span class="comment"># cat abc</span></span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">anon_mkdir_write_enable=YES</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重启服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 vusers_dir]<span class="comment"># systemctl restart vsftpd</span></span><br></pre></td></tr></table></figure>
+
+<p>此时用另外一台主机去访问</p>
+<ul>
+<li>安装lftp</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># yum install -y lftp</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看lftp的帮助用法</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># lftp --help</span></span><br><span class="line">用法: lftp [OPTS] &lt;site&gt;</span><br><span class="line">`lftp<span class="string">' 是在 rc 文件执行后 lftp 执行的第一个命令</span></span><br><span class="line"><span class="string"> -f &lt;file&gt;           执行文件中的命令后退出</span></span><br><span class="line"><span class="string"> -c &lt;cmd&gt;            执行命令后退出</span></span><br><span class="line"><span class="string"> --help              显示帮助信息后退出</span></span><br><span class="line"><span class="string"> --version           显示 lftp 版本后退出</span></span><br><span class="line"><span class="string"> 其他的选项同 `open'</span> 命令</span><br><span class="line"> -e &lt;cmd&gt;            在选择后执行命令</span><br><span class="line"> -u &lt;user&gt;[,&lt;pass&gt;]  使用指定的用户名/口令进行验证</span><br><span class="line"> -p &lt;port&gt;           连接指定的端口</span><br><span class="line"> &lt;site&gt;              主机名, URL 或书签的名字</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>连接192.168.176.111中的abc用户</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># lftp -u abc,123321 192.168.176.111</span></span><br><span class="line">lftp abc@192.168.176.111:~&gt; ls</span><br><span class="line">lftp abc@192.168.176.111:/&gt; mkdir abc</span><br><span class="line">mkdir 成功, 建立 `abc<span class="string">'</span></span><br><span class="line"><span class="string">lftp abc@192.168.176.111:/&gt; ls</span></span><br><span class="line"><span class="string">drwx------    2 1001     1001            6 Jun 27 14:28 abc</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可用help或者？来查看帮助命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">lftp abc@192.168.176.111:/&gt; <span class="built_in">help</span></span><br><span class="line">    !&lt;shell-command&gt;                     (commands)</span><br><span class="line">    <span class="built_in">alias</span> [&lt;name&gt; [&lt;value&gt;]]             attach [PID]</span><br><span class="line">    bookmark [SUBCMD]                    cache [SUBCMD]</span><br><span class="line">    cat [-b] &lt;files&gt;                     <span class="built_in">cd</span> &lt;rdir&gt;</span><br><span class="line">    chmod [OPTS] mode file...            close [-a]</span><br><span class="line">    [re]cls [opts] [path/][pattern]      debug [&lt;level&gt;|off] [-o &lt;file&gt;]</span><br><span class="line">    du [options] &lt;<span class="built_in">dirs</span>&gt;                  <span class="built_in">exit</span> [&lt;code&gt;|<span class="built_in">bg</span>]</span><br><span class="line">    get [OPTS] &lt;rfile&gt; [-o &lt;lfile&gt;]      glob [OPTS] &lt;cmd&gt; &lt;args&gt;</span><br><span class="line">    <span class="built_in">help</span> [&lt;cmd&gt;]                         <span class="built_in">history</span> -w file|-r file|-c|-l [cnt]</span><br><span class="line">    <span class="built_in">jobs</span> [-v] [&lt;job_no...&gt;]              <span class="built_in">kill</span> all|&lt;job_no&gt;</span><br><span class="line">    lcd &lt;ldir&gt;                           lftp [OPTS] &lt;site&gt;</span><br><span class="line">    ln [-s] &lt;file1&gt; &lt;file2&gt;              ls [&lt;args&gt;]</span><br><span class="line">    mget [OPTS] &lt;files&gt;                  mirror [OPTS] [remote [<span class="built_in">local</span>]]</span><br><span class="line">    mkdir [-p] &lt;<span class="built_in">dirs</span>&gt;                    module name [args]</span><br><span class="line">    more &lt;files&gt;                         mput [OPTS] &lt;files&gt;</span><br><span class="line">    mrm &lt;files&gt;                          mv &lt;file1&gt; &lt;file2&gt;</span><br><span class="line">    [re]nlist [&lt;args&gt;]                   open [OPTS] &lt;site&gt;</span><br><span class="line">    pget [OPTS] &lt;rfile&gt; [-o &lt;lfile&gt;]     put [OPTS] &lt;lfile&gt; [-o &lt;rfile&gt;]</span><br><span class="line">    <span class="built_in">pwd</span> [-p]                             queue [OPTS] [&lt;cmd&gt;]</span><br><span class="line">    quote &lt;cmd&gt;                          repeat [OPTS] [delay] [<span class="built_in">command</span>]</span><br><span class="line">    rm [-r] [-f] &lt;files&gt;                 rmdir [-f] &lt;<span class="built_in">dirs</span>&gt;</span><br><span class="line">    scache [&lt;session_no&gt;]                <span class="built_in">set</span> [OPT] [&lt;var&gt; [&lt;val&gt;]]</span><br><span class="line">    site &lt;site-cmd&gt;                      <span class="built_in">source</span> &lt;file&gt;</span><br><span class="line">    torrent [-O &lt;dir&gt;] &lt;file|URL&gt;...     user &lt;user|URL&gt; [&lt;pass&gt;]</span><br><span class="line">    <span class="built_in">wait</span> [&lt;jobno&gt;]                       zcat &lt;files&gt;</span><br><span class="line">    zmore &lt;files&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>进入192.168.176.111</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 /]<span class="comment"># cd file/</span></span><br><span class="line">[root@client111 file]<span class="comment"># ls</span></span><br><span class="line">abc</span><br><span class="line">[root@client111 file]<span class="comment"># echo "1234567890" &gt; abc.txt</span></span><br><span class="line">[root@client111 file]<span class="comment"># ls</span></span><br><span class="line">abc  abc.txt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>进入192.168.176.222</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># lftp -u abc,123321 192.168.176.111</span></span><br><span class="line">lftp abc@192.168.176.111:~&gt; ls</span><br><span class="line">drwx------    3 1001     1001           21 Jun 27 14:34 abc</span><br><span class="line">-rw-r--r--    1 0        0              11 Jun 27 14:39 abc.txt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>下载abc.txt</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># lftp -u abc,123321 192.168.176.111</span></span><br><span class="line">lftp abc@192.168.176.111:~&gt; ls</span><br><span class="line">drwx------    3 1001     1001           21 Jun 27 14:34 abc</span><br><span class="line">-rw-r--r--    1 0        0              11 Jun 27 14:39 abc.txt</span><br><span class="line">lftp abc@192.168.176.111:/&gt; get abc.txt -o /opt</span><br><span class="line">11 bytes transferred</span><br><span class="line">lftp abc@192.168.176.111:/&gt; <span class="built_in">exit</span></span><br><span class="line">[root@server222 ~]<span class="comment"># ll /opt</span></span><br><span class="line">总用量 4</span><br><span class="line">-rw-r--r--. 1 root root 11 6月  27 22:39 abc.txt</span><br><span class="line">drwxr-xr-x. 2 root root  6 3月  26 2015 rh</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>1.安装vsftpd<br>2.配置匿名用户ftp<br>3.配置虚拟用户ftp<br>4.配置系统用户ftp<br>5.写博客，要写明ftp的使用场景以及如何安装与配置</p>
+<p>要求：<br>1.安装并配置完成后要使用ftp客户端工具登录验证</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>FTP服务</p>
+    
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Li Jie">Li Jie</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-08-29, 23:44:18</p>
+    <p><span class="copy-title">最后更新:</span>2019-08-22, 20:18:33</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/08/29/2.linux--FTP服务/" title="FTP服务">https://github.com/chineselijie/2019/08/29/2.linux--FTP服务/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="//cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#linux基础','#python','#linux进阶','#linux运维',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

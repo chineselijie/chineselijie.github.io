@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>NFS服务 | Li Jie&#39;s blog</title>
+  <meta name="keywords" content=" linux进阶 ">
+  <meta name="description" content="NFS服务 | Li Jie&#39;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Li Jie&#39;s blog">
+<meta property="og:url" content="https://github.com/chineselijie/about/index.html">
+<meta property="og:site_name" content="Li Jie&#39;s blog">
+<meta property="og:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-28T17:25:29.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Li Jie&#39;s blog">
+<meta name="twitter:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Li Jie</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="facebook" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-facebook"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/ff56736de7cf" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(41)</small></div></li>
+    
+        
+            
+            <li><div data-rel="linux基础">linux基础<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="python">python<small>(8)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="linux进阶">linux进阶<small>(12)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="linux运维">linux运维<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="41">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux基础</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux进阶</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux运维</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/1.RHEL 7.4 实验环境搭建/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="RHEL 7.4 实验环境搭建">RHEL 7.4 实验环境搭建</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/11.linux--网络进阶管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="网络进阶管理">网络进阶管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/2.python--计算机数据存储与进制/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python 计算机数据存储与进制">python 计算机数据存储与进制</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/7.linux--正则表达式/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="正则表达式">正则表达式</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/7.谈Python变量和数据类型/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="谈Python变量和数据类型">谈Python变量和数据类型</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/9.linux--shell脚本进阶/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本进阶">shell脚本进阶</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/1.linux--openssh/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="openssh">openssh</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/08/29/1.linux--初步熟悉RHEL 8/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="初步熟悉RHEL 8">初步熟悉RHEL 8</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/1.python--python基础理论讲解/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python基础理论讲解">python基础理论讲解</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/08/29/1.网络--子网划分/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="子网划分">子网划分</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/10.linux--shell脚本笔记(脚本)/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本笔记(脚本)">shell脚本笔记(脚本)</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/11.linux--ISCSI服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="ISCSI服务">ISCSI服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/14.linux--LVM磁盘管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="LVM磁盘管理">LVM磁盘管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/15.linux--linux基础练习/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="linux基础练习">linux基础练习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/16.linux--RHCSA模拟/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="RHCSA复习">RHCSA复习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/2.linux--FTP服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="FTP服务">FTP服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/2.rsync/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="rsync">rsync</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/3.linux--samba服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="samba服务">samba服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/3.python--第一章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第一章">python第一章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/3.zabbix/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="zabbix">zabbix</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/4.linux--权限管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="权限管理">权限管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/5.linux--linux计划任务/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux计划任务">Linux计划任务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/6.linux--httpd服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="httpd服务">httpd服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/6.python--第四章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第四章">python第四章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/8.linux--shell脚本基础/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本基础">shell脚本基础</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/8.linux--软件管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="软件管理">软件管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/8.python的文件处理/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python文件处理">python文件处理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/12.linux--源码安装包管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="源码安装管理">源码安装管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/2.基础linux命令/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux基础命令">Linux基础命令</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/4.linux--NFS服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="NFS服务">NFS服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/4.python--第二章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第二章">python第二章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/5.linux--MariaDB数据库/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="MariaDB数据库">MariaDB数据库</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/5.python--第三章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第三章">python第三章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/6.linux--yum工具的使用/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="yum工具的使用">yum工具的使用</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/7.linux--用户和组管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="用户和组管理">用户和组管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/1.linux--LNMP/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="LNMP">LNMP</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/13.linux--linux系统磁盘管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux系统磁盘管理">Linux系统磁盘管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/9.linux--linux进程管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="linux进程管理">linux进程管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/3.linux--linux基础/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux基础">Linux基础</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/10.linux--网络基础管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="网络基础管理">网络基础管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/13.linux--RHCE  认证考试练习/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="RHCE 认证考试练习">RHCE 认证考试练习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-4.linux--NFS服务" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">NFS服务</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="linux进阶">linux进阶</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color3">linux进阶</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-08-22 20:25:02'>2019-08-29 23:44</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NFS简介"><span class="toc-text">NFS简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NFS特点"><span class="toc-text">NFS特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用NFS的好处"><span class="toc-text">使用NFS的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NFS的体系组成"><span class="toc-text">NFS的体系组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NFS的应用场景"><span class="toc-text">NFS的应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NFS挂载原理"><span class="toc-text">NFS挂载原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NFS的工作机制"><span class="toc-text">NFS的工作机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RPC"><span class="toc-text">RPC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RPC工作原理"><span class="toc-text">RPC工作原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NIS"><span class="toc-text">NIS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NFS的工作机制-1"><span class="toc-text">NFS的工作机制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#exports文件的格式"><span class="toc-text">exports文件的格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NFS管理"><span class="toc-text">NFS管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NFS配置演示"><span class="toc-text">NFS配置演示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作业"><span class="toc-text">作业</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>关于作者</strong></p>
+<p><strong>周李杰</strong>，最后一批90后，现居<strong>湖北武汉</strong></p>
+<p>孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。</p>
+<p>兴趣众多，然无一精通。正努力成为一个有趣的人。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>[TOC]</p>
+<h2 id="NFS简介"><a href="#NFS简介" class="headerlink" title="NFS简介"></a>NFS简介</h2><h3 id="NFS特点"><a href="#NFS特点" class="headerlink" title="NFS特点"></a>NFS特点</h3><ul>
+<li><p><a href="https://baike.baidu.com/item/NFS/812203?fr=aladdin" target="_blank" rel="noopener">NFS（Network File System)</a>即<a href="https://baike.baidu.com/item/网络文件系统/9719420" target="_blank" rel="noopener">网络文件系统</a>，是FreeBSD支持的文件系统中的一种，它允许网络中的计算机之间共享资源。在NFS的应用中，本地NFS的客户端应用可以透明地读写位于远端NFS服务器上的文件，就像访问本地文件一样。</p>
+</li>
+<li><p>NFS适用于Linux与unix之间实现文件共享，不能实现Linux与Windows之间的文件共享</p>
+</li>
+<li><p>NFS运行在应用层的协议上，其监听于2049/tcp和2049/udp套接字上</p>
+</li>
+</ul>
+<p>注意：NFS服务只能基于IP进行认证</p>
+<h3 id="使用NFS的好处"><a href="#使用NFS的好处" class="headerlink" title="使用NFS的好处"></a>使用NFS的好处</h3><ul>
+<li>节省本地存储空间，将常用的数据存放在一台NFS服务器上且可以通过网络访问，那么本地终端将可以减少自身存储空间的使用。</li>
+<li>用户不需要在网络中的每个机器上都建有Home目录，Home目录可以放在NFS服务器上且可以在网络上被访问使用。</li>
+<li>一些存储设备如软驱、CDROM和Zip（一种高储存密度的磁盘驱动器与磁盘）等都可以在网络上被别的机器使用。这可以减少整个网络上可移动介质设备的数量。</li>
+</ul>
+<h3 id="NFS的体系组成"><a href="#NFS的体系组成" class="headerlink" title="NFS的体系组成"></a>NFS的体系组成</h3><p>NFS体系至少有两个主要部分：</p>
+<p><a href="https://baike.baidu.com/pic/NFS/812203/0/0df3d7ca7bcb0a46faeb868c6863f6246a60afbd?fr=lemma&ct=single" target="_blank" rel="noopener"><img src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D220/sign=83208b998401a18bf4eb154dae2e0761/0df3d7ca7bcb0a46faeb868c6863f6246a60afbd.jpg" alt="img"></a></p>
+<p>一台NFS服务器和若干台客户机，如上图所示。</p>
+<p>客户机通过TCP/IP网络远程访问存放在NFS服务器上的数据。</p>
+<p>在NFS服务器正式启用前，需要根据实际环境和需求，配置一些NFS参数。</p>
+<h3 id="NFS的应用场景"><a href="#NFS的应用场景" class="headerlink" title="NFS的应用场景"></a>NFS的应用场景</h3><ol>
+<li><p>多个机器共享一台CDROM或者其他设备。这对于在多台机器中安装软件来说更加便宜跟方便。</p>
+</li>
+<li><p>在大型网络中，配置一台中心 NFS 服务器用来放置所有用户的home目录可能会带来便利。这些目录能被输出到网络以便用户不管在哪台工作站上登录，总能得到相同的home目录。</p>
+</li>
+<li><p>不同客户端可在NFS上观看影视文件，节省本地空间。</p>
+</li>
+<li><p>在客户端完成的工作数据，可以备份保存到NFS服务器上用户自己的路径下。</p>
+</li>
+</ol>
+<ul>
+<li>NFS是运行在应用层的协议。随着NFS多年的发展和改进，NFS既可以用于局域网也可以用于广域网，且与操作系统和硬件无关，可以在不同的计算机或系统上运行。</li>
+</ul>
+<h3 id="NFS挂载原理"><a href="#NFS挂载原理" class="headerlink" title="NFS挂载原理"></a>NFS挂载原理</h3><p><img src="https://images2017.cnblogs.com/blog/1054216/201709/1054216-20170901171038202-1066682924.jpg" alt></p>
+<ul>
+<li><p>​    当我们在NFS服务器设置好一个共享目录/home/public后，其他的有权访问NFS服务器的NFS客户端就可以将这个目录挂载到自己文件系统的某个挂载点，这个挂载点可以自己定义，如上图客户端A与客户端B挂载的目录就不相同。并且挂载好后我们在本地能够看到服务端/home/public的所有数据。如果服务器端配置的客户端只读，那么客户端就只能够只读。如果配置读写，客户端就能够进行读写。挂载后，NFS客户端查看磁盘信息命令：#df –h。</p>
+</li>
+<li><p>既然NFS是通过网络来进行服务器端和客户端之间的数据传输，那么两者之间要传输数据就要有想对应的网络端口，NFS服务器到底使用哪个端口来进行数据传输呢？基本上NFS这个服务器的端口开在2049,但由于文件系统非常复杂。因此NFS还有其他的程序去启动额外的端口，这些额外的用来传输数据的端口是随机选择的，是小于1024的端口；既然是随机的那么客户端又是如何知道NFS服务器端到底使用的是哪个端口呢？这时就需要通过远程过程调用（Remote Procedure Call,RPC）协议来实现了！</p>
+</li>
+</ul>
+<h2 id="NFS的工作机制"><a href="#NFS的工作机制" class="headerlink" title="NFS的工作机制"></a>NFS的工作机制</h2><p>NFS是基于rpc来实现网络文件系统共享的。</p>
+<h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><p><a href="[https://baike.baidu.com/item/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8%E5%8D%8F%E8%AE%AE/6893245?fromtitle=RPC&fromid=609861&fr=aladdin](https://baike.baidu.com/item/远程过程调用协议/6893245?fromtitle=RPC&fromid=609861&fr=aladdin)">RPC（Remote Procedure Call）</a>—<a href="https://baike.baidu.com/item/远程过程调用/7854346" target="_blank" rel="noopener">远程过程调用</a>，它是一种通过<a href="https://baike.baidu.com/item/网络/143243" target="_blank" rel="noopener">网络</a>从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。<a href="https://baike.baidu.com/item/RPC协议" target="_blank" rel="noopener">RPC协议</a>假定某些<a href="https://baike.baidu.com/item/传输协议/8048821" target="_blank" rel="noopener">传输协议</a>的存在，如TCP或UDP，为通信程序之间携带信息数据。在OSI<a href="https://baike.baidu.com/item/网络通信/9636548" target="_blank" rel="noopener">网络通信</a>模型中，RPC跨越了<a href="https://baike.baidu.com/item/传输层/4329536" target="_blank" rel="noopener">传输层</a>和<a href="https://baike.baidu.com/item/应用层/4329788" target="_blank" rel="noopener">应用层</a>。RPC使得开发包括网络<a href="https://baike.baidu.com/item/分布式" target="_blank" rel="noopener">分布式</a>多程序在内的应用程序更加容易。</p>
+<p>RPC采用客户机/服务器模式。请求程序就是一个客户机，而服务提供程序就是一个服务器。首先，客户机调用进程发送一个有进程参数的调用信息到服务进程，然后等待应答信息。在服务器端，进程保持睡眠状态直到调用信息到达为止。当一个调用信息到达，服务器获得进程参数，计算结果，发送答复<a href="https://baike.baidu.com/item/信息/111163" target="_blank" rel="noopener">信息</a>，然后等待下一个调用信息，最后，客户端调用进程接收答复信息，获得进程结果，然后调用执行继续进行。</p>
+<h4 id="RPC工作原理"><a href="#RPC工作原理" class="headerlink" title="RPC工作原理"></a>RPC工作原理</h4><p>运行时，一次客户机对服务器的RPC调用，其内部操作大致有如下十步：</p>
+<p>1.调用客户端句柄；执行传送参数</p>
+<p>2.调用本地系统<a href="https://baike.baidu.com/item/内核" target="_blank" rel="noopener">内核</a>发送网络消息</p>
+<p>3.<a href="https://baike.baidu.com/item/消息传送" target="_blank" rel="noopener">消息传送</a>到远程<a href="https://baike.baidu.com/item/主机" target="_blank" rel="noopener">主机</a></p>
+<p>4.服务器句柄得到消息并取得参数</p>
+<p>5.执行远程过程</p>
+<p><a href="https://baike.baidu.com/pic/远程过程调用协议/6893245/0/18d8bc3eb13533fadd93e964a9d3fd1f41345b56?fr=lemma&ct=single" target="_blank" rel="noopener"><img src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D220/sign=7e27f7747aec54e745ec1d1c89399bfd/18d8bc3eb13533fadd93e964a9d3fd1f41345b56.jpg" alt="img"></a></p>
+<p>6.执行的过程将结果返回服务器句柄</p>
+<p>7.服务器句柄返回结果，调用远程系统<a href="https://baike.baidu.com/item/内核" target="_blank" rel="noopener">内核</a></p>
+<p>8.消息传回<a href="https://baike.baidu.com/item/本地主机" target="_blank" rel="noopener">本地主机</a></p>
+<p>9.客户句柄由内核接收消息</p>
+<p>10.客户接收句柄返回的数据</p>
+<h3 id="NIS"><a href="#NIS" class="headerlink" title="NIS"></a>NIS</h3><p><a href="https://baike.baidu.com/item/NIS/9085264?fr=aladdin" target="_blank" rel="noopener">NIS（Network Information Service）</a>—–网络信息服务，是<a href="https://baike.baidu.com/item/诺顿网络安全特警/10753322" target="_blank" rel="noopener">诺顿网络安全特警</a>简称，同时NIS是Sun Microsystem于1985年发布的一项目录服务技术（Diretory Service），用来<a href="https://baike.baidu.com/item/集中控制/1051216" target="_blank" rel="noopener">集中控制</a>几个系统管理数据库的网络用品。简化了UNIX和<a href="https://baike.baidu.com/item/LINUX/27050" target="_blank" rel="noopener">LINUX</a>桌面客户的管理工作，客户端利用它可以使用中心服务器的管理文件。</p>
+<h3 id="NFS的工作机制-1"><a href="#NFS的工作机制-1" class="headerlink" title="NFS的工作机制"></a>NFS的工作机制</h3><p>NFS服务器端运行着四个进程：</p>
+<ul>
+<li>nfsd      nfs的守护进程，监听在2049/tcp和2049/udp端口上；不负责文件的存储（由NFS服务器本地内核负责调度存储），用于理解客户端发起的RPC请求，并将其转交给本地内核，然后存储在指定的文件系统上</li>
+<li>mountd     用于验证客户端是否在允许访问此NFS文件系统的客户端列表中，如果在的话就允许访问（发放一个指令，携带指令去寻找nfsd）;   mountd的服务端口是随机的，由rpc服务提供随机的端口号</li>
+<li>idmapd     实现用户账号的集中映射，把所有的账号都映射为nfsnobody，但是在访问时却能以本地用户的身份去访问</li>
+<li>portmapper     NFS服务器的RPC服务，其监听于111/tcp和111/UDP套接字上，用于管理远程过程中调用RPC</li>
+</ul>
+<h2 id="exports文件的格式"><a href="#exports文件的格式" class="headerlink" title="exports文件的格式"></a>exports文件的格式</h2><p>nfs的主配置文件是/etc/exports，在此文件中，可以定义NFS系统的输出目录（即共享目录）、访问权限和允许访问的主机等参数。该文件默认为空，没有配置输出任何共享目录，这是基于安全性的考虑，如此即使系统启动了NFS服务也不会输出任何共享资源。</p>
+<p>exports文件中每一行提供了一个共享目录的设置，其命令格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;输出目录&gt; [客户端1(选项1,选项2,...)] [客户端2(选项1,选项2,...)]</span><br></pre></td></tr></table></figure>
+
+<p>其中，除输出目录是必选参数外，其他参数均是可选项。另外，格式中的输出目录和客户端之间、客户端与客户端之间都使用空格分隔，但客户端与选项之间不能有空格。</p>
+<p>客户端是指网络中可以访问这个NFS共享目录的计算机。客户端的指定非常灵活，可为单个主机的IP或域名，亦可为某个子网或域中的主机等。</p>
+<p><strong>客户端地址的设置主要有以下几种方式：</strong></p>
+<ul>
+<li>可以使用完整的IP或者是网络号，例如192.168.107.140 或 192.168.107.0/24</li>
+<li>可以使用主机名，但这个主机名必须要在/etc/hosts内，或可以使用DNS找到该名称才行，反正重点是可找到IP就行，如果是主机名的话，还可以支持通配符，例如‘*’或‘？’均可接受。</li>
+</ul>
+<p><strong>选项用来设置共享目录的访问权限、用户映射等。exports文件中的选项比较多，一般可分为三类：</strong></p>
+<ul>
+<li>访问权限选项（用于控制共享目录的访问权限）</li>
+<li>用户映射选项<ul>
+<li>默认情况下，当客户端访问NFS服务器时，若远程访问的用户是root用户，则NFS服务器会将其映射成一个本地的匿名用户（该用户为nfsnobody），并将其所属的用户组也映射成匿名用户组（该用户组也为nfsnobody），如此有助于提高系统的安全性。</li>
+</ul>
+</li>
+<li>其他选项</li>
+</ul>
+<p><strong>访问权限选项：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">访问权限选项</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ro</td>
+<td align="left">设置输出目录只读</td>
+</tr>
+<tr>
+<td align="center">rw</td>
+<td align="left">设置输出目录可读写</td>
+</tr>
+</tbody></table>
+<p><strong>用户映射选项：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">用户映射选项</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">all_squash</td>
+<td align="left">将远程访问的所有普通用户及所属组都映射为匿名用户或用户组(nfsnobody)</td>
+</tr>
+<tr>
+<td align="center">no_all_squash</td>
+<td align="left">不将远程访问的所有普通用户及所属用户组都映射为匿名用户或用户组(默认设置)</td>
+</tr>
+<tr>
+<td align="center">root_squash</td>
+<td align="left">将root用户及所属用户组都映射为匿名用户或用户组(默认设置)</td>
+</tr>
+<tr>
+<td align="center">no_root_squash</td>
+<td align="left">不将root用户及所属用户组都映射为匿名用户或用户组</td>
+</tr>
+<tr>
+<td align="center">anonuid=xxx</td>
+<td align="left">将远程访问的所有用户都映射为匿名用户，并指定该匿名用户为本地用户帐户(UID=xxx)</td>
+</tr>
+<tr>
+<td align="center">anongid=xxx</td>
+<td align="left">将远程访问的所有用户组都映射为匿名用户组，并指定该匿名用户组为本地用户组(GID=xxx)</td>
+</tr>
+</tbody></table>
+<p><strong>常用的其他选项：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">其他选项</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">secure</td>
+<td align="left">限制客户端只能从小于1024的TCP/IP端口连接NFS服务器(默认设置)</td>
+</tr>
+<tr>
+<td align="left">insecure</td>
+<td align="left">允许客户端从大于1024的TCP/IP端口连接NFS服务器</td>
+</tr>
+<tr>
+<td align="left">sync</td>
+<td align="left">将数据同步写入内存缓冲区或磁盘中，效率较低，但可保证数据一致性</td>
+</tr>
+<tr>
+<td align="left">async</td>
+<td align="left">将数据先保存在内存缓冲区中，必要时才写入磁盘</td>
+</tr>
+<tr>
+<td align="left">wdelay</td>
+<td align="left">检查是否有相关的写操作，如果有则这些写操作一起执行，可提高效率(默认设置)</td>
+</tr>
+<tr>
+<td align="left">no_wdelay</td>
+<td align="left">若有写操作则立即执行，应与sync配置使用</td>
+</tr>
+<tr>
+<td align="left">subtree_check</td>
+<td align="left">若输出目录是一个子目录，则NFS服务器将检查其父目录的权限(默认设置)</td>
+</tr>
+<tr>
+<td align="left">no_subtree_check</td>
+<td align="left">即使输出目录是一个子目录，NFS服务亦不检查其父目录的权限，可提高效率</td>
+</tr>
+<tr>
+<td align="left">nohide</td>
+<td align="left">若将一个目录挂载到另一个目录之上，则原来的目录通常就被隐藏起来或看起来像空的一样。要禁用这种行为，需启用hide选项</td>
+</tr>
+</tbody></table>
+<h2 id="NFS管理"><a href="#NFS管理" class="headerlink" title="NFS管理"></a>NFS管理</h2><ul>
+<li>安装NFS</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">yum -y install nfs*</span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">systemctl restart nfs-server rpcbind</span><br><span class="line">或者 systemctl start nfs-server rpcbind</span><br><span class="line"><span class="comment">#查看启动状态</span></span><br><span class="line">systemctl status nfs</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用showmount命令测试NFS服务器的输出目录状态</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">语法：showmount [选项] [NFS服务器名称或地址]</span><br><span class="line">常用的选项：</span><br><span class="line">	-a	显示指定NFS服务器的所有客户端主机及其所连接的目录</span><br><span class="line">	-d	显示指定的NFS服务器中已被客户端连接的所有输出目录</span><br><span class="line">	-e	显示指定的NFS服务器上所有输出的共享目录</span><br><span class="line">	</span><br><span class="line">[root@client ~]# showmount -a 192.168.176.222</span><br><span class="line">All mount points on 192.168.176.222:</span><br><span class="line">[root@client ~]# showmount -d 192.168.176.222</span><br><span class="line">Directories on 192.168.176.222:</span><br><span class="line">[root@client ~]# showmount -e 192.168.176.222</span><br><span class="line">Export list for 192.168.176.222:</span><br><span class="line">/123 192.168.176.111</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在客户端挂载NFS文件系统</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount -t nfs 服务器的IP地址：服务端的地址目录 本地挂载地址目录</span><br><span class="line"></span><br><span class="line">[root@client ~]<span class="comment"># mount -t nfs 192.168.176.222:/123 /nfs</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在客户端设置开机自动挂在NFS</li>
+</ul>
+<p>首先编辑/etc/fstab</p>
+<p>添加内容如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">服务器的IP地址：服务端的地址目录 本地挂载地址目录 nfs defaults,_netdev 0 0</span><br><span class="line"></span><br><span class="line">192.168.176.222:/123    /nfs    nfs     defaults,_netdev        0 0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>客户端挂载时可以使用的特殊选项：<ul>
+<li>rsize：其值是从服务器读取的字节数（缓冲）。默认为1024。若使用比较高的值，如8192，可以提高传输速度</li>
+<li>wsize：其值是写入到服务器的字节数（缓冲）。默认为1024。若使用比较高的值，如8192，可以提高传输速度</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">exportfs	维护exports文件导出的文件系统表的专用工具</span><br><span class="line">	-a	输出在/etc/exports文件中所设置的所有目录</span><br><span class="line">	-r	重新读取/etc/exports文件中的设置，并使其立即生效，无需重启服务</span><br><span class="line">	-u	停止输出某一目录</span><br><span class="line">	-v	在输出目录时将目录显示到屏幕上</span><br></pre></td></tr></table></figure>
+
+<p><strong>检查输出目录所使的选项：</strong></p>
+<p>​     在配置文件/etc/exports中，即使在命令行中只设置了一两个选项，但在真正输出目录时，实际上还带有很多默认的选项。通过查看<code>/var/lib/nfs/etab</code>文件，可以看到具体使用了何选项</p>
+<h2 id="NFS配置演示"><a href="#NFS配置演示" class="headerlink" title="NFS配置演示"></a>NFS配置演示</h2><blockquote>
+<p>服务端地址为：192.168.176.222</p>
+<p>客服端地址为：192.168.176.111</p>
+</blockquote>
+<p><strong>服务端：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># yum install nfs* rpcbind -y</span></span><br><span class="line">[root@server ~]<span class="comment"># systemctl restart nfs rpcbind</span></span><br><span class="line">[root@server ~]<span class="comment"># mkdir /123</span></span><br><span class="line">[root@server ~]<span class="comment"># vim /etc/exports</span></span><br><span class="line">[root@server ~]<span class="comment"># cat /etc/exports</span></span><br><span class="line">/123    192.168.176.111(rw)</span><br><span class="line">[root@server ~]<span class="comment"># systemctl restart nfs rpcbind</span></span><br><span class="line"><span class="comment">#服务端已经配置完成，转到客户端之前请确认服务端以及客户端SELinux以及防火墙关闭</span></span><br><span class="line">[root@server ~]<span class="comment"># systemctl stop firewalld</span></span><br><span class="line">[root@server ~]<span class="comment"># setenforce 0</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>客户端：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># systemctl stop firewalld</span></span><br><span class="line">[root@client ~]<span class="comment"># setenforce 0</span></span><br><span class="line">[root@client ~]<span class="comment"># showmount -e 192.168.176.222</span></span><br><span class="line">Export list <span class="keyword">for</span> 192.168.176.222:</span><br><span class="line">/123 192.168.176.111</span><br><span class="line">[root@client ~]<span class="comment"># mkdir /nfs</span></span><br><span class="line">[root@client ~]<span class="comment"># mount -t nfs 192.168.176.222:/123 /nfs</span></span><br><span class="line">[root@client ~]<span class="comment"># df -Th</span></span><br><span class="line">文件系统                类型      容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/mapper/centos-root xfs        17G  1.1G   16G    6% /</span><br><span class="line">devtmpfs                devtmpfs  982M     0  982M    0% /dev</span><br><span class="line">tmpfs                   tmpfs     993M     0  993M    0% /dev/shm</span><br><span class="line">tmpfs                   tmpfs     993M  8.7M  984M    1% /run</span><br><span class="line">tmpfs                   tmpfs     993M     0  993M    0% /sys/fs/cgroup</span><br><span class="line">/dev/sr0                iso9660   4.3G  4.3G     0  100% /mnt</span><br><span class="line">/dev/sda1               xfs      1014M  125M  890M   13% /boot</span><br><span class="line">tmpfs                   tmpfs     199M     0  199M    0% /run/user/0</span><br><span class="line">192.168.176.222:/123    nfs4       17G  1.3G   16G    8% /nfs</span><br><span class="line">[root@client /]<span class="comment"># cd /nfs</span></span><br><span class="line">[root@client nfs]<span class="comment"># ls</span></span><br><span class="line">[root@client nfs]<span class="comment"># mkdir abc</span></span><br><span class="line">mkdir: 无法创建目录<span class="string">"abc"</span>: 权限不够</span><br><span class="line"></span><br><span class="line"><span class="comment"># 此时我们要修改服务端的文件权限</span></span><br><span class="line">[root@client nfs]<span class="comment"># ssh root@192.168.176.222</span></span><br><span class="line">Last login: Tue Jun 25 15:49:36 2019 from 192.168.176.111</span><br><span class="line">[root@server ~]<span class="comment">#</span></span><br><span class="line">[root@server ~]<span class="comment"># cd /</span></span><br><span class="line">[root@server /]<span class="comment"># ls -ld 123</span></span><br><span class="line">drwxr-xr-x. 2 root root 6 6月  25 16:45 123</span><br><span class="line">[root@server /]<span class="comment"># chmod 777 123</span></span><br><span class="line">[root@server /]<span class="comment"># exit</span></span><br><span class="line">登出</span><br><span class="line">Connection to 192.168.176.222 closed.</span><br><span class="line">[root@client nfs]<span class="comment"># mkdir abc</span></span><br><span class="line">[root@client nfs]<span class="comment"># ls -l</span></span><br><span class="line">drwxr-xr-x. 2 nfsnobody nfsnobody 6 6月  25 17:21 abc</span><br><span class="line"></span><br><span class="line"><span class="comment">## 或者我们修改服务端的文件的所属者</span></span><br><span class="line">[root@client nfs]<span class="comment"># ssh root@192.168.176.222</span></span><br><span class="line">Last login: Tue Jun 25 17:25:35 2019 from 192.168.176.111</span><br><span class="line">[root@server ~]<span class="comment"># cd /</span></span><br><span class="line">[root@server /]<span class="comment"># ls -ld 123</span></span><br><span class="line">drwxrwxrwx. 3 root root 17 6月  25 17:26 123</span><br><span class="line">[root@server /]<span class="comment"># chmod 755 123</span></span><br><span class="line">[root@server /]<span class="comment"># ls -ld 123</span></span><br><span class="line">drwxr-xr-x. 3 root root 17 6月  25 17:26 123</span><br><span class="line">[root@server /]<span class="comment"># chown nfsnobody /123</span></span><br><span class="line">[root@server /]<span class="comment"># ls -ld 123</span></span><br><span class="line">drwxr-xr-x. 3 nfsnobody root 17 6月  25 17:26 123</span><br><span class="line">[root@server /]<span class="comment"># exit</span></span><br><span class="line">登出</span><br><span class="line">Connection to 192.168.176.222 closed.</span><br><span class="line">[root@client nfs]<span class="comment"># rm -rf abc</span></span><br><span class="line">[root@client nfs]<span class="comment"># mkdir eerefsf</span></span><br><span class="line">[root@client nfs]<span class="comment"># ls</span></span><br><span class="line">eerefsf</span><br></pre></td></tr></table></figure>
+
+<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><p>1.手动搭建一个nfs服务器</p>
+<ul>
+<li>开放/nfs/shared目录，供所有用户查阅资料</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@server /]<span class="comment"># mkdir /nfs/shared</span></span><br><span class="line">[root@server /]<span class="comment"># chmod -R 777 /nfs/shared</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>开放/nfs/upload目录为192.168.176.0/24（或者自己主机网段）网段的数据上传目录，并将所有用户及所属的用户组都映射为nfs-upload，其UID与GID均为300</li>
+</ul>
+<p>2.通过脚本搭建nfs并在客户端上挂载</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>NFS服务</p>
+    
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Li Jie">Li Jie</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-08-29, 23:44:18</p>
+    <p><span class="copy-title">最后更新:</span>2019-08-22, 20:25:02</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/08/29/4.linux--NFS服务/" title="NFS服务">https://github.com/chineselijie/2019/08/29/4.linux--NFS服务/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="//cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#linux基础','#python','#linux进阶','#linux运维',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

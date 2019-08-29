@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>linux进程管理 | Li Jie&#39;s blog</title>
+  <meta name="keywords" content=" linux基础 ">
+  <meta name="description" content="linux进程管理 | Li Jie&#39;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Li Jie&#39;s blog">
+<meta property="og:url" content="https://github.com/chineselijie/about/index.html">
+<meta property="og:site_name" content="Li Jie&#39;s blog">
+<meta property="og:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-28T17:25:29.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Li Jie&#39;s blog">
+<meta name="twitter:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Li Jie</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="facebook" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-facebook"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/ff56736de7cf" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(41)</small></div></li>
+    
+        
+            
+            <li><div data-rel="linux基础">linux基础<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="python">python<small>(8)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="linux进阶">linux进阶<small>(12)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="linux运维">linux运维<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="41">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux基础</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux进阶</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux运维</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/1.RHEL 7.4 实验环境搭建/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="RHEL 7.4 实验环境搭建">RHEL 7.4 实验环境搭建</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/11.linux--网络进阶管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="网络进阶管理">网络进阶管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/2.python--计算机数据存储与进制/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python 计算机数据存储与进制">python 计算机数据存储与进制</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/7.linux--正则表达式/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="正则表达式">正则表达式</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/7.谈Python变量和数据类型/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="谈Python变量和数据类型">谈Python变量和数据类型</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/9.linux--shell脚本进阶/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本进阶">shell脚本进阶</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/1.linux--openssh/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="openssh">openssh</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/08/29/1.linux--初步熟悉RHEL 8/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="初步熟悉RHEL 8">初步熟悉RHEL 8</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/1.python--python基础理论讲解/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python基础理论讲解">python基础理论讲解</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/08/29/1.网络--子网划分/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="子网划分">子网划分</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/10.linux--shell脚本笔记(脚本)/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本笔记(脚本)">shell脚本笔记(脚本)</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/11.linux--ISCSI服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="ISCSI服务">ISCSI服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/14.linux--LVM磁盘管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="LVM磁盘管理">LVM磁盘管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/15.linux--linux基础练习/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="linux基础练习">linux基础练习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/16.linux--RHCSA模拟/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="RHCSA复习">RHCSA复习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/2.linux--FTP服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="FTP服务">FTP服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/2.rsync/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="rsync">rsync</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/3.linux--samba服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="samba服务">samba服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/3.python--第一章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第一章">python第一章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/3.zabbix/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="zabbix">zabbix</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/4.linux--权限管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="权限管理">权限管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/5.linux--linux计划任务/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux计划任务">Linux计划任务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/6.linux--httpd服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="httpd服务">httpd服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/6.python--第四章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第四章">python第四章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/8.linux--shell脚本基础/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本基础">shell脚本基础</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/8.linux--软件管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="软件管理">软件管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/8.python的文件处理/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python文件处理">python文件处理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/12.linux--源码安装包管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="源码安装管理">源码安装管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/2.基础linux命令/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux基础命令">Linux基础命令</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/4.linux--NFS服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="NFS服务">NFS服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/4.python--第二章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第二章">python第二章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/5.linux--MariaDB数据库/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="MariaDB数据库">MariaDB数据库</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/5.python--第三章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第三章">python第三章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/6.linux--yum工具的使用/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="yum工具的使用">yum工具的使用</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/7.linux--用户和组管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="用户和组管理">用户和组管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/1.linux--LNMP/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="LNMP">LNMP</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/13.linux--linux系统磁盘管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux系统磁盘管理">Linux系统磁盘管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/9.linux--linux进程管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="linux进程管理">linux进程管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/3.linux--linux基础/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux基础">Linux基础</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/10.linux--网络基础管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="网络基础管理">网络基础管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/13.linux--RHCE  认证考试练习/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="RHCE 认证考试练习">RHCE 认证考试练习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-9.linux--linux进程管理" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">linux进程管理</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="linux基础">linux基础</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color3">linux基础</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-08-22 21:23:33'>2019-08-29 23:44</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#进程基本概述"><span class="toc-text">进程基本概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的组成部分"><span class="toc-text">进程的组成部分</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的环境"><span class="toc-text">进程的环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的产生"><span class="toc-text">进程的产生</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的分类"><span class="toc-text">进程的分类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程状态"><span class="toc-text">进程状态</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Linux进程状态"><span class="toc-text">Linux进程状态</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程优先级"><span class="toc-text">进程优先级</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#linux进程调度与多任务"><span class="toc-text">linux进程调度与多任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程优先级-1"><span class="toc-text">进程优先级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#相对优先级"><span class="toc-text">相对优先级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nice级别与权限"><span class="toc-text">nice级别与权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程优先级调整"><span class="toc-text">进程优先级调整</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程管理命令"><span class="toc-text">进程管理命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ps"><span class="toc-text">ps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pstree"><span class="toc-text">pstree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pgrep"><span class="toc-text">pgrep</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pidof"><span class="toc-text">pidof</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#vmstat"><span class="toc-text">vmstat</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#控制作业"><span class="toc-text">控制作业</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#作业与会话"><span class="toc-text">作业与会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#作业分类"><span class="toc-text">作业分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在后台运行作业"><span class="toc-text">在后台运行作业</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进程间通信"><span class="toc-text">进程间通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用信号控制进程"><span class="toc-text">使用信号控制进程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#kill"><span class="toc-text">kill</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#监控进程活动"><span class="toc-text">监控进程活动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IO负载"><span class="toc-text">IO负载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实时进程监控"><span class="toc-text">实时进程监控</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#top"><span class="toc-text">top</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#练习"><span class="toc-text">练习</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>关于作者</strong></p>
+<p><strong>周李杰</strong>，最后一批90后，现居<strong>湖北武汉</strong></p>
+<p>孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。</p>
+<p>兴趣众多，然无一精通。正努力成为一个有趣的人。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>[TOC]</p>
+<h2 id="进程基本概述"><a href="#进程基本概述" class="headerlink" title="进程基本概述"></a>进程基本概述</h2><p>进程是已启动的可执行程序的运行中实例。</p>
+<p>/proc目录下以数字为名的目录，每一个目录代表一个进程，保存着进程的属性信息。每一个进程的PID是唯一的，就算进程退出了，其它进程也不会占用其PID。</p>
+<h4 id="进程的组成部分"><a href="#进程的组成部分" class="headerlink" title="进程的组成部分"></a>进程的组成部分</h4><ul>
+<li>已分配内存的地址空间</li>
+<li>安全属性，包括所有权凭据和特权</li>
+<li>程序代码的一个或多个执行线程</li>
+<li>进程状态</li>
+</ul>
+<h4 id="进程的环境"><a href="#进程的环境" class="headerlink" title="进程的环境"></a>进程的环境</h4><ul>
+<li>本地和全局变量</li>
+<li>当前调度上下文</li>
+<li>分配的系统资源，如文件描述符和网络端口</li>
+</ul>
+<h4 id="进程的产生"><a href="#进程的产生" class="headerlink" title="进程的产生"></a>进程的产生</h4><p>现有的（父）进程复制自己的地址空间（fork）来创建一个新的（子）进程结构。 每个新进程分配有一个唯一的进程ID（PID），满足跟踪和安全性之需。PID与父进程ID（PPID）是新进程环境的元素。 任何进程可创建子进程。所有进程都是第一个系统进程的后代。RHEL7上，第一个系统进程是systemd。 </p>
+<p><img src="https://s2.ax1x.com/2019/04/09/AoEPY9.png" alt></p>
+<p>通过fork例程，子进程继承安全性身份、过去和当前的文件描述符、端口和资源特权、环境变量，以及程序代码。随后，子进程可能exec其自己的程序代码。通常，父进程在子进程运行期间处于睡眠状态，设置一个在子进程完成时发出信号的请求（wait）。在退出时，子进程可能已经关闭或丢弃了其资源和环境，剩余的部分被称作僵停。父进程在子进程退出时收到信号而被唤醒，清理剩余结构，然后继续执行其自己的程序代码。 </p>
+<h4 id="进程的分类"><a href="#进程的分类" class="headerlink" title="进程的分类"></a>进程的分类</h4><ul>
+<li>前台进程：与终端相关的进程，通过终端启动的进程 <ul>
+<li>注意：也可把在前台启动的进程送往后台，以守护模式运行</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>守护进程：daemon，与终端无关的进程（如内核），在系统引导过程中启动的进程</li>
+</ul>
+<h2 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h2><p><img src="https://s2.ax1x.com/2019/04/09/AoE86P.png" alt></p>
+<blockquote>
+<p>Excuting                          //运行态<br>Ready                              //就绪态，也可以称作睡眠态<br>Uninterruptible sleep   //不可中断的睡眠。不可随时唤醒，只有当IO资源加载成功后才能唤醒<br>Interruptible sleep      //可中断的睡眠。可随时唤醒<br>Zombie                        //僵尸进程。正常运行结束了，但是不释放占据的内存<br>Stopped                       //停止态，暂停于内存中，但不会被调度，除非手动启动之</p>
+</blockquote>
+<blockquote>
+<p>进程睡眠的原因： 当一个执行中的进程，需要加载额外的IO资源的时候，由于IO设备的速度太慢，所以会转入睡眠状态等待，交出CPU给其他进程，以免浪费剩余执行时间 </p>
+</blockquote>
+<p>在多任务处理操作系统中，每个CPU（或CPU核心）在一个时间点上处理一个进程。在进程运行时，它对CPU时间和资源分配的直接要求会有变化。进程分配有一个状态，它随着环境要求而改变。 </p>
+<h6 id="Linux进程状态"><a href="#Linux进程状态" class="headerlink" title="Linux进程状态"></a>Linux进程状态</h6><table>
+<thead>
+<tr>
+<th>标志</th>
+<th>内核定义的状态名称和描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R</td>
+<td>TASK_RUNNING：进程正在CPU上执行，或者正在等待运行。处于运行中（或可运行）状态时，进程可能正在执行用户例程或内核例程（系统调用），或者已排队并就绪</td>
+</tr>
+<tr>
+<td>S</td>
+<td>TASK_INTERRUPTIBLE：进程处于睡眠状态且正在等待某一条件：硬件请求、系统资源访问或信号。当事件或信号满足该条件时，该进程将返回到运行中</td>
+</tr>
+<tr>
+<td>D</td>
+<td>TASK_UNINTERRUPTIBLE：此进程也在睡眠，但与S状态不同，不会响应传递的信号。仅在特定的条件下使用，其中进程中断可能会导致意外的设备状态</td>
+</tr>
+<tr>
+<td>K</td>
+<td>TASK_KILLABLE：进程处于睡眠状态，与不可中断的D状态相同，但有所修改，允许等待中的任务通过响应信号而被中断（彻底退出）。实用程序通常将可中断的进程显示为D状态</td>
+</tr>
+<tr>
+<td>T</td>
+<td>TASK_STOPPED：进程已被停止（暂停），通常是通过用户或其他进程发出的信号。进程可以通过另一信号返回到运行中状态，继续执行（恢复）</td>
+</tr>
+<tr>
+<td>T</td>
+<td>TASK_TRACED：正在被调试的进程也会临时停止，并且共享同一个T状态标志</td>
+</tr>
+<tr>
+<td>Z</td>
+<td>EXIT_ZOMBIE：子进程在退出时向父进程发出信号。除进程身份（PID）之外的所有资源都已释放</td>
+</tr>
+<tr>
+<td>X</td>
+<td>EXIT_DEAD：当父进程清理（获取）剩余的子进程结构时，进程现在已彻底释放。此状态从不会在进程列出实用程序中看到</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>高优先级进程</td>
+</tr>
+<tr>
+<td>N</td>
+<td>低优先级进程</td>
+</tr>
+<tr>
+<td>+</td>
+<td>前台进程组中的进程</td>
+</tr>
+<tr>
+<td>|</td>
+<td>多线程进程</td>
+</tr>
+<tr>
+<td>s</td>
+<td>会话进程首进程</td>
+</tr>
+</tbody></table>
+<h2 id="进程优先级"><a href="#进程优先级" class="headerlink" title="进程优先级"></a>进程优先级</h2><h4 id="linux进程调度与多任务"><a href="#linux进程调度与多任务" class="headerlink" title="linux进程调度与多任务"></a>linux进程调度与多任务</h4><p>现代计算机系统中既包含每次只能执行一个指令的低端处理器，也包含高性能超级计算机，这些超级计算机每台配备数百个CPU，每个CPU上具有多个核心，它们可以并行执行数以百计的指令。但是所有这些系统往往具有一个共同点：它们需要运行的进程数量总是超出实际具有的核心数。</p>
+<p>通过时间分片技术，Linux（和其他操作系统）实际能够运行的进程数（和线程数）可以超出可用的实际处理单元数。操作系统进程调度程序将在单个核心上的进程之间进行快速切换，从而给用户一种有多个进程在同时运行的印象。</p>
+<p>执行此切换的Linux内核部分称为进程调度程序。</p>
+<h4 id="进程优先级-1"><a href="#进程优先级-1" class="headerlink" title="进程优先级"></a>进程优先级</h4><ul>
+<li>进程优先级范围：0-139，数字越小，优先级越高 <ul>
+<li>0-99：实时优先级，内核调整</li>
+<li>100-139：静态优先级，用户可控制</li>
+</ul>
+</li>
+<li>进程优先级高的特点： <ul>
+<li>获得更多的CPU运行时间</li>
+<li>更优先获得CPU运行的机会</li>
+</ul>
+</li>
+</ul>
+<p>要修改进程的优先级可以通过调整进程的nice值来实现，nice值越小，优先级越高： nice值的范围是（-20，19），-20对应100，19对应139 </p>
+<h4 id="相对优先级"><a href="#相对优先级" class="headerlink" title="相对优先级"></a>相对优先级</h4><p>由于不是每种进程都与其他进程同样重要，可告知调度程序为不同的进程使用不同的调度策略。常规系统上运行的大多数进程所使用的调度策略称为<code>SCHED_OTHER</code>(也称为<code>SCHED_NORMAL</code>)，但还有一些其他策略可用于不同的目的。</p>
+<p>由于并非所有进程都以同样的方式创建，可为采用<code>SCHED_NORMAL</code>策略运行的进程指定相对优先级。此优先级称为进程的<code>nice</code>值。一个进程可以有40种不同级别的<code>nice</code>值。</p>
+<p>这些<code>nice</code>级别的范围是从-20到19。默认情况下，进程将继承其父进程的<code>nice</code>级别，通常为0</p>
+<blockquote>
+<p><code>nice</code>级别越高，表示优先级越低（该进程容易将其CPU使用量让给其他进程）<br><code>nice</code>级别越低，表示优先级越高（该进程更加不倾向于让出CPU）<br>如果不存在资源争用（例如当活动进程数少于可用CPU核心数时），即使<code>nice</code>级别高的进程也将仍使用它们可使用的所有可用CPU资源。但当请求CPU时间的进程数超过可用核心数时，<code>nice</code>级别较高的进程将比<code>nice</code>级别较低的进程收到更少的CPU时间</p>
+</blockquote>
+<h4 id="nice级别与权限"><a href="#nice级别与权限" class="headerlink" title="nice级别与权限"></a>nice级别与权限</h4><p>为很占CPU资源的进程设置较低的<code>nice</code>级别可能会对同一系统上运行的其他进程的性能造成负面影响，所以仅允许root用户设置负<code>nice</code>级别以及降低现有进程的<code>nice</code>级别。</p>
+<p>普通非特权用户仅允许设置正的<code>nice</code>级别。只能对现有进程提升<code>nice</code>级别，而不能降低<code>nice</code>级别。</p>
+<h4 id="进程优先级调整"><a href="#进程优先级调整" class="headerlink" title="进程优先级调整"></a>进程优先级调整</h4><p>进程优先级调整：调整nice值</p>
+<blockquote>
+<p>//调整已经启动的进程的nice值：<br>    renice NI PID（例：renice 3 3704）<br>//在启动时指定nice值：（-20，19）<br>    nice -n NI COMMAND</p>
+</blockquote>
+<h2 id="进程管理命令"><a href="#进程管理命令" class="headerlink" title="进程管理命令"></a>进程管理命令</h2><p>Linux系统各进程的相关信息均保存在/proc/PID目录下的各文件中 </p>
+<h4 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h4><p>ps命令用于查看系统中的进程状态</p>
+<blockquote>
+<p>-a  显示所有进程（包括其他用户的进程） </p>
+<p>-u  用户以及其他详细信息 </p>
+<p>-x  显示没有控制终端的进程 </p>
+</blockquote>
+<p>Linux系统中时刻运行着许多进程，如果能够合理地管理它们，则可以优化系统的性能。在Linux系统中，有5种常见的进程状态，分别为运行、中断、不可中断、僵死与停止，其各自含义如下所示。 </p>
+<blockquote>
+<p><strong>R（运行）：</strong>进程正在运行或在运行队列中等待。</p>
+<p><strong>S（中断）：</strong>进程处于休眠中，当某个条件形成后或者接收到信号时，则脱离该   状态。</p>
+<p><strong>D（不可中断）：</strong>进程不响应系统异步信号，即便用kill命令也不能将其中断。</p>
+<p><strong>Z（僵死）：</strong>进程已经终止，但进程描述符依然存在, 直到父进程调用wait4()系统函数后将进程释放。</p>
+<p><strong>T（停止）：</strong>进程收到停止信号后停止运行。</p>
+</blockquote>
+<p>当执行ps aux命令后通常会看到如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># ps aux</span></span><br><span class="line">USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span><br><span class="line">root          1  0.0  0.3  50776  7212 ?        Ss   4月08   0:01 /usr/lib/syst</span><br><span class="line">root          2  0.0  0.0      0     0 ?        S    4月08   0:00 [kthreadd]</span><br><span class="line">root          3  0.0  0.0      0     0 ?        S    4月08   0:00 [ksoftirqd/0]</span><br><span class="line">root          5  0.0  0.0      0     0 ?        S&lt;   4月08   0:00 [kworker/0:0H</span><br><span class="line">root          7  0.0  0.0      0     0 ?        S    4月08   0:00 [migration/0]</span><br><span class="line">root          8  0.0  0.0      0     0 ?        S    4月08   0:00 [rcu_bh]</span><br><span class="line">...............................以下省略...............................</span><br></pre></td></tr></table></figure>
+
+<h4 id="pstree"><a href="#pstree" class="headerlink" title="pstree"></a>pstree</h4><p>pstree用于显示当前系统上的进程树 </p>
+<blockquote>
+<p> 如果没有 使用yum安装</p>
+<p>yum install -y psmisc</p>
+</blockquote>
+<h4 id="pgrep"><a href="#pgrep" class="headerlink" title="pgrep"></a>pgrep</h4><p>以grep风格指定只显示哪些进程，在当前系统中找符合某些特性的进程。只显示进程号 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># pgrep vim</span></span><br><span class="line">3469</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># ps aux | grep vim</span></span><br><span class="line">root       3469  0.0  0.2 151920  5036 pts/0    S+   01:24   0:00 vim 1</span><br><span class="line">root       3502  0.0  0.0 112656   988 pts/2    R+   01:32   0:00 grep --color=auto vim</span><br></pre></td></tr></table></figure>
+
+<h4 id="pidof"><a href="#pidof" class="headerlink" title="pidof"></a>pidof</h4><p>pidof命令用于查询某个指定服务进程的PID值</p>
+<p>每个进程的进程号码值（PID）是唯一的，因此可以通过PID来区分不同的进程。例如，可以使用如下命令来查询本机上正在运行的vim的PID：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打开两个终端</span></span><br><span class="line"><span class="comment"># 在第一个终端上输入：</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># vim a</span></span><br><span class="line"><span class="comment"># 在第二个终端上输入：</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># pidof vim</span></span><br><span class="line">3358</span><br></pre></td></tr></table></figure>
+
+<h4 id="vmstat"><a href="#vmstat" class="headerlink" title="vmstat"></a>vmstat</h4><p>虚拟内存状态查看命令 </p>
+<blockquote>
+<p>vmstat 2        //表示每2秒刷新一次<br>vmstat 2   5      //表示每2秒刷新一次，刷新5次后退出</p>
+<p> -s          //显示内存的统计数据  </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># vmstat</span></span><br><span class="line">procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----</span><br><span class="line"> r  b   swpd   free   buff  cache   si   so    bi    bo   <span class="keyword">in</span>   cs us sy id wa st</span><br><span class="line"> 2  0      0 1489572   1524 152768    0    0     8     2   12   21  0  0 100  0  0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>procs：<br>    r（running）  //表示等待运行的队列长度，也即等待运行的进程的个数<br>    b（block）    //表示阻塞队列长度，也即处于不可中断睡眠态的进程个数<br>memory：<br>    swpd        //交换内存的使用总量<br>    free        //空闲物理内存总量<br>    buffer      //用于buffer的内存总量<br>    cache       //用于cache的内存总量<br>swap：<br>    si（swap in）     //表示从物理内存有多少页面换进swap，也即数据进入swap的数据速率（kb/s）<br>    so（swap out）    //表示从swap有多少页面换进物理内存，也即数据离开swap的数据速率（kb/s）<br>io：<br>    bi（block in）    //表示磁盘块有多少个被调入内存中，也即从块设备读入数据到系统的速率（kb/s）<br>    bo（block out）   //表示有多少个磁盘块从内存中被同步到硬盘上去了，也即保存数据至块设备的速率（kb/s）<br>system：<br>    in（ interrupts）     //表示中断的个数，也即中断速率（kb/s）<br>    cs（context switch）  //表示上下文切换的次数，也即进程切换速率（kb/s）<br>CPU：<br>    us      //表示用户空间<br>    sy      //表示内核空间<br>    id      //表示空闲百分比<br>    wa      //表示等待IO完成所占据的时间百分比<br>    st      //表示steal，被虚拟化技术偷走的时间（比如运行虚拟机）</p>
+</blockquote>
+<h2 id="控制作业"><a href="#控制作业" class="headerlink" title="控制作业"></a>控制作业</h2><h4 id="作业与会话"><a href="#作业与会话" class="headerlink" title="作业与会话"></a>作业与会话</h4><p>作业控制是<code>shell</code>的一种功能，它允许单个shell实例运行和管理多个命令。</p>
+<p>作业与在<code>shell</code>提示符中输入的每个管道相关联。该管道中的所有进程均是作业的一部分，并且是同一个进程组的成员。（如果在<code>shell</code>提示符中仅输入了一条命令，则这条命令可视为命令的最小管道。该命令将是该作业的唯一成员）</p>
+<p>一次只能有一个作业从特定终端窗口读取输入和键盘生成的信号。属于该作业的进程是该控制终端的前台进程。</p>
+<p>该控制终端的后台进程是与该终端相关联的任何其他作业的成员。终端的后台进程无法从终端读取输入或接收键盘生成的中断，但可以写入终端。后台中的作业可能已停止（暂停），也可能正在运行。如果某个正在运行的后台作业尝试从终端读取内容，则该作业将自动暂停。</p>
+<p>每个终端是其自身的会话，并且可以具有一个前台进程和多个独立的后台进程。一个作业只能属于一个会话，也就是属于其控制终端的会话。</p>
+<h4 id="作业分类"><a href="#作业分类" class="headerlink" title="作业分类"></a>作业分类</h4><p>Linux作业分为前台作业与后台作业两种。其各自的特点如下：</p>
+<ul>
+<li>前台作业：通过终端启动，且启动后一直占据了命令提示符</li>
+<li>后台作业：可以通过终端启动，但启动之后，释放命令提示符，后续的操作在后台完成<ul>
+<li>此类作业虽然被送往后台运行，但其依然与终端相关。如果希望送往后台后，剥离与终端的关系需要执行（nohup COMMAND &amp;）</li>
+</ul>
+</li>
+</ul>
+<h4 id="在后台运行作业"><a href="#在后台运行作业" class="headerlink" title="在后台运行作业"></a>在后台运行作业</h4><p>在命令后跟上&amp;符号可以生成一个后台作业</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># sleep 1000 &amp;</span></span><br><span class="line">[1] 3538</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># sleep 1000 &amp;</span></span><br><span class="line">[2] 3540</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># ps</span></span><br><span class="line">   PID TTY          TIME CMD</span><br><span class="line">  3475 pts/2    00:00:00 bash</span><br><span class="line">  3538 pts/2    00:00:00 sleep</span><br><span class="line">  3540 pts/2    00:00:00 sleep</span><br><span class="line">  3541 pts/2    00:00:00 ps</span><br></pre></td></tr></table></figure>
+
+<p>jobs命令用于显示当前所有的后台作业</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># jobs</span></span><br><span class="line">[1]-  运行中               sleep 1000 &amp;</span><br><span class="line">[2]+  运行中               sleep 1000 &amp;</span><br></pre></td></tr></table></figure>
+
+<p>fg命令用于将后台作业调至前台运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># fg</span></span><br><span class="line">sleep 1000</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 当只有一个后台作业时，直接使用fg命令，不跟任何参数即可将后台作业调至前台运行，但是当有多个作业时则必须跟上%+作业号，也就是上面命令执行结果中以[]括起来的数字。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># jobs</span></span><br><span class="line">[1]-  运行中               sleep 1000 &amp;</span><br><span class="line">[2]+  运行中               sleep 1000 &amp;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 使用ctrl+z可将前台进程发送到后台，此时作业将处于停止状态</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># fg %1</span></span><br><span class="line">sleep 1000</span><br><span class="line">^Z</span><br><span class="line">[1]+  已停止               sleep 1000</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用bg命令+作业号可使后台已停止的作业重新运行</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># bg %1</span></span><br><span class="line">[1]+ sleep 1000 &amp;</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># jobs</span></span><br><span class="line">[1]-  运行中               sleep 1000 &amp;</span><br><span class="line">[2]+  运行中               sleep 1000 &amp;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>kill加上作业号可以手动杀死指定作业</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># jobs</span></span><br><span class="line">[1]-  运行中               sleep 1000 &amp;</span><br><span class="line">[2]+  运行中               sleep 1000 &amp;</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># kill %1</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># jobs</span></span><br><span class="line">[1]-  已终止               sleep 1000</span><br><span class="line">[2]+  运行中               sleep 1000 &amp;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> jobs命令的结果中</p>
+<ul>
+<li>//命令将默认操作的作业<ul>
+<li>//命令将第二个默认操作的作业</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h2><p>进程间通信（IPC：Inter Process Communication）</p>
+<p>进程间通信方式：</p>
+<ul>
+<li><p>同一主机</p>
+<ul>
+<li>共享内存</li>
+<li>信号：Signal</li>
+</ul>
+</li>
+<li><p>不同主机</p>
+<ul>
+<li><p>rpc：remote procecure call</p>
+<ul>
+<li><p>基于socket实现进程间通信</p>
+<blockquote>
+<p>socket 套接字  ip加接口   ss -natl</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="使用信号控制进程"><a href="#使用信号控制进程" class="headerlink" title="使用信号控制进程"></a>使用信号控制进程</h2><p>信号是传递至进程的软件中断。信号向执行中的程序报告事件。生成信号的事件可以是错误或外部事件（如I/O请求或计时器过期），或者来自于明确请求（如使用信号发送命令）</p>
+<p>下表列出了系统管理员用于日常进程管理的基本信号。请通过短名称（HUP）或正确名称（SIGHUP）指代信号。</p>
+<ul>
+<li>指定一个信号的方法： <ul>
+<li>信号号码（数字标识）：<code>kill -1</code></li>
+<li>信号完整名称：<code>kill -SIGKILL</code></li>
+<li>信号简写名称：<code>kill -TERM或kill -KILL或kill -INT或kill -HUP</code></li>
+</ul>
+</li>
+</ul>
+<p>基本进程管理信号 </p>
+<table>
+<thead>
+<tr>
+<th>信号编号 ID</th>
+<th>短名称</th>
+<th>定义</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>HUP</td>
+<td>挂起</td>
+<td>让一个进程不用重启就可以重读配置文件，并让新的配置信息生效</td>
+</tr>
+<tr>
+<td>2</td>
+<td>INT</td>
+<td>键盘中断</td>
+<td>中断一个前台进程。ctrl+c就是用的SIGINT信号</td>
+</tr>
+<tr>
+<td>9</td>
+<td>KILL</td>
+<td>中断，无法拦截</td>
+<td>导致立即终止程序。无法被拦截、忽略或处理</td>
+</tr>
+<tr>
+<td>15 默认值</td>
+<td>TERM</td>
+<td>终止</td>
+<td>导致程序终止。和SIGKILL不同，可以被拦截、忽略或处理。要求程序终止的友好方式，允许自我清理</td>
+</tr>
+</tbody></table>
+<p>用户可以中断自己的进程，但只有root才能终止由其他人拥有的进程。</p>
+<h4 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h4><p>kill命令根据ID向进程发送信号。虽其名称为kill，但该命令可用于发送任何信号，而不仅仅是终止程序的信号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># kill -l</span></span><br><span class="line"> 1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL       5) SIGTRAP</span><br><span class="line"> 6) SIGABRT      7) SIGBUS       8) SIGFPE       9) SIGKILL     10) SIGUSR1</span><br><span class="line">11) SIGSEGV     12) SIGUSR2     13) SIGPIPE     14) SIGALRM     15) SIGTERM</span><br><span class="line">16) SIGSTKFLT   17) SIGCHLD     18) SIGCONT     19) SIGSTOP     20) SIGTSTP</span><br><span class="line">21) SIGTTIN     22) SIGTTOU     23) SIGURG      24) SIGXCPU     25) SIGXFSZ</span><br><span class="line">26) SIGVTALRM   27) SIGPROF     28) SIGWINCH    29) SIGIO       30) SIGPWR</span><br><span class="line">31) SIGSYS      34) SIGRTMIN    35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3</span><br><span class="line">38) SIGRTMIN+4  39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8</span><br><span class="line">43) SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12 47) SIGRTMIN+13</span><br><span class="line">48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12</span><br><span class="line">53) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7</span><br><span class="line">58) SIGRTMAX-6  59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2</span><br><span class="line">63) SIGRTMAX-1  64) SIGRTMAX</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># kill 3571</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># ps</span></span><br><span class="line">   PID TTY          TIME CMD</span><br><span class="line">  3475 pts/2    00:00:00 bash</span><br><span class="line">  3610 pts/2    00:00:00 ps</span><br><span class="line">[2]+  已终止               sleep 1000</span><br></pre></td></tr></table></figure>
+
+<h2 id="监控进程活动"><a href="#监控进程活动" class="headerlink" title="监控进程活动"></a>监控进程活动</h2><h4 id="IO负载"><a href="#IO负载" class="headerlink" title="IO负载"></a>IO负载</h4><p>负载平均值代表一段时间内感知的系统负载。Linux通过预期服务等待时间的表示来实施平均负载计算。</p>
+<p>Linux不仅计算进程数，也作为独立的任务计算线程数。运行中线程和等待I/O资源的线程的CPU请求队列对应于R和D进程状态。等待I/O包括处于睡眠而等待预期磁盘和网络响应的任务。</p>
+<p>负载数属于全局计数器计算，是所有CPU的总和数。由于从睡眠返回的任务可能会重新调度到不同的CPU，难以精确的每CPU计数，但累计数的准确度可以保障。显示的平均负载代表所有的CPU。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># grep 'model name' /proc/cpuinfo</span></span><br><span class="line">model name      : Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz</span><br></pre></td></tr></table></figure>
+
+<p>一些UNIX系统仅考虑CPU使用率或运行队列长度来指示系统负载。由于具有空闲CPU的系统可能会因为磁盘或网络资源忙而遇到很长时间的等待，因此Linux负载平均值中包含了对I/O的考量。遇到负载平均值很高但CPU活动很低时，请检查磁盘和网络活动。</p>
+<p>Linux中可以使用<code>top</code>、<code>uptime</code>显示负载平均值的情况。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># uptime</span></span><br><span class="line"> 02:11:29 up  5:54,  3 users,  load average: 0.00, 0.01, 0.05</span><br></pre></td></tr></table></figure>
+
+<p>将显示的负载平均值除以系统中的逻辑CPU数。当值低于1表示资源利用率较好，等待时间很短。当值高于1表示资源饱和，而且有一定的服务等待时间。</p>
+<p>空闲CPU队列的负载数为0。每个就绪和等待的线程使计数增加1。总队列数为1时，资源（CPU、磁盘或网络）正在使用中，但没有请求把时间花在等待上。增加的请求数会累积该计数，但由于许多请求可以在时限内处理，资源使用率会很高，而等待时间则不会。</p>
+<p>因为磁盘或网络资源忙碌等待I/O而处于睡眠的进程包含在该计数内，而且使负载平均值增大。虽然不能表示CPU使用率，队列数依然表明用户和程序正在等待资源服务。</p>
+<p>在资源饱和前，平均负载将保持在1以下，因为几乎不会在队列中发现等待的任务。只有资源饱和导致请求留在排队状态并且被负载计算例程计数时，负载平均才会增大。当资源使用率接近100%时，每个增加的请求将开始遭遇服务等待时间。</p>
+<h4 id="实时进程监控"><a href="#实时进程监控" class="headerlink" title="实时进程监控"></a>实时进程监控</h4><h4 id="top"><a href="#top" class="headerlink" title="top"></a>top</h4><p>top命令用于动态地监视进程活动与系统负载等信息 </p>
+<blockquote>
+<p>top命令相当强大，能够动态地查看系统运维状态，完全将它看作Linux中的“强化版的Windows任务管理器” .</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">top - 01:07:42 up  4:50,  4 users,  load average: 0.00, 0.01, 0.05</span><br><span class="line">Tasks: 412 total,   2 running, 410 sleeping,   0 stopped,   0 zombie</span><br><span class="line">%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span><br><span class="line">KiB Mem:   1870760 total,   323388 used,  1547372 free,      780 buffers</span><br><span class="line">KiB Swap:  2097148 total,        0 used,  2097148 free.   101676 cached Mem</span><br><span class="line"></span><br><span class="line">   PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND</span><br><span class="line">     1 root      20   0   50776   7212   2480 S  0.0  0.4   0:01.26 systemd</span><br><span class="line">     2 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kthreadd</span><br><span class="line">     3 root      20   0       0      0      0 S  0.0  0.0   0:00.04 ksoftirqd/0</span><br><span class="line">     5 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kworker/0:+</span><br><span class="line">     7 root      rt   0       0      0      0 S  0.0  0.0   0:00.00 migration/0</span><br><span class="line">     8 root      20   0       0      0      0 S  0.0  0.0   0:00.00 rcu_bh</span><br><span class="line">     9 root      20   0       0      0      0 S  0.0  0.0   0:00.00 rcuob/0</span><br><span class="line">...............................以下省略..................................</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>第1行：系统时间、运行时间、登录终端数、系统负载（三个数值分别为1分钟、5分钟、15分钟内的平均值，数值越小意味着负载越低）。</p>
+<p>第2行：进程总数、运行中的进程数、睡眠中的进程数、停止的进程数、僵死的进程数。</p>
+<p>第3行：用户占用资源百分比、系统内核占用资源百分比、改变过优先级的进程资源百分比、空闲的资源百分比等。其中数据均为CPU数据并以百分比格式显示，例如“97.1 id”意味着有97.1%的CPU处理器资源处于空闲。</p>
+<p>第4行：物理内存总量、内存使用量、内存空闲量、作为内核缓存的内存量。</p>
+<p>第5行：虚拟内存总量、虚拟内存使用量、虚拟内存空闲量、已被提前加载的内存量。</p>
+</blockquote>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p><strong>写出以下描述对应的进程状态标志：</strong></p>
+<table>
+<thead>
+<tr>
+<th>描述</th>
+<th align="center">状态标志</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>进程已被停止(暂停)</td>
+<td align="center">T</td>
+</tr>
+<tr>
+<td>进程已释放了其所有资源(pid除外)</td>
+<td align="center">Z</td>
+</tr>
+<tr>
+<td>进程正在CPU上运行或者正在等待于CPU上运行</td>
+<td align="center">R</td>
+</tr>
+<tr>
+<td>进程正处于睡眠状态，直至满足某些条件后才会启动</td>
+<td align="center">S</td>
+</tr>
+<tr>
+<td>进程正在等待I/O或某些条件得到满足，并且绝对不会影响信号</td>
+<td align="center">D</td>
+</tr>
+</tbody></table>
+<p><strong>按以下顺序练习后台与前台进程操作：</strong></p>
+<p>并排打开两个终端窗口，分别称为左窗口和右窗口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># 1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># 2</span></span><br></pre></td></tr></table></figure>
+
+<p>在左窗口中，启动一个进程，该进程以一秒为间隔持续向~/outfile文件附加单词”rock”和一个空格。整个命令集必须包含在括号内，以便作业控制可以将该集合解译为一个作业</p>
+<blockquote>
+<p>[root@localhost ~]# (while true;do echo -n ‘rock ‘ &gt;&gt; ~/outfile;sleep 1;done)</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># (while true;do echo -n 'rock ' &gt;&gt; ~/outfile;sleep 1;done)</span></span><br></pre></td></tr></table></figure>
+
+<p>在右窗口中，使用<code>tail</code>确认新进程正在写入该文件</p>
+<blockquote>
+<p> [root@localhost ~]# tail -f ~/outfile</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie yum.repos.d]<span class="comment"># tail -f ~/outfile</span></span><br><span class="line">rock rock rock rock rock rock rock rock rock rock rock rock rock rock rock rock rock rock rock rock rock rock rock rock rock rock</span><br></pre></td></tr></table></figure>
+
+<p>在左窗口中，使用<code>ctrl+z</code>快捷键暂停正在运行的进程。<code>shell</code>将返回作业ID并用方括号括起。在右窗口中确认进程输出已经停止</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment">#  (while true;do echo -n 'rock ' &gt;&gt; ~/outfile;sleep 1;done)</span></span><br><span class="line">^Z</span><br><span class="line">[1]+  已停止               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'rock '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> )</span><br></pre></td></tr></table></figure>
+
+<p>在左窗口中，查看jobs列表。+表示当前的作业。使用<code>bg</code>命令在后台重新启动该作业，并再次查看jobs列表，在右窗口中，确认进程输出再次处于活动状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># jobs</span></span><br><span class="line">[1]+  已停止               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'rock '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> )</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># bg</span></span><br><span class="line">[1]+ ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'rock '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> ) &amp;</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># jobs</span></span><br><span class="line">[1]+  运行中               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'rock '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> ) &amp;</span><br></pre></td></tr></table></figure>
+
+<p>在左窗口中，再启动两个进程，以便向同一输出文件附加内容。将”rock”替换为”paper”，再替换为”scissors”。要将进程正确置于后台，整个命令集必须包含在括号内，并且以&amp;符号结尾</p>
+<blockquote>
+<p>[root@localhost ~]# (while true;do echo -n ‘paper ‘ &gt;&gt; ~/outfile;sleep 1;done) &amp;</p>
+</blockquote>
+<blockquote>
+<p>[root@localhost ~]# (while true;do echo -n ‘scissors ‘ &gt;&gt; ~/outfile;sleep 1;done) &amp;</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment">#  (while true;do echo -n 'paper ' &gt;&gt; ~/outfile;sleep 1;done) &amp;</span></span><br><span class="line">[3] 3858</span><br><span class="line">[root@zhoulijie ~]<span class="comment">#  (while true;do echo -n 'scissors ' &gt;&gt; ~/outfile;sleep 1;done) &amp;</span></span><br><span class="line">[4] 3887</span><br></pre></td></tr></table></figure>
+
+<p>在左窗口中，检查jobs，以查看所有三个进程都在运行中。在右窗口中，确认所有三个进程都附加内容到文件中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># jobs</span></span><br><span class="line">[1]   运行中               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'rock '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> ) &amp;</span><br><span class="line">[2]-  运行中               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'paper '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> ) &amp;</span><br><span class="line">[3]+  运行中               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'scissors '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> ) &amp;</span><br></pre></td></tr></table></figure>
+
+<p>仅使用之前学习的命令，暂停”rock”进程。在左窗口中，使用从jobs列表中确定的作业ID使作业进入前台，然后使用ctrl+z暂停该作业，确认”rock”进程为已停止。在右窗口中，确认”rock”输出不再活动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># jobs</span></span><br><span class="line">[1]   运行中               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'rock '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> ) &amp;</span><br><span class="line">[2]-  运行中               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'paper '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> ) &amp;</span><br><span class="line">[3]+  运行中               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'scissors '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> ) &amp;</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># fg %1</span></span><br><span class="line">( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'rock '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> )</span><br><span class="line">^Z</span><br><span class="line">[1]+  已停止               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'rock '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> )</span><br></pre></td></tr></table></figure>
+
+<p>终止”paper”进程。在左窗口中，使作业进入前台，然后使用ctrl+c终止该作业，确认”paper”进程已经消失。在右窗口中，确认”paper”输出不再活动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># jobs</span></span><br><span class="line">[3]-  运行中               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'scissors '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> ) &amp;</span><br><span class="line">[4]+  运行中               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'paper '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> ) &amp;</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># fg %4</span></span><br><span class="line">( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'paper '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> )</span><br><span class="line">^C</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scissors scissors scissors scissors scissors scissors scissors scissors scissors scissors scissors scissors scissors scissors scissors scissors scissors scissors scissors scissors</span><br></pre></td></tr></table></figure>
+
+<p>在左窗口中，使用ps查看剩余的作业。暂停中的作业具有状态T标志。其他后台作业为睡眠中(S)，因为ps在显示时处于”CPU上”(R)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]# ps j</span><br><span class="line">  PPID    PID   PGID    SID TTY       TPGID STAT   UID   TIME COMMAND</span><br><span class="line">   960   2580   2580   2580 tty1       2580 Ss+      0   0:00 -bash</span><br><span class="line">  3333   3337   3337   3337 pts/0      4653 Ss       0   0:00 -bash</span><br><span class="line">  3470   3475   3475   3475 pts/2      5657 Ss       0   0:00 -bash</span><br><span class="line">  3337   3690   3690   3337 pts/0      4653 T        0   0:00 tail -f /root/outfil</span><br><span class="line">  3337   4653   4653   3337 pts/0      4653 S+       0   0:00 tail -f /root/outfil</span><br><span class="line">  3475   4699   4699   3475 pts/2      5657 S        0   0:00 -bash</span><br><span class="line">  4699   5656   4699   3475 pts/2      5657 S        0   0:00 sleep 1</span><br><span class="line">  3475   5657   5657   3475 pts/2      5657 R+       0   0:00 ps j</span><br></pre></td></tr></table></figure>
+
+<p>停止剩余的两个作业。在左窗口中，使其中一个作业进入前台。使用ctrl+c将其终止，对剩余的作业重复此操作。停止的作业在前入前台时会临时重新启动。确认没有剩余的作业，输出也已停止。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># jobs</span></span><br><span class="line">[1]+  运行中               ( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'scissors '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> ) &amp;</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># fg %1</span></span><br><span class="line">( <span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">'scissors '</span> &gt;&gt; ~/outfile; sleep 1;</span><br><span class="line"><span class="keyword">done</span> )</span><br><span class="line">^C</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># jobs</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>在右窗口中，停止tail命令。关闭多余的终端窗口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie yum.repos.d]<span class="comment"># ps</span></span><br><span class="line">   PID TTY          TIME CMD</span><br><span class="line">  3337 pts/0    00:00:00 bash</span><br><span class="line">  3690 pts/0    00:00:00 tail</span><br><span class="line">  5870 pts/0    00:00:00 ps</span><br><span class="line">[root@zhoulijie yum.repos.d]<span class="comment"># kill 3690</span></span><br><span class="line">[root@zhoulijie yum.repos.d]<span class="comment"># ps</span></span><br><span class="line">   PID TTY          TIME CMD</span><br><span class="line">  5876 pts/0    00:00:00 bash</span><br><span class="line">  5897 pts/0    00:00:00 ps</span><br></pre></td></tr></table></figure>
+
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>linux进程管理</p>
+    
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Li Jie">Li Jie</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-08-29, 23:44:18</p>
+    <p><span class="copy-title">最后更新:</span>2019-08-22, 21:23:33</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/08/29/9.linux--linux进程管理/" title="linux进程管理">https://github.com/chineselijie/2019/08/29/9.linux--linux进程管理/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="//cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#linux基础','#python','#linux进阶','#linux运维',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

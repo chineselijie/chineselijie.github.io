@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>用户和组管理 | Li Jie&#39;s blog</title>
+  <meta name="keywords" content=" linux基础 ">
+  <meta name="description" content="用户和组管理 | Li Jie&#39;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Li Jie&#39;s blog">
+<meta property="og:url" content="https://github.com/chineselijie/about/index.html">
+<meta property="og:site_name" content="Li Jie&#39;s blog">
+<meta property="og:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-28T17:25:29.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Li Jie&#39;s blog">
+<meta name="twitter:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Li Jie</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="facebook" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-facebook"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/ff56736de7cf" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(41)</small></div></li>
+    
+        
+            
+            <li><div data-rel="linux基础">linux基础<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="python">python<small>(8)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="linux进阶">linux进阶<small>(12)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="linux运维">linux运维<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="41">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux基础</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux进阶</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux运维</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/1.RHEL 7.4 实验环境搭建/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="RHEL 7.4 实验环境搭建">RHEL 7.4 实验环境搭建</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/11.linux--网络进阶管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="网络进阶管理">网络进阶管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/2.python--计算机数据存储与进制/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python 计算机数据存储与进制">python 计算机数据存储与进制</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/7.linux--正则表达式/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="正则表达式">正则表达式</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/7.谈Python变量和数据类型/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="谈Python变量和数据类型">谈Python变量和数据类型</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/9.linux--shell脚本进阶/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本进阶">shell脚本进阶</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/1.linux--openssh/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="openssh">openssh</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/08/29/1.linux--初步熟悉RHEL 8/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="初步熟悉RHEL 8">初步熟悉RHEL 8</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/1.python--python基础理论讲解/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python基础理论讲解">python基础理论讲解</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/08/29/1.网络--子网划分/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="子网划分">子网划分</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/10.linux--shell脚本笔记(脚本)/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本笔记(脚本)">shell脚本笔记(脚本)</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/11.linux--ISCSI服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="ISCSI服务">ISCSI服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/14.linux--LVM磁盘管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="LVM磁盘管理">LVM磁盘管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/15.linux--linux基础练习/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="linux基础练习">linux基础练习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/16.linux--RHCSA模拟/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="RHCSA复习">RHCSA复习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/2.linux--FTP服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="FTP服务">FTP服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/2.rsync/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="rsync">rsync</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/3.linux--samba服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="samba服务">samba服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/3.python--第一章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第一章">python第一章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/3.zabbix/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="zabbix">zabbix</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/4.linux--权限管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="权限管理">权限管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/5.linux--linux计划任务/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux计划任务">Linux计划任务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/6.linux--httpd服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="httpd服务">httpd服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/6.python--第四章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第四章">python第四章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/8.linux--shell脚本基础/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本基础">shell脚本基础</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/8.linux--软件管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="软件管理">软件管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/8.python的文件处理/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python文件处理">python文件处理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/12.linux--源码安装包管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="源码安装管理">源码安装管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/2.基础linux命令/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux基础命令">Linux基础命令</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/4.linux--NFS服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="NFS服务">NFS服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/4.python--第二章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第二章">python第二章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/5.linux--MariaDB数据库/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="MariaDB数据库">MariaDB数据库</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/5.python--第三章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第三章">python第三章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/6.linux--yum工具的使用/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="yum工具的使用">yum工具的使用</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/7.linux--用户和组管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="用户和组管理">用户和组管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/1.linux--LNMP/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="LNMP">LNMP</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/13.linux--linux系统磁盘管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux系统磁盘管理">Linux系统磁盘管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/9.linux--linux进程管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="linux进程管理">linux进程管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/3.linux--linux基础/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux基础">Linux基础</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/10.linux--网络基础管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="网络基础管理">网络基础管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/13.linux--RHCE  认证考试练习/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="RHCE 认证考试练习">RHCE 认证考试练习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-7.linux--用户和组管理" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">用户和组管理</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="linux基础">linux基础</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color3">linux基础</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-08-22 21:23:54'>2019-08-29 23:44</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#用户和组管理"><span class="toc-text">用户和组管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#何为用户何为组？"><span class="toc-text">何为用户何为组？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用户和组的概念"><span class="toc-text">用户和组的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用户分类"><span class="toc-text">用户分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux安全上下文"><span class="toc-text">Linux安全上下文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux用户组类别"><span class="toc-text">Linux用户组类别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-用户和组相关的配置文件"><span class="toc-text">Linux 用户和组相关的配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#各配置文件的说明"><span class="toc-text">各配置文件的说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#加密方法"><span class="toc-text">加密方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux用户密码加密方式"><span class="toc-text">Linux用户密码加密方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户和组相关的命令"><span class="toc-text">用户和组相关的命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用户管理"><span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#用户创建命令useradd"><span class="toc-text">用户创建命令useradd</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#用户删除命令userdel"><span class="toc-text">用户删除命令userdel</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#查看用户账号的信息命令id"><span class="toc-text">查看用户账号的信息命令id</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#修改用户账号属性的命令usermod"><span class="toc-text">修改用户账号属性的命令usermod</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#切换用户命令su"><span class="toc-text">切换用户命令su</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#密码管理"><span class="toc-text">密码管理</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#密码管理命令passwd"><span class="toc-text">密码管理命令passwd</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#改变用户密码过期信息命令chage"><span class="toc-text">改变用户密码过期信息命令chage</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#密码生成工具openssl"><span class="toc-text">密码生成工具openssl</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#组管理"><span class="toc-text">组管理</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#创建组命令groupadd"><span class="toc-text">创建组命令groupadd</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#修改组命令groupmod"><span class="toc-text">修改组命令groupmod</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#删除组命令groupdel"><span class="toc-text">删除组命令groupdel</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#练习"><span class="toc-text">练习</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>关于作者</strong></p>
+<p><strong>周李杰</strong>，最后一批90后，现居<strong>湖北武汉</strong></p>
+<p>孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。</p>
+<p>兴趣众多，然无一精通。正努力成为一个有趣的人。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="用户和组管理"><a href="#用户和组管理" class="headerlink" title="用户和组管理"></a>用户和组管理</h1><p>[TOC]</p>
+<h2 id="何为用户何为组？"><a href="#何为用户何为组？" class="headerlink" title="何为用户何为组？"></a>何为用户何为组？</h2><h4 id="用户和组的概念"><a href="#用户和组的概念" class="headerlink" title="用户和组的概念"></a>用户和组的概念</h4><p>例如：小明和他的家人</p>
+<p>小明就是用户，他的家就是这个组，他的家人就是这个组里面的组员</p>
+<p>*<em>用户存在的目的是为了实现资源的分派。 *</em></p>
+<p>小明在家里有知识，可以教给小明的爸爸妈妈，小明的妈妈会做饭，可以做的饭给小明和小明爸爸吃，小明的爸爸有钱，可以给小明和小明妈妈花。</p>
+<h4 id="用户分类"><a href="#用户分类" class="headerlink" title="用户分类"></a>用户分类</h4><p>Linux用户分为管理员和普通用户两种：</p>
+<table>
+<thead>
+<tr>
+<th align="center">用户类别</th>
+<th align="center">用户ID</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">管理员</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">普通用户</td>
+<td align="center">1-65535</td>
+</tr>
+</tbody></table>
+<p>其中普通用户又分为系统用户和登录用户两种： </p>
+<table>
+<thead>
+<tr>
+<th align="center">用户类别</th>
+<th align="center">用户ID</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">系通用户</td>
+<td align="center">1-999（为 守护类进程获取系统资源而完成权限指派的用户 ）</td>
+</tr>
+<tr>
+<td align="center">登陆用户</td>
+<td align="center">1000-60000（为了完成交互式登录使用的用户）</td>
+</tr>
+</tbody></table>
+<h4 id="Linux安全上下文"><a href="#Linux安全上下文" class="headerlink" title="Linux安全上下文"></a>Linux安全上下文</h4><blockquote>
+<p> 运行中的程序：进程</p>
+<p>以进程发起者的身份运行</p>
+<p>进程所能够访问的所有资源的权限取决于进程的发起者的身份</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先我们打开两个终端</span></span><br><span class="line"><span class="comment"># 在第一个终端里输入</span></span><br><span class="line">[root@MR ~]<span class="comment"># cd /tmp</span></span><br><span class="line">[root@MR tmp]<span class="comment"># ls</span></span><br><span class="line">shadow</span><br><span class="line">[root@MR tmp]<span class="comment"># touch 123</span></span><br><span class="line">[root@MR tmp]<span class="comment"># ls -l</span></span><br><span class="line">总用量 4</span><br><span class="line">-rw-r--r--. 1 root root   0 3月  27 07:37 123</span><br><span class="line">----------. 1 root root 608 3月   8 15:48 shadow</span><br><span class="line"><span class="comment"># 在这里我们可以看到root是可读可写的权限</span></span><br><span class="line"><span class="comment"># 在第二个终端里输入</span></span><br><span class="line">[root@MR ~]<span class="comment"># su - zhou</span></span><br><span class="line">上一次登录：三 3月 27 04:27:47 CST 2019pts/1 上</span><br><span class="line">[zhou@MR ~]$ <span class="built_in">cd</span> /tmp</span><br><span class="line">[zhou@MR tmp]$ ls -l</span><br><span class="line">总用量 4</span><br><span class="line">-rw-r--r--. 1 root root   0 3月  27 07:37 123</span><br><span class="line">----------. 1 root root 608 3月   8 15:48 shadow</span><br><span class="line">[zhou@MR tmp]$ vim 123</span><br><span class="line">~</span><br><span class="line"><span class="string">"123"</span> [只读] 0L, 0C                                           0,0-1        全部</span><br><span class="line"><span class="comment"># 然后我们在第一个终端里输入</span></span><br><span class="line">[root@MR tmp]<span class="comment"># ps aux | grep vim</span></span><br><span class="line">zhou       4946  0.1  0.2 151916  5004 pts/0    S+   07:40   0:00 vim 123</span><br><span class="line">root       4948  0.0  0.0 112656   992 pts/2    R+   07:40   0:00 grep --color=auto vim</span><br><span class="line"><span class="comment"># 在这里我们可以看到 vim 123 是由zhou用户发起的进程</span></span><br><span class="line"><span class="comment"># 但是我们子啊第二步骤里面可以看到这个文件只是一个只读文件</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Linux通过安全上下文的概念完成用户权限的指派。</p>
+<p>先判断用户是否是某文件的属主</p>
+<p>再判断用户是否属于某个组</p>
+<p>最后定其为其他用户</p>
+</blockquote>
+<h4 id="Linux用户组类别"><a href="#Linux用户组类别" class="headerlink" title="Linux用户组类别"></a>Linux用户组类别</h4><table>
+<thead>
+<tr>
+<th align="center">用户组类别</th>
+<th align="center">特征</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">私有组</td>
+<td align="center">创建用户时，如果没有为其指定所属的组， 系统会自动为其创建一个与用户名相同的组</td>
+</tr>
+<tr>
+<td align="center">基本组</td>
+<td align="center">用户的默认组</td>
+</tr>
+<tr>
+<td align="center">附加组(额外组)</td>
+<td align="center">默认组以外的其它组</td>
+</tr>
+</tbody></table>
+<h2 id="Linux-用户和组相关的配置文件"><a href="#Linux-用户和组相关的配置文件" class="headerlink" title="Linux 用户和组相关的配置文件"></a>Linux 用户和组相关的配置文件</h2><h4 id="各配置文件的说明"><a href="#各配置文件的说明" class="headerlink" title="各配置文件的说明"></a>各配置文件的说明</h4><table>
+<thead>
+<tr>
+<th align="center">配置文件</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">/etc/passwd</td>
+<td align="center">用户及其属性信息（名称、uid、基本组id等等）</td>
+</tr>
+<tr>
+<td align="center">/etc/group</td>
+<td align="center">组及其属性信息</td>
+</tr>
+<tr>
+<td align="center">/etc/shadow</td>
+<td align="center">用户密码及其相关属性</td>
+</tr>
+<tr>
+<td align="center">/etc/gshadow</td>
+<td align="center">组密码及其相关属性。在用户执行基本组切换时使用</td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@MR tmp]<span class="comment"># tail -n5 /etc/passwd</span></span><br><span class="line">postfix:x:89:89::/var/spool/postfix:/sbin/nologin</span><br><span class="line">sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin</span><br><span class="line">zhou:x:1000:1000::/home/zhou:/bin/bash</span><br><span class="line">wangqing:x:1001:1003:wu liang tian zun:/opt/123:/bin/csh</span><br><span class="line">openstack:x:1002:1005::/home/openstack:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@MR tmp]<span class="comment"># tail -n5 /etc/group</span></span><br><span class="line">taoist:x:1001:wangqing</span><br><span class="line">tianzun:x:1002:wangqing</span><br><span class="line">wangqing:x:1003:</span><br><span class="line">123:x:1004:</span><br><span class="line">openstack:x:1005:</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>配置文件</th>
+<th align="center">/etc/passwd</th>
+<th align="center">/etc/group</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一字段</td>
+<td align="center">用户名</td>
+<td align="center">组名</td>
+</tr>
+<tr>
+<td>第二字段</td>
+<td align="center">密码占位符号</td>
+<td align="center">组名</td>
+</tr>
+<tr>
+<td>第三字段</td>
+<td align="center">UID</td>
+<td align="center">组密码</td>
+</tr>
+<tr>
+<td>第四字段</td>
+<td align="center">GID</td>
+<td align="center">GID</td>
+</tr>
+<tr>
+<td>第五字段</td>
+<td align="center">用户的描述信息</td>
+<td align="center">以当前组为附加组的用户列表(分隔符为逗号)</td>
+</tr>
+<tr>
+<td>第六字段</td>
+<td align="center">用户家目录</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>第七字段</td>
+<td align="center">用户的登录shell</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@MR tmp]<span class="comment"># tail -n5 /etc/shadow</span></span><br><span class="line">postfix:!!:17961::::::</span><br><span class="line">sshd:!!:17961::::::</span><br><span class="line">zhou:!!:17981:0:99999:7:::</span><br><span class="line">wangqing:!!:17981:0:99999:3::17986:</span><br><span class="line">openstack:!!:17981:0:99999:7:::</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@MR tmp]<span class="comment"># tail -n5 /etc/gshadow</span></span><br><span class="line">taoist:!::wangqing</span><br><span class="line">tianzun:!::</span><br><span class="line">wangqing:!::</span><br><span class="line">123:<span class="variable">$6</span><span class="variable">$f3I23</span>/woA<span class="variable">$DV6eA</span>/Qc0KsZkbwOo1uqC3YRx30riDKd/ZOtrEulPnct2knx4gBakc8rFYwnCOXFKaG4H7Cdf1alzK/V6fpTl/::</span><br><span class="line">openstack:!::</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">配置文件</th>
+<th align="center">/etc/shadow</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">第一字段</td>
+<td align="center">登录名</td>
+</tr>
+<tr>
+<td align="center">第二字段</td>
+<td align="center">加密后的密码</td>
+</tr>
+<tr>
+<td align="center">第三字段</td>
+<td align="center">最近一次更改密码的日期</td>
+</tr>
+<tr>
+<td align="center">第四字段</td>
+<td align="center">密码的最小使用期限</td>
+</tr>
+<tr>
+<td align="center">第五字段</td>
+<td align="center">密码的最大使用期限</td>
+</tr>
+<tr>
+<td align="center">第六字段</td>
+<td align="center">密码警告时间段</td>
+</tr>
+<tr>
+<td align="center">第七字段</td>
+<td align="center">密码禁用期</td>
+</tr>
+<tr>
+<td align="center">第八字段</td>
+<td align="center">帐号的过期日期</td>
+</tr>
+<tr>
+<td align="center">第九字段</td>
+<td align="center">保留字段</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p> 以上配置文件均可用vim 进行改动</p>
+</blockquote>
+<h4 id="加密方法"><a href="#加密方法" class="headerlink" title="加密方法"></a>加密方法</h4><ul>
+<li>对称加密：加密和解密使用同一个密钥 </li>
+<li>公钥加密：每个密码都成对出现，一个为私钥（secret key），一个为公钥（public key）</li>
+<li>单向加密：也叫散列加密，提取数据特征码，能加密不能解密，常用于做数据完整性校验 </li>
+</ul>
+<p>单向加密的特点：</p>
+<ul>
+<li><p>雪崩效应（初始条件的微小改变，将会引起结果的巨大改变）</p>
+</li>
+<li><p>定长输出 </p>
+<p>​    1.MD5：128位定长输出</p>
+<p>​    2.SHA1：160位定长输出</p>
+<p>​    3.SHA224：224位定长输出</p>
+<p>​    4.SHA256：256位定长输出</p>
+<p>​    5.SHA384：384位定长输出</p>
+<p>​    6.SHA512：512位定长输出</p>
+</li>
+</ul>
+<blockquote>
+<p>一般我们只用MD5进行加密</p>
+</blockquote>
+<h4 id="Linux用户密码加密方式"><a href="#Linux用户密码加密方式" class="headerlink" title="Linux用户密码加密方式"></a>Linux用户密码加密方式</h4><blockquote>
+<p> Linux密码是使用的单向加密方式进行加密 </p>
+<p>意思是每个密码都不一样，在加密前给用户设置的密码加上一点杂质，再对这个杂质+用户密码一起使用单向加密。由于单向加密的雪崩效应，就算两人设置的密码是一样的，但因为杂质的不同，最终的结果也会截然不同</p>
+</blockquote>
+<p>密码复杂性策略：</p>
+<ul>
+<li>使用数字、大写字母、小写字母及特殊字符中至少3种</li>
+<li>足够长</li>
+<li>使用随机密码，不要使用有意义的单词或数字</li>
+<li>定期更换，不要使用最近曾经使用过的密码</li>
+</ul>
+<h2 id="用户和组相关的命令"><a href="#用户和组相关的命令" class="headerlink" title="用户和组相关的命令"></a>用户和组相关的命令</h2><h4 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h4><h6 id="用户创建命令useradd"><a href="#用户创建命令useradd" class="headerlink" title="用户创建命令useradd"></a>用户创建命令useradd</h6><p>-u 指定uid</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@MR tmp]<span class="comment"># cd</span></span><br><span class="line">[root@MR ~]<span class="comment"># useradd -u 8888 yue</span></span><br><span class="line">[root@MR ~]<span class="comment"># id yue</span></span><br><span class="line">uid=8888(yue) gid=8888(yue) 组=8888(yue)</span><br></pre></td></tr></table></figure>
+
+<p>-g 指定gid</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@MR home]<span class="comment"># tail -n5 /etc/group</span></span><br><span class="line">taoist:x:1001:wangqing</span><br><span class="line">tianzun:x:1002:wangqing</span><br><span class="line">wangqing:x:1003:</span><br><span class="line">123:x:1004:</span><br><span class="line">openstack:x:1005:</span><br><span class="line">[root@MR home]<span class="comment"># useradd -g tianzun yue</span></span><br><span class="line">[root@MR home]<span class="comment"># id yue</span></span><br><span class="line">uid=1003(yue) gid=1002(tianzun) 组=1002(tianzun)</span><br></pre></td></tr></table></figure>
+
+<p>-G 指定附加组，组与组之间用逗号隔开，记住附加组必须存在</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@MR home]<span class="comment"># tail -n5 /etc/group</span></span><br><span class="line">taoist:x:1001:wangqing</span><br><span class="line">tianzun:x:1002:wangqing</span><br><span class="line">wangqing:x:1003:</span><br><span class="line">123:x:1004:</span><br><span class="line">openstack:x:1005:</span><br><span class="line">[root@MR home]<span class="comment"># useradd -G tianzun,taoist yue</span></span><br><span class="line">[root@MR home]<span class="comment"># id yue</span></span><br><span class="line">uid=1003(yue) gid=1006(yue) 组=1006(yue),1001(taoist),1002(tianzun)</span><br></pre></td></tr></table></figure>
+
+<p>-c 添加注释信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@MR home]<span class="comment"># useradd -c"hahahahahaha" yue</span></span><br><span class="line">[root@MR home]<span class="comment"># tail -n5 /etc/passwd</span></span><br><span class="line">sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin</span><br><span class="line">zhou:x:1000:1000::/home/zhou:/bin/bash</span><br><span class="line">wangqing:x:1001:1003:wu liang tian zun:/opt/123:/bin/csh</span><br><span class="line">openstack:x:1002:1005::/home/openstack:/bin/bash</span><br><span class="line">yue:x:1003:1006:hahahahahaha:/home/yue:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>-d 指定用户的家目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@MR home]<span class="comment"># cd /tmp</span></span><br><span class="line">[root@MR tmp]<span class="comment"># ls</span></span><br><span class="line">123  shadow</span><br><span class="line">[root@MR tmp]<span class="comment"># mkdir abc</span></span><br><span class="line">[root@MR tmp]<span class="comment"># useradd -d /tmp/abc yue</span></span><br><span class="line">useradd：警告：此主目录已经存在。</span><br><span class="line">不从 skel 目录里向其中复制任何文件。</span><br></pre></td></tr></table></figure>
+
+<p>-s 指定shell，但这个shell必须在/etc/shells里面存在</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@MR tmp]<span class="comment"># useradd -s /sbin/nologin yue</span></span><br><span class="line">[root@MR tmp]<span class="comment"># tail -n5 /etc/passwd</span></span><br><span class="line">sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin</span><br><span class="line">zhou:x:1000:1000::/home/zhou:/bin/bash</span><br><span class="line">wangqing:x:1001:1003:wu liang tian zun:/opt/123:/bin/csh</span><br><span class="line">openstack:x:1002:1005::/home/openstack:/bin/bash</span><br><span class="line">yue:x:1003:1006::/home/yue:/sbin/nologin</span><br></pre></td></tr></table></figure>
+
+<p>-M 创建用户时不给其创建家目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@MR tmp]<span class="comment"># useradd -M yue</span></span><br><span class="line">[root@MR /]<span class="comment"># ls /home</span></span><br><span class="line">openstack  wangqing  zhou</span><br></pre></td></tr></table></figure>
+
+<h6 id="用户删除命令userdel"><a href="#用户删除命令userdel" class="headerlink" title="用户删除命令userdel"></a>用户删除命令userdel</h6><p>-r 删除用户的同时删除其家目录（userdel默认不会删除其家目录）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@MR /]<span class="comment"># useradd yue</span></span><br><span class="line">[root@MR /]<span class="comment"># ls /home</span></span><br><span class="line">openstack  wangqing  yue  zhou</span><br><span class="line">[root@MR /]<span class="comment"># userdel -r yue</span></span><br><span class="line">[root@MR /]<span class="comment"># ls /home</span></span><br><span class="line">openstack  wangqing  zhou</span><br></pre></td></tr></table></figure>
+
+<h6 id="查看用户账号的信息命令id"><a href="#查看用户账号的信息命令id" class="headerlink" title="查看用户账号的信息命令id"></a>查看用户账号的信息命令id</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@MR /]<span class="comment"># id zhou</span></span><br><span class="line">uid=1000(zhou) gid=1000(zhou) 组=1000(zhou),0(root)</span><br></pre></td></tr></table></figure>
+
+<h6 id="修改用户账号属性的命令usermod"><a href="#修改用户账号属性的命令usermod" class="headerlink" title="修改用户账号属性的命令usermod"></a>修改用户账号属性的命令usermod</h6><p>-u 修改uid</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@MR /]<span class="comment"># id yue</span></span><br><span class="line">uid=1003(yue) gid=1006(yue) 组=1006(yue)</span><br><span class="line">[root@MR /]<span class="comment"># usermod -u 8888 yue</span></span><br><span class="line">[root@MR /]<span class="comment"># id yue</span></span><br><span class="line">uid=8888(yue) gid=1006(yue) 组=1006(yue)</span><br></pre></td></tr></table></figure>
+
+<p>-g 修改gid</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@MR /]<span class="comment"># id yue</span></span><br><span class="line">uid=8888(yue) gid=1006(yue) 组=1006(yue)</span><br><span class="line">[root@MR /]<span class="comment"># groupadd -g 7777 hah</span></span><br><span class="line">[root@MR /]<span class="comment"># usermod -g 7777 yue</span></span><br><span class="line">[root@MR /]<span class="comment"># id yue</span></span><br><span class="line">uid=8888(yue) gid=7777(hah) 组=7777(hah)</span><br></pre></td></tr></table></figure>
+
+<p>-a -G  不使用-a选项，会覆盖此前的附加组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@MR /]<span class="comment"># id yue</span></span><br><span class="line">uid=8888(yue) gid=7777(hah) 组=7777(hah)</span><br><span class="line">[root@MR /]<span class="comment"># usermod -a -G yue yue</span></span><br><span class="line">[root@MR /]<span class="comment"># id yue</span></span><br><span class="line">uid=8888(yue) gid=7777(hah) 组=7777(hah),1006(yue)</span><br></pre></td></tr></table></figure>
+
+<p>-d -m  改变用户家目录的同时把原来家目录的文件移动到新的家目录中</p>
+<blockquote>
+<p>切记-d在-m后面</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@MR /]<span class="comment"># ls /home</span></span><br><span class="line">openstack  wangqing  yue  zhou</span><br><span class="line">[root@MR /]<span class="comment"># cd /home/yue</span></span><br><span class="line">[root@MR yue]<span class="comment"># touch 123</span></span><br><span class="line">[root@MR yue]<span class="comment"># ls</span></span><br><span class="line">123</span><br><span class="line">[root@MR yue]<span class="comment"># cd /tmp</span></span><br><span class="line">[root@MR tmp]<span class="comment"># ls</span></span><br><span class="line">abc  shadow</span><br><span class="line">[root@MR tmp]<span class="comment"># mkdir qqq</span></span><br><span class="line">[root@MR tmp]<span class="comment"># ls</span></span><br><span class="line">abc  qqq  shadow</span><br><span class="line">[root@MR tmp]<span class="comment"># usermod -md /tmp/qqq yue</span></span><br><span class="line">usermod：目录 /tmp/qqq 不存在</span><br><span class="line">[root@MR tmp]<span class="comment"># tail -n5 /etc/passwd</span></span><br><span class="line">sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin</span><br><span class="line">zhou:x:1000:1000::/home/zhou:/bin/bash</span><br><span class="line">wangqing:x:1001:1003:wu liang tian zun:/opt/123:/bin/csh</span><br><span class="line">openstack:x:1002:1005::/home/openstack:/bin/bash</span><br><span class="line">yue:x:1003:1006::/tmp/qqq:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<h6 id="切换用户命令su"><a href="#切换用户命令su" class="headerlink" title="切换用户命令su"></a>切换用户命令su</h6><table>
+<thead>
+<tr>
+<th>切换用户的方式</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>su USERNAME</td>
+<td>非登录式切换，即不会读取目标用户的配置文件</td>
+</tr>
+<tr>
+<td>su - USERNAME</td>
+<td>登录式切换，即会读取目标用户的配置文件。完全切换</td>
+</tr>
+<tr>
+<td>su -</td>
+<td>不指定用户时默认切换至root用户</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>root su至其他用户不需要密码，非root用户su至其他用户时需要输入目标用户的密码 </p>
+</blockquote>
+<p>bash的配置文件:</p>
+<table>
+<thead>
+<tr>
+<th align="center">配置文件类型</th>
+<th align="center">配置文件路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">全局配置</td>
+<td align="center">/etc/profile /etc/profile.d/*.sh /etc/bashrc</td>
+</tr>
+<tr>
+<td align="center">个人配置</td>
+<td align="center">~/.bash_profile ～/.bashrc</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">配置文件类型</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">profile类</td>
+<td align="center">为交互式登录的shell提供配置，用来设定环境变量、运行命令或脚本</td>
+</tr>
+<tr>
+<td align="center">bashrc类</td>
+<td align="center">为非交互式登录的shell提供配置，用来设定本地变量、定义命令别名</td>
+</tr>
+</tbody></table>
+<p>登录式shell如何读取配置文件</p>
+<blockquote>
+<p> /etc/profile –&gt; /etc/profile.d/*.sh –&gt; ~/.bash_profile –&gt; ~/.bashrc –&gt; /etc/bashrc</p>
+</blockquote>
+<p>非登录式shell如何读取配置文件</p>
+<blockquote>
+<p>~/.bashrc –&gt; /etc/bashrc –&gt; /etc/profile.d/*.sh</p>
+</blockquote>
+<h4 id="密码管理"><a href="#密码管理" class="headerlink" title="密码管理"></a>密码管理</h4><h6 id="密码管理命令passwd"><a href="#密码管理命令passwd" class="headerlink" title="密码管理命令passwd"></a>密码管理命令passwd</h6><p>–stdin 从标准输入获取用户密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@MR qqq]<span class="comment"># useradd yue</span></span><br><span class="line">[root@MR qqq]<span class="comment"># echo "123456" | passwd --stdin yue</span></span><br><span class="line">更改用户 yue 的密码 。</span><br><span class="line">passwd：所有的身份验证令牌已经成功更新。</span><br></pre></td></tr></table></figure>
+
+<h6 id="改变用户密码过期信息命令chage"><a href="#改变用户密码过期信息命令chage" class="headerlink" title="改变用户密码过期信息命令chage"></a>改变用户密码过期信息命令chage</h6><p>-E 过期时间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># chage -E 2019-05-31 yue</span></span><br><span class="line">[root@MR ~]<span class="comment"># tail -n5 /etc/shadow</span></span><br><span class="line">sshd:!!:17961::::::</span><br><span class="line">zhou:!!:17981:0:99999:7:::</span><br><span class="line">wangqing:!!:17981:0:99999:3::17986:</span><br><span class="line">openstack:!!:17981:0:99999:7:::</span><br><span class="line">yue:<span class="variable">$6</span><span class="variable">$BRQKiE3H</span><span class="variable">$Ns7arFcpyOipUDWQ9CzJJlxvodMKEDN9iGfSYxo1V0PsW7OF5DU7cFpdCAi8EbyPv7KoVl1</span>.PXnSUatlRU2jN/:17982:0:99999:7::18047:</span><br><span class="line"><span class="comment"># 此时间代表从1970年1月1日开始的多少天</span></span><br></pre></td></tr></table></figure>
+
+<p>-w 警告时间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认提前7天警告</span></span><br><span class="line">[root@MR ~]<span class="comment"># chage -W 3 yue</span></span><br><span class="line">[root@MR ~]<span class="comment"># tail -n5 /etc/shadow</span></span><br><span class="line">sshd:!!:17961::::::</span><br><span class="line">zhou:!!:17981:0:99999:7:::</span><br><span class="line">wangqing:!!:17981:0:99999:3::17986:</span><br><span class="line">openstack:!!:17981:0:99999:7:::</span><br><span class="line">yue:<span class="variable">$6</span><span class="variable">$BRQKiE3H</span><span class="variable">$Ns7arFcpyOipUDWQ9CzJJlxvodMKEDN9iGfSYxo1V0PsW7OF5DU7cFpdCAi8EbyPv7KoVl1</span>.PXnSUatlRU2jN/:17982:0:99999:3::18047:</span><br></pre></td></tr></table></figure>
+
+<h6 id="密码生成工具openssl"><a href="#密码生成工具openssl" class="headerlink" title="密码生成工具openssl"></a>密码生成工具openssl</h6><p>version  查看程序版本号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># openssl version</span></span><br><span class="line">OpenSSL 1.0.1e-fips 11 Feb 2013</span><br></pre></td></tr></table></figure>
+
+<p> dgst   提取特征码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># openssl dgst -md5 /home/yue</span></span><br><span class="line">Read Error <span class="keyword">in</span> /home/yue</span><br><span class="line">139969262737312:error:0200B015:system library:fread:Is a directory:bss_file.c:24                                5:</span><br><span class="line">139969262737312:error:20082002:BIO routines:FILE_READ:system lib:bss_file.c:246:</span><br></pre></td></tr></table></figure>
+
+<p> passwd   生成密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># openssl passwd -1 -salt hello</span></span><br><span class="line">Password:</span><br><span class="line"><span class="variable">$1</span><span class="variable">$hello</span><span class="variable">$bs8EXZ2u6YMHz8lF7E05u0</span></span><br></pre></td></tr></table></figure>
+
+<p>  rand    生成伪随机数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># openssl rand -base64 30</span></span><br><span class="line">J7oxn34FkHcdxdTvmtsyf3VCUaZf/SU8I5jprwMS</span><br></pre></td></tr></table></figure>
+
+<h4 id="组管理"><a href="#组管理" class="headerlink" title="组管理"></a>组管理</h4><h6 id="创建组命令groupadd"><a href="#创建组命令groupadd" class="headerlink" title="创建组命令groupadd"></a>创建组命令groupadd</h6><p>-g 指定GID</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># groupadd -g 6666 natasha</span></span><br><span class="line">[root@MR ~]<span class="comment"># tail -n5 /etc/group</span></span><br><span class="line">123:x:1004:</span><br><span class="line">openstack:x:1005:</span><br><span class="line">hah:x:7777:</span><br><span class="line">yue:x:7778:</span><br><span class="line">natasha:x:6666:</span><br></pre></td></tr></table></figure>
+
+<h6 id="修改组命令groupmod"><a href="#修改组命令groupmod" class="headerlink" title="修改组命令groupmod"></a>修改组命令groupmod</h6><p>-g 修改gid</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># groupmod -g 4444 natasha</span></span><br><span class="line">[root@MR ~]<span class="comment"># tail -n5 /etc/group</span></span><br><span class="line">123:x:1004:</span><br><span class="line">openstack:x:1005:</span><br><span class="line">hah:x:7777:</span><br><span class="line">yue:x:7778:</span><br><span class="line">natasha:x:4444:</span><br></pre></td></tr></table></figure>
+
+<p>-n 修改组名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># groupmod -n hahahaha natasha</span></span><br><span class="line">[root@MR ~]<span class="comment"># tail -n5 /etc/group</span></span><br><span class="line">123:x:1004:</span><br><span class="line">openstack:x:1005:</span><br><span class="line">hah:x:7777:</span><br><span class="line">yue:x:7778:</span><br><span class="line">hahahaha:x:4444:</span><br></pre></td></tr></table></figure>
+
+<h6 id="删除组命令groupdel"><a href="#删除组命令groupdel" class="headerlink" title="删除组命令groupdel"></a>删除组命令groupdel</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># groupdel hahahaha</span></span><br><span class="line">[root@MR ~]<span class="comment"># tail -n5 /etc/group</span></span><br><span class="line">wangqing:x:1003:</span><br><span class="line">123:x:1004:</span><br><span class="line">openstack:x:1005:</span><br><span class="line">hah:x:7777:</span><br><span class="line">yue:x:7778:</span><br></pre></td></tr></table></figure>
+
+<p>给组设定密码命令gpasswd</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># gpasswd hahahaha</span></span><br><span class="line">正在修改 hahahaha 组的密码</span><br><span class="line">新密码：</span><br><span class="line">请重新输入新密码：</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>1.创建用户wangqing，附加组为taoist和tianzun，默认shell为/bin/csh，注释信息为“wu liang tian zun” </p>
+<p><strong>groupadd taoist</strong></p>
+<p><strong>groupadd tianzun</strong></p>
+<p><strong>useradd -G taoist,tianzun -c”wu liang tian zun” -s /bin/csh wangqing</strong></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>用户和组管理</p>
+    
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Li Jie">Li Jie</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-08-29, 23:44:18</p>
+    <p><span class="copy-title">最后更新:</span>2019-08-22, 21:23:54</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/08/29/7.linux--用户和组管理/" title="用户和组管理">https://github.com/chineselijie/2019/08/29/7.linux--用户和组管理/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="//cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#linux基础','#python','#linux进阶','#linux运维',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>linux基础练习 | Li Jie&#39;s blog</title>
+  <meta name="keywords" content=" linux基础 ">
+  <meta name="description" content="linux基础练习 | Li Jie&#39;s blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Li Jie&#39;s blog">
+<meta property="og:url" content="https://github.com/chineselijie/about/index.html">
+<meta property="og:site_name" content="Li Jie&#39;s blog">
+<meta property="og:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-28T17:25:29.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Li Jie&#39;s blog">
+<meta name="twitter:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Li Jie</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="facebook" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-facebook"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/ff56736de7cf" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(41)</small></div></li>
+    
+        
+            
+            <li><div data-rel="linux基础">linux基础<small>(16)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="python">python<small>(8)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="linux进阶">linux进阶<small>(12)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="linux运维">linux运维<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="41">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux基础</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux进阶</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">linux运维</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/1.RHEL 7.4 实验环境搭建/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="RHEL 7.4 实验环境搭建">RHEL 7.4 实验环境搭建</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/11.linux--网络进阶管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="网络进阶管理">网络进阶管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/2.python--计算机数据存储与进制/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python 计算机数据存储与进制">python 计算机数据存储与进制</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/7.linux--正则表达式/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="正则表达式">正则表达式</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/7.谈Python变量和数据类型/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="谈Python变量和数据类型">谈Python变量和数据类型</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/9.linux--shell脚本进阶/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本进阶">shell脚本进阶</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/1.linux--openssh/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="openssh">openssh</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/08/29/1.linux--初步熟悉RHEL 8/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="初步熟悉RHEL 8">初步熟悉RHEL 8</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/1.python--python基础理论讲解/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python基础理论讲解">python基础理论讲解</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class=""
+           href="/2019/08/29/1.网络--子网划分/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="子网划分">子网划分</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/10.linux--shell脚本笔记(脚本)/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本笔记(脚本)">shell脚本笔记(脚本)</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/11.linux--ISCSI服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="ISCSI服务">ISCSI服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/14.linux--LVM磁盘管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="LVM磁盘管理">LVM磁盘管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/15.linux--linux基础练习/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="linux基础练习">linux基础练习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/16.linux--RHCSA模拟/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="RHCSA复习">RHCSA复习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/2.linux--FTP服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="FTP服务">FTP服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/2.rsync/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="rsync">rsync</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/3.linux--samba服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="samba服务">samba服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/3.python--第一章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第一章">python第一章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/3.zabbix/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="zabbix">zabbix</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/4.linux--权限管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="权限管理">权限管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/5.linux--linux计划任务/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux计划任务">Linux计划任务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/6.linux--httpd服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="httpd服务">httpd服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/6.python--第四章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第四章">python第四章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/8.linux--shell脚本基础/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="shell脚本基础">shell脚本基础</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/8.linux--软件管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="软件管理">软件管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/8.python的文件处理/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python文件处理">python文件处理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/12.linux--源码安装包管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="源码安装管理">源码安装管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/2.基础linux命令/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux基础命令">Linux基础命令</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/4.linux--NFS服务/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="NFS服务">NFS服务</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/4.python--第二章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第二章">python第二章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/5.linux--MariaDB数据库/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="MariaDB数据库">MariaDB数据库</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="python "
+           href="/2019/08/29/5.python--第三章/"
+           data-tag="python"
+           data-author="" >
+            <span class="post-title" title="python第三章">python第三章</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/6.linux--yum工具的使用/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="yum工具的使用">yum工具的使用</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/7.linux--用户和组管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="用户和组管理">用户和组管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/08/29/1.linux--LNMP/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="LNMP">LNMP</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/13.linux--linux系统磁盘管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux系统磁盘管理">Linux系统磁盘管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/9.linux--linux进程管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="linux进程管理">linux进程管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/3.linux--linux基础/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="Linux基础">Linux基础</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux基础 "
+           href="/2019/08/29/10.linux--网络基础管理/"
+           data-tag="linux基础"
+           data-author="" >
+            <span class="post-title" title="网络基础管理">网络基础管理</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+        <a  class="linux进阶 "
+           href="/2019/08/29/13.linux--RHCE  认证考试练习/"
+           data-tag="linux进阶"
+           data-author="" >
+            <span class="post-title" title="RHCE 认证考试练习">RHCE 认证考试练习</span>
+            <span class="post-date" title="2019-08-29 23:44:18">2019/08/29</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-15.linux--linux基础练习" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">linux基础练习</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="linux基础">linux基础</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color3">linux基础</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-08-22 20:15:00'>2019-08-29 23:44</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭selinux，手工配置本地yum源"><span class="toc-text">关闭selinux，手工配置本地yum源</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关闭SElinux："><span class="toc-text">关闭SElinux：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#手工配置本地yum源"><span class="toc-text">手工配置本地yum源:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装vsftpd，并启动vsftpd服务"><span class="toc-text">安装vsftpd，并启动vsftpd服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装krb5-config命令"><span class="toc-text">安装krb5-config命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用rpm命令安装httpd软件，不解决依赖关系进行安装"><span class="toc-text">使用rpm命令安装httpd软件，不解决依赖关系进行安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用sed命令将网卡配置文件的ONBOOT-no-改为ONBOOT-yes"><span class="toc-text">使用sed命令将网卡配置文件的ONBOOT=no 改为ONBOOT=yes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#备份-etc-shadow到-tmp-，保留其权限，使用sed命将此文件中的root替换为aaaabbbb，并对比-etc-shadow和-tmp-shadow两个文件的差别"><span class="toc-text">备份/etc/shadow到/tmp ，保留其权限，使用sed命将此文件中的root替换为aaaabbbb，并对比/etc/shadow和/tmp/shadow两个文件的差别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加用户：user1，并为文件-tmp-shadow文件添加user1的ACL，权限为读和执行-并把user1加入root组"><span class="toc-text">添加用户：user1，并为文件/tmp/shadow文件添加user1的ACL，权限为读和执行,并把user1加入root组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用find命令找出系统中所有属于user1的文件"><span class="toc-text">使用find命令找出系统中所有属于user1的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用find命令找出-boot目录下所有目录文件，然后统计目录的个数"><span class="toc-text">使用find命令找出/boot目录下所有目录文件，然后统计目录的个数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找系统中小于10M的文件并打印显示"><span class="toc-text">查找系统中小于10M的文件并打印显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用rpm命令列出vsftpd的所有doc-man文档"><span class="toc-text">使用rpm命令列出vsftpd的所有doc/man文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手工创建用户user2-要求有家目录，完整的登陆提示符"><span class="toc-text">手工创建用户user2 ,要求有家目录，完整的登陆提示符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手工创建用户user9-要求没有家目录，不允许登录"><span class="toc-text">手工创建用户user9 ,要求没有家目录，不允许登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改user2的登陆shell为nologin-，并测试是否能登录"><span class="toc-text">修改user2的登陆shell为nologin ，并测试是否能登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看根分区大小，并取出根分区使用率赋值给root-disk变量。例如：root-disk-55-（55-是根分区使用率）"><span class="toc-text">查看根分区大小，并取出根分区使用率赋值给root_disk变量。例如：root_disk=55%（55%是根分区使用率）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看-etc-passwd-的6-9行内容"><span class="toc-text">查看/etc/passwd 的6-9行内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以树状的形式显示-etc-security-目录，提交命令和结果"><span class="toc-text">以树状的形式显示/etc/security/目录，提交命令和结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#给网卡添加一个临时ip-172-16-12-22-24"><span class="toc-text">给网卡添加一个临时ip 172.16.12.22/24</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#切换到tty2虚拟终端，并查看当前终端是哪个终端"><span class="toc-text">切换到tty2虚拟终端，并查看当前终端是哪个终端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎样找出fdisk命令的绝对路径"><span class="toc-text">怎样找出fdisk命令的绝对路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过命令行重启系统有哪些方法"><span class="toc-text">通过命令行重启系统有哪些方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何在命令行中快速删除光标前的内容？"><span class="toc-text">如何在命令行中快速删除光标前的内容？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何在命令行中快速删除光标后的内容？"><span class="toc-text">如何在命令行中快速删除光标后的内容？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拷贝-etc-passwd文件到本地，并且设置其权限为属主有读写执行权限，属组有读写权限，其他帐户没有权限"><span class="toc-text">拷贝/etc/passwd文件到本地，并且设置其权限为属主有读写执行权限，属组有读写权限，其他帐户没有权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除-tmp下所有s开头的文件"><span class="toc-text">删除/tmp下所有s开头的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#把-etc目录复制到-tmp下并保持原属性不变"><span class="toc-text">把/etc目录复制到/tmp下并保持原属性不变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#把-tmp-etc-man-db-conf移动到-tmp下并改名为test-conf且设置所有人都有读写执行权限"><span class="toc-text">把/tmp/etc/man_db.conf移动到/tmp下并改名为test.conf且设置所有人都有读写执行权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建用户tom、创建组jerry，修改-tmp-test-conf的属主为tom-属组为jerry"><span class="toc-text">创建用户tom、创建组jerry，修改/tmp/test.conf的属主为tom,属组为jerry</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除用户tom和组jerry"><span class="toc-text">删除用户tom和组jerry</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用find命令找出当前系统中没有属主或属组的所有文件并打印显示"><span class="toc-text">使用find命令找出当前系统中没有属主或属组的所有文件并打印显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统计当前系统中一共有多少帐户"><span class="toc-text">统计当前系统中一共有多少帐户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看-etc-passwd的前3行和尾3行内容"><span class="toc-text">查看/etc/passwd的前3行和尾3行内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看-etc-passwd的第10行内容"><span class="toc-text">查看/etc/passwd的第10行内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一条命令创建test-1-2-3-4-5目录"><span class="toc-text">一条命令创建test/1/2/3/4/5目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何快速回到当前登录用户的家目录"><span class="toc-text">如何快速回到当前登录用户的家目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何只查看-etc单个目录的信息并以长格式显示"><span class="toc-text">如何只查看/etc单个目录的信息并以长格式显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看-etc-所占的磁盘空间"><span class="toc-text">查看/etc/所占的磁盘空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结合ls与grep命令打印出-tmp-etc目录下的所有目录文件"><span class="toc-text">结合ls与grep命令打印出/tmp/etc目录下的所有目录文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除-tmp下所有的文件"><span class="toc-text">删除/tmp下所有的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#临时设置系统主机名并重启验证"><span class="toc-text">临时设置系统主机名并重启验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#永久设置系统主机名并重启验证"><span class="toc-text">永久设置系统主机名并重启验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将系统时间设置为2008-05-10-00-12-13并验证"><span class="toc-text">将系统时间设置为2008-05-10 00:12:13并验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用ntpdate同步互联网时间"><span class="toc-text">使用ntpdate同步互联网时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统计出-etc-passwd文件有多少单词和字符"><span class="toc-text">统计出/etc/passwd文件有多少单词和字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加一个计划任务，在每周6凌晨1点35分备份-etc目录到-tmp目录下，要求备份的文件必须是打包好的，名字为etc-tar-xz"><span class="toc-text">添加一个计划任务，在每周6凌晨1点35分备份/etc目录到/tmp目录下，要求备份的文件必须是打包好的，名字为etc.tar.xz</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux如何挂载windows下的共享目录？"><span class="toc-text">Linux如何挂载windows下的共享目录？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统计linux中TCP各连接状态的数量？"><span class="toc-text">统计linux中TCP各连接状态的数量？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#请简述符号链接与硬链接的区别？"><span class="toc-text">请简述符号链接与硬链接的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何在文本里面进行复制、粘贴，删除行，删除全部，按行查找和按字母查找？"><span class="toc-text">如何在文本里面进行复制、粘贴，删除行，删除全部，按行查找和按字母查找？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#请简述ftp的主动模式与被动模式工作过程"><span class="toc-text">请简述ftp的主动模式与被动模式工作过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何过滤出-runtime中的所有一级目录-不包含子目录，即只能是一级目录"><span class="toc-text">如何过滤出/runtime中的所有一级目录(不包含子目录，即只能是一级目录)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何查看-etc-目录下最近更新的5个文件？"><span class="toc-text">如何查看/etc/目录下最近更新的5个文件？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#已知apache服务的访问日志按天记录在服务器本地目录-app-logs下，由于磁盘空间紧张，现在要求只能保留最近7天访问日志！请问如何解决？"><span class="toc-text">已知apache服务的访问日志按天记录在服务器本地目录/app/logs下，由于磁盘空间紧张，现在要求只能保留最近7天访问日志！请问如何解决？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何打印配置文件nginx-conf的行号及内容？"><span class="toc-text">如何打印配置文件nginx.conf的行号及内容？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调试系统服务时，希望能实时查看系统日志-var-log-messages的更新，如何做？"><span class="toc-text">调试系统服务时，希望能实时查看系统日志/var/log/messages的更新，如何做？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何查看-etc-services文件有多少行？"><span class="toc-text">如何查看/etc/services文件有多少行？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分别使用ifconfig和ip命令取出当前主机的ip地址"><span class="toc-text">分别使用ifconfig和ip命令取出当前主机的ip地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何将-etc-fstab中的权限取出来，以数字644这样的形式打印"><span class="toc-text">如何将/etc/fstab中的权限取出来，以数字644这样的形式打印</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打印出-etc-fstab文件中除掉空行和注释的内容"><span class="toc-text">打印出/etc/fstab文件中除掉空行和注释的内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用date命令打印3天前的日期，如：2018-10-10"><span class="toc-text">用date命令打印3天前的日期，如：2018-10-10</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将目录-etc-a下除了b文件外的所有文件压缩打包放到-tmp-a下，名字为a-gz"><span class="toc-text">将目录/etc/a下除了b文件外的所有文件压缩打包放到/tmp/a下，名字为a.gz</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是umask？umask-022代表什么意思？"><span class="toc-text">什么是umask？umask=022代表什么意思？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ftp、http、https、smtp、pop3、ssh、dns的端口号"><span class="toc-text">ftp、http、https、smtp、pop3、ssh、dns的端口号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何在不停止进程的情况下清空日志-var-log-a-log？"><span class="toc-text">如何在不停止进程的情况下清空日志/var/log/a.log？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何在-usr目录下找出大小超过10MB的文件？"><span class="toc-text">如何在/usr目录下找出大小超过10MB的文件？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何在-var目录下找出90天之内未被访问过的文件？"><span class="toc-text">如何在/var目录下找出90天之内未被访问过的文件？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ll-awk-‘-print-3-”owns”-9-’-这条命令是在做什么？"><span class="toc-text">ll | awk ‘{print (3,”owns”,)9}’ 这条命令是在做什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#给你50台Linux系统如何安装呢？如何实现，步骤是什么？"><span class="toc-text">给你50台Linux系统如何安装呢？如何实现，步骤是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用虚拟机安装了一台Linux系统，突然想克隆一台服务器，克隆后发现无法上网，如何解决？"><span class="toc-text">用虚拟机安装了一台Linux系统，突然想克隆一台服务器，克隆后发现无法上网，如何解决？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux网卡配置文件路径是什么？要使服务器上外网，必须满足的条件有哪些？需要配置什么？"><span class="toc-text">Linux网卡配置文件路径是什么？要使服务器上外网，必须满足的条件有哪些？需要配置什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找当前目录下30天以前-log结尾的大于1G的文件，并把它移动到-tmp下"><span class="toc-text">查找当前目录下30天以前.log结尾的大于1G的文件，并把它移动到/tmp下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看某个端口是否已经启动，以及查看端口做占用的PID进程号"><span class="toc-text">查看某个端口是否已经启动，以及查看端口做占用的PID进程号</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>关于作者</strong></p>
+<p><strong>周李杰</strong>，最后一批90后，现居<strong>湖北武汉</strong></p>
+<p>孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。</p>
+<p>兴趣众多，然无一精通。正努力成为一个有趣的人。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="关闭selinux，手工配置本地yum源"><a href="#关闭selinux，手工配置本地yum源" class="headerlink" title="关闭selinux，手工配置本地yum源"></a>关闭selinux，手工配置本地yum源</h3><h4 id="关闭SElinux："><a href="#关闭SElinux：" class="headerlink" title="关闭SElinux："></a>关闭SElinux：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># getenforce</span></span><br><span class="line">Enforcing</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># setenforce 0</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># getenforce</span></span><br><span class="line">Permissive</span><br><span class="line"><span class="comment"># 配置文件在：</span></span><br><span class="line">/etc/selinux/config</span><br></pre></td></tr></table></figure>
+
+<h4 id="手工配置本地yum源"><a href="#手工配置本地yum源" class="headerlink" title="手工配置本地yum源:"></a>手工配置本地yum源:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># cd /etc/yum.repos.d/</span></span><br><span class="line">[root@MR yum.repos.d]<span class="comment"># ls</span></span><br><span class="line">[root@MR dev]<span class="comment"># mkdir /mnt/cdrom</span></span><br><span class="line">[root@MR dev]<span class="comment"># mount /dev/sr0 /mnt/cdrom/</span></span><br><span class="line">mount: /dev/sr0 写保护，将以只读方式挂载</span><br><span class="line">[root@MR dev]<span class="comment"># vi /etc/fstab</span></span><br><span class="line">将/dev/sr0        /mnt/cdrom      iso9660   defaults    0    0</span><br><span class="line">写入到最后一行后保存并退出</span><br><span class="line">[root@MR dev]<span class="comment"># df -Th</span></span><br><span class="line">文件系统              类型      容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/mapper/rhel-root xfs        18G  816M   17G    5% /</span><br><span class="line">devtmpfs              devtmpfs  908M     0  908M    0% /dev</span><br><span class="line">tmpfs                 tmpfs     914M     0  914M    0% /dev/shm</span><br><span class="line">tmpfs                 tmpfs     914M  8.6M  905M    1% /run</span><br><span class="line">tmpfs                 tmpfs     914M     0  914M    0% /sys/fs/cgroup</span><br><span class="line">/dev/sda1             xfs       497M   96M  401M   20% /boot</span><br><span class="line">/dev/sr0              iso9660   3.5G  3.5G     0  100% /mnt/cdrom</span><br><span class="line"><span class="comment"># 此时/dev/sr0已经挂载到/mnt/cdrom</span></span><br><span class="line">[root@MR dev]<span class="comment"># cd /etc/yum.repos.d/</span></span><br><span class="line">[root@MR yum.repos.d]<span class="comment"># ls</span></span><br><span class="line">[root@MR yum.repos.d]<span class="comment"># vi bendiyum.repo</span></span><br><span class="line">将：</span><br><span class="line">[bendiyum]</span><br><span class="line">name=bendiyum</span><br><span class="line">baseurl=file:///mnt/cdrom</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">加入进去，保存并退出</span><br><span class="line">[root@MR yum.repos.d]<span class="comment"># yum clean all</span></span><br><span class="line">[root@MR yum.repos.d]<span class="comment"># yum list | wc -l</span></span><br><span class="line">4405</span><br><span class="line"><span class="comment"># 此时本地yum源成功搭建</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="安装vsftpd，并启动vsftpd服务"><a href="#安装vsftpd，并启动vsftpd服务" class="headerlink" title="安装vsftpd，并启动vsftpd服务"></a>安装vsftpd，并启动vsftpd服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># yum -y install vsftopd</span></span><br><span class="line">[root@MR ~]<span class="comment"># systemctl start vsftpd</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="安装krb5-config命令"><a href="#安装krb5-config命令" class="headerlink" title="安装krb5-config命令"></a>安装krb5-config命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># yum provides krb5-config</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># yum -y install krb5-devel-1.11.3-49.el7.x86_64</span></span><br><span class="line">[root@zhoulijie /]<span class="comment"># krb5-config</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用rpm命令安装httpd软件，不解决依赖关系进行安装"><a href="#使用rpm命令安装httpd软件，不解决依赖关系进行安装" class="headerlink" title="使用rpm命令安装httpd软件，不解决依赖关系进行安装"></a>使用rpm命令安装httpd软件，不解决依赖关系进行安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">待解答</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用sed命令将网卡配置文件的ONBOOT-no-改为ONBOOT-yes"><a href="#使用sed命令将网卡配置文件的ONBOOT-no-改为ONBOOT-yes" class="headerlink" title="使用sed命令将网卡配置文件的ONBOOT=no 改为ONBOOT=yes"></a>使用sed命令将网卡配置文件的ONBOOT=no 改为ONBOOT=yes</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@MR network-scripts]<span class="comment"># cat -n /etc/sysconfig/network-scripts/ifcfg-eno16777736</span></span><br><span class="line">     1  HWADDR=<span class="string">"00:0C:29:B6:10:19"</span></span><br><span class="line">    ........(中间省略)</span><br><span class="line">    16  ONBOOT=<span class="string">"no"</span></span><br><span class="line">[root@MR network-scripts]<span class="comment"># sed '16c ONBOOT=“yes”' ifcfg-eno16777736</span></span><br><span class="line">HWADDR=<span class="string">"00:0C:29:B6:10:19"</span></span><br><span class="line">........(中间省略)</span><br><span class="line">ONBOOT=“yes<span class="string">"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="备份-etc-shadow到-tmp-，保留其权限，使用sed命将此文件中的root替换为aaaabbbb，并对比-etc-shadow和-tmp-shadow两个文件的差别"><a href="#备份-etc-shadow到-tmp-，保留其权限，使用sed命将此文件中的root替换为aaaabbbb，并对比-etc-shadow和-tmp-shadow两个文件的差别" class="headerlink" title="备份/etc/shadow到/tmp ，保留其权限，使用sed命将此文件中的root替换为aaaabbbb，并对比/etc/shadow和/tmp/shadow两个文件的差别"></a>备份/etc/shadow到/tmp ，保留其权限，使用sed命将此文件中的root替换为aaaabbbb，并对比/etc/shadow和/tmp/shadow两个文件的差别</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@MR /]<span class="comment"># cp /etc/shadow /tmp</span></span><br><span class="line">[root@MR tmp]<span class="comment"># sed s/root/aaaabbbb/ /tmp/shadow</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加用户：user1，并为文件-tmp-shadow文件添加user1的ACL，权限为读和执行-并把user1加入root组"><a href="#添加用户：user1，并为文件-tmp-shadow文件添加user1的ACL，权限为读和执行-并把user1加入root组" class="headerlink" title="添加用户：user1，并为文件/tmp/shadow文件添加user1的ACL，权限为读和执行,并把user1加入root组"></a>添加用户：user1，并为文件/tmp/shadow文件添加user1的ACL，权限为读和执行,并把user1加入root组</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@MR home]<span class="comment"># useradd -G root user1</span></span><br><span class="line">[root@MR home]<span class="comment"># id user1</span></span><br><span class="line">uid=1000(user1) gid=1000(user1) 组=1000(user1),0(root)</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用find命令找出系统中所有属于user1的文件"><a href="#使用find命令找出系统中所有属于user1的文件" class="headerlink" title="使用find命令找出系统中所有属于user1的文件"></a>使用find命令找出系统中所有属于user1的文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@MR home]<span class="comment"># find -name user1</span></span><br><span class="line">./user1</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用find命令找出-boot目录下所有目录文件，然后统计目录的个数"><a href="#使用find命令找出-boot目录下所有目录文件，然后统计目录的个数" class="headerlink" title="使用find命令找出/boot目录下所有目录文件，然后统计目录的个数"></a>使用find命令找出/boot目录下所有目录文件，然后统计目录的个数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@MR home]<span class="comment"># find /boot -type d | wc -l</span></span><br><span class="line">7</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找系统中小于10M的文件并打印显示"><a href="#查找系统中小于10M的文件并打印显示" class="headerlink" title="查找系统中小于10M的文件并打印显示"></a>查找系统中小于10M的文件并打印显示</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@MR home]<span class="comment"># find -size -10M -print</span></span><br><span class="line">.</span><br><span class="line">./user1</span><br><span class="line">./user1/.bash_logout</span><br><span class="line">./user1/.bash_profile</span><br><span class="line">./user1/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用rpm命令列出vsftpd的所有doc-man文档"><a href="#使用rpm命令列出vsftpd的所有doc-man文档" class="headerlink" title="使用rpm命令列出vsftpd的所有doc/man文档"></a>使用rpm命令列出vsftpd的所有doc/man文档</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie /]<span class="comment"># rpm -qd vsftpd</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="手工创建用户user2-要求有家目录，完整的登陆提示符"><a href="#手工创建用户user2-要求有家目录，完整的登陆提示符" class="headerlink" title="手工创建用户user2 ,要求有家目录，完整的登陆提示符"></a>手工创建用户user2 ,要求有家目录，完整的登陆提示符</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@MR home]<span class="comment"># useradd user2 -d /home/user2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="手工创建用户user9-要求没有家目录，不允许登录"><a href="#手工创建用户user9-要求没有家目录，不允许登录" class="headerlink" title="手工创建用户user9 ,要求没有家目录，不允许登录"></a>手工创建用户user9 ,要求没有家目录，不允许登录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@MR home]<span class="comment"># useradd user9 -M -s /sbin/nologin</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>验证以上两题</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@MR home]<span class="comment"># ls /home</span></span><br><span class="line">user1  user2</span><br><span class="line">[root@MR home]<span class="comment"># cat /etc/passwd</span></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">.....(中间省略)</span><br><span class="line">user1:x:1000:1000::/home/user1:/bin/bash</span><br><span class="line">user2:x:1001:1001::/home/user2:/bin/bash</span><br><span class="line">user9:x:1002:1002::/home/user9:/sbin/nologin</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改user2的登陆shell为nologin-，并测试是否能登录"><a href="#修改user2的登陆shell为nologin-，并测试是否能登录" class="headerlink" title="修改user2的登陆shell为nologin ，并测试是否能登录"></a>修改user2的登陆shell为nologin ，并测试是否能登录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不可以登陆</span></span><br><span class="line">[root@MR home]<span class="comment"># vim /etc/passwd</span></span><br><span class="line">按<span class="string">'i'</span>切换到user2 修改/bin/bash为/sbin/nologin</span><br><span class="line">保存并退出</span><br><span class="line">[root@MR home]<span class="comment"># su user2</span></span><br><span class="line">This account is currently not available.</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看根分区大小，并取出根分区使用率赋值给root-disk变量。例如：root-disk-55-（55-是根分区使用率）"><a href="#查看根分区大小，并取出根分区使用率赋值给root-disk变量。例如：root-disk-55-（55-是根分区使用率）" class="headerlink" title="查看根分区大小，并取出根分区使用率赋值给root_disk变量。例如：root_disk=55%（55%是根分区使用率）"></a>查看根分区大小，并取出根分区使用率赋值给root_disk变量。例如：root_disk=55%（55%是根分区使用率）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># df | grep /$ | awk '&#123;print $5&#125;'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="查看-etc-passwd-的6-9行内容"><a href="#查看-etc-passwd-的6-9行内容" class="headerlink" title="查看/etc/passwd 的6-9行内容"></a>查看/etc/passwd 的6-9行内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># sed -n '6,9p' /etc/passwd</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="以树状的形式显示-etc-security-目录，提交命令和结果"><a href="#以树状的形式显示-etc-security-目录，提交命令和结果" class="headerlink" title="以树状的形式显示/etc/security/目录，提交命令和结果"></a>以树状的形式显示/etc/security/目录，提交命令和结果</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@MR home]<span class="comment"># yum -y install tree</span></span><br><span class="line">[root@MR home]<span class="comment"># tree /etc/security/</span></span><br><span class="line">/etc/security/</span><br><span class="line">├── access.conf</span><br><span class="line">├── chroot.conf</span><br><span class="line">├── console.apps</span><br><span class="line">│   ├── config-util</span><br><span class="line">│   ├── rhn_register</span><br><span class="line">│   └── subscription-manager</span><br><span class="line">├── console.handlers</span><br><span class="line">├── console.perms</span><br><span class="line">├── console.perms.d</span><br><span class="line">├── group.conf</span><br><span class="line">├── limits.conf</span><br><span class="line">├── limits.d</span><br><span class="line">│   └── 20-nproc.conf</span><br><span class="line">├── namespace.conf</span><br><span class="line">├── namespace.d</span><br><span class="line">├── namespace.init</span><br><span class="line">├── opasswd</span><br><span class="line">├── pam_env.conf</span><br><span class="line">├── pwquality.conf</span><br><span class="line">├── sepermit.conf</span><br><span class="line">└── time.conf</span><br><span class="line"></span><br><span class="line">4 directories, 17 files</span><br></pre></td></tr></table></figure>
+
+<h3 id="给网卡添加一个临时ip-172-16-12-22-24"><a href="#给网卡添加一个临时ip-172-16-12-22-24" class="headerlink" title="给网卡添加一个临时ip 172.16.12.22/24"></a>给网卡添加一个临时ip 172.16.12.22/24</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">图形界面右上角--网卡设置--添加网卡</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">ifconfig ens33:5 172.16.12.22 netmask 255.255.255.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="切换到tty2虚拟终端，并查看当前终端是哪个终端"><a href="#切换到tty2虚拟终端，并查看当前终端是哪个终端" class="headerlink" title="切换到tty2虚拟终端，并查看当前终端是哪个终端"></a>切换到tty2虚拟终端，并查看当前终端是哪个终端</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># who</span></span><br><span class="line">root      pts/0        2019-03-08 14:54 (192.168.233.1)</span><br><span class="line">root     pts/1        2019-03-08 16:40 (192.168.233.1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="怎样找出fdisk命令的绝对路径"><a href="#怎样找出fdisk命令的绝对路径" class="headerlink" title="怎样找出fdisk命令的绝对路径"></a>怎样找出fdisk命令的绝对路径</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># which fdisk</span></span><br><span class="line">/usr/sbin/fdisk</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过命令行重启系统有哪些方法"><a href="#通过命令行重启系统有哪些方法" class="headerlink" title="通过命令行重启系统有哪些方法"></a>通过命令行重启系统有哪些方法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何在命令行中快速删除光标前的内容？"><a href="#如何在命令行中快速删除光标前的内容？" class="headerlink" title="如何在命令行中快速删除光标前的内容？"></a>如何在命令行中快速删除光标前的内容？</h3><p>ctrl+U</p>
+<h3 id="如何在命令行中快速删除光标后的内容？"><a href="#如何在命令行中快速删除光标后的内容？" class="headerlink" title="如何在命令行中快速删除光标后的内容？"></a>如何在命令行中快速删除光标后的内容？</h3><p>ctrl+K</p>
+<h3 id="拷贝-etc-passwd文件到本地，并且设置其权限为属主有读写执行权限，属组有读写权限，其他帐户没有权限"><a href="#拷贝-etc-passwd文件到本地，并且设置其权限为属主有读写执行权限，属组有读写权限，其他帐户没有权限" class="headerlink" title="拷贝/etc/passwd文件到本地，并且设置其权限为属主有读写执行权限，属组有读写权限，其他帐户没有权限"></a>拷贝/etc/passwd文件到本地，并且设置其权限为属主有读写执行权限，属组有读写权限，其他帐户没有权限</h3><blockquote>
+<p>cp /etc/passwd .</p>
+<p>chmod 760 passwd</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># cp /etc/passwd .</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># chmod 760 passwd</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># ls -l</span></span><br><span class="line">total 11</span><br><span class="line">-rwxrw---- 1 root root 956 Apr  6 23:30 passwd</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除-tmp下所有s开头的文件"><a href="#删除-tmp下所有s开头的文件" class="headerlink" title="删除/tmp下所有s开头的文件"></a>删除/tmp下所有s开头的文件</h3><blockquote>
+<p>rm -rf  /tmp/s*</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># ls /tmp</span></span><br><span class="line">Aegis-&lt;Guid(5A2C30A2-A87D-490A-9281-6765EDAD7CBA)&gt;  s123</span><br><span class="line">CmsGoAgent.pid                                      ssfasf</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># rm -rf /tmp/s*</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># ls /tmp</span></span><br><span class="line">Aegis-&lt;Guid(5A2C30A2-A87D-490A-9281-6765EDAD7CBA)&gt;  CmsGoAgent.pid</span><br></pre></td></tr></table></figure>
+
+<h3 id="把-etc目录复制到-tmp下并保持原属性不变"><a href="#把-etc目录复制到-tmp下并保持原属性不变" class="headerlink" title="把/etc目录复制到/tmp下并保持原属性不变"></a>把/etc目录复制到/tmp下并保持原属性不变</h3><blockquote>
+<p>cp -r -p /etc /tmp/</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[tom@zhoulijie /]$ cp -r -p /etc /tmp/</span><br><span class="line">[tom@zhoulijie /]$ ls /tmp</span><br><span class="line">Aegis-&lt;Guid(5A2C30A2-A87D-490A-9281-6765EDAD7CBA)&gt;  CmsGoAgent.pid  etc</span><br></pre></td></tr></table></figure>
+
+<h3 id="把-tmp-etc-man-db-conf移动到-tmp下并改名为test-conf且设置所有人都有读写执行权限"><a href="#把-tmp-etc-man-db-conf移动到-tmp下并改名为test-conf且设置所有人都有读写执行权限" class="headerlink" title="把/tmp/etc/man_db.conf移动到/tmp下并改名为test.conf且设置所有人都有读写执行权限"></a>把/tmp/etc/man_db.conf移动到/tmp下并改名为test.conf且设置所有人都有读写执行权限</h3><blockquote>
+<p>mv /tmp/etc/man_db.conf /tmp/ test.conf</p>
+<p>chmod 777 test.conf</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@MR /]<span class="comment"># mv /tmp/etc/man_db.conf /tmp/test.conf</span></span><br><span class="line">[root@MR tmp]<span class="comment"># chmod 777 test.conf</span></span><br><span class="line">[root@MR tmp]<span class="comment"># ls -l test.conf</span></span><br><span class="line">-rwxrwxrwx. 1 root root 5171 3月  18 2014 test.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建用户tom、创建组jerry，修改-tmp-test-conf的属主为tom-属组为jerry"><a href="#创建用户tom、创建组jerry，修改-tmp-test-conf的属主为tom-属组为jerry" class="headerlink" title="创建用户tom、创建组jerry，修改/tmp/test.conf的属主为tom,属组为jerry"></a>创建用户tom、创建组jerry，修改/tmp/test.conf的属主为tom,属组为jerry</h3><blockquote>
+<p>useradd tom</p>
+<p>groupadd jerry</p>
+<p>chown -R tom:jerry /tmp/test.conf</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># useradd tom</span></span><br><span class="line">[root@MR ~]<span class="comment"># groupadd jerry</span></span><br><span class="line">[root@MR ~]<span class="comment"># chown -R tom:jerry /tmp/test.conf</span></span><br><span class="line">[root@MR ~]<span class="comment"># ls -l /tmp/test.conf</span></span><br><span class="line">-rwxrwxrwx. 1 tom jerry 5171 3月  18 2014 /tmp/test.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除用户tom和组jerry"><a href="#删除用户tom和组jerry" class="headerlink" title="删除用户tom和组jerry"></a>删除用户tom和组jerry</h3><blockquote>
+<p>userdel -r tom</p>
+<p>groupdel jerry</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># userdel -r tom</span></span><br><span class="line">[root@MR ~]<span class="comment"># groupdel jerry</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用find命令找出当前系统中没有属主或属组的所有文件并打印显示"><a href="#使用find命令找出当前系统中没有属主或属组的所有文件并打印显示" class="headerlink" title="使用find命令找出当前系统中没有属主或属组的所有文件并打印显示"></a>使用find命令找出当前系统中没有属主或属组的所有文件并打印显示</h3><blockquote>
+<p>find  -nouser -nogroup</p>
+<p> -nouser 查找没有属主的文件</p>
+<p>-nogroup 查找没有属组的文件</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie /]<span class="comment"># find  -nouser -nogroup</span></span><br><span class="line">find: ‘./proc/2673/task/2673/fd/6’: 没有那个文件或目录</span><br><span class="line">find: ‘./proc/2673/task/2673/fdinfo/6’: 没有那个文件或目录</span><br><span class="line">find: ‘./proc/2673/fd/6’: 没有那个文件或目录</span><br><span class="line">find: ‘./proc/2673/fdinfo/6’: 没有那个文件或目录</span><br><span class="line">./tmp/test.conf</span><br><span class="line">./home/wangqing</span><br><span class="line">./home/wangqing/.bash_logout</span><br><span class="line">./home/wangqing/.bash_profile</span><br><span class="line">./home/wangqing/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h3 id="统计当前系统中一共有多少帐户"><a href="#统计当前系统中一共有多少帐户" class="headerlink" title="统计当前系统中一共有多少帐户"></a>统计当前系统中一共有多少帐户</h3><blockquote>
+<p>wc -l /etc/passwd</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie /]<span class="comment"># wc -l /etc/passwd</span></span><br><span class="line">24 /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看-etc-passwd的前3行和尾3行内容"><a href="#查看-etc-passwd的前3行和尾3行内容" class="headerlink" title="查看/etc/passwd的前3行和尾3行内容"></a>查看/etc/passwd的前3行和尾3行内容</h3><blockquote>
+<p>head -n 3 /etc/passwd</p>
+<p>tail -n 3 /etc/passwd</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie /]<span class="comment"># head -n 3 /etc/passwd</span></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">bin:x:1:1:bin:/bin:/sbin/nologin</span><br><span class="line">daemon:x:2:2:daemon:/sbin:/sbin/nologin</span><br><span class="line">[root@zhoulijie /]<span class="comment"># tail -n 3 /etc/passwd</span></span><br><span class="line">wangqing:x:1004:7780:wu liang tian zun:/home/wangqing:/bin/csh</span><br><span class="line">openstack:x:1005:1005::/home/openstack:/bin/bash</span><br><span class="line">runtime:x:1006:1006::/home/runtime:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看-etc-passwd的第10行内容"><a href="#查看-etc-passwd的第10行内容" class="headerlink" title="查看/etc/passwd的第10行内容"></a>查看/etc/passwd的第10行内容</h3><blockquote>
+<p>awk “NR==10” /etc/passwd</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie /]<span class="comment"># awk "NR==10" /etc/passwd</span></span><br><span class="line">operator:x:11:0:operator:/root:/sbin/nologin</span><br></pre></td></tr></table></figure>
+
+<h3 id="一条命令创建test-1-2-3-4-5目录"><a href="#一条命令创建test-1-2-3-4-5目录" class="headerlink" title="一条命令创建test/1/2/3/4/5目录"></a>一条命令创建test/1/2/3/4/5目录</h3><blockquote>
+<p>mkdir -p test/1/2/3/4/5</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># mkdir -p test/1/2/3/4/5</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># tree test/</span></span><br><span class="line"><span class="built_in">test</span>/</span><br><span class="line">└── 1</span><br><span class="line">    └── 2</span><br><span class="line">        └── 3</span><br><span class="line">            └── 4</span><br><span class="line">                └── 5</span><br><span class="line"></span><br><span class="line">5 directories, 0 files</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何快速回到当前登录用户的家目录"><a href="#如何快速回到当前登录用户的家目录" class="headerlink" title="如何快速回到当前登录用户的家目录"></a>如何快速回到当前登录用户的家目录</h3><blockquote>
+<p>cd</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie tmp]<span class="comment"># cd</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># pwd</span></span><br><span class="line">/root</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何只查看-etc单个目录的信息并以长格式显示"><a href="#如何只查看-etc单个目录的信息并以长格式显示" class="headerlink" title="如何只查看/etc单个目录的信息并以长格式显示"></a>如何只查看/etc单个目录的信息并以长格式显示</h3><blockquote>
+<p>ll -d /etc</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie /]<span class="comment"># ll -d /etc</span></span><br><span class="line">drwxr-xr-x. 76 root root 8192 4月   7 23:35 /etc</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看-etc-所占的磁盘空间"><a href="#查看-etc-所占的磁盘空间" class="headerlink" title="查看/etc/所占的磁盘空间"></a>查看/etc/所占的磁盘空间</h3><blockquote>
+<p>du -sh /etc</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie /]<span class="comment"># du -sh /etc</span></span><br><span class="line">20M     /etc</span><br></pre></td></tr></table></figure>
+
+<h3 id="结合ls与grep命令打印出-tmp-etc目录下的所有目录文件"><a href="#结合ls与grep命令打印出-tmp-etc目录下的所有目录文件" class="headerlink" title="结合ls与grep命令打印出/tmp/etc目录下的所有目录文件"></a>结合ls与grep命令打印出/tmp/etc目录下的所有目录文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># ls -l /tmp/etc |grep  ^d</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除-tmp下所有的文件"><a href="#删除-tmp下所有的文件" class="headerlink" title="删除/tmp下所有的文件"></a>删除/tmp下所有的文件</h3><blockquote>
+<p>rm -rf /tmp/*</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie /]<span class="comment"># rm -rf /tmp/*</span></span><br><span class="line">[root@zhoulijie /]<span class="comment"># ls /tmp</span></span><br><span class="line">[root@zhoulijie /]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="临时设置系统主机名并重启验证"><a href="#临时设置系统主机名并重启验证" class="headerlink" title="临时设置系统主机名并重启验证"></a>临时设置系统主机名并重启验证</h3><blockquote>
+<p>hostname 123</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># hostname 123</span></span><br><span class="line">[root@MR ~]<span class="comment"># bash</span></span><br><span class="line">[root@123 ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="永久设置系统主机名并重启验证"><a href="#永久设置系统主机名并重启验证" class="headerlink" title="永久设置系统主机名并重启验证"></a>永久设置系统主机名并重启验证</h3><blockquote>
+<p>vim /etc/hostname</p>
+<p>输入zhoulijie</p>
+<p>保存并退出</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># vim /etc/hostname</span></span><br><span class="line">[root@MR ~]<span class="comment"># bash</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="将系统时间设置为2008-05-10-00-12-13并验证"><a href="#将系统时间设置为2008-05-10-00-12-13并验证" class="headerlink" title="将系统时间设置为2008-05-10 00:12:13并验证"></a>将系统时间设置为2008-05-10 00:12:13并验证</h3><blockquote>
+<p>date -s “2008-05-10 00:12:13”</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># date -s "2008-05-10 00:12:13"</span></span><br><span class="line">2008年 05月 10日 星期六 00:12:13 CST</span><br><span class="line">[root@MR ~]<span class="comment"># date</span></span><br><span class="line">2008年 05月 10日 星期六 00:12:44 CST</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用ntpdate同步互联网时间"><a href="#使用ntpdate同步互联网时间" class="headerlink" title="使用ntpdate同步互联网时间"></a>使用ntpdate同步互联网时间</h3><blockquote>
+<p>ntpdate time1.aliyun.com</p>
+<p>如果没有就使用yum安装</p>
+<p>yum install ntpdate -y</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment">#ntpdate time1.aliyun.com</span></span><br><span class="line">11 Apr 17:37:29 ntpdate[7400]: step time server 119.28.183.184 offset 199144.735638 sec</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># date</span></span><br><span class="line">2019年 04月 11日 星期四 17:37:34 CST</span><br></pre></td></tr></table></figure>
+
+<h3 id="统计出-etc-passwd文件有多少单词和字符"><a href="#统计出-etc-passwd文件有多少单词和字符" class="headerlink" title="统计出/etc/passwd文件有多少单词和字符"></a>统计出/etc/passwd文件有多少单词和字符</h3><blockquote>
+<p>wc -w -c /etc/passwd</p>
+<p>-w 只显示单词数</p>
+<p>-c 只显示字节数</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@MR ~]<span class="comment"># wc -w -c /etc/passwd</span></span><br><span class="line">  37 1116 /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加一个计划任务，在每周6凌晨1点35分备份-etc目录到-tmp目录下，要求备份的文件必须是打包好的，名字为etc-tar-xz"><a href="#添加一个计划任务，在每周6凌晨1点35分备份-etc目录到-tmp目录下，要求备份的文件必须是打包好的，名字为etc-tar-xz" class="headerlink" title="添加一个计划任务，在每周6凌晨1点35分备份/etc目录到/tmp目录下，要求备份的文件必须是打包好的，名字为etc.tar.xz"></a>添加一个计划任务，在每周6凌晨1点35分备份/etc目录到/tmp目录下，要求备份的文件必须是打包好的，名字为etc.tar.xz</h3><blockquote>
+<p>crontab -e  编辑计划任务</p>
+<p>crontab -l    查看计划任务</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@lzy tmp]<span class="comment"># crontab -e</span></span><br><span class="line">no crontab <span class="keyword">for</span> root - using an empty one</span><br><span class="line">crontab: installing new crontab</span><br><span class="line">[root@lzy tmp]<span class="comment"># crontab -l</span></span><br><span class="line">35 1 * * 6  /usr/bin/tar -jcf etc.tar.xz /etc/* &amp;&amp; cp -r -p etc.tar.xz /tmp/</span><br></pre></td></tr></table></figure>
+
+<h3 id="Linux如何挂载windows下的共享目录？"><a href="#Linux如何挂载windows下的共享目录？" class="headerlink" title="Linux如何挂载windows下的共享目录？"></a>Linux如何挂载windows下的共享目录？</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mount.cifs //IP地址/server /mnt/server -o user=administrator,password=123456</span><br><span class="line">linux 下的server需要自己手动建一个 后面的user与pass 是windows主机的账号和密码 注意空格 和逗号</span><br></pre></td></tr></table></figure>
+
+<h3 id="统计linux中TCP各连接状态的数量？"><a href="#统计linux中TCP各连接状态的数量？" class="headerlink" title="统计linux中TCP各连接状态的数量？"></a>统计linux中TCP各连接状态的数量？</h3><h3 id="请简述符号链接与硬链接的区别？"><a href="#请简述符号链接与硬链接的区别？" class="headerlink" title="请简述符号链接与硬链接的区别？"></a>请简述符号链接与硬链接的区别？</h3><h3 id="如何在文本里面进行复制、粘贴，删除行，删除全部，按行查找和按字母查找？"><a href="#如何在文本里面进行复制、粘贴，删除行，删除全部，按行查找和按字母查找？" class="headerlink" title="如何在文本里面进行复制、粘贴，删除行，删除全部，按行查找和按字母查找？"></a>如何在文本里面进行复制、粘贴，删除行，删除全部，按行查找和按字母查找？</h3><h3 id="请简述ftp的主动模式与被动模式工作过程"><a href="#请简述ftp的主动模式与被动模式工作过程" class="headerlink" title="请简述ftp的主动模式与被动模式工作过程"></a>请简述ftp的主动模式与被动模式工作过程</h3><h3 id="如何过滤出-runtime中的所有一级目录-不包含子目录，即只能是一级目录"><a href="#如何过滤出-runtime中的所有一级目录-不包含子目录，即只能是一级目录" class="headerlink" title="如何过滤出/runtime中的所有一级目录(不包含子目录，即只能是一级目录)"></a>如何过滤出/runtime中的所有一级目录(不包含子目录，即只能是一级目录)</h3><h3 id="如何查看-etc-目录下最近更新的5个文件？"><a href="#如何查看-etc-目录下最近更新的5个文件？" class="headerlink" title="如何查看/etc/目录下最近更新的5个文件？"></a>如何查看/etc/目录下最近更新的5个文件？</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@MR etc]<span class="comment"># ls -lt | head -n 6</span></span><br><span class="line">总用量 1108</span><br><span class="line">----------.  1 root root    361 3月   8 19:55 gshadow</span><br><span class="line">-rw-r--r--.  1 root root    455 3月   8 19:55 group</span><br><span class="line">----------.  1 root root    608 3月   8 19:55 shadow</span><br><span class="line">-rw-r--r--.  1 root root    922 3月   8 19:55 passwd</span><br><span class="line">-rw-r--r--.  1 root root    469 3月   8 19:55 group-</span><br></pre></td></tr></table></figure>
+
+<h3 id="已知apache服务的访问日志按天记录在服务器本地目录-app-logs下，由于磁盘空间紧张，现在要求只能保留最近7天访问日志！请问如何解决？"><a href="#已知apache服务的访问日志按天记录在服务器本地目录-app-logs下，由于磁盘空间紧张，现在要求只能保留最近7天访问日志！请问如何解决？" class="headerlink" title="已知apache服务的访问日志按天记录在服务器本地目录/app/logs下，由于磁盘空间紧张，现在要求只能保留最近7天访问日志！请问如何解决？"></a>已知apache服务的访问日志按天记录在服务器本地目录/app/logs下，由于磁盘空间紧张，现在要求只能保留最近7天访问日志！请问如何解决？</h3><h3 id="如何打印配置文件nginx-conf的行号及内容？"><a href="#如何打印配置文件nginx-conf的行号及内容？" class="headerlink" title="如何打印配置文件nginx.conf的行号及内容？"></a>如何打印配置文件nginx.conf的行号及内容？</h3><h3 id="调试系统服务时，希望能实时查看系统日志-var-log-messages的更新，如何做？"><a href="#调试系统服务时，希望能实时查看系统日志-var-log-messages的更新，如何做？" class="headerlink" title="调试系统服务时，希望能实时查看系统日志/var/log/messages的更新，如何做？"></a>调试系统服务时，希望能实时查看系统日志/var/log/messages的更新，如何做？</h3><h3 id="如何查看-etc-services文件有多少行？"><a href="#如何查看-etc-services文件有多少行？" class="headerlink" title="如何查看/etc/services文件有多少行？"></a>如何查看/etc/services文件有多少行？</h3><h3 id="分别使用ifconfig和ip命令取出当前主机的ip地址"><a href="#分别使用ifconfig和ip命令取出当前主机的ip地址" class="headerlink" title="分别使用ifconfig和ip命令取出当前主机的ip地址"></a>分别使用ifconfig和ip命令取出当前主机的ip地址</h3><h3 id="如何将-etc-fstab中的权限取出来，以数字644这样的形式打印"><a href="#如何将-etc-fstab中的权限取出来，以数字644这样的形式打印" class="headerlink" title="如何将/etc/fstab中的权限取出来，以数字644这样的形式打印"></a>如何将/etc/fstab中的权限取出来，以数字644这样的形式打印</h3><h3 id="打印出-etc-fstab文件中除掉空行和注释的内容"><a href="#打印出-etc-fstab文件中除掉空行和注释的内容" class="headerlink" title="打印出/etc/fstab文件中除掉空行和注释的内容"></a>打印出/etc/fstab文件中除掉空行和注释的内容</h3><h3 id="用date命令打印3天前的日期，如：2018-10-10"><a href="#用date命令打印3天前的日期，如：2018-10-10" class="headerlink" title="用date命令打印3天前的日期，如：2018-10-10"></a>用date命令打印3天前的日期，如：2018-10-10</h3><h3 id="将目录-etc-a下除了b文件外的所有文件压缩打包放到-tmp-a下，名字为a-gz"><a href="#将目录-etc-a下除了b文件外的所有文件压缩打包放到-tmp-a下，名字为a-gz" class="headerlink" title="将目录/etc/a下除了b文件外的所有文件压缩打包放到/tmp/a下，名字为a.gz"></a>将目录/etc/a下除了b文件外的所有文件压缩打包放到/tmp/a下，名字为a.gz</h3><h3 id="什么是umask？umask-022代表什么意思？"><a href="#什么是umask？umask-022代表什么意思？" class="headerlink" title="什么是umask？umask=022代表什么意思？"></a>什么是umask？umask=022代表什么意思？</h3><h3 id="ftp、http、https、smtp、pop3、ssh、dns的端口号"><a href="#ftp、http、https、smtp、pop3、ssh、dns的端口号" class="headerlink" title="ftp、http、https、smtp、pop3、ssh、dns的端口号"></a>ftp、http、https、smtp、pop3、ssh、dns的端口号</h3><h3 id="如何在不停止进程的情况下清空日志-var-log-a-log？"><a href="#如何在不停止进程的情况下清空日志-var-log-a-log？" class="headerlink" title="如何在不停止进程的情况下清空日志/var/log/a.log？"></a>如何在不停止进程的情况下清空日志/var/log/a.log？</h3><h3 id="如何在-usr目录下找出大小超过10MB的文件？"><a href="#如何在-usr目录下找出大小超过10MB的文件？" class="headerlink" title="如何在/usr目录下找出大小超过10MB的文件？"></a>如何在/usr目录下找出大小超过10MB的文件？</h3><h3 id="如何在-var目录下找出90天之内未被访问过的文件？"><a href="#如何在-var目录下找出90天之内未被访问过的文件？" class="headerlink" title="如何在/var目录下找出90天之内未被访问过的文件？"></a>如何在/var目录下找出90天之内未被访问过的文件？</h3><h3 id="ll-awk-‘-print-3-”owns”-9-’-这条命令是在做什么？"><a href="#ll-awk-‘-print-3-”owns”-9-’-这条命令是在做什么？" class="headerlink" title="ll | awk ‘{print (3,”owns”,)9}’ 这条命令是在做什么？"></a>ll | awk ‘{print (3,”owns”,)9}’ 这条命令是在做什么？</h3><h3 id="给你50台Linux系统如何安装呢？如何实现，步骤是什么？"><a href="#给你50台Linux系统如何安装呢？如何实现，步骤是什么？" class="headerlink" title="给你50台Linux系统如何安装呢？如何实现，步骤是什么？"></a>给你50台Linux系统如何安装呢？如何实现，步骤是什么？</h3><h3 id="用虚拟机安装了一台Linux系统，突然想克隆一台服务器，克隆后发现无法上网，如何解决？"><a href="#用虚拟机安装了一台Linux系统，突然想克隆一台服务器，克隆后发现无法上网，如何解决？" class="headerlink" title="用虚拟机安装了一台Linux系统，突然想克隆一台服务器，克隆后发现无法上网，如何解决？"></a>用虚拟机安装了一台Linux系统，突然想克隆一台服务器，克隆后发现无法上网，如何解决？</h3><h3 id="Linux网卡配置文件路径是什么？要使服务器上外网，必须满足的条件有哪些？需要配置什么？"><a href="#Linux网卡配置文件路径是什么？要使服务器上外网，必须满足的条件有哪些？需要配置什么？" class="headerlink" title="Linux网卡配置文件路径是什么？要使服务器上外网，必须满足的条件有哪些？需要配置什么？"></a>Linux网卡配置文件路径是什么？要使服务器上外网，必须满足的条件有哪些？需要配置什么？</h3><h3 id="查找当前目录下30天以前-log结尾的大于1G的文件，并把它移动到-tmp下"><a href="#查找当前目录下30天以前-log结尾的大于1G的文件，并把它移动到-tmp下" class="headerlink" title="查找当前目录下30天以前.log结尾的大于1G的文件，并把它移动到/tmp下"></a>查找当前目录下30天以前.log结尾的大于1G的文件，并把它移动到/tmp下</h3><h3 id="查看某个端口是否已经启动，以及查看端口做占用的PID进程号"><a href="#查看某个端口是否已经启动，以及查看端口做占用的PID进程号" class="headerlink" title="查看某个端口是否已经启动，以及查看端口做占用的PID进程号"></a>查看某个端口是否已经启动，以及查看端口做占用的PID进程号</h3>
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>linux基础练习</p>
+    
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Li Jie">Li Jie</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-08-29, 23:44:18</p>
+    <p><span class="copy-title">最后更新:</span>2019-08-22, 20:15:00</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/08/29/15.linux--linux基础练习/" title="linux基础练习">https://github.com/chineselijie/2019/08/29/15.linux--linux基础练习/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="//cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#linux基础','#python','#linux进阶','#linux运维',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
