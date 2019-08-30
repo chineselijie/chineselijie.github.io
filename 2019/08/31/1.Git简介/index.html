@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>Linux计划任务 | Li Jie&#39;s blog</title>
-  <meta name="keywords" content=" linux基础 ">
-  <meta name="description" content="Linux计划任务 | Li Jie&#39;s blog">
+  <title>Git简介 | Li Jie&#39;s blog</title>
+  <meta name="keywords" content=" Git ">
+  <meta name="description" content="Git简介 | Li Jie&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="关于作者 周李杰，最后一批90后，现居湖北武汉 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 12&amp;gt; print(&amp;quot;👆以上是不完整的我&amp;quot;) //请我吃大餐将会了解更多&amp;gt;  [TOC] Git 何是Git？  Git(读音为/gɪt/。)是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的">
 <meta name="keywords" content="Git">
@@ -628,9 +628,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-5.linux--linux计划任务" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-1.Git简介" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Linux计划任务</h1>
+        <h1 class="article-title">Git简介</h1>
     
     <div class="article-meta">
         
@@ -638,26 +638,26 @@
         
         <span class="book">
             
-                <a href="javascript:" data-rel="linux基础">linux基础</a>
+                <a href="javascript:" data-rel="Git">Git</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color3">linux基础</a>
+            <a href="javascript:" class="color4">Git</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-08-22 21:23:52'>2019-08-29 23:44</time>
+        创建时间:<time class="date" title='更新时间: 2019-08-31 00:19:54'>2019-08-31 00:20</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.2k</span>
+        <span>字数:2.7k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -687,7 +687,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#crond计划任务概述"><span class="toc-text">crond计划任务概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crond配置文件详解"><span class="toc-text">crond配置文件详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crond计划任务管理"><span class="toc-text">crond计划任务管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crond配置编写实例"><span class="toc-text">crond配置编写实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crond计划任务调试"><span class="toc-text">crond计划任务调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#练习"><span class="toc-text">练习</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git"><span class="toc-text">Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git特点"><span class="toc-text">Git特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git的由来"><span class="toc-text">Git的由来</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git的多版本控制"><span class="toc-text">Git的多版本控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集中式VS分布式"><span class="toc-text">集中式VS分布式</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -710,112 +710,98 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>[TOC]</p>
-<h2 id="crond计划任务概述"><a href="#crond计划任务概述" class="headerlink" title="crond计划任务概述"></a>crond计划任务概述</h2><p>crond 是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务 工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Schedule one-time tasks with at.   一次性调度执行 at</span><br><span class="line">Schedule recurring jobs with cron. 循环调度执行 cron</span><br><span class="line">Schedule recurring system jobs. 所有计划任务执行中的输出都会以邮件的方式发送给指定用户, 除非重定向</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//循环调度执行cron 进程每分钟会处理一次计划任务</span><br><span class="line">[root@zhoulijie ~]# systemctl status crond</span><br><span class="line">[root@zhoulijie ~]# ps aux | grep crond</span><br><span class="line">root       1238  0.0  0.0 126236  1672 ?        Ss   00:27   0:00 /usr/sbin/crond -n</span><br><span class="line">root      16029  0.0  0.0 112680   984 pts/0    S+   21:58   0:00 grep --color=auto crond</span><br></pre></td></tr></table></figure>
-
-<p><strong>计划任务分为以下两种情况：</strong></p>
-<ul>
-<li><p>系统级别的定时任务:</p>
+<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h2><blockquote>
+<p>何是Git？</p>
+</blockquote>
+<p>Git(读音为/gɪt/。)是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的项目版本管理。 [1]  Git 是 [Linus Torvalds](<a href="https://baike.baidu.com/item/Linus" target="_blank" rel="noopener">https://baike.baidu.com/item/Linus</a> Torvalds/9336769) 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。</p>
+<p>Torvalds 开始着手开发 Git 是为了作为一种过渡方案来替代 BitKe</p>
+<h2 id="Git特点"><a href="#Git特点" class="headerlink" title="Git特点"></a>Git特点</h2><p>分布式相比于集中式的最大区别在于开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。</p>
+<p>下图是经典的git开发过程。</p>
+<p><a href="https://baike.baidu.com/pic/GIT/12647237/0/a71ea8d3fd1f4134ca7667d8251f95cad0c85ed6?fr=lemma&ct=single" target="_blank" rel="noopener"><img src="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D220/sign=7252eeae9b504fc2a65fb707d5dce7f0/a71ea8d3fd1f4134ca7667d8251f95cad0c85ed6.jpg" alt="img"></a></p>
+<p>Git的功能特性：</p>
+<p>从一般开发者的角度来看，git有以下功能：</p>
+<p>1、从服务器上克隆完整的Git仓库（包括代码和版本信息）到单机上。</p>
+<p>2、在自己的机器上根据不同的开发目的，创建分支，修改代码。</p>
+<p>3、在单机上自己创建的分支上提交代码。</p>
+<p>4、在单机上合并分支。</p>
+<p>5、把服务器上最新版的代码fetch下来，然后跟自己的主分支合并。</p>
+<p>6、生成补丁（patch），把补丁发送给主开发者。</p>
+<p>7、看主开发者的反馈，如果主开发者发现两个一般开发者之间有冲突（他们之间可以合作解决的冲突），就会要求他们先解决冲突，然后再由其中一个人提交。如果主开发者可以自己解决，或者没有冲突，就通过。</p>
+<p>8、一般开发者之间解决冲突的方法，开发者之间可以使用pull 命令解决冲突，解决完冲突之后再向主开发者提交补丁。</p>
+<p>从主开发者的角度（假设主开发者不用开发代码）看，git有以下功能：</p>
+<p>1、查看邮件或者通过其它方式查看一般开发者的提交状态。</p>
+<p>2、打上补丁，解决冲突（可以自己解决，也可以要求开发者之间解决以后再重新提交，如果是开源项目，还要决定哪些补丁有用，哪些不用）。</p>
+<p>3、向公共服务器提交结果，然后通知所有开发人员。</p>
+<p><strong>优点：</strong></p>
+<p>适合<a href="https://baike.baidu.com/item/分布式开发" target="_blank" rel="noopener">分布式开发</a>，强调个体。</p>
+<p>公共服务器压力和数据量都不会太大。</p>
+<p>速度快、灵活。</p>
+<p>任意两个开发者之间可以很容易的解决冲突。</p>
+<p>离线工作。</p>
+<p><strong>缺点：</strong></p>
+<p>资料少（起码中文资料很少）。</p>
+<p>学习周期相对而言比较长。</p>
+<p>不符合常规思维。</p>
+<p>代码保密性差，一旦开发者把整个库克隆下来就可以完全公开所有代码和版本信息。</p>
+<h2 id="Git的由来"><a href="#Git的由来" class="headerlink" title="Git的由来"></a>Git的由来</h2><p>​        Linus torvalds在1991年时发布了Linux操作系统，从那以后Linux系统便不断发展壮大，因为Linux系统开源的特性，所以一直接受着来自全球Linux技术爱好者的贡献，志愿者们通过邮件向Linus发送着自己编写的源代码文件，然后由Linus本人通过手工的方式将代码合并，但这样不仅没有效率，而且真的是太痛苦了。</p>
+<p>​        一直到2002年，Linux系统经过十余年的不断发展，代码库已经庞大到无法再通过手工的方式管理了，但是Linus真的很不喜欢类似于CVS或者Subversion的一些版本控制系统，于是商业公司BitMover决定将其公司的BitKeeper分布式版本控制系统授权给Linux开发社区来免费使用，当时的BitKeeper可以比较文件内容的不同，还能够将出错的文档还原到历史某个状态，Linus终于放下了心里的石头。</p>
+<p>​        就这样平静的度过了三年时间，但是Linux社区聚集着太多的黑客人物，2005年时，那位曾经开发Samba服务程序的Andrew因为试图破解BitKeeper软件协议而激怒了BitMover公司，当即决定不再向Linux社区提供免费的软件授权了，此时的Linus其实也早已有自己编写分布式版本控制系统的打算了，于是便用C语言创建了一个分布式版本控制系统，并上传了Linux系统的源代码。这就是现在大名鼎鼎的Git.</p>
 <blockquote>
-<p>清理系统缓存<br>临时文件清理<br>系统信息采集<br>日志文件切割</p>
+<p>Git不仅是一款开源的分布式版本控制系统，而且有其独特的功能特性，例如大多数的分布式版本控制系统只会记录每次文件的变化，说白了就是只会关心文件的内容变化差异，而Git则是关注于文件数据整体的变化，直接会将文件提交时的数据保存成快照，而非仅记录差异内容，并且使用SHA-1加密算法保证数据的完整性。</p>
 </blockquote>
-</li>
-<li><p>用户级别的定时任务:</p>
-<blockquote>
-<p>定时同步互联网时间<br>定时备份系统配置文件<br>定时备份数据库文件</p>
+<h2 id="Git的多版本控制"><a href="#Git的多版本控制" class="headerlink" title="Git的多版本控制"></a>Git的多版本控制</h2><blockquote>
+<p>Git为了提高效率，对于没有被修改的文件，则不会重复存储，而是创建一个链接指向之前存储过的文件。</p>
 </blockquote>
-</li>
-</ul>
-<h2 id="crond配置文件详解"><a href="#crond配置文件详解" class="headerlink" title="crond配置文件详解"></a>crond配置文件详解</h2><ul>
-<li><p>Linux下的任务调度分为两类，系统任务调度和用户任务调度。</p>
-</li>
-<li><p>系统任务调度：系统周期性所要执行的工作，比如写缓存数据到硬盘、日志清理等。在/etc目录下有一个crontab文件，这个就是系统任务调度的配置文件。</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">文件              说明</span><br><span class="line">/etc/crontab        //crontab配置文件</span><br><span class="line">/etc/cron.deny      //该文件中所列用户不允许使用crontab命令</span><br><span class="line">/var/spool/cron/*   //所有用户定时文件都存放此目录,文件以用户名命名</span><br><span class="line">/var/log/cron       //定时任务执行后的日志文件,可用来回溯</span><br></pre></td></tr></table></figure>
+<p>​        其实从发明计算机至今，编写文档工作早已融入到每个人的生活之中，但为了完成一篇好文章，一定免不了反复的修改，许多人习惯用复制整个文件的方式来保存不同的版本，或许还会改名加上备份时间以示区别，这样做的好处就是简单，但人们的思维如此活跃，一不小心就变成了这个样子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Git版本控制.docx</span><br><span class="line">Git版本控制-副本.docx</span><br><span class="line">Git版本控制(1).docx</span><br><span class="line">Git版本控制(2).docx</span><br><span class="line">插入了一段话.docx</span><br><span class="line">删除了一段话.docx</span><br><span class="line">Git版本控制-完整版.docx</span><br></pre></td></tr></table></figure>
 
-<h2 id="crond计划任务管理"><a href="#crond计划任务管理" class="headerlink" title="crond计划任务管理"></a>crond计划任务管理</h2><p><strong>crond任务管理</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">参数          含义                指定示例</span><br><span class="line">-e      编辑crontab文件内容       crontab -e</span><br><span class="line">-l      查看crontab文件内容       crontab -l</span><br><span class="line">-r      删除crontab文件内容       crontab -r</span><br><span class="line">-u      管理其他用户的计划任务   crontab -u zhou -l</span><br><span class="line">注意: crontab &#123;-l -e&#125;实际上就是在操作/var/spool/cron/username</span><br></pre></td></tr></table></figure>
-
-<p><strong>crond时间含义</strong></p>
-<p><img src="https://img-blog.csdn.net/20180301122140123" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># Example of job definition:</span><br><span class="line"># .---------------- minute (0 - 59) //分钟</span><br><span class="line"># |  .------------- hour (0 - 23)   //小时</span><br><span class="line"># |  |  .---------- day of month (1 - 31)   //日期</span><br><span class="line"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr //月份</span><br><span class="line"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat  //星期</span><br><span class="line"># |  |  |  |  |</span><br><span class="line"># *  *  *  *  *   command to be executed</span><br><span class="line"></span><br><span class="line">// *    表示任意的(分、时、日、月、周)时间都执行</span><br><span class="line">// -    表示一个时间范围段, 如5-7点</span><br><span class="line">// ,    表示分隔时段, 如6,0,4表示周六、日、四</span><br><span class="line">// */n  表示每隔n单位时间, 如*/10 每10分钟</span><br></pre></td></tr></table></figure>
-
-<p><strong>crond编写示例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">00 02 * * * command      //每天2:00整 </span><br><span class="line">00 02 1 * * command      //每月1号2:00整 </span><br><span class="line">00 02 14 2 * command     //每年2月14号2:00整 </span><br><span class="line">00 02 * * 7 command      //每周日2:00整 </span><br><span class="line">00 02 * 6 5 command      //每年6月的周五2:00整</span><br><span class="line">00 02 14 * 7 command     //每月14号2:00整或每周日2:00整，这两个时间都执行</span><br><span class="line">00 02 14 2 7 command     //每年 2 月 14 号 2:00 整 或者 每周日 2:00 整，这两个时间都执行 </span><br><span class="line">00 02 * * * command      //每天2:00整</span><br><span class="line">*  02 * * * command      //每天2:00中的每一分钟 (错误示范)</span><br><span class="line">* * * * *  command       //每分钟执行 ls</span><br><span class="line">* * 14 2 *  command      //2月14号的每分钟(错误示范)</span><br><span class="line">*/5 * * * *  command     //每隔5分钟 </span><br><span class="line">00 02 * 1,5,8 * command  //每年1,5,8月的每天2:00整 </span><br><span class="line">00 02 1-8 * *  command   //每月1到8号的2:00整</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://img-blog.csdn.net/20180510204632418?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NhdGVycGlsbGFyNw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
-<p><strong>crond书写规范</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//1.为计划任务增加必要的注释</span><br><span class="line">[root@zhoulijie ~]# crontab -e</span><br><span class="line">no crontab for root - using an empty one</span><br><span class="line">crontab: installing new crontab</span><br><span class="line">[root@zhoulijie ~]# crontab -l</span><br><span class="line">##time sync</span><br><span class="line">*/5 * * * * /usr/sbin/ntpdate time1.aliyun.com &amp;&gt;/dev/null</span><br><span class="line"></span><br><span class="line">//2.规范计划任务执行脚本存放的路径/scripts/</span><br><span class="line">[root@zhoulijie ~]# crontab -e</span><br><span class="line">crontab: installing new crontab</span><br><span class="line">[root@zhoulijie ~]# crontab -l</span><br><span class="line">##backup www to /backup</span><br><span class="line">30 01 * * * /bin/sh /scripts/www_backup.sh &amp;&gt;/dev/null</span><br><span class="line"></span><br><span class="line">//3.执行shell脚本任务前加/bin/sh, 脚本结尾加&amp;&gt;/dev/null</span><br><span class="line">//调试好后应屏蔽debug输出信息,避免产生系统垃圾占用过多inode, 如需输出日志, 可重定向至日志文件</span><br><span class="line">[root@zhoulijie ~]# crontab -e</span><br><span class="line">crontab: installing new crontab</span><br><span class="line">[root@zhoulijie ~]# crontab -l</span><br><span class="line">####backup www to /backup</span><br><span class="line">30 01 * * * /bin/sh /scripts/www_backup.sh &amp;&gt;/tmp/www_backup.log</span><br></pre></td></tr></table></figure>
-
-<h2 id="crond配置编写实例"><a href="#crond配置编写实例" class="headerlink" title="crond配置编写实例"></a>crond配置编写实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]# crontab -e</span><br><span class="line"></span><br><span class="line">#每天凌晨切割nginx日志</span><br><span class="line">05 00 * * * /bin/bash -x /scripts/cut_nginx.sh &amp;&gt; /scripts/log/nginx.log</span><br><span class="line"></span><br><span class="line">#每天5点备份数据库</span><br><span class="line">00 05 * * * /bin/bash -x /scripts/dump_sql.sh &amp;&gt;/scripts/log/mysql.log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//注意：</span><br><span class="line">1.我们所有的crond服务是运行的程序。而crontab命令用户用来设置定时规则的命令。</span><br><span class="line">2.crond服务是企业生产工作中常用的重要服务，at很少使用，可以忽略。</span><br><span class="line">3.几乎每个服务器都会用到crond服务。</span><br></pre></td></tr></table></figure>
-
-<h2 id="crond计划任务调试"><a href="#crond计划任务调试" class="headerlink" title="crond计划任务调试"></a>crond计划任务调试</h2><blockquote>
-<ol>
-<li>调整任务每分钟执行, 检测是否是否正常, 有些任务不要频繁执行</li>
-<li>调整系统时间然后在检测任务, 生产不建议直接使用此方式</li>
-<li>执行脚本, 将脚本执行输出写入指定日志文件, 观察日志内容是否正常</li>
-<li>注意一些任务命令带来的问题echo “wangqing” &gt;&gt;/tmp/test.log &amp;&gt;/dev/null</li>
-<li>命令使用绝对路径, 防止无法找到命令导致定时任务执行故障</li>
-<li>查看/var/log/cron日志进行调试</li>
-</ol>
-</blockquote>
-<p>建议: 将需要定期执行的任务写入脚本中, 建立/scripts目录统一存放脚本, 脚本中命令必须使用绝对路径,手动执行脚本检测输出是否正常, 然后将脚本加入计划任务测试, 测试后无问题将脚本输出写入对应的日志文件中即可。</p>
-<p>计划任务添加步骤：</p>
-<ol>
-<li>手动执行保留执行命令的正确结果</li>
-<li>编写脚本<ul>
-<li>脚本需要统一路径/scripts</li>
-<li>脚本开头建议填写注释信息, 包括执行时间、周期、任务</li>
-<li>脚本内容复制执行成功的命令至脚本文件中(减少每个环节出错几率)</li>
-<li>脚本内容尽可能的优化, 使用一些变量或使用简单的判断语句</li>
-<li>脚本执行的输出信息不要随意打印, 可以重定向至其他位置保留或丢入黑洞</li>
-</ul>
-</li>
-<li>执行脚本<ul>
-<li>使用bash执行, 防止脚本没有增加执行权限(/bin/bash)</li>
-<li>执行命令以及脚本成功后并复制该命令</li>
-</ul>
-</li>
-<li>编写计划任务<ul>
-<li>加上必要的注释信息, 人、时间、任务</li>
-<li>设定计划任务执行的周期</li>
-<li>加入执行脚本的命令</li>
-</ul>
-</li>
-<li>调试计划任务<ul>
-<li>增加任务频率测试、调整系统时间测试(不能用于生产)</li>
-<li>检查环境变量问题、检查crond服务产生日志进行排查</li>
-</ul>
-</li>
-</ol>
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>1.在linux系统中备份脚本backup.sh需要再每周1-5的每天下午1点和晚上8点执行，下列哪个cron命令可以完成（D）</p>
-<p>a. 00 13,20 * 1-5 * backup.sh </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">每年的1-5月的13点和20点执行backup.sh</span><br></pre></td></tr></table></figure>
-
-<p>b. 0 13,20 1,5 * * backup.sh</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">每月的1号和5号的13点和20点执行backup.sh</span><br></pre></td></tr></table></figure>
-
-<p>c. * 13,20 * * 1-5 backup.sh</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">错误显示</span><br></pre></td></tr></table></figure>
-
-<p>d. 00 13,20 * * 1-5 backup.sh</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">每周一-周五的13点和20点执行backup.sh</span><br></pre></td></tr></table></figure>
-
-<p>说明以上答案每一行是什么含义</p>
-<p>2.新建/scripts/httpd.sh文件，并让/scripts/httpd.sh脚本在每天的00:10分执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># mkdir /scripts</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># touch /scripts/httpd.sh</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># whereis sh</span></span><br><span class="line">sh: /usr/bin/sh /usr/share/man/man1/sh.1.gz /usr/share/man/man1p/sh.1p.gz</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># crontab -e</span></span><br><span class="line">crontab: installing new crontab</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># crontab -l</span></span><br><span class="line">10 00 * * * /usr/bin/sh /scripts/httpd.sh</span><br></pre></td></tr></table></figure>
-
-<p>3.新建/backup目录,每周一下午5:50将/backup目录下的所有文件打包成 backup.tar.gz</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># mkdir /bachup</span></span><br><span class="line">[root@zhoulijie ~]<span class="comment"># whereis tar</span></span><br><span class="line">tar: /usr/bin/tar /usr/share/man/man1/tar.1.gz /usr/share/man/man5/tar.5.gz</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># crontab -e</span></span><br><span class="line">crontab: installing new crontab</span><br><span class="line">[root@zhoulijie ~]<span class="comment"># crontab -l</span></span><br><span class="line">50 17 * * 1 /usr/bin/tar -czf backup.tar.gz /backup</span><br></pre></td></tr></table></figure>
-
-<p>4.写一个定时任务，每天0点5分把/var/log/nginx下7天前的文件转移到/backup/2018_xx_xx的目录中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># crontab -l</span></span><br><span class="line">5 0 * * * /usr/bin/find /var/<span class="built_in">log</span>/nginx -mtime +7 | xargs /usr/bin/mv &#123;&#125; /backup/$(date <span class="string">'+%Y_%m_%d'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>5.系统脚本/scripts/which.sh，如何定时每隔7分钟执行一次？</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@zhoulijie ~]<span class="comment"># crontab -e</span></span><br><span class="line">*/7 * * * *</span><br></pre></td></tr></table></figure>
-
-<p>6.如何不小心删除了/var/spool/cron/root文件，该如何恢复。</p>
+<p>无意中就创建出了这么多乱七八糟的文档，但是那个才是我想要的版本呢？而且又担心要删除的文档中可能保留有某个不错的想法，删除后就不能找回了。更要命的是，有些章节还需要团队一起编写，于是需要把文件传输给他们，等到编写后再传回来，最后由我逐条对照差别后将新的内容添加进去，这样真的是太麻烦了，我们更希望看到这样的记录吧：</p>
+<table>
+<thead>
+<tr>
+<th align="center">版本</th>
+<th align="center">用户</th>
+<th align="center">说明</th>
+<th align="center">日期</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1.0</td>
+<td align="center">zhoulijie</td>
+<td align="center">创建Git版本控制</td>
+<td align="center">2019.8.21 18:21:45</td>
+</tr>
+<tr>
+<td align="center">2.0</td>
+<td align="center">natasha</td>
+<td align="center">修改了Git版本控制新增介绍</td>
+<td align="center">2019.8.23 18:21:45</td>
+</tr>
+<tr>
+<td align="center">3.0</td>
+<td align="center">hary</td>
+<td align="center">新增GitHub的使用</td>
+<td align="center">2019.8.25 18:21:45</td>
+</tr>
+<tr>
+<td align="center">4.0</td>
+<td align="center">mary</td>
+<td align="center">完善文档，修改错别字</td>
+<td align="center">2019.8.27 18:21:45</td>
+</tr>
+</tbody></table>
+<h2 id="集中式VS分布式"><a href="#集中式VS分布式" class="headerlink" title="集中式VS分布式"></a>集中式VS分布式</h2><p><strong>集中式</strong></p>
+<p>集中式版本控制系统，版本库是集中存放在中央服务器的，而干活的时候，用的都是自己的电脑，所以要先从中央服务器取得最新的版本，然后开始干活，干完活了，再把自己的活推送给中央服务器。中央服务器就好比是一个图书馆，你要改一本书，必须先从图书馆借出来，然后回到家自己改，改完了，再放回图书馆。</p>
+<p>集中式版本控制系统最大的毛病就是必须联网才能工作，如果在局域网内还好，带宽够大，速度够快，可如果在互联网上，遇到网速慢的话，可能提交一个10M的文件就需要5分钟，这还不得把人给憋死啊</p>
+<p><strong>分布式</strong></p>
+<p>分布式版本控制系统根本没有“中央服务器”，每个人的电脑上都是一个完整的版本库，这样，你工作的时候，就不需要联网了，因为版本库就在你自己的电脑上。既然每个人电脑上都有一个完整的版本库，那多个人如何协作呢？比方说你在自己电脑上改了文件A，你的同事也在他的电脑上改了文件A，这时，你们俩之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。</p>
+<p>和集中式版本控制系统相比，分布式版本控制系统的安全性要高很多，因为每个人电脑里都有完整的版本库，某一个人的电脑坏掉了不要紧，随便从其他人那里复制一个就可以了。而集中式版本控制系统的中央服务器要是出了问题，所有人都没法干活了。</p>
+<p>在实际使用分布式版本控制系统的时候，其实很少在两人之间的电脑上推送版本库的修改，因为可能你们俩不在一个局域网内，两台电脑互相访问不了，也可能今天你的同事病了，他的电脑压根没有开机。因此，分布式版本控制系统通常也有一台充当“中央服务器”的电脑，但这个服务器的作用仅仅是用来方便“交换”大家的修改，没有它大家也一样干活，只是交换修改不方便而已。</p>
+<p>当然，Git的优势不单是不必联网这么简单，后面我们还会看到Git极其强大的分支管理，把SVN等远远抛在了后面。</p>
+<p>CVS作为最早的开源而且免费的集中式版本控制系统，直到现在还有不少人在用。由于CVS自身设计的问题，会造成提交文件不完整，版本库莫名其妙损坏的情况。同样是开源而且免费的SVN修正了CVS的一些稳定性问题，是目前用得最多的集中式版本库控制系统。</p>
+<p>除了免费的外，还有收费的集中式版本控制系统，比如IBM的ClearCase（以前是Rational公司的，被IBM收购了），特点是安装比Windows还大，运行比蜗牛还慢，能用ClearCase的一般是世界500强，他们有个共同的特点是财大气粗，或者人傻钱多。</p>
+<p>微软自己也有一个集中式版本控制系统叫VSS，集成在Visual Studio中。由于其反人类的设计，连微软自己都不好意思用了。</p>
+<p>分布式版本控制系统除了Git以及促使Git诞生的BitKeeper外，还有类似Git的Mercurial和Bazaar等。这些分布式版本控制系统各有特点，但最快、最简单也最流行的依然是Git！</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
@@ -829,12 +815,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Linux计划任务</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">2.2k</span></p>
+    <p><span class="copy-title">文章标题:</span>Git简介</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2.7k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="Li Jie">Li Jie</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-08-29, 23:44:18</p>
-    <p><span class="copy-title">最后更新:</span>2019-08-22, 21:23:52</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/08/29/5.linux--linux计划任务/" title="Linux计划任务">https://github.com/chineselijie/2019/08/29/5.linux--linux计划任务/</a>
+    <p><span class="copy-title">发布时间:</span>2019-08-31, 00:20:12</p>
+    <p><span class="copy-title">最后更新:</span>2019-08-31, 00:19:54</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/08/31/1.Git简介/" title="Git简介">https://github.com/chineselijie/2019/08/31/1.Git简介/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
