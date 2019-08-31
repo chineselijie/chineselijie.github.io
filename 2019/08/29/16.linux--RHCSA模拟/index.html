@@ -6,20 +6,17 @@
   <meta name="keywords" content=" linux基础 ">
   <meta name="description" content="RHCSA复习 | Li Jie&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="关于作者 周李杰，最后一批90后，现居湖北武汉 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 12&amp;gt; print(&amp;quot;👆以上是不完整的我&amp;quot;) //请我吃大餐将会了解更多&amp;gt;  [TOC] Git 何是Git？  Git(读音为/gɪt/。)是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的">
-<meta name="keywords" content="Git">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Git简介">
-<meta property="og:url" content="https://github.com/chineselijie/2019/08/31/1.Git简介/index.html">
+<meta name="description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Li Jie&#39;s blog">
+<meta property="og:url" content="https://github.com/chineselijie/about/index.html">
 <meta property="og:site_name" content="Li Jie&#39;s blog">
-<meta property="og:description" content="关于作者 周李杰，最后一批90后，现居湖北武汉 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 12&amp;gt; print(&amp;quot;👆以上是不完整的我&amp;quot;) //请我吃大餐将会了解更多&amp;gt;  [TOC] Git 何是Git？  Git(读音为/gɪt/。)是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的">
+<meta property="og:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D220/sign=7252eeae9b504fc2a65fb707d5dce7f0/a71ea8d3fd1f4134ca7667d8251f95cad0c85ed6.jpg">
-<meta property="og:updated_time" content="2019-08-30T16:19:54.010Z">
+<meta property="og:updated_time" content="2019-08-28T17:25:29.218Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git简介">
-<meta name="twitter:description" content="关于作者 周李杰，最后一批90后，现居湖北武汉 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 12&amp;gt; print(&amp;quot;👆以上是不完整的我&amp;quot;) //请我吃大餐将会了解更多&amp;gt;  [TOC] Git 何是Git？  Git(读音为/gɪt/。)是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的">
-<meta name="twitter:image" content="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D220/sign=7252eeae9b504fc2a65fb707d5dce7f0/a71ea8d3fd1f4134ca7667d8251f95cad0c85ed6.jpg">
+<meta name="twitter:title" content="Li Jie&#39;s blog">
+<meta name="twitter:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
 
 
 <link rel="icon" href="/img/lijie.jpg">
@@ -764,7 +761,7 @@
 <h3 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h3><p>如classroom.example.com不能访问<br>首先在本地主机远程172.25.254.254（172.25.0.254）<br>命令如下：<br>ssh <a href="mailto:root@172.25.254.254" target="_blank" rel="noopener">root@172.25.254.254</a><br>echo ‘NSSENforceValidCerts off’ &gt;&gt; /etc/httpd/conf.d/nss.conf<br>systemctl restart httpd</p>
 
       
-       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 775531910@qq.com </span>
     </div>
 </article>
 
