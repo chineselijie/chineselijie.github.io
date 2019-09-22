@@ -6,17 +6,38 @@
   <meta name="keywords" content>
   <meta name="description" content="初步熟悉RHEL 8 | Li Jie&#39;s blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Li Jie&#39;s blog">
-<meta property="og:url" content="https://github.com/chineselijie/about/index.html">
+<meta name="description" content="关于作者 周李杰，最后一批90后，现居湖北武汉 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 12&amp;gt; print(&amp;quot;👆以上是不完整的我&amp;quot;) //请我吃大餐将会了解更多&amp;gt;  PXE什么是PXE？ 严格来说，PXE 并不是一种安装方式，而是一种引导的方式。进行 PXE 安装的必要条件是要安装的计算机中包含一">
+<meta name="keywords" content="linux运维">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PXE无人值守安装服务器">
+<meta property="og:url" content="https://github.com/chineselijie/2019/09/22/5.PXE无人值守安装服务器/index.html">
 <meta property="og:site_name" content="Li Jie&#39;s blog">
-<meta property="og:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta property="og:description" content="关于作者 周李杰，最后一批90后，现居湖北武汉 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 12&amp;gt; print(&amp;quot;👆以上是不完整的我&amp;quot;) //请我吃大餐将会了解更多&amp;gt;  PXE什么是PXE？ 严格来说，PXE 并不是一种安装方式，而是一种引导的方式。进行 PXE 安装的必要条件是要安装的计算机中包含一">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-09-21T14:48:59.580Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/u9WmUs.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/u9WN5R.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCkLzn.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCkjs0.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCkzZT.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCAKFe.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCAaFg.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCAwWj.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCADln.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCAsO0.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCAXfH.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCAx1A.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCKsd1.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCAz6I.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCEM7T.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCe54O.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCevUf.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCm8Vx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/09/22/uCmBqI.png">
+<meta property="og:updated_time" content="2019-09-22T15:34:56.845Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Li Jie&#39;s blog">
-<meta name="twitter:description" content="Who am I?My name is 周李杰，最后一批90后，现居湖北武汉 大三程序狗一枚，现任上海天玑科技股份有限公司武汉分公司运维实习生一职 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 1print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多  个人座右铭：        我想拥有立足于社会的本领，然后尽可能的帮助他人">
+<meta name="twitter:title" content="PXE无人值守安装服务器">
+<meta name="twitter:description" content="关于作者 周李杰，最后一批90后，现居湖北武汉 孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。 兴趣众多，然无一精通。正努力成为一个有趣的人。 12&amp;gt; print(&amp;quot;👆以上是不完整的我&amp;quot;) //请我吃大餐将会了解更多&amp;gt;  PXE什么是PXE？ 严格来说，PXE 并不是一种安装方式，而是一种引导的方式。进行 PXE 安装的必要条件是要安装的计算机中包含一">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/09/22/u9WmUs.jpg">
 
 
 <link rel="icon" href="/img/lijie.jpg">
@@ -151,7 +172,7 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(49)</small></div></li>
+    <li><div class="all active">全部文章<small>(50)</small></div></li>
     
         
             
@@ -179,7 +200,7 @@
     
         
             
-            <li><div data-rel="linux运维">linux运维<small>(4)</small></div>
+            <li><div data-rel="linux运维">linux运维<small>(5)</small></div>
                 
             </li>
             
@@ -203,8 +224,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="49">
-<input type="hidden" id="yelog_site_word_count" value="148.6k">
+<input type="hidden" id="yelog_site_posts_number" value="50">
+<input type="hidden" id="yelog_site_word_count" value="151k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -659,6 +680,14 @@
            data-author="" >
             <span class="post-title" title="Git的分支管理">Git的分支管理</span>
             <span class="post-date" title="2019-09-21 22:45:47">2019/09/21</span>
+        </a>
+        
+        <a  class="linux运维 "
+           href="/2019/09/22/5.PXE无人值守安装服务器/"
+           data-tag="linux运维"
+           data-author="" >
+            <span class="post-title" title="PXE无人值守安装服务器">PXE无人值守安装服务器</span>
+            <span class="post-date" title="2019-09-22 23:35:27">2019/09/22</span>
         </a>
         
     </nav>
