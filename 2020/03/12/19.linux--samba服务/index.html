@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    samba服务 |  Li Jie&#39;s blog
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Li Jie's blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-19.linux--samba服务" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  samba服务
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/12/19.linux--samba服务/" class="article-date">
+  <time datetime="2020-03-12T11:38:40.249Z" itemprop="datePublished">2020-03-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux进阶/">linux进阶</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.3k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">10分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p><strong>关于作者</strong></p>
+<p><strong>周李杰</strong>，最后一批90后，现居<strong>湖北武汉</strong></p>
+<p>孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。</p>
+<p>兴趣众多，然无一精通。正努力成为一个有趣的人。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="samba简介"><a href="#samba简介" class="headerlink" title="samba简介"></a>samba简介</h2><p><a href="https://baike.baidu.com/item/samba/455025?fr=aladdin" target="_blank" rel="noopener">Samba</a>是在Linux和UNIX系统上实现<a href="https://baike.baidu.com/item/SMB协议" target="_blank" rel="noopener">SMB协议</a>的一个免费软件，由服务器及客户端程序构成。<a href="https://baike.baidu.com/item/SMB" target="_blank" rel="noopener">SMB</a>（Server Messages Block，信息服务块）是一种在<a href="https://baike.baidu.com/item/局域网" target="_blank" rel="noopener">局域网</a>上共享文件和打印机的一种<a href="https://baike.baidu.com/item/通信协议/3351624" target="_blank" rel="noopener">通信协议</a>，它为局域网内的不同计算机之间提供文件及打印机等资源的共享服务。SMB协议是客户机/服务器型协议，客户机通过该协议可以访问服务器上的共享文件系统、打印机及其他资源。通过设置“NetBIOS over TCP/IP”使得Samba不但能与局域网络主机分享资源，还能与全世界的电脑分享资源。</p>
+<p>samba监听端口有：</p>
+<p>TCP：139    445</p>
+<p>UDP：137·    138</p>
+<p>tcp端口相对应的服务是smbd服务，其作用是提供对服务器中文件、打印资源的共享访问。<br>udp端口相对应的服务是nmbd服务，其作用是提供基于NetBIOS主机名称的解析。</p>
+<p><strong>samba进程：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">进程</th>
+<th align="center">对应</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">nmbd</td>
+<td align="center">对应netbios</td>
+</tr>
+<tr>
+<td align="center">smbd</td>
+<td align="center">对应cifs协议</td>
+</tr>
+<tr>
+<td align="center">winbindd + ldap</td>
+<td align="center">对应Windows AD活动目录</td>
+</tr>
+</tbody></table>
+<p><strong>samba用户：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">帐号</th>
+<th align="center">密码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">都是系统用户 /etc/passwd</td>
+<td align="center">Samba服务自有密码文件 通过smbpasswd -a USERNAME命令设置</td>
+</tr>
+</tbody></table>
+<h3 id="smbpasswd命令"><a href="#smbpasswd命令" class="headerlink" title="smbpasswd命令"></a>smbpasswd命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-a		添加系统用户为samba用户并为其设置密码</span><br><span class="line">-d		禁用用户账号</span><br><span class="line">-e		启动用户账号</span><br><span class="line">-x		删除用户账号</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@server ~]<span class="comment"># yum -y install samba*</span></span><br><span class="line">[root@server ~]<span class="comment"># useradd 123</span></span><br><span class="line">[root@server ~]<span class="comment"># smbpasswd -a 123</span></span><br><span class="line">New SMB password:</span><br><span class="line">Retype new SMB password:</span><br><span class="line">Added user 123.</span><br><span class="line">[root@server ~]<span class="comment"># smbpasswd -d 123</span></span><br><span class="line">Disabled user 123.</span><br><span class="line">[root@server ~]<span class="comment"># smbpasswd -e 123</span></span><br><span class="line">Enabled user 123.</span><br><span class="line">[root@server ~]<span class="comment"># smbpasswd -x 123</span></span><br><span class="line">Deleted user 123.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Samba安全级别：</strong><br>Samba服务器的安全级别有三个，分别是user，server，domain</p>
+<table>
+<thead>
+<tr>
+<th align="left">安全级别</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">user</td>
+<td align="left">基于本地的验证</td>
+</tr>
+<tr>
+<td align="left">server</td>
+<td align="left">由另一台指定的服务器对用户身份进行认证</td>
+</tr>
+<tr>
+<td align="left">domain</td>
+<td align="left">由域控进行身份验证</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>以前的samba版本支持的安全级别有四个，分别是share，user，server，domain<br>share是用来设置匿名访问的，但现在的版本已经不支持share了，但是还是可以实现匿名访问的（share在7版本中已经不支持）<br>只是配置方式变了</p>
+</blockquote>
+<p><strong>samba配置文件：</strong></p>
+<ul>
+<li>/etc/samba/smb.conf(主配置文件)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">[root@server samba]<span class="comment"># ls</span></span><br><span class="line">lmhosts  smb.conf  smb.conf.example</span><br><span class="line">[root@server samba]<span class="comment"># vim smb.conf</span></span><br><span class="line"><span class="comment"># See smb.conf.example for a more detailed config file or</span></span><br><span class="line"><span class="comment"># read the smb.conf manpage.</span></span><br><span class="line"><span class="comment"># Run 'testparm' to verify the config is correct after</span></span><br><span class="line"><span class="comment"># you modified it.</span></span><br><span class="line"></span><br><span class="line">[global]  <span class="comment"># 全局配置，此处的设置项对整个samba服务器都有效</span></span><br><span class="line">    workgroup = SAMBA	<span class="comment"># 表示设置工作组名称</span></span><br><span class="line">    security = user		<span class="comment"># 表示设置安全级别，其值可为user、server、domain</span></span><br><span class="line">    passdb backend = tdbsam		<span class="comment"># 表示设置共享帐户文件的类型，其值可为tdbsam（tdb数据库文件）、ldapsam（LDAP目录认证）、smbpasswd（兼容旧版本samba密码文件）</span></span><br><span class="line">    printing = cups</span><br><span class="line">    printcap name = cups</span><br><span class="line">    load printers = yes</span><br><span class="line">    cups options = raw</span><br><span class="line"></span><br><span class="line">[homes] <span class="comment"># 宿主目录共享设置，此处用来设置Linux用户的默认共享，对应用户的宿主目录。当用户访问服务器中与自己用户名同名的共享目录时，通过验证后将会自动映射到该用户的宿主目录中</span></span><br><span class="line">    comment = Home Directories	<span class="comment"># 表示设置对应共享目录的注释，说明信息，即文件共享名</span></span><br><span class="line">    valid users = %S, %D%w%S  <span class="comment"># 设置可以访问的用户和组，例如 valid users = root,@root</span></span><br><span class="line">    browseable = No		<span class="comment"># 表示设置共享是否可见</span></span><br><span class="line">    <span class="built_in">read</span> only = No </span><br><span class="line">    inherit acls = Yes</span><br><span class="line"></span><br><span class="line">[printers] <span class="comment"># 打印共享设置</span></span><br><span class="line">    comment = All Printers	 <span class="comment"># 表示设置对应共享目录的注释，说明信息，即文件共享名</span></span><br><span class="line">    path = /var/tmp		<span class="comment"># 表示共享目录的路径</span></span><br><span class="line">    printable = Yes		<span class="comment"># 表示设置是否为打印机</span></span><br><span class="line">    create mask = 0600</span><br><span class="line">    browseable = No		<span class="comment"># 表示设置共享是否可见</span></span><br><span class="line"></span><br><span class="line">[<span class="built_in">print</span>$]</span><br><span class="line">    comment = Printer Drivers	<span class="comment"># 表示设置对应共享目录的注释，说明信息，即文件共享名</span></span><br><span class="line">    path = /var/lib/samba/drivers	<span class="comment"># 表示共享目录的路径</span></span><br><span class="line">    write list = root	<span class="comment"># 表示设置允许写的用户和组，组要用@表示，例如 write list = root,@root</span></span><br><span class="line">    create mask = 0664</span><br><span class="line">    directory mask = 0775</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># server string 表示描述samba服务器</span></span><br><span class="line"><span class="comment"># writable 表示设置目录是否可写</span></span><br><span class="line"><span class="comment"># guest ok 表示设置是否所有人均可访问共享目录</span></span><br><span class="line"><span class="comment"># public 表示设置是否允许匿名用户访问</span></span><br><span class="line"><span class="comment"># hosts deny 设置拒绝哪台主机访问，例如 hosts deny = 192.168.176.111</span></span><br><span class="line"><span class="comment"># hosts allow 设置允许哪台主机访问，例如 hosts allow = 192.168.176.222</span></span><br><span class="line"><span class="comment"># printable 表示设置是否为打印机</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>常用配置文件参数：</strong></p>
+<blockquote>
+<p>可使用testparm命令检测是否有语法错误</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]# testparm</span><br><span class="line">Load smb config files from /etc/samba/smb.conf</span><br><span class="line">rlimit_max: increasing rlimit_max (1024) to minimum Windows limit (16384)</span><br><span class="line">Processing section &quot;[homes]&quot;</span><br><span class="line">Processing section &quot;[printers]&quot;</span><br><span class="line">Processing section &quot;[print$]&quot;</span><br><span class="line">Loaded services file OK.</span><br><span class="line">Server role: ROLE_STANDALONE</span><br><span class="line"></span><br><span class="line">Press enter to see a dump of your service definitions</span><br></pre></td></tr></table></figure>
+
+<h2 id="samba访问"><a href="#samba访问" class="headerlink" title="samba访问"></a>samba访问</h2><blockquote>
+<p>服务器地址：192.168.176.222</p>
+<p>客户端地址：192.168.176.111</p>
+</blockquote>
+<p>服务端：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># yum install samba* -y</span></span><br><span class="line">[root@server ~]<span class="comment"># cd /etc/samba/</span></span><br><span class="line">[root@server samba]<span class="comment"># ls</span></span><br><span class="line">lmhosts  smb.conf  smb.conf.example</span><br><span class="line">[root@server ~]<span class="comment"># cd /</span></span><br><span class="line">[root@server /]<span class="comment"># mkdir samba</span></span><br><span class="line">[root@server /]<span class="comment"># vim /etc/samba/smb.conf</span></span><br><span class="line">[root@server /]<span class="comment"># tail -n 5 /etc/samba/smb.conf</span></span><br><span class="line"></span><br><span class="line">[share]</span><br><span class="line">        path = /samba</span><br><span class="line">        browseable = Yes</span><br><span class="line">        valid users = 123</span><br><span class="line">[root@server /]<span class="comment"># systemctl restart smb nmb</span></span><br><span class="line">[root@server /]<span class="comment"># systemctl stop firewalld</span></span><br><span class="line">[root@server /]<span class="comment"># setenforce 0</span></span><br></pre></td></tr></table></figure>
+
+<p>客户端：</p>
+<ul>
+<li>交互式访问</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># yum install -y samba-client</span></span><br><span class="line">[root@client ~]<span class="comment"># smbclient -L 192.168.176.222 -U 123</span></span><br><span class="line">Enter SAMBA\123<span class="string">'s password:123321</span></span><br><span class="line"><span class="string">Domain=[SEVER] OS=[Windows 6.1] Server=[Samba 4.6.2]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Sharename       Type      Comment</span></span><br><span class="line"><span class="string">        ---------       ----      -------</span></span><br><span class="line"><span class="string">        print$          Disk      Printer Drivers</span></span><br><span class="line"><span class="string">        IPC$            IPC       IPC Service (Samba 4.6.2)</span></span><br><span class="line"><span class="string">        123             Disk      Home Directories</span></span><br><span class="line"><span class="string">Domain=[SEVER] OS=[Windows 6.1] Server=[Samba 4.6.2]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Server               Comment</span></span><br><span class="line"><span class="string">        ---------            -------</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Workgroup            Master</span></span><br><span class="line"><span class="string">        ---------            -------</span></span><br><span class="line"><span class="string">        SAMBA                SEVER</span></span><br><span class="line"><span class="string"># 交互式访问共享资源</span></span><br><span class="line"><span class="string">[root@client ~]# smbclient //192.168.176.222/123 -U 123</span></span><br><span class="line"><span class="string">Enter SAMBA\123'</span>s password:</span><br><span class="line">Domain=[SEVER] OS=[Windows 6.1] Server=[Samba 4.6.2]</span><br><span class="line">smb: \&gt; ls</span><br><span class="line">  .                                   D        0  Wed Jun 26 10:17:59 2019</span><br><span class="line">  ..                                  D        0  Wed Jun 26 10:17:59 2019</span><br><span class="line">  .bash_logout                        H       18  Thu Aug  3 05:11:00 2017</span><br><span class="line">  .bash_profile                       H      193  Thu Aug  3 05:11:00 2017</span><br><span class="line">  .bashrc                             H      231  Thu Aug  3 05:11:00 2017</span><br><span class="line"></span><br><span class="line">                17811456 blocks of size 1024. 16485268 blocks available</span><br><span class="line">smb: \&gt;</span><br><span class="line"><span class="comment"># 可用？来查看当前状态可用哪些命令</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>挂载方式</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@client ~]<span class="comment"># mount -t cifs //192.168.176.222/share /media -o username=123,password=123321</span></span><br><span class="line">[root@client ~]<span class="comment"># vim /etc/fstab</span></span><br><span class="line">[root@client ~]<span class="comment"># tail -n 1 /etc/fstab</span></span><br><span class="line">//192.168.176.222/share /media  cifs defaults,username=123,password=123321 0 0</span><br><span class="line">[root@client ~]<span class="comment"># df -Th</span></span><br><span class="line">文件系统                类型      容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/mapper/rhel-root   xfs        17G  3.8G   14G   22% /</span><br><span class="line">devtmpfs                devtmpfs  977M     0  977M    0% /dev</span><br><span class="line">tmpfs                   tmpfs     993M     0  993M    0% /dev/shm</span><br><span class="line">tmpfs                   tmpfs     993M  9.1M  984M    1% /run</span><br><span class="line">tmpfs                   tmpfs     993M     0  993M    0% /sys/fs/cgroup</span><br><span class="line">/dev/sr0                iso9660   3.8G  3.8G     0  100% /mnt/cdrom</span><br><span class="line">/dev/sda1               xfs      1014M  161M  854M   16% /boot</span><br><span class="line">tmpfs                   tmpfs     199M   12K  199M    1% /run/user/42</span><br><span class="line">tmpfs                   tmpfs     199M     0  199M    0% /run/user/0</span><br><span class="line">//192.168.176.222/share cifs       17G  3.9G   14G   23% /media</span><br></pre></td></tr></table></figure>
+
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><ul>
+<li>用户映射</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 服务端</span></span><br><span class="line">[root@client ~]<span class="comment"># cd /etc/samba/</span></span><br><span class="line">[root@client samba]<span class="comment"># vim smbusers</span></span><br><span class="line">[root@client samba]<span class="comment"># cat smbusers</span></span><br><span class="line">123 = haha</span><br><span class="line">[root@client samba]<span class="comment"># vim /etc/samba/smb.conf</span></span><br><span class="line">[global]</span><br><span class="line">        workgroup = SAMBA</span><br><span class="line">        security = user</span><br><span class="line">        username map = /etc/samba/smbusers <span class="comment"># 找到global，将此行添加上去</span></span><br><span class="line"></span><br><span class="line">[root@client samba]<span class="comment"># cd /</span></span><br><span class="line">[root@client /]<span class="comment"># mkdir camba</span></span><br><span class="line">[root@client /]<span class="comment"># vim /etc/samba/smb.conf</span></span><br><span class="line">[root@client /]<span class="comment"># tail -n 3 /etc/samba/smb.conf</span></span><br><span class="line">        path = /samba</span><br><span class="line">        browseable = Yes</span><br><span class="line">        valid users = 123</span><br><span class="line"></span><br><span class="line">[root@client samba]<span class="comment"># systemctl restart smb nmb</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 客户端</span></span><br><span class="line">[root@client media]<span class="comment"># smbclient -L 192.168.107.144 -U haha</span></span><br><span class="line">Enter SAMBA\haha<span class="string">'s password:</span></span><br><span class="line"><span class="string">Domain=[SEVER] OS=[Windows 6.1] Server=[Samba 4.6.2]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Sharename       Type      Comment</span></span><br><span class="line"><span class="string">        ---------       ----      -------</span></span><br><span class="line"><span class="string">        print$          Disk      Printer Drivers</span></span><br><span class="line"><span class="string">        share           Disk</span></span><br><span class="line"><span class="string">        IPC$            IPC       IPC Service (Samba 4.6.2)</span></span><br><span class="line"><span class="string">        123             Disk      Home Directories</span></span><br><span class="line"><span class="string">Domain=[SEVER] OS=[Windows 6.1] Server=[Samba 4.6.2]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Server               Comment</span></span><br><span class="line"><span class="string">        ---------            -------</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Workgroup            Master</span></span><br><span class="line"><span class="string">        ---------            -------</span></span><br><span class="line"><span class="string">        SAMBA</span></span><br><span class="line"><span class="string">[root@client media]# vim /etc/fstab</span></span><br><span class="line"><span class="string">[root@client media]# tail -n 1 /etc/fstab</span></span><br><span class="line"><span class="string">//192.168.107.144/share /media  cifs    defaults,useradd=haha,password=123321 0 0</span></span><br><span class="line"><span class="string">[root@client media]# df -Th</span></span><br><span class="line"><span class="string">文件系统                类型      容量  已用  可用 已用% 挂载点</span></span><br><span class="line"><span class="string">/dev/mapper/rhel-root   xfs        17G  3.8G   14G   22% /</span></span><br><span class="line"><span class="string">devtmpfs                devtmpfs  977M     0  977M    0% /dev</span></span><br><span class="line"><span class="string">tmpfs                   tmpfs     993M     0  993M    0% /dev/shm</span></span><br><span class="line"><span class="string">tmpfs                   tmpfs     993M  9.1M  984M    1% /run</span></span><br><span class="line"><span class="string">tmpfs                   tmpfs     993M     0  993M    0% /sys/fs/cgroup</span></span><br><span class="line"><span class="string">/dev/sr0                iso9660   3.8G  3.8G     0  100% /mnt/cdrom</span></span><br><span class="line"><span class="string">/dev/sda1               xfs      1014M  161M  854M   16% /boot</span></span><br><span class="line"><span class="string">tmpfs                   tmpfs     199M   12K  199M    1% /run/user/42</span></span><br><span class="line"><span class="string">tmpfs                   tmpfs     199M     0  199M    0% /run/user/0</span></span><br><span class="line"><span class="string">//192.168.107.144/share cifs       17G  3.9G   14G   23% /media</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>匿名访问</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 服务端</span></span><br><span class="line">[root@server ~]<span class="comment"># cd /etc/samba/</span></span><br><span class="line">[root@server samba]<span class="comment"># vim smbusers</span></span><br><span class="line">[root@server samba]<span class="comment"># cat smbusers</span></span><br><span class="line">123 = haha</span><br><span class="line">[root@server samba]<span class="comment"># vim /etc/samba/smb.conf</span></span><br><span class="line">[global]</span><br><span class="line">        workgroup = SAMBA</span><br><span class="line">        security = user</span><br><span class="line">        map to guest = Bad User <span class="comment"># 找到global，将此行添加上去</span></span><br><span class="line"><span class="comment"># 加入下列6行     </span></span><br><span class="line">[share] </span><br><span class="line">        path = /samba</span><br><span class="line">        browseable = Yes</span><br><span class="line">        guest ok = yes</span><br><span class="line">        public = yes</span><br><span class="line">        writable = yes</span><br><span class="line"></span><br><span class="line">[root@server samba]<span class="comment"># systemctl restart smb nmb</span></span><br><span class="line">[root@server samba]<span class="comment"># chmod 777 /samba</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 客户端</span></span><br><span class="line">[root@client media]<span class="comment"># vim /etc/fstab</span></span><br><span class="line">[root@client media]<span class="comment"># tail -n 1 /etc/fstab</span></span><br><span class="line">//192.168.107.144/share /media  cifs    defaults,username=<span class="string">'BadUser'</span> 0 0</span><br><span class="line">[root@client media]<span class="comment"># mount -a</span></span><br><span class="line">\[root@client media]<span class="comment"># df -Th</span></span><br><span class="line">文件系统                类型      容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/mapper/rhel-root   xfs        17G  3.8G   14G   22% /</span><br><span class="line">devtmpfs                devtmpfs  977M     0  977M    0% /dev</span><br><span class="line">tmpfs                   tmpfs     993M     0  993M    0% /dev/shm</span><br><span class="line">tmpfs                   tmpfs     993M  9.1M  984M    1% /run</span><br><span class="line">tmpfs                   tmpfs     993M     0  993M    0% /sys/fs/cgroup</span><br><span class="line">/dev/sr0                iso9660   3.8G  3.8G     0  100% /mnt/cdrom</span><br><span class="line">/dev/sda1               xfs      1014M  161M  854M   16% /boot</span><br><span class="line">tmpfs                   tmpfs     199M   12K  199M    1% /run/user/42</span><br><span class="line">tmpfs                   tmpfs     199M     0  199M    0% /run/user/0</span><br><span class="line">//192.168.107.144/share cifs       17G  3.9G   14G   23% /media</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>1.搭建匿名用户共享服务器<br>2.搭建用户认证共享服务器</p>
+<p>要求：<br>1.不论是匿名用户还是用户认证共享，均要在客户机验证结果<br>2.用户认证共享需要映射系统用户为一个虚拟用户</p>
+
+      
+      <!-- 打赏 -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/chineselijie/2020/03/12/19.linux--samba服务/" data-id="ck7ooyafu001e4su6ojr9scp1"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux进阶/">linux进阶</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/03/12/20.linux--NFS服务/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            NFS服务
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/03/12/18.linux--FTP服务/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">FTP服务</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2020
+        Li Jie
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="Li Jie&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>喜欢就打赏吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+<script src="/js/tocbot.min.js"></script>
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>

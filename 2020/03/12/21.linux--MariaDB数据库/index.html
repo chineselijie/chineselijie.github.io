@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    MariaDB数据库 |  Li Jie&#39;s blog
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Li Jie's blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-21.linux--MariaDB数据库" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  MariaDB数据库
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/12/21.linux--MariaDB数据库/" class="article-date">
+  <time datetime="2020-03-12T11:38:40.252Z" itemprop="datePublished">2020-03-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux进阶/">linux进阶</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3.5k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">16分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p><strong>关于作者</strong></p>
+<p><strong>周李杰</strong>，最后一批90后，现居<strong>湖北武汉</strong></p>
+<p>孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。</p>
+<p>兴趣众多，然无一精通。正努力成为一个有趣的人。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>[toc]</p>
+<h2 id="MariaDB数据库"><a href="#MariaDB数据库" class="headerlink" title="MariaDB数据库"></a>MariaDB数据库</h2><p>​        开发MariaDB数据库的开发人员以前是从事开发MySQL，但是MySQL被Oracle公司收购了，从开源软件转变为闭源软件，之后MySQL的开发者们就离开了公司，再次创建了一个名为MariaDB的数据库，可以说，MariaDB和MySQL在性能上基本保持一致，两者的操作命令也十分相似。从务实的角度来讲，在掌握了MariaDB数据库的命令和基本操作之后，在今后的工作中即使遇到MySQL数据库，也可以快速上手。</p>
+<p><a href="https://baike.baidu.com/item/mariaDB/6466119?fr=aladdin" target="_blank" rel="noopener">MariaDB-百度百科</a></p>
+<p><a href="https://mariadb.org/" target="_blank" rel="noopener">MariaDB</a></p>
+<p>​        当前，谷歌、维基百科等技术领域决定将MySQL数据库上的业务转移到MariaDB数据库，Linux开源系统的领袖<a href="https://www.linuxprobe.com/" target="_blank" rel="noopener">红帽</a>公司也决定在RHEL 7、<a href="https://www.linuxprobe.com/" target="_blank" rel="noopener">CentOS</a> 7以及最新的Fedora系统中，将MariaDB作为默认的数据库管理系统，而且<a href="https://www.linuxprobe.com/" target="_blank" rel="noopener">红帽</a>公司更是首次将数据库知识加入到了<a href="https://www.linuxprobe.com/" target="_blank" rel="noopener">RHCE</a>认证的考试内容中。随后，还有数十个常见的Linux系统（如openSUSE、Slackware等）也作出了同样的表态。</p>
+<p><img src="https://s2.ax1x.com/2019/07/01/Z819C8.png" alt></p>
+<h2 id="初始化MariaDB服务"><a href="#初始化MariaDB服务" class="headerlink" title="初始化MariaDB服务"></a>初始化MariaDB服务</h2><p>​        相较于MySQL，MariaDB数据库管理系统有了很多新鲜的扩展特性，例如对微秒级别的支持、线程池、子查询优化、进程报告等。在配置妥当Yum软件仓库后，即可安装部署MariaDB数据库主程序及服务端程序了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># tail -n 1 /etc/fstab</span></span><br><span class="line">/dev/cdrom      /mnt/cdrom      iso9660                 defaults        0 0</span><br><span class="line">[root@server222 ~]<span class="comment"># mount -a</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># yum install -y mariadb mariadb-server</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装完成后加入到开机启动项</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># systemctl restart mariadb</span></span><br><span class="line">[root@server222 ~]<span class="comment"># systemctl enable mariadb</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>初始化5步骤</strong></p>
+<ol>
+<li>设置root管理员在数据库中的密码值（注意，该密码并非root管理员在系统中的密码，这里的密码值默认应该为空，可直接按回车键）。</li>
+<li>设置root管理员在数据库中的专有密码。</li>
+<li>随后删除匿名账户，并使用root管理员从远程登录数据库，以确保数据库上运行的业务的安全性。</li>
+<li>删除默认的测试数据库，取消测试数据库的一系列访问权限。</li>
+<li>刷新授权列表，让初始化的设定立即生效。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># mysql_secure_installation</span></span><br><span class="line"></span><br><span class="line">NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB</span><br><span class="line">      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!</span><br><span class="line"></span><br><span class="line">In order to <span class="built_in">log</span> into MariaDB to secure it, we<span class="string">'ll need the current</span></span><br><span class="line"><span class="string">password for the root user.  If you'</span>ve just installed MariaDB, and</span><br><span class="line">you haven<span class="string">'t set the root password yet, the password will be blank,</span></span><br><span class="line"><span class="string">so you should just press enter here.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Enter current password for root (enter for none): #当前数据库密码为空，直接回车</span></span><br><span class="line"><span class="string">OK, successfully used password, moving on...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Setting the root password ensures that nobody can log into the MariaDB</span></span><br><span class="line"><span class="string">root user without the proper authorisation.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Set root password? [Y/n] y</span></span><br><span class="line"><span class="string">New password: # 设置创建数据库管理员密码</span></span><br><span class="line"><span class="string">Re-enter new password: #再次输入密码</span></span><br><span class="line"><span class="string">Password updated successfully!</span></span><br><span class="line"><span class="string">Reloading privilege tables..</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">By default, a MariaDB installation has an anonymous user, allowing anyone</span></span><br><span class="line"><span class="string">to log into MariaDB without having to have a user account created for</span></span><br><span class="line"><span class="string">them.  This is intended only for testing, and to make the installation</span></span><br><span class="line"><span class="string">go a bit smoother.  You should remove them before moving into a</span></span><br><span class="line"><span class="string">production environment.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Remove anonymous users? [Y/n] y #删除匿名账户</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Normally, root should only be allowed to connect from '</span>localhost<span class="string">'.  This</span></span><br><span class="line"><span class="string">ensures that someone cannot guess at the root password from the network.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Disallow root login remotely? [Y/n] y # 禁止root管理员从远程登陆</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">By default, MariaDB comes with a database named '</span><span class="built_in">test</span><span class="string">' that anyone can</span></span><br><span class="line"><span class="string">access.  This is also intended only for testing, and should be removed</span></span><br><span class="line"><span class="string">before moving into a production environment.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Remove test database and access to it? [Y/n] y #删除text数据库并取消对它的访问权限</span></span><br><span class="line"><span class="string"> - Dropping test database...</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"> - Removing privileges on test database...</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Reloading the privilege tables will ensure that all changes made so far</span></span><br><span class="line"><span class="string">will take effect immediately.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Reload privilege tables now? [Y/n] y # 刷新授权表，让初始化后的设定立即生效</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Cleaning up...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">All done!  If you'</span>ve completed all of the above steps, your MariaDB</span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks <span class="keyword">for</span> using MariaDB!</span><br><span class="line">[root@server222 ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>之后我们还要设置防火墙，使其放行对数据库服务程序的访问请求，数据库服务程序默认会占用3306端口，在防火墙策略中服务名称统一叫作mysql</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># firewall-cmd --permanent --add-service=mysql</span></span><br><span class="line">success</span><br><span class="line">[root@server222 ~]<span class="comment"># firewall-cmd --reload</span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<p>最后，我们可以开始首次登陆MariaDB数据库</p>
+<p>-u  指定哪一位用户登陆</p>
+<p>-p 验证该用户在数据库中的密码值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter password: <span class="comment">#此处输入您刚才设置的密码</span></span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 12</span><br><span class="line">Server version: 5.5.56-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在登陆MariaDB数据库执行命令时候，每一次都要在命令结尾以分号（;）结尾</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; SHOW databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">+--------------------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用数据库命令更改密码"><a href="#使用数据库命令更改密码" class="headerlink" title="使用数据库命令更改密码"></a>使用数据库命令更改密码</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; SET password = PASSWORD(<span class="string">'abccba'</span>);</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line">MariaDB [(none)]&gt; <span class="built_in">exit</span></span><br><span class="line">Bye</span><br><span class="line">[root@server222 ~]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter password:</span><br><span class="line">ERROR 1045 (28000): Access denied <span class="keyword">for</span> user <span class="string">'root'</span>@<span class="string">'localhost'</span> (using password: YES)</span><br><span class="line">[root@server222 ~]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter password:</span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br></pre></td></tr></table></figure>
+
+<h2 id="管理用户以及授权"><a href="#管理用户以及授权" class="headerlink" title="管理用户以及授权"></a>管理用户以及授权</h2><h4 id="创建专用的数据库管理账户"><a href="#创建专用的数据库管理账户" class="headerlink" title="创建专用的数据库管理账户"></a>创建专用的数据库管理账户</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [mysql]&gt; CREATE USER abc@localhost IDENTIFIED BY <span class="string">'123321'</span>;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询账户"><a href="#查询账户" class="headerlink" title="查询账户"></a>查询账户</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; use mysql</span><br><span class="line">Reading table information <span class="keyword">for</span> completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">MariaDB [mysql]&gt; SELECT HOST,USER,PASSWORD FROM user WHERE USER=<span class="string">"abc"</span>;</span><br><span class="line">+-----------+------+-------------------------------------------+</span><br><span class="line">| HOST      | USER | PASSWORD                                  |</span><br><span class="line">+-----------+------+-------------------------------------------+</span><br><span class="line">| localhost | abc  | *437F1809645E0A92DAB553503D2FE21DB91270FD |</span><br><span class="line">+-----------+------+-------------------------------------------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="授权：grant"><a href="#授权：grant" class="headerlink" title="授权：grant"></a>授权：grant</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">GRANT 权限 ON 数据库.表单名称 TO 用户名@主机名</td>
+<td align="center">对某个特定数据库中的特定表单给予授权</td>
+</tr>
+<tr>
+<td align="center">GRANT 权限 ON 数据库.* TO 用户名@主机名</td>
+<td align="center">对某个特定数据库中的所有表单给予授权</td>
+</tr>
+<tr>
+<td align="center">GRANT 权限 ON <em>.</em> TO 用户名@主机名</td>
+<td align="center">对所有数据库及所有表单给予授权</td>
+</tr>
+<tr>
+<td align="center">GRANT 权限1,权限2 ON 数据库.* TO 用户名@主机名</td>
+<td align="center">对某个数据库中的所有表单给予多个授权</td>
+</tr>
+<tr>
+<td align="center">GRANT ALL PRIVILEGES ON <em>.</em> TO 用户名@主机名</td>
+<td align="center">对所有数据库及所有表单给予全部授权（需谨慎操作）</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; use mysql;</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line">MariaDB [mysql]&gt; GRANT SELECT,UPDATE,DELETE,INSERT ON mysql.user TO abc@localhost;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [mysql]&gt; SHOW GRANTS FOR abc@localhost;                                 +------------------------------------------------------------------------------------------------------------+</span><br><span class="line">| Grants for abc@localhost                                                                                   |</span><br><span class="line">+------------------------------------------------------------------------------------------------------------+</span><br><span class="line">| GRANT USAGE ON *.* TO &apos;abc&apos;@&apos;localhost&apos; IDENTIFIED BY PASSWORD &apos;*437F1809645E0A92DAB553503D2FE21DB91270FD&apos; |</span><br><span class="line">| GRANT SELECT, INSERT, UPDATE, DELETE ON `mysql`.`user` TO &apos;abc&apos;@&apos;localhost&apos;                                |</span><br><span class="line">+------------------------------------------------------------------------------------------------------------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>经过一系列的操作，我们再切入到abc用户</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># mysql -u abc -p</span></span><br><span class="line">Enter password:</span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 22</span><br><span class="line">Server version: 5.5.56-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; show database;</span><br><span class="line">ERROR 1064 (42000): You have an error <span class="keyword">in</span> your SQL syntax; check the manual that corresponds to your MariaDB server version <span class="keyword">for</span> the right syntax to use near <span class="string">'database'</span> at line 1</span><br><span class="line">MariaDB [(none)]&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">+--------------------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; use mysql</span><br><span class="line">Reading table information <span class="keyword">for</span> completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line">MariaDB [mysql]&gt; show tables;</span><br><span class="line">+-----------------+</span><br><span class="line">| Tables_in_mysql |</span><br><span class="line">+-----------------+</span><br><span class="line">| user            |</span><br><span class="line">+-----------------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="收回权限命令：revoke"><a href="#收回权限命令：revoke" class="headerlink" title="收回权限命令：revoke"></a>收回权限命令：revoke</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter password:</span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 24</span><br><span class="line">Server version: 5.5.56-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; use mysql;</span><br><span class="line">Reading table information <span class="keyword">for</span> completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line">MariaDB [mysql]&gt; REVOKE SE</span><br><span class="line">SECOND              SELECT              SERIALIZABLE</span><br><span class="line">SECOND_MICROSECOND  SENSITIVE           SESSION</span><br><span class="line">SECURITY            SEPARATOR           SESSION_USER</span><br><span class="line">SEC_TO_TIME         SERIAL              SET</span><br><span class="line">MariaDB [mysql]&gt; REVOKE SELECT</span><br><span class="line">Display all 1116 possibilities? (y or n)</span><br><span class="line">MariaDB [mysql]&gt; REVOKE SELECT,UPDATE,DELETE,INSERT ON mysql.user FROM abc@localhost;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [mysql]&gt; SHOW GRANTS FOR abc@localhost;</span><br><span class="line">+------------------------------------------------------------------------------------------------------------+</span><br><span class="line">| Grants <span class="keyword">for</span> abc@localhost                                                                                   |</span><br><span class="line">+------------------------------------------------------------------------------------------------------------+</span><br><span class="line">| GRANT USAGE ON *.* TO <span class="string">'abc'</span>@<span class="string">'localhost'</span> IDENTIFIED BY PASSWORD <span class="string">'*437F1809645E0A92DAB553503D2FE21DB91270FD'</span> |</span><br><span class="line">+------------------------------------------------------------------------------------------------------------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建数据库与表单"><a href="#创建数据库与表单" class="headerlink" title="创建数据库与表单"></a>创建数据库与表单</h2><h4 id="自定义数据库表结构"><a href="#自定义数据库表结构" class="headerlink" title="自定义数据库表结构"></a>自定义数据库表结构</h4><table>
+<thead>
+<tr>
+<th align="center">用法</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">CREATE database 数据库名称。</td>
+<td align="center">创建新的数据库</td>
+</tr>
+<tr>
+<td align="center">DESCRIBE 表单名称;</td>
+<td align="center">描述表单</td>
+</tr>
+<tr>
+<td align="center">UPDATE 表单名称 SET attribute=新值 WHERE attribute &gt; 原始值;</td>
+<td align="center">更新表单中的数据</td>
+</tr>
+<tr>
+<td align="center">USE 数据库名称;</td>
+<td align="center">指定使用的数据库</td>
+</tr>
+<tr>
+<td align="center">SHOW databases;</td>
+<td align="center">显示当前已有的数据库</td>
+</tr>
+<tr>
+<td align="center">SHOW tables;</td>
+<td align="center">显示当前数据库中的表单</td>
+</tr>
+<tr>
+<td align="center">SELECT * FROM 表单名称;</td>
+<td align="center">从表单中选中某个记录值</td>
+</tr>
+<tr>
+<td align="center">DELETE FROM 表单名 WHERE attribute=值;</td>
+<td align="center">从表单中删除某个记录值</td>
+</tr>
+</tbody></table>
+<p>现在我们创建一个名为tom的数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; CREATE DATABASE tom;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; SHOW databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| tom                |</span><br><span class="line">+--------------------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>想要创建数据表单，首先需要切换到指定的数据库中，我们现在在tom数据库中创建表单mybook。然后进行表单的初始化，即定义存储数据内容的结构。我们分别定义3个字段项，其中，长度为15个字符的字符型字段name用来存放图书名称，整型字段price和pages分别存储图书的价格和页数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; use tom;</span><br><span class="line">Database changed</span><br><span class="line">MariaDB [tom]&gt; CREATE TABLE mybook (name char(15),price int,pages int);</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [tom]&gt; DESCRIBE mybook;</span><br><span class="line">+-------+----------+------+-----+---------+-------+</span><br><span class="line">| Field | Type     | Null | Key | Default | Extra |</span><br><span class="line">+-------+----------+------+-----+---------+-------+</span><br><span class="line">| name  | char(15) | YES  |     | NULL    |       |</span><br><span class="line">| price | int(11)  | YES  |     | NULL    |       |</span><br><span class="line">| pages | int(11)  | YES  |     | NULL    |       |</span><br><span class="line">+-------+----------+------+-----+---------+-------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [tom]&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="管理表单及数据"><a href="#管理表单及数据" class="headerlink" title="管理表单及数据"></a>管理表单及数据</h2><p>​        接下来向mybook数据表单中插一条图书信息。为此需要使用INSERT命令，并在命令中写清表单名称以及对应的字段项。执行该命令之后即可完成图书写入信息。下面我们使用该命令插入一条图书信息，其中书名为gelintonghua，价格和页数分别是60元和518页。在命令执行后也就意味着图书信息已经成功写入到数据表单中，然后就可以查询表单中的内容了。我们在使用select命令查询表单内容时，需要加上想要查询的字段。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [tom]&gt; INSERT INTO mybook(name,price,pages) VALUES(<span class="string">'gelintonghua'</span>,<span class="string">'60'</span>, <span class="string">'518'</span>);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>如果想查看表单中的所有内容，则可以使用星号（*）通配符来显示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [tom]&gt; select * from mybook;</span><br><span class="line">+--------------+-------+-------+</span><br><span class="line">| name         | price | pages |</span><br><span class="line">+--------------+-------+-------+</span><br><span class="line">| gelintonghua |    60 |   518 |</span><br><span class="line">+--------------+-------+-------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>更改图书的价格</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [tom]&gt; UPDATE mybook SET price=55 ;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br><span class="line"></span><br><span class="line">MariaDB [tom]&gt; SELECT name,price FROM mybook;</span><br><span class="line">+--------------+-------+</span><br><span class="line">| name         | price |</span><br><span class="line">+--------------+-------+</span><br><span class="line">| gelintonghua |    55 |</span><br><span class="line">+--------------+-------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [tom]&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除命令：delete"><a href="#删除命令：delete" class="headerlink" title="删除命令：delete"></a>删除命令：delete</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [tom]&gt; DELETE FROM mybook;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [tom]&gt; SELECT * FROM mybook;</span><br><span class="line">Empty <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询大于某一个数值的信息"><a href="#查询大于某一个数值的信息" class="headerlink" title="查询大于某一个数值的信息"></a>查询大于某一个数值的信息</h4><p>首先我们插入四条数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [tom]&gt; INSERT INTO mybook(name,price,pages) VALUES(<span class="string">'123'</span>,<span class="string">'30'</span>,<span class="string">'518'</span>);   Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [tom]&gt; INSERT INTO mybook(name,price,pages) VALUES(<span class="string">'456'</span>,<span class="string">'50'</span>,<span class="string">'518'</span>);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [tom]&gt; INSERT INTO mybook(name,price,pages) VALUES(<span class="string">'789'</span>,<span class="string">'80'</span>,<span class="string">'518'</span>);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [tom]&gt; INSERT INTO mybook(name,price,pages) VALUES(<span class="string">'101'</span>,<span class="string">'100'</span>,<span class="string">'518'</span>);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="命令where"><a href="#命令where" class="headerlink" title="命令where"></a>命令where</h4><table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">=</td>
+<td align="center">相等</td>
+</tr>
+<tr>
+<td align="center">&lt;&gt;或!=</td>
+<td align="center">不相等</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于</td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">小于</td>
+</tr>
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">大于或等于</td>
+</tr>
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">小于或等于</td>
+</tr>
+<tr>
+<td align="center">BETWEEN</td>
+<td align="center">在某个范围内</td>
+</tr>
+<tr>
+<td align="center">LIKE</td>
+<td align="center">搜索一个例子</td>
+</tr>
+<tr>
+<td align="center">IN</td>
+<td align="center">在列中搜索多个值</td>
+</tr>
+</tbody></table>
+<p><strong>在mybook表单中查找出价格大于75元或价格不等于80元的图书</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [tom]&gt; SELECT * FROM mybook WHERE price&gt;75;</span><br><span class="line">+------+-------+-------+</span><br><span class="line">| name | price | pages |</span><br><span class="line">+------+-------+-------+</span><br><span class="line">| 789  |    80 |   518 |</span><br><span class="line">| 101  |   100 |   518 |</span><br><span class="line">+------+-------+-------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [tom]&gt;  SELECT * FROM mybook WHERE price!=80;</span><br><span class="line">+------+-------+-------+</span><br><span class="line">| name | price | pages |</span><br><span class="line">+------+-------+-------+</span><br><span class="line">| 123  |    30 |   518 |</span><br><span class="line">| 456  |    50 |   518 |</span><br><span class="line">| 101  |   100 |   518 |</span><br><span class="line">+------+-------+-------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库的备份及恢复"><a href="#数据库的备份及恢复" class="headerlink" title="数据库的备份及恢复"></a>数据库的备份及恢复</h2><h4 id="命令mysqldump"><a href="#命令mysqldump" class="headerlink" title="命令mysqldump"></a>命令mysqldump</h4><p>​        mysqldump命令用于备份数据库数据，格式为“mysqldump [参数] [数据库名称]”。其中参数与mysql命令大致相同，-u参数用于定义登录数据库的账户名称，-p参数代表密码提示符。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [(none)]&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">+--------------------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; <span class="built_in">exit</span></span><br><span class="line">Bye</span><br><span class="line">[root@server222 ~]<span class="comment"># mysqldump -u root -p mysql &gt; /root/mysql.dump</span></span><br><span class="line">Enter password:</span><br><span class="line">[root@server222 ~]<span class="comment"># ls</span></span><br><span class="line">anaconda-ks.cfg       mysql.dump  模板  图片  下载  桌面</span><br><span class="line">initial-setup-ks.cfg  公共        视频  文档  音乐</span><br></pre></td></tr></table></figure>
+
+<p><strong>进入MariaDB数据库管理系统，删除mysql数据库</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter password:</span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 45</span><br><span class="line">Server version: 5.5.56-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; DROP DATABASE mysql;</span><br><span class="line">Query OK, 24 rows affected, 2 warnings (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; SHOW databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| performance_schema |</span><br><span class="line">+--------------------+</span><br><span class="line">2 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; CREATE DATABASE mysql;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p><strong>恢复数据库mysql</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># mysql -u root -p mysql &gt; /root/mysql.dump</span></span><br><span class="line">Enter password:</span><br><span class="line">[root@server222 ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>1.搭建mysql服务<br>2.创建一个以你名字为名的数据库，并创建一张表student，该表包含三个字段（id，name，age），表结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; desc student;</span><br><span class="line">+-------+--------------+------+-----+---------+-------+</span><br><span class="line">| Field | Type         | Null | Key | Default | Extra |</span><br><span class="line">+-------+--------------+------+-----+---------+-------+</span><br><span class="line">| id    | int(11)      | NO   |     | NULL    |       |</span><br><span class="line">| name  | varchar(100) | NO   |     | NULL    |       |</span><br><span class="line">| age   | tinyint(4)   | YES  |     | NULL    |       |</span><br><span class="line">+-------+--------------+------+-----+---------+-------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>3.查看下该新建的表有无内容（用select语句）<br>4.往新建的student表中插入数据（用insert语句），结果应如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">+----+-------------+------+</span><br><span class="line">| id | name        | age  |</span><br><span class="line">+----+-------------+------+</span><br><span class="line">|  1 | tom         |   20 |</span><br><span class="line">|  2 | jerry       |   23 |</span><br><span class="line">|  3 | wangqing    |   25 |</span><br><span class="line">|  4 | sean        |   28 |</span><br><span class="line">|  5 | zhangshan   |   26 |</span><br><span class="line">|  6 | zhangshan   |   20 |</span><br><span class="line">|  7 | lisi        | NULL |</span><br><span class="line">|  8 | chenshuo    |   10 |</span><br><span class="line">|  9 | wangwu      |    3 |</span><br><span class="line">| 10 | qiuyi       |   15 |</span><br><span class="line">| 11 | qiuxiaotian |   20 |</span><br><span class="line">+----+-------------+------+</span><br></pre></td></tr></table></figure>
+
+<p>5.修改lisi的年龄为50<br>6.以age字段降序排序<br>7.查询student表中年龄最小的3位同学<br>8.查询student表中年龄最大的4位同学<br>9.查询student表中名字叫zhangshan的记录<br>10.查询student表中名字叫zhangshan且年龄大于20岁的记录<br>11.查询student表中年龄在23到30之间的记录<br>12.修改wangwu的年龄为100<br>13.删除student中名字叫zhangshan且年龄小于等于20的记录</p>
+
+      
+      <!-- 打赏 -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/chineselijie/2020/03/12/21.linux--MariaDB数据库/" data-id="ck7ooyak9002y4su66bkm5oa4"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux进阶/">linux进阶</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/03/12/22.linux--httpd服务/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            httpd服务
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/03/12/20.linux--NFS服务/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">NFS服务</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2020
+        Li Jie
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="Li Jie&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>喜欢就打赏吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+<script src="/js/tocbot.min.js"></script>
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>

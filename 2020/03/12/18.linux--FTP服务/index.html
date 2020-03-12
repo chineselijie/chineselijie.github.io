@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    FTP服务 |  Li Jie&#39;s blog
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Li Jie's blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-18.linux--FTP服务" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  FTP服务
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/12/18.linux--FTP服务/" class="article-date">
+  <time datetime="2020-03-12T11:38:40.247Z" itemprop="datePublished">2020-03-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux进阶/">linux进阶</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3.3k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">14分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p><strong>关于作者</strong></p>
+<p><strong>周李杰</strong>，最后一批90后，现居<strong>湖北武汉</strong></p>
+<p>孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。</p>
+<p>兴趣众多，然无一精通。正努力成为一个有趣的人。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>[TOC]</p>
+<h2 id="FTP简介"><a href="#FTP简介" class="headerlink" title="FTP简介"></a>FTP简介</h2><p>网络文件共享服务主流的主要有三种，分别是<strong>ftp</strong>、<strong>nfs</strong>、<strong>samba</strong></p>
+<p><strong>FTP</strong>:<a href="https://baike.baidu.com/item/ftp/13839?fr=aladdin" target="_blank" rel="noopener"><strong>文件传输协议</strong>（英文：<strong>F</strong>ile <strong>T</strong>ransfer <strong>P</strong>rotocol，缩写：<strong>FTP</strong>）</a>是用于在<a href="https://baike.baidu.com/item/网络" target="_blank" rel="noopener">网络</a>上进行文件传输的一套标准协议，使用客户/服务器模式。它属于<a href="https://baike.baidu.com/item/网络传输协议" target="_blank" rel="noopener">网络传输协议</a>的<a href="https://baike.baidu.com/item/应用层" target="_blank" rel="noopener">应用层</a>。文件传送（file transfer）和文件访问（file access）之间的区别在于：前者由FTP提供，后者由如NFS等应用系统提供。</p>
+<p>FTP是一个8位的客户端-服务器协议，能操作任何类型的文件而不需要进一步处理，就像MIME或Unicode一样。但是，FTP有着极高的延时，这意味着，从开始请求到第一次接收需求数据之间的时间，会非常长；并且不时的必须执行一些冗长的登录进程。</p>
+<p>在使用FTP时候，用户经常会遇到两种概念：</p>
+<ul>
+<li>上传</li>
+</ul>
+<blockquote>
+<p>将自己电脑上的文件拷贝到远端主机上</p>
+</blockquote>
+<ul>
+<li>下载</li>
+</ul>
+<blockquote>
+<p>从远端主机拷贝文件到自己的电脑上面</p>
+</blockquote>
+<h2 id="FTP架构"><a href="#FTP架构" class="headerlink" title="FTP架构"></a>FTP架构</h2><p>FTP工作于应用层，它监听tcp的21号端口，是一种c/s架构的应用程序。其有多种客户端和服务端的应用程序</p>
+<ul>
+<li><p>客户端工具</p>
+<ul>
+<li>ftp</li>
+<li>liftp，lftpget</li>
+<li>wget，curl</li>
+<li>filezilla</li>
+<li>gftp(linux GUI)</li>
+<li>商业软件(flashftp,cuteftp)</li>
+</ul>
+</li>
+<li><p>服务端软件</p>
+<ul>
+<li>wu-ftpd</li>
+<li>proftpd(提供web接口的一种ftp服务端程序)</li>
+<li>pureftp</li>
+<li>vsftpd(Very Secure)</li>
+<li>ServU(windows平台的一种强大ftp服务端程序)</li>
+</ul>
+</li>
+</ul>
+<h2 id="FTP数据连接模式"><a href="#FTP数据连接模式" class="headerlink" title="FTP数据连接模式"></a>FTP数据连接模式</h2><p>ftp有2种数据连接模式：</p>
+<ul>
+<li>命令连接：是指文件管理类命令，始终在线的持久性连接，直到用户退出登录为止</li>
+<li>数据连接：是指数据传输，按需创建及关闭的连接<ul>
+<li>数据传输格式：<ul>
+<li>文件传输</li>
+<li>二进制传输</li>
+</ul>
+</li>
+<li>数据传输模式：<ul>
+<li>主动模式：由服务器端创建数据连接</li>
+<li>被动模式：由客户端创建数据连接</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>主动模式下</p>
+<ul>
+<li>命令连接：</li>
+</ul>
+<p>客户端以大于1023的随机端口去连接ftp服务端的21号端口</p>
+<p>1024 –&gt; 21 建立命令连接</p>
+<ul>
+<li>数据连接：</li>
+</ul>
+<p>服务端以自己的20号端口去连接客户端建立命令连接时的端口+1的端口号</p>
+<p>20 –&gt; 1025 建立数据连接 </p>
+</li>
+<li><p>被动模式下</p>
+<ul>
+<li>命令连接</li>
+</ul>
+<p>客户端以一个随机端口(1110)来连接服务器端的21号端口，之后服务器会返回一个告知客户端连接服务端的哪个端口号</p>
+<p>1110 –&gt; 21 (告知客户端连接哪一个端口)</p>
+<ul>
+<li>数据连接</li>
+</ul>
+<p>客户端以创建命令连接的端口+1 (1110 + 1)的端口号去连接服务器端通过命令连接告知自己的一个随机端口号来创建数据连接</p>
+<p>1111 –&gt; （服务端告知自己的端口）</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>注意：</strong></p>
+<p>主动模式有个弊端，因为客户端的端口是随机的，如果客户端开了防火墙，那么服务器端去连接客户端创建数据连接时就可能会被拒绝。</p>
+</blockquote>
+<h2 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h2><p>FTP的用户主要有三种：</p>
+<ul>
+<li>虚拟用户：仅用于访问某特定服务中的资源</li>
+<li>系统用户：可以登录系统的真实用户</li>
+<li>匿名用户</li>
+</ul>
+<h2 id="vsftpd"><a href="#vsftpd" class="headerlink" title="vsftpd"></a>vsftpd</h2><h3 id="vsftpd安装"><a href="#vsftpd安装" class="headerlink" title="vsftpd安装"></a>vsftpd安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># yum install -y vsftpd</span></span><br><span class="line">........</span><br><span class="line">已安装:</span><br><span class="line">  vsftpd.x86_64 0:3.0.2-22.el7</span><br><span class="line"></span><br><span class="line">完毕！</span><br></pre></td></tr></table></figure>
+
+<h3 id="vsftpd配置"><a href="#vsftpd配置" class="headerlink" title="vsftpd配置"></a>vsftpd配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件目录</span></span><br><span class="line">[root@client111 ~]<span class="comment"># ls -ld /etc/vsftpd</span></span><br><span class="line">drwxr-xr-x. 2 root root 88 6月  27 15:45 /etc/vsftpd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主配置文件</span></span><br><span class="line">[root@client111 ~]<span class="comment"># ls -l /etc/vsftpd/vsftpd.conf</span></span><br><span class="line">-rw-------. 1 root root 5030 8月   3 2017 /etc/vsftpd/vsftpd.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># vsftpd用户认证配置文件</span></span><br><span class="line">[root@client111 ~]<span class="comment"># ls -l /etc/pam.d/vsftpd</span></span><br><span class="line">-rw-r--r--. 1 root root 335 8月   3 2017 /etc/pam.d/vsftpd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 匿名用户（映射为ftp用户）的共享资源位置是/var/ftp</span></span><br><span class="line"><span class="comment"># 系统用户通过ftp访问的资源位置为用户的家目录</span></span><br><span class="line"><span class="comment"># 虚拟用户通过ftp访问的资源位置为给虚拟用户指定的映射成为的系统用户的家目录</span></span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable=YES				启用匿名用户登陆</span><br><span class="line">anon_upload_enable=YES			允许匿名用户上传</span><br><span class="line">anon_mkdir_write_enable=YES		允许匿名用户创建目录，但是不能删除</span><br><span class="line">anon_other_write_enable=YES		允许匿名用户创建和删除目录</span><br><span class="line">local_enable=YES					启用本地用户登陆</span><br><span class="line">write_enable=YES					允许本地用户有写权限</span><br><span class="line">local_umask=022					通过FTP上传文件的默认遮罩码</span><br><span class="line">chroot_local_user=YES				禁锢所有FTP本地用户只能在其家目录中</span><br><span class="line">chroot_list_enable=YES			开启禁锢文件列表；需要与chroot_list_file参数一起使用</span><br><span class="line">chroot_list_file=/etc/vsftp/chroot_list	 指定禁锢列表文件路径；在此文件里面的用户将被禁锢在其家目录中</span><br><span class="line">allow_writeable_chroot=YES		允许被禁锢的用户家目录有写权限</span><br><span class="line">xferlog_enable=YES				是否启用传输日志，记录FTP传输过程</span><br><span class="line">xferlog_std_format=YES			传输日志是否使用标准格式</span><br><span class="line">xferlog_file=/var/<span class="built_in">log</span>/xferlog		指定传输日志存储的位置</span><br><span class="line">chown_uploads=YES					是否启用改变上传文件属性的功能</span><br><span class="line">chown_username=whoever			指定要将上传的文件的属主改为哪个用户，此用户必须在系统中存在</span><br><span class="line">pam_service_name=vsftpd			指定vsftp使用/etc/pam.d下的哪个pam配置文件进行用户认证</span><br><span class="line">userlist_enable=YES				是否启用控制用户登陆的列表文件：默认为/etc/vsftpd/user_list文件</span><br><span class="line">userlist_deny=YES					是否拒绝userlist指定的列表文件中存在的用户登陆FTP</span><br><span class="line">max_cients=`<span class="comment">#`					最大并发连接数</span></span><br><span class="line">max_per_ip=`<span class="comment">#`					每个IP可同时发起的并发请求数</span></span><br><span class="line">anon_max_rate						匿名用户的最大传输速率，单位是‘字节/秒’</span><br><span class="line">local_max_rate					本地用户的最大传输速率，单位是‘字节/秒’</span><br><span class="line">dirmessage_enable=YES				启用某目录下的.message描述信息</span><br><span class="line"><span class="comment">#假设有一个目录，在此目录下面创建一个名为.message的文件，在此文件内写入一些描述信息之后切换出目录，目录会自动显示.message文件中的内容</span></span><br><span class="line"></span><br><span class="line">message_file						设置访问一个目录时获得的目录信息文件的文件名，默认是.message</span><br><span class="line">idle_session_timeout=600			设置默认的断开不活跃session的时间</span><br><span class="line">data_connection_timeout=120		设置数据传输超时时间</span><br><span class="line">ftpd_banner=<span class="string">"Welcome to chenlf FTP service."</span>	定制欢迎信息，登陆FTP时自动显示</span><br></pre></td></tr></table></figure>
+
+<h3 id="vsftpd虚拟用户配置"><a href="#vsftpd虚拟用户配置" class="headerlink" title="vsftpd虚拟用户配置"></a>vsftpd虚拟用户配置</h3><ul>
+<li><p>虚拟用户的配置：</p>
+<ul>
+<li>所有的虚拟用户会被统一映射为一个指定的系统账号，访问的共享位置即为此系统账号的家目录</li>
+<li>各虚拟用户可被赋予不同的访问权限，通过匿名用户的权限控制参数进行指定</li>
+<li>虚拟用户账号的存储方式：<ul>
+<li>文件：编辑文件，此文件需要为<a href="https://baike.baidu.com/item/Hash/390310" target="_blank" rel="noopener">编码hash格式</a>。<ul>
+<li>文件奇数行为用户</li>
+<li>偶数行为密码</li>
+</ul>
+</li>
+<li>关系型数据库的表中：<ul>
+<li>通过即时查询数据库完成用户认证</li>
+<li>mysql库：pam要依赖于pam_mysql软件，可以通过epel源yum安装</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>vsftpd虚拟用户的配置步骤：</p>
+<ul>
+<li>安装依赖的程序</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># cd /etc/yum.repos.d/</span></span><br><span class="line">[root@client111 yum.repos.d]<span class="comment"># wget http://mirrors.163.com/.help/CentOS7-Base-163.repo</span></span><br><span class="line">[root@client111 yum.repos.d]<span class="comment"># vim CentOS7-Base-163.repo</span></span><br><span class="line">[root@client111 yum.repos.d]<span class="comment"># tail -n 5 CentOS7-Base-163.repo</span></span><br><span class="line">name=CentOS-<span class="variable">$releasever</span> - Plus - 163.com</span><br><span class="line">baseurl=http://mirrors.163.com/centos/<span class="variable">$releasever</span>/centosplus/<span class="variable">$basearch</span>/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1   <span class="comment"># 此处将0改为1</span></span><br><span class="line">gpgkey=http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-7</span><br><span class="line">[root@client111 yum.repos.d]<span class="comment"># yum clean all</span></span><br><span class="line">[root@client111 yum.repos.d]<span class="comment"># yum install -y epel-release</span></span><br><span class="line">[root@client111 yum.repos.d]<span class="comment"># yum install -y vsftpd</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建文本格式的用户名以及密码</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 yum.repos.d]<span class="comment"># cd /etc/vsftpd/</span></span><br><span class="line">[root@client111 vsftpd]<span class="comment"># vim vu.list</span></span><br><span class="line">[root@client111 vsftpd]<span class="comment"># cat vu.list</span></span><br><span class="line">123</span><br><span class="line">123321</span><br><span class="line">abc</span><br><span class="line">123321</span><br><span class="line"><span class="comment"># 用户和密码一一对应，前面为账户，后面为密码</span></span><br><span class="line">[root@client111 vsftpd]<span class="comment"># id 123</span></span><br><span class="line">id: 123: no such user</span><br><span class="line">[root@client111 vsftpd]<span class="comment"># id abc</span></span><br><span class="line">id: abc: no such user</span><br><span class="line"><span class="comment"># 账户在系统中没有创建过</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装db4工具</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 vsftpd]<span class="comment"># yum install -y db4*</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用db4工具将刚才编辑的vu.list转换成数据库文件(vu.db)</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-T 表示转换		-t 表示加密方式使用<span class="built_in">hash</span>算法加密</span><br><span class="line">[root@client111 vsftpd]<span class="comment"># db_load -T -t hash -f /etc/vsftpd/vu.list /etc/vsftpd/vu.db</span></span><br><span class="line">[root@client111 vsftpd]<span class="comment"># ls</span></span><br><span class="line">ftpusers  user_list  vsftpd.conf  vsftpd_conf_migrate.sh  vu.db  vu.list</span><br><span class="line">[root@client111 vsftpd]<span class="comment"># file vu.*</span></span><br><span class="line">vu.db:   Berkeley DB (Hash, version 9, native byte-order)</span><br><span class="line">vu.list: ASCII text</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为防止数据泄露，将文件权限设置为600</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 vsftpd]<span class="comment"># chmod 600 vu.*</span></span><br><span class="line">[root@client111 vsftpd]<span class="comment"># ls -l vu.*</span></span><br><span class="line">-rw-------. 1 root root 12288 6月  27 17:16 vu.db</span><br><span class="line">-rw-------. 1 root root    22 6月  27 17:08 vu.list</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>添加虚拟用户的映射账号，创建ftp的根目录</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 vsftpd]<span class="comment"># useradd -d /file -s /sbin/nologin vftp</span></span><br><span class="line">[root@client111 vsftpd]<span class="comment"># cd /</span></span><br><span class="line">[root@client111 /]<span class="comment"># ls -ld file</span></span><br><span class="line">drwx------. 3 vftp vftp 78 6月  27 17:32 file</span><br><span class="line">[root@client111 /]<span class="comment"># chmod 755 file</span></span><br><span class="line">[root@client111 /]<span class="comment"># ls -ld file</span></span><br><span class="line">drwxr-xr-x. 3 vftp vftp 78 6月  27 17:32 file</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>备份vsftpd用户认证配置文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 pam.d]<span class="comment"># cp /etc/pam.d/vsftpd&#123;,.bak&#125;</span></span><br><span class="line">[root@client111 pam.d]<span class="comment"># ls vsftpd*</span></span><br><span class="line">vsftpd  vsftpd.bak</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为虚拟用户建立pam认证</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 pam.d]<span class="comment"># vim /etc/pam.d/vsftpd</span></span><br><span class="line">[root@client111 pam.d]<span class="comment"># cat /etc/pam.d/vsftpd</span></span><br><span class="line"><span class="comment">#%PAM-1.0</span></span><br><span class="line">auth required pam_userdb.so db=/etc/vsftpd/vu</span><br><span class="line">account required pam_userdb.so db=/etc/vsftpd/vu</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改vsftpd配置文件,添加虚拟用户支持</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 pam.d]<span class="comment"># vim /etc/vsftpd/vsftpd.conf</span></span><br><span class="line">[root@client111 pam.d]<span class="comment"># tail -n 2 /etc/vsftpd/vsftpd.conf</span></span><br><span class="line">guest_enable=YES</span><br><span class="line">guest_username=vftp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为不同的虚拟用户建立独立的配置文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 pam.d]<span class="comment"># vim /etc/vsftpd/vsftpd.conf</span></span><br><span class="line">[root@client111 pam.d]<span class="comment"># tail -n 2 /etc/vsftpd/vsftpd.conf</span></span><br><span class="line">user_config_dir=/etc/vsftpd/vusers_dir</span><br><span class="line">allow_writeable_chroot=YES</span><br></pre></td></tr></table></figure>
+
+<p>上述配置配置完成之后，转到/etc/vsftpd/vusers_dir目录中为每个虚拟用户分别建立配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 pam.d]<span class="comment"># mkdir /etc/vsftpd/vusers_dir</span></span><br><span class="line">[root@client111 pam.d]<span class="comment"># cd /etc/vsftpd/vusers_dir</span></span><br><span class="line">[root@client111 vusers_dir]<span class="comment"># ls</span></span><br><span class="line">[root@client111 vusers_dir]<span class="comment"># touch 123</span></span><br><span class="line">[root@client111 vusers_dir]<span class="comment"># touch abc</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置虚拟用户123能上传和下载，而abc可以上传文件和创建目录、以及下载。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 vusers_dir]<span class="comment"># vim 123</span></span><br><span class="line">[root@client111 vusers_dir]<span class="comment"># vim abc</span></span><br><span class="line">[root@client111 vusers_dir]<span class="comment"># cat 123</span></span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">[root@client111 vusers_dir]<span class="comment"># cat abc</span></span><br><span class="line">anon_upload_enable=YES</span><br><span class="line">anon_mkdir_write_enable=YES</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重启服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 vusers_dir]<span class="comment"># systemctl restart vsftpd</span></span><br></pre></td></tr></table></figure>
+
+<p>此时用另外一台主机去访问</p>
+<ul>
+<li>安装lftp</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># yum install -y lftp</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看lftp的帮助用法</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># lftp --help</span></span><br><span class="line">用法: lftp [OPTS] &lt;site&gt;</span><br><span class="line">`lftp<span class="string">' 是在 rc 文件执行后 lftp 执行的第一个命令</span></span><br><span class="line"><span class="string"> -f &lt;file&gt;           执行文件中的命令后退出</span></span><br><span class="line"><span class="string"> -c &lt;cmd&gt;            执行命令后退出</span></span><br><span class="line"><span class="string"> --help              显示帮助信息后退出</span></span><br><span class="line"><span class="string"> --version           显示 lftp 版本后退出</span></span><br><span class="line"><span class="string"> 其他的选项同 `open'</span> 命令</span><br><span class="line"> -e &lt;cmd&gt;            在选择后执行命令</span><br><span class="line"> -u &lt;user&gt;[,&lt;pass&gt;]  使用指定的用户名/口令进行验证</span><br><span class="line"> -p &lt;port&gt;           连接指定的端口</span><br><span class="line"> &lt;site&gt;              主机名, URL 或书签的名字</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>连接192.168.176.111中的abc用户</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># lftp -u abc,123321 192.168.176.111</span></span><br><span class="line">lftp abc@192.168.176.111:~&gt; ls</span><br><span class="line">lftp abc@192.168.176.111:/&gt; mkdir abc</span><br><span class="line">mkdir 成功, 建立 `abc<span class="string">'</span></span><br><span class="line"><span class="string">lftp abc@192.168.176.111:/&gt; ls</span></span><br><span class="line"><span class="string">drwx------    2 1001     1001            6 Jun 27 14:28 abc</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可用help或者？来查看帮助命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">lftp abc@192.168.176.111:/&gt; <span class="built_in">help</span></span><br><span class="line">    !&lt;shell-command&gt;                     (commands)</span><br><span class="line">    <span class="built_in">alias</span> [&lt;name&gt; [&lt;value&gt;]]             attach [PID]</span><br><span class="line">    bookmark [SUBCMD]                    cache [SUBCMD]</span><br><span class="line">    cat [-b] &lt;files&gt;                     <span class="built_in">cd</span> &lt;rdir&gt;</span><br><span class="line">    chmod [OPTS] mode file...            close [-a]</span><br><span class="line">    [re]cls [opts] [path/][pattern]      debug [&lt;level&gt;|off] [-o &lt;file&gt;]</span><br><span class="line">    du [options] &lt;<span class="built_in">dirs</span>&gt;                  <span class="built_in">exit</span> [&lt;code&gt;|<span class="built_in">bg</span>]</span><br><span class="line">    get [OPTS] &lt;rfile&gt; [-o &lt;lfile&gt;]      glob [OPTS] &lt;cmd&gt; &lt;args&gt;</span><br><span class="line">    <span class="built_in">help</span> [&lt;cmd&gt;]                         <span class="built_in">history</span> -w file|-r file|-c|-l [cnt]</span><br><span class="line">    <span class="built_in">jobs</span> [-v] [&lt;job_no...&gt;]              <span class="built_in">kill</span> all|&lt;job_no&gt;</span><br><span class="line">    lcd &lt;ldir&gt;                           lftp [OPTS] &lt;site&gt;</span><br><span class="line">    ln [-s] &lt;file1&gt; &lt;file2&gt;              ls [&lt;args&gt;]</span><br><span class="line">    mget [OPTS] &lt;files&gt;                  mirror [OPTS] [remote [<span class="built_in">local</span>]]</span><br><span class="line">    mkdir [-p] &lt;<span class="built_in">dirs</span>&gt;                    module name [args]</span><br><span class="line">    more &lt;files&gt;                         mput [OPTS] &lt;files&gt;</span><br><span class="line">    mrm &lt;files&gt;                          mv &lt;file1&gt; &lt;file2&gt;</span><br><span class="line">    [re]nlist [&lt;args&gt;]                   open [OPTS] &lt;site&gt;</span><br><span class="line">    pget [OPTS] &lt;rfile&gt; [-o &lt;lfile&gt;]     put [OPTS] &lt;lfile&gt; [-o &lt;rfile&gt;]</span><br><span class="line">    <span class="built_in">pwd</span> [-p]                             queue [OPTS] [&lt;cmd&gt;]</span><br><span class="line">    quote &lt;cmd&gt;                          repeat [OPTS] [delay] [<span class="built_in">command</span>]</span><br><span class="line">    rm [-r] [-f] &lt;files&gt;                 rmdir [-f] &lt;<span class="built_in">dirs</span>&gt;</span><br><span class="line">    scache [&lt;session_no&gt;]                <span class="built_in">set</span> [OPT] [&lt;var&gt; [&lt;val&gt;]]</span><br><span class="line">    site &lt;site-cmd&gt;                      <span class="built_in">source</span> &lt;file&gt;</span><br><span class="line">    torrent [-O &lt;dir&gt;] &lt;file|URL&gt;...     user &lt;user|URL&gt; [&lt;pass&gt;]</span><br><span class="line">    <span class="built_in">wait</span> [&lt;jobno&gt;]                       zcat &lt;files&gt;</span><br><span class="line">    zmore &lt;files&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>进入192.168.176.111</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 /]<span class="comment"># cd file/</span></span><br><span class="line">[root@client111 file]<span class="comment"># ls</span></span><br><span class="line">abc</span><br><span class="line">[root@client111 file]<span class="comment"># echo "1234567890" &gt; abc.txt</span></span><br><span class="line">[root@client111 file]<span class="comment"># ls</span></span><br><span class="line">abc  abc.txt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>进入192.168.176.222</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># lftp -u abc,123321 192.168.176.111</span></span><br><span class="line">lftp abc@192.168.176.111:~&gt; ls</span><br><span class="line">drwx------    3 1001     1001           21 Jun 27 14:34 abc</span><br><span class="line">-rw-r--r--    1 0        0              11 Jun 27 14:39 abc.txt</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>下载abc.txt</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># lftp -u abc,123321 192.168.176.111</span></span><br><span class="line">lftp abc@192.168.176.111:~&gt; ls</span><br><span class="line">drwx------    3 1001     1001           21 Jun 27 14:34 abc</span><br><span class="line">-rw-r--r--    1 0        0              11 Jun 27 14:39 abc.txt</span><br><span class="line">lftp abc@192.168.176.111:/&gt; get abc.txt -o /opt</span><br><span class="line">11 bytes transferred</span><br><span class="line">lftp abc@192.168.176.111:/&gt; <span class="built_in">exit</span></span><br><span class="line">[root@server222 ~]<span class="comment"># ll /opt</span></span><br><span class="line">总用量 4</span><br><span class="line">-rw-r--r--. 1 root root 11 6月  27 22:39 abc.txt</span><br><span class="line">drwxr-xr-x. 2 root root  6 3月  26 2015 rh</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>1.安装vsftpd<br>2.配置匿名用户ftp<br>3.配置虚拟用户ftp<br>4.配置系统用户ftp<br>5.写博客，要写明ftp的使用场景以及如何安装与配置</p>
+<p>要求：<br>1.安装并配置完成后要使用ftp客户端工具登录验证</p>
+
+      
+      <!-- 打赏 -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/chineselijie/2020/03/12/18.linux--FTP服务/" data-id="ck7ooyafs001b4su6lhw1vhwt"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux进阶/">linux进阶</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/03/12/19.linux--samba服务/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            samba服务
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/03/12/17.linux--openssh服务/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">openssh</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2020
+        Li Jie
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="Li Jie&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>喜欢就打赏吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+<script src="/js/tocbot.min.js"></script>
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>

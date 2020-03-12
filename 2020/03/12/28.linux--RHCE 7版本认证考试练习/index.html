@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    RHCE 7版本认证考试练习 |  Li Jie&#39;s blog
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Li Jie's blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-28.linux--RHCE 7版本认证考试练习" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  RHCE 7版本认证考试练习
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/12/28.linux--RHCE 7版本认证考试练习/" class="article-date">
+  <time datetime="2020-03-12T11:38:40.266Z" itemprop="datePublished">2020-03-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux进阶/">linux进阶</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">8.5k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">44分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p>写在前面的话：考试练习不等于真实考试考题，里面的数据可能也与您考试练习的数据不一样，请认真仔细。祝愿RHCE取得好成绩！！</p>
+</blockquote>
+<p>[TOC]</p>
+<h2 id="模拟考前配置"><a href="#模拟考前配置" class="headerlink" title="模拟考前配置"></a>模拟考前配置</h2><blockquote>
+<p>准备前</p>
+</blockquote>
+<p>首先我们要将三台虚拟机开启<br>classroom是172.25.0.254</p>
+<p>desktop是172.25.0.10</p>
+<p>server是172.25.0.11</p>
+<p>前提是三个主机能互相ping通</p>
+<p>然后我们在本地上远程到classroom</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ ssh root@172.25.0.254</span><br><span class="line">Last login: Sat Jul  6 09:08:15 2019 from 172.25.0.250</span><br><span class="line">[root@classroom ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>等待远程过去之后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@classroom ~]<span class="comment"># tail /etc/httpd/logs/error_log</span></span><br></pre></td></tr></table></figure>
+
+<p>将那段字母复制(NSS开头，off结尾的那段，具体我也不是带清楚)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@classroom ~]<span class="comment"># vim /etc/httpd/conf.d/nss.conf</span></span><br></pre></td></tr></table></figure>
+
+<p>将你复制的那段粘贴到最底部，然后保存并退出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">[root@classroom ~]<span class="comment"># cd /var/www/html/pub/</span></span><br><span class="line">[root@classroom pub]<span class="comment"># echo "zheshi yige 在 server 上配置一个 web 站点" &gt; example.html</span></span><br><span class="line">[root@classroom pub]<span class="comment"># echo "zheshi yige 在 server 上扩展您的 WEB 服务器" &gt; www.html</span></span><br><span class="line">[root@classroom pub]<span class="comment"># echo "zheshi yige web 访问控制“ &gt; private.html</span></span><br><span class="line">[root@classroom pub]<span class="comment"># vim webapp.wsgi</span></span><br><span class="line">[root@classroom pub]<span class="comment"># cat webapp.wsgi </span></span><br><span class="line">def application(environ, start_response):</span><br><span class="line">    status = <span class="string">'200 OK'</span></span><br><span class="line">    output = <span class="string">'Hello World!'</span></span><br><span class="line"></span><br><span class="line">    response_headers = [(<span class="string">'Content-type'</span>, <span class="string">'text/plain'</span>),</span><br><span class="line">                        (<span class="string">'Content-Length'</span>, str(len(output)))]</span><br><span class="line">    start_response(status, response_headers)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> [output]</span><br><span class="line"></span><br><span class="line">[root@classroom pub]<span class="comment"># vim user</span></span><br><span class="line">[root@classroom pub]<span class="comment"># cat user</span></span><br><span class="line">user1</span><br><span class="line">user2</span><br><span class="line">user3</span><br><span class="line">user4</span><br><span class="line">user5</span><br><span class="line"></span><br><span class="line">[root@foundation0 ~]<span class="comment"># vim /etc/hosts</span></span><br><span class="line">[root@foundation0 ~]<span class="comment"># tail -n 1 /etc/hosts</span></span><br><span class="line">172.25.0.11 server.example.com alt.example.com www.example.com</span><br><span class="line">[root@foundation0 ~]<span class="comment"># ssh root@172.25.0.10</span></span><br><span class="line">Last login: Sat Jul  6 09:08:15 2019 from 172.25.0.10</span><br><span class="line">[root@desktop0 ~]<span class="comment"># vim /etc/hosts</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># tail -n 1 /etc/hosts</span></span><br><span class="line">172.25.0.11 server.example.com alt.example.com www.example.com</span><br><span class="line">[root@foundation0 ~]<span class="comment"># ssh root@172.25.0.11</span></span><br><span class="line">[root@server0 ~]<span class="comment"># vim /etc/hosts</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># tail -n 1 /etc/hosts</span></span><br><span class="line">172.25.0.11 server.example.com alt.example.com www.example.com</span><br></pre></td></tr></table></figure>
+
+<p>更改网卡在本地切换到root用户（此题需要做后面的链路聚合）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[kiosk@foundation0 ~]$ su -</span><br><span class="line">Password: </span><br><span class="line">[root@foundation0 ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>密码是：Asimov</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@foundation0 ~]<span class="comment"># virt-manager</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.ax1x.com/2019/07/08/ZDoh6K.png" alt></p>
+<p><img src="https://s2.ax1x.com/2019/07/08/ZDoWSx.png" alt></p>
+<p><img src="https://s2.ax1x.com/2019/07/08/ZDobtA.png" alt></p>
+<p><img src="https://s2.ax1x.com/2019/07/08/ZDIdqe.png" alt></p>
+<p><img src="https://s2.ax1x.com/2019/07/08/ZDofl6.png" alt></p>
+<blockquote>
+<p>按照这种方式，在server 和 desktop两台虚拟机里面添加两块网卡，保证有三快网卡</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@foundation0 ~]<span class="comment"># reboot</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>然后直接将整个大虚拟机重启</p>
+</blockquote>
+<blockquote>
+<p>数据库文件因过繁多内容，此处数据库文件请找我进行拷贝。</p>
+</blockquote>
+<p>打开火狐浏览器输入：<a href="http://classroom.example.com/" target="_blank" rel="noopener">http://classroom.example.com/</a></p>
+<blockquote>
+<p>以上是模拟考试前需要做的，真实考试不需要配置以上步骤</p>
+<p>下面就开始模拟考题</p>
+</blockquote>
+<h2 id="开始考题"><a href="#开始考题" class="headerlink" title="开始考题"></a>开始考题</h2><blockquote>
+<p>请注意：由于本机环境原因上述模拟考前配置是正式考试前不需要做的，考者切记正式考试是不用做前面的东西</p>
+<p> 现在正式开始你的考试:</p>
+</blockquote>
+<h3 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h3><p>您在考试中将使用到两个系统的信息如下：</p>
+<p><strong>desktop0.example.com : 作为服务器</strong></p>
+<p><strong>server0.example.com : 作为客户端</strong></p>
+<p><strong>两个系统</strong>的<strong>root密码</strong>为<strong>redhat</strong></p>
+<p>系统的IP地址有DHCP提供，您可以视为正常，或者您可以按照一下信息重新设置未静态IP：</p>
+<p><strong>server0.example.com ： 172.24.8.11/24</strong></p>
+<p><strong>desktop0.example.com ： 172.24.8.10/24</strong></p>
+<p>两个系统均为DNS域example.com的成员。除非特别知名，所有要求配置的网络服务都必须能被该域的系统访问。</p>
+<p>classroom.example.com提供了集中认证的服务器为example.com。两个系统desktop0和server0都已经预先配置成此域的客户端。</p>
+<p>classroom.example.com 提供了YUM软件仓库，URL是 <a href="http://classroom.example.com/content/rhel7.0/x86_64/dvd/" target="_blank" rel="noopener">http://classroom.example.com/content/rhel7.0/x86_64/dvd/</a> .</p>
+<p>防火墙是默认打开的，在您认为适当的时候可以关闭。其他防火墙的设置可能在单独的要求中。</p>
+<p>my133.org(172.13.0.0/24)作为不可信网络。</p>
+<p>》 》 》 》 》》》》》》》》》》》》》》》》》》》》》》》》</p>
+<h2 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h2><h4 id="1-配置-YUM"><a href="#1-配置-YUM" class="headerlink" title="1.配置 YUM"></a>1.配置 YUM</h4><blockquote>
+<p> 配置yum源考试时候是不作为考题的，需要考者自己去阅读配置文档，里面有说明</p>
+</blockquote>
+<ul>
+<li>分别在 server 和 desktop 上配置 YUM,指向:</li>
+</ul>
+<p><strong>server0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># vim /etc/yum.repos.d/rhce.repo</span></span><br><span class="line">[root@server0 ~]<span class="comment"># cat /etc/yum.repos.d/rhce.repo</span></span><br><span class="line">[rhce]</span><br><span class="line">name=http://classroom.example.com/content/rhel7.0/x86_64/dvd/</span><br><span class="line">baseurl=http://classroom.example.com/content/rhel7.0/x86_64/dvd/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br><span class="line">[root@server0 ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>desktop0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@desktop0 ~]<span class="comment"># vim /etc/yum.repos.d/rhce.repo</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># cat /etc/yum.repos.d/rhce.repo</span></span><br><span class="line">[rhce]</span><br><span class="line">name=http://classroom.example.com/content/rhel7.0/x86_64/dvd/</span><br><span class="line">baseurl=http://classroom.example.com/content/rhel7.0/x86_64/dvd/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这一题是在真实考试中不做考题，您需要自己配置，yum源就在文中的信息当中，包括后面的各个域名的所归属的网段。您需要去阅读配置信息，这里配置信息在本博客开头部分。</p>
+</blockquote>
+<h4 id="2-配置-SELinux"><a href="#2-配置-SELinux" class="headerlink" title="2.配置 SELinux"></a>2.配置 SELinux</h4><ul>
+<li>SElinux 有三种模式,请将 server 与 desktop 运行于强制模式</li>
+</ul>
+<p><strong>server0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># vim /etc/selinux/config</span></span><br><span class="line">[root@server0 ~]<span class="comment"># cat /etc/selinux/config | grep SELINUX=en</span></span><br><span class="line">SELINUX=enforcing</span><br><span class="line">[root@server0 ~]<span class="comment"># reboot</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>desktop0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@desktop0 ~]<span class="comment"># vim /etc/selinux/config</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># cat /etc/selinux/config | grep SELINUX=en</span></span><br><span class="line">SELINUX=enforcing</span><br><span class="line">[root@desktop0 ~]<span class="comment"># reboot</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>其实可以不用reboot重启虚拟机，两边改完配置文件之后</p>
+<p>我们可以这样</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@desktop0 ~]<span class="comment"># setenforce 1</span></span><br><span class="line">&gt; [root@desktop0 ~]<span class="comment"># getenforce</span></span><br><span class="line">&gt; Enforcing</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>配置文件也改为enforcing</p>
+<p>同样我们也临时获取到Enforcing权限</p>
+<p>接下来可不要忘记了另外一台虚拟机了哦</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@server0 ~]<span class="comment"># setenforce 1</span></span><br><span class="line">&gt; [root@server0 ~]<span class="comment"># getenforce</span></span><br><span class="line">&gt; Enforcing</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="3-配置-SSH"><a href="#3-配置-SSH" class="headerlink" title="3.配置 SSH"></a>3.配置 SSH</h4><ul>
+<li>用户能够从域 example.com 内的客户端通过 SSH 访问您的两个虚拟机系统</li>
+<li>在域 my133t.org 内的客户端不能访问您的两个虚拟机系统</li>
+</ul>
+<p><strong>server0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># systemctl stop iptables ebtables</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl disable iptables ebtables</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl mask iptables ebtables</span></span><br><span class="line">ln -s <span class="string">'/dev/null'</span> <span class="string">'/etc/systemd/system/iptables.service'</span></span><br><span class="line">ln -s <span class="string">'/dev/null'</span> <span class="string">'/etc/systemd/system/ebtables.service'</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl restart firewalld</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl enable firewalld</span></span><br><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --remove-service=ssh --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --add-rich-rule 'rule family=ipv4 source address=172.25.0.0/24 service name=ssh accept' --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --reload </span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<p><strong>desktop0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@desktop0 ~]<span class="comment"># systemctl stop iptables ebtables</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># systemctl disable iptables ebtables</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># systemctl mask iptables ebtables</span></span><br><span class="line">ln -s <span class="string">'/dev/null'</span> <span class="string">'/etc/systemd/system/iptables.service'</span></span><br><span class="line">ln -s <span class="string">'/dev/null'</span> <span class="string">'/etc/systemd/system/ebtables.service'</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># systemctl restart firewalld</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># systemctl enable firewalld</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># firewall-cmd --remove-service=ssh --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@desktop0 ~]<span class="comment"># firewall-cmd --add-rich-rule 'rule family=ipv4 source address=172.25.0.0/24 service name=ssh accept' --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@desktop0 ~]<span class="comment"># firewall-cmd --reload </span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>做完这些操作之后，我们可以列出来查看一下，看看是否与我们想的一致</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@server0 ~]<span class="comment"># firewall-cmd --list-all</span></span><br><span class="line">&gt; public (default, active)</span><br><span class="line">&gt;   interfaces: eth0</span><br><span class="line">&gt;   sources: </span><br><span class="line">&gt;   services: dhcpv6-client</span><br><span class="line">&gt;   ports: </span><br><span class="line">&gt;   masquerade: no</span><br><span class="line">&gt;   forward-ports: </span><br><span class="line">&gt;   icmp-blocks: </span><br><span class="line">&gt;   rich rules: </span><br><span class="line">&gt; 	rule family=<span class="string">"ipv4"</span> <span class="built_in">source</span> address=<span class="string">"172.25.0.0/24"</span> service name=<span class="string">"ssh"</span> accept</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>从此处我们可以看出ssh这个服务没有了，从而添加上了允许172.25.0.0/24这个网段的主机去访问，与我们所想的一致，接下来看看另外一个</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@desktop0 ~]<span class="comment"># firewall-cmd --list-all</span></span><br><span class="line">&gt; public (default, active)</span><br><span class="line">&gt;   interfaces: eth0</span><br><span class="line">&gt;   sources: </span><br><span class="line">&gt;   services: dhcpv6-client</span><br><span class="line">&gt;   ports: </span><br><span class="line">&gt;   masquerade: no</span><br><span class="line">&gt;   forward-ports: </span><br><span class="line">&gt;   icmp-blocks: </span><br><span class="line">&gt;   rich rules: </span><br><span class="line">&gt; 	rule family=<span class="string">"ipv4"</span> <span class="built_in">source</span> address=<span class="string">"172.25.0.0/24"</span> service name=<span class="string">"ssh"</span> accept</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="4-命令别名及IP-转发"><a href="#4-命令别名及IP-转发" class="headerlink" title="4.命令别名及IP 转发"></a>4.命令别名及IP 转发</h4><p><strong>1）在系统 server 和 desktop 上创建自定义命令为 tk,此自定义命令将执行/bin/ps aux,此命令对系统中所有用户有效</strong></p>
+<p><strong>server0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@desktop0 ~]<span class="comment"># vim /etc/bashrc</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># tail -n 1 /etc/bashrc </span></span><br><span class="line"><span class="built_in">alias</span> tk=<span class="string">'/bin/ps aux'</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># bash</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># which tk</span></span><br><span class="line"><span class="built_in">alias</span> tk=<span class="string">'/bin/ps aux'</span></span><br><span class="line">	/bin/ps</span><br></pre></td></tr></table></figure>
+
+<p><strong>desktop0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># vim /etc/bashrc </span></span><br><span class="line">[root@server0 ~]<span class="comment"># tail -n 1 /etc/bashrc</span></span><br><span class="line"><span class="built_in">alias</span> tk=<span class="string">'/bin/ps aux'</span></span><br><span class="line">[root@server0 ~]<span class="comment"># bash</span></span><br><span class="line">[root@server0 ~]<span class="comment"># which tk</span></span><br><span class="line"><span class="built_in">alias</span> tk=<span class="string">'/bin/ps aux'</span></span><br><span class="line">	/bin/ps</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此题过于简单，这里就不过多解释</p>
+</blockquote>
+<p><strong>2）开启 IP 转发功能</strong></p>
+<p><strong>server0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># cat /etc/sysctl.conf </span></span><br><span class="line"><span class="comment"># System default settings live in /usr/lib/sysctl.d/00-system.conf.</span></span><br><span class="line"><span class="comment"># To override those settings, enter new settings here, or in an </span></span><br><span class="line">.........................................</span><br><span class="line">[root@server0 ~]<span class="comment"># vim /usr/lib/sysctl.d/00-system.conf</span></span><br><span class="line">[root@server0 ~]<span class="comment"># cat /usr/lib/sysctl.d/00-system.conf </span></span><br><span class="line">........................................</span><br><span class="line">net.bridge.bridge-nf-call-arptables = 0</span><br><span class="line">net.ipv4.ip_forward = 1 <span class="comment">#在此处添加</span></span><br><span class="line"></span><br><span class="line">........................................</span><br><span class="line">[root@server0 ~]<span class="comment"># sysctl -p /usr/lib/sysctl.d/00-system.conf</span></span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 0</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 0</span><br><span class="line">net.bridge.bridge-nf-call-arptables = 0</span><br><span class="line">net.ipv4.ip_forward = 1      <span class="comment">#有这个表示成功</span></span><br><span class="line">kernel.shmmax = 4294967295</span><br><span class="line">kernel.shmall = 268435456</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>同样在desktop 这台虚拟机上也要做，此处不做过多演示</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@desktop0 ~]<span class="comment"># cat /etc/sysctl.conf </span></span><br><span class="line"><span class="comment"># System default settings live in /usr/lib/sysctl.d/00-system.conf.</span></span><br><span class="line"><span class="comment"># To override those settings, enter new settings here, or in an /etc/sysctl.d/&lt;name&gt;.conf file</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># For more information, see sysctl.conf(5) and sysctl.d(5).</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># vim /usr/lib/sysctl.d/00-system.conf</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># sysctl -p /usr/lib/sysctl.d/00-system.conf</span></span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 0</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 0</span><br><span class="line">net.bridge.bridge-nf-call-arptables = 0</span><br><span class="line">net.ipv4.ip_forward = 1</span><br><span class="line">kernel.shmmax = 4294967295</span><br><span class="line">kernel.shmall = 268435456</span><br><span class="line">[root@desktop0 ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-端口转发"><a href="#5-端口转发" class="headerlink" title="5.端口转发"></a>5.端口转发</h4><ul>
+<li>在 server 上配置端口转发,在 172.25.0.0/24 中的系统,访问 server 的本地端口 9527 将被转发到 80,此设置永久生效</li>
+</ul>
+<p><strong>server0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --add-rich-rule 'rule family=ipv4 source address=172.25.0.0/24 forward-port port=9527 protocol=tcp to-port=80' --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --reload </span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以用<code>firewall-cmd --list-all</code>命令来查看是否添加上去</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@server0 ~]<span class="comment"># firewall-cmd --list-all</span></span><br><span class="line">&gt; public (default, active)</span><br><span class="line">&gt;   interfaces: eth0</span><br><span class="line">&gt;   sources: </span><br><span class="line">&gt;   services: dhcpv6-client</span><br><span class="line">&gt;   ports: </span><br><span class="line">&gt;   masquerade: no</span><br><span class="line">&gt;   forward-ports: </span><br><span class="line">&gt;   icmp-blocks: </span><br><span class="line">&gt;   rich rules: </span><br><span class="line">&gt; 	rule family=<span class="string">"ipv4"</span> <span class="built_in">source</span> address=<span class="string">"172.25.0.0/24"</span> forward-port port=<span class="string">"9527"</span> protocol=<span class="string">"tcp"</span> to-port=<span class="string">"80"</span></span><br><span class="line">&gt; 	rule family=<span class="string">"ipv4"</span> <span class="built_in">source</span> address=<span class="string">"172.25.0.0/24"</span> service name=<span class="string">"ssh"</span> accept</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>切记：此题需要之在<strong>server0</strong>上面操作，而且考试中题目需要你在那操作就在那操作，切勿心急盲目</p>
+</blockquote>
+<h4 id="6-聚合网络"><a href="#6-聚合网络" class="headerlink" title="6.聚合网络"></a>6.聚合网络</h4><p>在 server 和 desktop 之间配置链路聚合</p>
+<p>此链路使用接口 slave1 和 slave2</p>
+<p>此链路在一个接口失效后,仍然能工作</p>
+<p>此链路在 server 上使用地址 192.168.0.1/24</p>
+<p>此链路在 desktop 上使用地址 192.168.0.2/24</p>
+<p>此链路在系统重启后依然保持正常状态</p>
+<p><strong>server0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># nmcli device </span></span><br><span class="line">DEVICE  TYPE      STATE         CONNECTION  </span><br><span class="line">eth0    ethernet  connected     System eth0 </span><br><span class="line">eth1    ethernet  disconnected  --          </span><br><span class="line">eth2    ethernet  disconnected  --          </span><br><span class="line">lo      loopback  unmanaged     --          </span><br><span class="line">[root@server0 ~]<span class="comment"># nmcli connection add type team con-name team0 ifname team0 config '&#123;"runner":&#123;"name":"activebackup"&#125;&#125;'</span></span><br><span class="line">Connection <span class="string">'team0'</span> (f816c00c-0488-455e-8d17-d66004112ef7) successfully added.</span><br><span class="line">[root@server0 ~]<span class="comment"># nmcli connection modify team0 ipv4.addresses "192.168.0.1/24" ipv4.method manual connection.autoconnect yes</span></span><br><span class="line">[root@server0 ~]<span class="comment"># nmcli connection add type team-slave con-name slave1 ifname eth1 master team0 </span></span><br><span class="line">Connection <span class="string">'slave1'</span> (5276955f-cbd6-4ec3-82dc-daf6b0073998) successfully added.</span><br><span class="line">[root@server0 ~]<span class="comment"># nmcli connection add type team-slave con-name slave2 ifname eth2 master team0 </span></span><br><span class="line">Connection <span class="string">'slave2'</span> (26009b44-7428-4cb4-a2b6-41d5aa5f3cac) successfully added.</span><br><span class="line">[root@server0 ~]<span class="comment"># nmcli connection up team0</span></span><br><span class="line">Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/4)</span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl restart network</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>desktop</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@desktop0 ~]<span class="comment"># nmcli device </span></span><br><span class="line">DEVICE  TYPE      STATE         CONNECTION  </span><br><span class="line">eth0    ethernet  connected     System eth0 </span><br><span class="line">eth1    ethernet  disconnected  --          </span><br><span class="line">eth2    ethernet  disconnected  --          </span><br><span class="line">lo      loopback  unmanaged     --          </span><br><span class="line">[root@desktop0 ~]<span class="comment"># nmcli connection add type team con-name team0 ifname team0 config '&#123;"runner":&#123;"name":"activebackup"&#125;&#125;'</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># nmcli connection modify team0 ipv4.addresses "192.168.0.2/24" ipv4.method manual connection.autoconnect yes</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># nmcli connection add type team-slave con-name slave1 ifname eth1 master team0 </span></span><br><span class="line">Connection <span class="string">'slave1'</span> (5c6c05b2-63b9-4aca-b991-ab570f4e23bd) successfully added.</span><br><span class="line">[root@desktop0 ~]<span class="comment"># nmcli connection add type team-slave con-name slave2 ifname eth2 master team0  </span></span><br><span class="line">Connection <span class="string">'slave2'</span> (546bc410-6a94-4fff-9bef-398e54b2feff) successfully added.</span><br><span class="line">[root@desktop0 ~]<span class="comment"># nmcli connection up team0 </span></span><br><span class="line">Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/4)</span><br><span class="line">[root@desktop0 ~]<span class="comment"># systemctl restart network</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>最后我们验证以下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@desktop0 ~]<span class="comment"># ping 192.168.0.1</span></span><br><span class="line">&gt; PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.</span><br><span class="line">&gt; 64 bytes from 192.168.0.1: icmp_seq=1 ttl=64 time=1.17 ms</span><br><span class="line">&gt; 64 bytes from 192.168.0.1: icmp_seq=2 ttl=64 time=0.301 ms</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>然后我们断掉一个接口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@desktop0 ~]<span class="comment"># nmcli connection down slave1</span></span><br><span class="line">&gt; [root@desktop0 ~]<span class="comment"># ping 192.168.0.1</span></span><br><span class="line">&gt; PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.</span><br><span class="line">&gt; 64 bytes from 192.168.0.1: icmp_seq=1 ttl=64 time=0.582 ms</span><br><span class="line">&gt; ^C</span><br><span class="line">&gt; --- 192.168.0.1 ping statistics ---</span><br><span class="line">&gt; 1 packets transmitted, 1 received, 0% packet loss, time 0ms</span><br><span class="line">&gt; rtt min/avg/max/mdev = 0.582/0.582/0.582/0.000 ms</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>我们down掉其中一个接口，还能ping通</p>
+</blockquote>
+<h4 id="7-IPv6-设置"><a href="#7-IPv6-设置" class="headerlink" title="7.IPv6 设置"></a>7.IPv6 设置</h4><p>在您的考试系统上配置接口,在你的默认网卡上使用如下 IPv6 地址</p>
+<p>server 上的 IP 地址应该是 fd00:ba5e:ba11:10::1/64</p>
+<p>desktop 上的 IP 地址应该是 fd00:ba5e:ba11:10::2/64</p>
+<p>两个系统必须能与网络 fd00:ba5e:ba11:10::cc 内的系统通信</p>
+<p>地址必须在重启后依然生效</p>
+<p>两个系统保持当前的 IPv4 地址并能通信</p>
+<p><strong>server0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># nmcli connection show </span></span><br><span class="line">NAME         UUID                                  TYPE            DEVICE </span><br><span class="line">slave1       5276955f-cbd6-4ec3-82dc-daf6b0073998  802-3-ethernet  eth1   </span><br><span class="line">team0        f816c00c-0488-455e-8d17-d66004112ef7  team            team0  </span><br><span class="line">System eth0  5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03  802-3-ethernet  eth0   </span><br><span class="line">slave2       26009b44-7428-4cb4-a2b6-41d5aa5f3cac  802-3-ethernet  eth2   </span><br><span class="line">[root@server0 ~]<span class="comment"># nmcli connection modify "System eth0" ipv6.addresses fd00:ba5e:ba11:10::1/64 ipv6.method manual connection.autoconnect yes</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl restart network</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>desktop</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@desktop0 ~]<span class="comment"># nmcli connection show </span></span><br><span class="line">NAME         UUID                                  TYPE            DEVICE </span><br><span class="line">slave1       5c6c05b2-63b9-4aca-b991-ab570f4e23bd  802-3-ethernet  eth1   </span><br><span class="line">team0        8ccca14c-7275-4996-9d06-9bfd33cf7b3e  team            team0  </span><br><span class="line">System eth0  5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03  802-3-ethernet  eth0   </span><br><span class="line">slave2       546bc410-6a94-4fff-9bef-398e54b2feff  802-3-ethernet  eth2   </span><br><span class="line">[root@desktop0 ~]<span class="comment"># nmcli connection modify "System eth0" ipv6.addresses "fd00:ba5e:ba11:10::2/64" ipv6.method manual connection.autoconnect yes</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># systemctl restart network</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>验证</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@desktop0 ~]<span class="comment"># ping6 fd00:ba5e:ba11:10::1</span></span><br><span class="line">&gt; PING fd00:ba5e:ba11:10::1(fd00:ba5e:ba11:10::1) 56 data bytes</span><br><span class="line">&gt; 64 bytes from fd00:ba5e:ba11:10::1: icmp_seq=1 ttl=64 time=4.55 ms</span><br><span class="line">&gt; 64 bytes from fd00:ba5e:ba11:10::1: icmp_seq=2 ttl=64 time=0.413 ms</span><br><span class="line">&gt; ^C</span><br><span class="line">&gt; --- fd00:ba5e:ba11:10::1 ping statistics ---</span><br><span class="line">&gt; 2 packets transmitted, 2 received, 0% packet loss, time 1003ms</span><br><span class="line">&gt; rtt min/avg/max/mdev = 0.413/2.485/4.558/2.073 ms</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>有好多考者都在思考这么一个问题，</p>
+<p>两个系统必须能与网络 fd00:ba5e:ba11:10::cc 内的系统通信</p>
+<p>请问：你电脑能平通自己的网段吗，考题说的是能与这个网络里面得系统</p>
+</blockquote>
+<h4 id="8-邮件服务"><a href="#8-邮件服务" class="headerlink" title="8.邮件服务"></a>8.邮件服务</h4><p>在 server 上配置邮件服务</p>
+<p>这些系统不接受外部发来的邮件</p>
+<p>在这些系统上本地发送任何邮件都会被路由到 server1.example.com</p>
+<p>从这些系统上发送的邮件显示来自于 example.com</p>
+<p>您可以通过发送邮件到 harry 来测试您的配置</p>
+<p>您可以通过访问 <a href="http://server1.example.com/email/harry" target="_blank" rel="noopener">http://server1.example.com/email/harry</a> 来验证您的配置(模拟环境上面没有这个地址，所以此题验证不了)</p>
+<p>发给 harry 的邮件同时能被 natasha 收到</p>
+<p><strong>server0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># vim /etc/postfix/main.cf </span></span><br><span class="line">myorigin = example.com    <span class="comment">#大概在99行</span></span><br><span class="line">inet_interfaces = localhost <span class="comment">#大概在117行，默认是localhost</span></span><br><span class="line">mydestination = 			<span class="comment">#大概在165行，将=号后面的删掉</span></span><br><span class="line">mynetworks =  127.0.0.0/8	<span class="comment">#大概在265行，仅需要127.0.0.0/8</span></span><br><span class="line">relayhost = [server1.example.com]	<span class="comment">#大概在319行</span></span><br><span class="line"><span class="comment">#保存并退出</span></span><br><span class="line">[root@server0 ~]<span class="comment"># vim  /etc/aliases</span></span><br><span class="line">[root@server0 ~]<span class="comment"># tail -n 1 /etc/aliases</span></span><br><span class="line">harry:		harry,natasha</span><br><span class="line">[root@server0 ~]<span class="comment"># useradd harry</span></span><br><span class="line">[root@server0 ~]<span class="comment"># useradd natasha</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl restart postfix.service </span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl enable postfix.service </span></span><br><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --add-service=smtp --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --reload </span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>因为环境原因此题无法验证，真实考试环境中是可以验证的具体验证如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@server0 ~]<span class="comment"># echo "hello" | mail -s testmail harry</span></span><br><span class="line">&gt; [root@server0 ~]<span class="comment"># curl http://server1.example.com/email/harry</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>然后在最下面可以看到一个hello</p>
+<p>配置文件具体解释：</p>
+<p>myorigin = example.com    #来自哪里<br>mynetworks =  127.0.0.0/8    # 邮件信息仅本地环回<br>relayhost = [server1.example.com]    # 类似中间站，例如B在A和C的中间，A发给C的消息B就会收到。</p>
+</blockquote>
+<h4 id="9-Samba-服务"><a href="#9-Samba-服务" class="headerlink" title="9.Samba 服务"></a>9.Samba 服务</h4><p>在 server 上配置 SAMBA 服务</p>
+<p>您的 samba 服务器必须是 STAFF 工作组的一个成员</p>
+<p>共享/common 目录,共享名为 common</p>
+<p>只有 example.com 域内的客户端可以访问 common 共享</p>
+<p>common 必须是可以浏览的</p>
+<p>用户 natasha 必须能够读取共享中的内容,如果需要的话,验证密码是:tangkai</p>
+<p><strong>server0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># yum install -y samba*</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl restart smb nmb</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl enable smb nmb</span></span><br><span class="line">[root@server0 ~]<span class="comment"># mkdir /common</span></span><br><span class="line">[root@server0 ~]<span class="comment"># vim /etc/samba/smb.conf </span></span><br><span class="line"><span class="comment">#找到：</span></span><br><span class="line">[global]</span><br><span class="line">workgroup = STAFF <span class="comment">#将=后面改为STAFF</span></span><br><span class="line">..................</span><br><span class="line">..................</span><br><span class="line"><span class="comment">#在最下面，新加入：</span></span><br><span class="line">[common]</span><br><span class="line">        path = /common</span><br><span class="line">        browseable = yes</span><br><span class="line">        valid users = natasha</span><br><span class="line"><span class="comment"># 保存并退出</span></span><br><span class="line">[root@server0 ~]<span class="comment"># getsebool -a | grep samba</span></span><br><span class="line">samba_create_home_dirs --&gt; off</span><br><span class="line">samba_domain_controller --&gt; off</span><br><span class="line">samba_enable_home_dirs --&gt; off</span><br><span class="line">samba_export_all_ro --&gt; off</span><br><span class="line">samba_export_all_rw --&gt; off</span><br><span class="line">samba_portmapper --&gt; off</span><br><span class="line">samba_run_unconfined --&gt; off</span><br><span class="line">samba_share_fusefs --&gt; off</span><br><span class="line">samba_share_nfs --&gt; off</span><br><span class="line">sanlock_use_samba --&gt; off</span><br><span class="line">use_samba_home_dirs --&gt; off</span><br><span class="line">virt_sandbox_use_samba --&gt; off</span><br><span class="line">virt_use_samba --&gt; off</span><br><span class="line">[root@server0 ~]<span class="comment"># setsebool -P samba_enable_home_dirs 1</span></span><br><span class="line">[root@server0 ~]<span class="comment"># chcon -Rt samba_share_t /common/</span></span><br><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --add-rich-rule 'rule family=ipv4 source address=172.25.0.0/24 service name=samba accept' --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --add-rich-rule 'rule family=ipv4 source address=172.25.0.0/24 service name=samba-client accept' --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --reload </span></span><br><span class="line">success</span><br><span class="line">[root@server0 ~]<span class="comment"># id natasha</span></span><br><span class="line">uid=1002(natasha) gid=1002(natasha) groups=1002(natasha)</span><br><span class="line">[root@server0 ~]<span class="comment"># smbpasswd -a natasha</span></span><br><span class="line">New SMB password:</span><br><span class="line">Retype new SMB password:</span><br><span class="line">Added user natasha.</span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl restart smb nmb</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl enable smb nmb</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>我们要养成一种习惯，不管之前有没有加入启动项，在每次重启之后，我们都要顺手把他加入到开机启动项里面</p>
+</blockquote>
+<blockquote>
+<p>验证:需要到desktop0里面验证</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@desktop0 ~]<span class="comment"># yum install -y cifs-util*</span></span><br><span class="line">&gt; [root@desktop0 ~]<span class="comment"># mount -t cifs -o username=natasha,password=tangkai //172.25.0.11/common /media/</span></span><br><span class="line">&gt; [root@desktop0 ~]<span class="comment"># df -h</span></span><br><span class="line">&gt; Filesystem            Size  Used Avail Use% Mounted on</span><br><span class="line">&gt; /dev/vda1              10G  3.1G  7.0G  31% /</span><br><span class="line">&gt; devtmpfs              906M     0  906M   0% /dev</span><br><span class="line">&gt; tmpfs                 921M   80K  921M   1% /dev/shm</span><br><span class="line">&gt; tmpfs                 921M   17M  904M   2% /run</span><br><span class="line">&gt; tmpfs                 921M     0  921M   0% /sys/fs/cgroup</span><br><span class="line">&gt; //172.25.0.11/common   10G  3.1G  7.0G  31% /media</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="10-多用户-samba-挂载"><a href="#10-多用户-samba-挂载" class="headerlink" title="10.多用户 samba 挂载"></a>10.多用户 samba 挂载</h4><p>在 server 上通过 samba 共享目录/storage</p>
+<p>共享名为 share</p>
+<p>共享目录只能被 example.com 域内的客户端使用</p>
+<p>共享目录 share 必须可以被浏览</p>
+<p>用户 sarah 能以读的方式访问此共享,访问密码是 tangkai</p>
+<p>用户 kitty 能以读写的方式访问此共享,访问密码是 tangkai</p>
+<p>此共享永久挂载在 desktop 上的/mnt/dev 目录,并使用用户 sarah 进行认证,任何用户可临时通过 kitty 来获得读写权限</p>
+<p><strong>server0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># vim /etc/samba/smb.conf </span></span><br><span class="line">[root@server0 ~]<span class="comment"># tail n 6 /etc/samba/smb.conf </span></span><br><span class="line">[share]</span><br><span class="line">	path = /storage</span><br><span class="line">	browseable = yes</span><br><span class="line">    valid users = sarah,kitty</span><br><span class="line">	writable = no</span><br><span class="line">	write list = kitty</span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl restart smb nmb</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl enable smb nmb</span></span><br><span class="line">[root@server0 ~]<span class="comment"># mkdir /storage</span></span><br><span class="line">[root@server0 ~]<span class="comment"># useradd sarah</span></span><br><span class="line">[root@server0 ~]<span class="comment"># useradd kitty</span></span><br><span class="line">[root@server0 ~]<span class="comment"># chcon -Rt samba_share_t /storage/</span></span><br><span class="line">[root@server0 ~]<span class="comment"># setfacl -m u:sarah:r-x /storage/</span></span><br><span class="line">[root@server0 ~]<span class="comment"># setfacl -m u:kitty:rwx /storage/</span></span><br><span class="line">[root@server0 ~]<span class="comment"># smbpasswd -a sarah</span></span><br><span class="line">New SMB password:</span><br><span class="line">Retype new SMB password:</span><br><span class="line">Added user sarah.</span><br><span class="line">[root@server0 ~]<span class="comment"># smbpasswd -a kitty</span></span><br><span class="line">New SMB password:</span><br><span class="line">Retype new SMB password:</span><br><span class="line">Added user kitty.</span><br></pre></td></tr></table></figure>
+
+<p><strong>desktop</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@desktop0 ~]<span class="comment"># vim /etc/fstab</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># tail -n 1 /etc/fstab </span></span><br><span class="line">//172.25.0.11/share	/mnt/dev	cifs multiuser,username=sarah,password=tangkai,sec=ntlmssp 0 0</span><br><span class="line">[root@desktop0 ~]<span class="comment"># mkdir /mnt/dev</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># mount -a</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># df -h</span></span><br><span class="line">Filesystem            Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/vda1              10G  3.1G  7.0G  31% /</span><br><span class="line">devtmpfs              906M     0  906M   0% /dev</span><br><span class="line">tmpfs                 921M   80K  921M   1% /dev/shm</span><br><span class="line">tmpfs                 921M   17M  904M   2% /run</span><br><span class="line">tmpfs                 921M     0  921M   0% /sys/fs/cgroup</span><br><span class="line">//172.25.0.11/common   10G  3.1G  7.0G  31% /media</span><br><span class="line">//172.25.0.11/share    10G  3.1G  7.0G  31% /mnt/dev</span><br></pre></td></tr></table></figure>
+
+<h4 id="11-配置-NFS-服务"><a href="#11-配置-NFS-服务" class="headerlink" title="11.配置 NFS 服务"></a>11.配置 NFS 服务</h4><p>1.) 在 server 上配置 NFS<br>以只读的方式共享/public,同时只能被 example.com 内用户访问</p>
+<p>以读写的方式共享/protected 能被 example.com 内用户访问</p>
+<p>访问/protected 需要通过 kerberos 安全加密,您可以使用下边链接的秘钥: <a href="http://classroom.example.com/pub/keytabs/server0.keytab" target="_blank" rel="noopener">http://classroom.example.com/pub/keytabs/server0.keytab</a></p>
+<p>目录/protected 应该包含名为 project 拥有人为 ldapuser12 的子目录</p>
+<p>用户 ldapuser12 能以读写的方式访问/protected/project</p>
+<p><strong>server0</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># vim /etc/exports</span></span><br><span class="line">[root@server0 ~]<span class="comment"># cat /etc/exports</span></span><br><span class="line">/public	172.25.0.0/24(ro)</span><br><span class="line">/protected 172.25.0.0/24(rw,sec=krb5p)</span><br><span class="line">[root@server0 ~]<span class="comment"># mkdir /public</span></span><br><span class="line">[root@server0 ~]<span class="comment"># mkdir /protected</span></span><br><span class="line">[root@server0 ~]<span class="comment"># mkdir /protected/project</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这一栏的步骤有可能考试不需要你操作，但我们要以防万一</span></span><br><span class="line">[root@server0 ~]<span class="comment"># yum install -y krb5* sssd* authconfig*</span></span><br><span class="line">[root@server0 ~]<span class="comment"># cd /etc/openldap/</span></span><br><span class="line">[root@server0 openldap]<span class="comment"># ls</span></span><br><span class="line">certs  ldap.conf  schema</span><br><span class="line">[root@server0 openldap]<span class="comment"># mkdir cacerts</span></span><br><span class="line">[root@server0 openldap]<span class="comment"># cd cacerts/</span></span><br><span class="line">[root@server0 cacerts]<span class="comment"># wget http://classroom.example.com/pub/example-ca.crt</span></span><br><span class="line">[root@server0 cacerts]<span class="comment"># authconfig-tui </span></span><br><span class="line"><span class="comment"># 过程在考rhcse的时候有描述，这里就不再介绍</span></span><br><span class="line">[root@server0 cacerts]<span class="comment"># su - ldapuser12</span></span><br><span class="line">su: warning: cannot change directory to /home/guests/ldapuser12: No such file or directory</span><br><span class="line">mkdir: cannot create directory <span class="string">'/home/guests'</span>: Permission denied</span><br><span class="line">-bash-4.2$</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># chown ldapuser12 /protected/project</span></span><br><span class="line">[root@server0 ~]<span class="comment"># wget -O /etc/krb5.keytab  http://classroom.example.com/pub/keytabs/server0.keytab</span></span><br><span class="line">[root@server0 ~]<span class="comment"># vim /etc/sysconfig/nfs</span></span><br><span class="line">RPCNFSDARGS=<span class="string">"-V 4.2"</span>  <span class="comment"># 在第13行，引号里面加入-V 4.2</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl enable nfs-secure nfs-secure-server nfs-server</span></span><br><span class="line">ln -s <span class="string">'/usr/lib/systemd/system/nfs-secure.service'</span> <span class="string">'/etc/systemd/system/nfs.target.wants/nfs-secure.service'</span></span><br><span class="line">ln -s <span class="string">'/usr/lib/systemd/system/nfs-secure-server.service'</span> <span class="string">'/etc/systemd/system/nfs.target.wants/nfs-secure-server.service'</span></span><br><span class="line">ln -s <span class="string">'/usr/lib/systemd/system/nfs-server.service'</span> <span class="string">'/etc/systemd/system/nfs.target.wants/nfs-server.service'</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl start nfs-secure nfs-secure-server nfs-server</span></span><br><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --add-rich-rule 'rule family=ipv4 source address=172.25.0.0/24 service name=nfs accept' --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --add-rich-rule 'rule family=ipv4 source address=172.25.0.0/24 service name=rpc-bind accept' --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@server0 ~]<span class="comment"># firewall-cmd --reload </span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.)</strong><br><strong>在 desktop 上挂载来自于 server0 的 NFS 共享</strong></p>
+<p>/public 挂载在目录/mnt/nfsmount 上</p>
+<p>/protected 挂载在目录/mnt/nfssecure,并使用安全的方式,秘钥：</p>
+<p><a href="http://classroom.example.com/pub/keytabs/desktop0.keytab" target="_blank" rel="noopener">http://classroom.example.com/pub/keytabs/desktop0.keytab</a></p>
+<p>用户 ldapuser12 能在/mnt/nfssecure/project 上创建文件</p>
+<p>这些文件系统在系统启动时自动挂载</p>
+<p><strong>desktop</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@desktop0 ~]<span class="comment"># mkdir /mnt/nfsmount</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># mkdir /mnt/nfssecure</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这一栏的步骤有可能考试不需要你操作，但我们要以防万一</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># yum install sssd* krb5* authconfig* -y</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># cd /etc/openldap/</span></span><br><span class="line">[root@desktop0 openldap]<span class="comment"># ls</span></span><br><span class="line">certs  ldap.conf</span><br><span class="line">[root@desktop0 openldap]<span class="comment"># mkdir cacerts</span></span><br><span class="line">[root@desktop0 openldap]<span class="comment"># cd cacerts/</span></span><br><span class="line">[root@desktop0 cacerts]<span class="comment"># wget http://classroom.example.com/pub/example-ca.crt</span></span><br><span class="line">[root@desktop0 cacerts]<span class="comment"># authconfig-tui</span></span><br><span class="line"><span class="comment"># 过程在考rhcse的时候有描述，这里就不再介绍</span></span><br><span class="line">[root@desktop0 cacerts]<span class="comment"># su - ldapuser12</span></span><br><span class="line">su: warning: cannot change directory to /home/guests/ldapuser12: No such file or directory</span><br><span class="line">mkdir: cannot create directory <span class="string">'/home/guests'</span>: Permission denied</span><br><span class="line">-bash-4.2$</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@desktop0 ~]<span class="comment"># wget -O /etc/krb5.keytab http://classroom.example.com/pub/keytabs/desktop0.keytab</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># vim /etc/sysconfig/nfs</span></span><br><span class="line">RPCNFSDARGS=<span class="string">"-V 4.2"</span>  <span class="comment"># 在第13行，引号里面加入-V 4.2</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># systemctl enable nfs-secure</span></span><br><span class="line">ln -s <span class="string">'/usr/lib/systemd/system/nfs-secure.service'</span> <span class="string">'/etc/systemd/system/nfs.target.wants/nfs-secure.service'</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># systemctl start nfs-secure</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># vim /etc/fstab</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># tail -n 2 /etc/fstab </span></span><br><span class="line">172.25.0.11:/public /mnt/nfsmount nfs ro,v4.2 0 0</span><br><span class="line">172.25.0.11:/protected /mnt/nfssecure nfs defaults,v4.2,sec=krb5p 0 0</span><br><span class="line">[root@desktop0 ~]<span class="comment"># mount -a</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="12-在-server-上配置一个-web-站点-http-server-example-com"><a href="#12-在-server-上配置一个-web-站点-http-server-example-com" class="headerlink" title="12.在 server 上配置一个 web 站点 http://server.example.com"></a>12.在 server 上配置一个 web 站点 <a href="http://server.example.com" target="_blank" rel="noopener">http://server.example.com</a></h4><p>从<a href="http://classroom.example.com/pub/example.html" target="_blank" rel="noopener">http://classroom.example.com/pub/example.html</a> 下载文件,</p>
+<p>并重命名为 index.html，不要修改文件内容。</p>
+<p>将文件 index.html 拷贝到您的 DocumentRoot 目录下</p>
+<p>来自于 example.com 的客户端可以访问该 web 服务器</p>
+<p>来自于 my133t.org 的客户端的访问会被拒绝</p>
+<p><strong>server</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># yum install httpd -y</span></span><br><span class="line">[root@server0 ~]<span class="comment"># cd /var/www/html/</span></span><br><span class="line">[root@server0 html]<span class="comment"># ls</span></span><br><span class="line">[root@server0 html]<span class="comment"># wget -O  index.html http://classroom.example.com/pub/example.html</span></span><br><span class="line">[root@server0 html]<span class="comment"># ls</span></span><br><span class="line">index.html</span><br><span class="line">[root@server0 html]<span class="comment"># systemctl restart httpd</span></span><br><span class="line">[root@server0 html]<span class="comment"># systemctl enable httpd</span></span><br><span class="line">ln -s <span class="string">'/usr/lib/systemd/system/httpd.service'</span> <span class="string">'/etc/systemd/system/multi-user.target.wants/httpd.service'</span></span><br><span class="line">[root@server0 html]<span class="comment"># firewall-cmd --add-rich-rule 'rule family=ipv4 source address=172.25.0.0/24 service name=http accept' --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@server0 html]<span class="comment"># firewall-cmd --reload </span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>验证</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;[root@server0 html]<span class="comment"># curl http://server.example.com</span></span><br><span class="line">&gt; zheshi yige 在 server 上配置一个 web 站点</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+</blockquote>
+<h4 id="13-为站点-http-server-example-com-配置-TLS-加密"><a href="#13-为站点-http-server-example-com-配置-TLS-加密" class="headerlink" title="13.为站点 http://server.example.com 配置 TLS 加密"></a>13.为站点 <a href="http://server.example.com" target="_blank" rel="noopener">http://server.example.com</a> 配置 TLS 加密</h4><p>已签名证书从 <a href="http://classroom.example.com/pub/tls/certs/server0.crt" target="_blank" rel="noopener">http://classroom.example.com/pub/tls/certs/server0.crt</a> 获取</p>
+<p>证书的秘钥从 <a href="http://classroom.example.com/pub/tls/private/server0.key" target="_blank" rel="noopener">http://classroom.example.com/pub/tls/private/server0.key</a> 获取</p>
+<p>证书的签名授权信息从 <a href="http://classroom.example.com/pub/tls/certs/www0.crt" target="_blank" rel="noopener">http://classroom.example.com/pub/tls/certs/www0.crt</a> 获取</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 html]<span class="comment"># yum -y install mod_ssl.x86_64</span></span><br><span class="line">[root@server0 html]<span class="comment"># cd /etc/httpd/conf.d/</span></span><br><span class="line">[root@server0 conf.d]<span class="comment"># vim ssl.conf </span></span><br><span class="line"><span class="comment">#到120行左右</span></span><br><span class="line">SSLCertificateFile /etc/pki/tls/certs/localhost.crt</span><br><span class="line">SSLCertificateKeyFile /etc/pki/tls/private/localhost.key</span><br><span class="line"><span class="comment">#SSLCACertificateFile /etc/pki/tls/certs/ca-bundle.crt</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#将这三个的后面的文件名改掉，然后将最后一个的#号去掉，效果如下：</span></span><br><span class="line">SSLCertificateFile /etc/pki/tls/certs/server0.crt</span><br><span class="line">SSLCertificateKeyFile /etc/pki/tls/private/server0.key</span><br><span class="line">SSLCACertificateFile /etc/pki/tls/certs/www0.crt</span><br><span class="line"><span class="comment"># 记住这三个路径之后保存并退出</span></span><br><span class="line">[root@server0 conf.d]<span class="comment"># cd /etc/pki/tls/certs/</span></span><br><span class="line">[root@server0 certs]<span class="comment"># wget http://classroom.example.com/pub/tls/certs/server0.crt</span></span><br><span class="line">[root@server0 certs]<span class="comment"># cd /etc/pki/tls/private/</span></span><br><span class="line">[root@server0 private]<span class="comment"># wget http://classroom.example.com/pub/tls/private/server0.key</span></span><br><span class="line">[root@server0 private]<span class="comment"># cd /etc/pki/tls/certs/</span></span><br><span class="line">[root@server0 certs]<span class="comment"># wget http://classroom.example.com/pub/tls/certs/www0.crt</span></span><br><span class="line"></span><br><span class="line">[root@server0 certs]<span class="comment"># systemctl restart httpd.service </span></span><br><span class="line">[root@server0 certs]<span class="comment"># systemctl enable httpd.service </span></span><br><span class="line">[root@server0 certs]<span class="comment"># firewall-cmd --add-rich-rule 'rule family=ipv4 source address=172.25.0.0/24 service name=https accept' --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@server0 certs]<span class="comment"># firewall-cmd --reload </span></span><br><span class="line">success</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>验证</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@server0 certs]<span class="comment"># curl -k https://server.example.com</span></span><br><span class="line">&gt; zheshi yige 在 server 上配置一个 web 站点</span><br><span class="line">&gt; [root@server0 certs]<span class="comment"># curl http://server.example.com</span></span><br><span class="line">&gt; zheshi yige 在 server 上配置一个 web 站点</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="14-在-server-上扩展您的-WEB-服务器"><a href="#14-在-server-上扩展您的-WEB-服务器" class="headerlink" title="14.在 server 上扩展您的 WEB 服务器"></a>14.在 server 上扩展您的 WEB 服务器</h4><ol>
+<li>为站点 <a href="http://www.example.com" target="_blank" rel="noopener">http://www.example.com</a> 创建一个虚拟主机</li>
+<li>设置 DocumentRoot 为/var/www/virtual</li>
+<li>从 <a href="http://classroom.example.com/pub/www.html" target="_blank" rel="noopener">http://classroom.example.com/pub/www.html</a> 下载文件,并重命名为 index.html,不要修改文件内容。</li>
+<li>将文件 index.html 拷贝到 DocumentRoot 目录下</li>
+<li>确保 floyd 用户能够在/var/www/virtual 下创建文件</li>
+</ol>
+<p><strong>server</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># find / -name *vhosts.conf</span></span><br><span class="line">/usr/share/doc/httpd-2.4.6/httpd-vhosts.conf</span><br><span class="line">[root@server0 ~]<span class="comment"># cp /usr/share/doc/httpd-2.4.6/httpd-vhosts.conf /etc/httpd/conf.d/</span></span><br><span class="line">[root@server0 ~]<span class="comment"># cd /etc/httpd/conf.d/</span></span><br><span class="line">[root@server0 conf.d]<span class="comment"># vim httpd-vhosts.conf </span></span><br><span class="line">[root@server0 conf.d]<span class="comment"># tail -n 8 httpd-vhosts.conf </span></span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    DocumentRoot <span class="string">"/var/www/html"</span></span><br><span class="line">    ServerName server.example.com</span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    DocumentRoot <span class="string">"/var/www/virtual"</span></span><br><span class="line">    ServerName www.example.com</span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line">[root@server0 ~]<span class="comment"># mkdir /var/www/virtual</span></span><br><span class="line">oot@server0 ~]<span class="comment"># cd /var/www/virtual/</span></span><br><span class="line">[root@server0 virtual]<span class="comment"># wget -O index.html http://classroom.example.com/pub/www.html</span></span><br><span class="line">[root@server0 conf.d]<span class="comment"># useradd floyd</span></span><br><span class="line">[root@server0 conf.d]<span class="comment"># setfacl -m u:floyd:rwx /var/www/virtual</span></span><br><span class="line">[root@server0 conf.d]<span class="comment"># systemctl restart httpd.service </span></span><br><span class="line">[root@server0 conf.d]<span class="comment"># systemctl enable httpd.service</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>验证</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@server0 conf.d]<span class="comment"># curl www.example.com </span></span><br><span class="line">&gt; zheshi yige 在 server 上扩展您的 WEB 服务器</span><br><span class="line">&gt; [root@server0 conf.d]<span class="comment"># curl -k https://server.example.com</span></span><br><span class="line">&gt; zheshi yige 在 server 上配置一个 web 站点</span><br><span class="line">&gt; [root@server0 conf.d]<span class="comment"># curl http://server.example.com</span></span><br><span class="line">&gt; zheshi yige 在 server 上配置一个 web 站点</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+</blockquote>
+<h4 id="15-web-访问控制"><a href="#15-web-访问控制" class="headerlink" title="15.web 访问控制"></a>15.web 访问控制</h4><p>在您 server 上的 web 服务器的 DocumentRoot 目录下创建一个名为 private 的目录</p>
+<p>从<a href="http://classroom.example.com/pub/private.html" target="_blank" rel="noopener">http://classroom.example.com/pub/private.html</a> 下载文件到这个目录,并重命名为index.html,不要修改文件内容</p>
+<p>从 server 上,任何人都可以浏览 private 的内容,但是从其他系统不能访问这个目录的内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 conf.d]<span class="comment"># cd /var/www/html/</span></span><br><span class="line">[root@server0 html]<span class="comment"># mkdir private</span></span><br><span class="line">[root@server0 html]<span class="comment"># cd private/</span></span><br><span class="line">[root@server0 private]<span class="comment"># wget -O index.html http://classroom.example.com/pub/private.</span></span><br><span class="line">[root@server0 private]<span class="comment"># vim /etc/httpd/conf/httpd.conf</span></span><br><span class="line"><span class="comment">#搜索Requ，复制</span></span><br><span class="line">&lt;Directory /&gt;</span><br><span class="line">    AllowOverride none</span><br><span class="line">    Require all denied</span><br><span class="line">&lt;/Directory&gt;</span><br><span class="line">[root@server0 private]<span class="comment"># vim /etc/httpd/conf.d/httpd-vhosts.conf</span></span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    DocumentRoot <span class="string">"/var/www/html"</span></span><br><span class="line">    ServerName server.example.com</span><br><span class="line">   <span class="comment">#&lt;Directory "/var/www/html/private"&gt;</span></span><br><span class="line">   <span class="comment">#    Require ip 172.25.0.11</span></span><br><span class="line">   <span class="comment">#&lt;/Directory&gt;</span></span><br><span class="line">&lt;/VirtualHost&gt; </span><br><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    DocumentRoot <span class="string">"/var/www/virtual"</span></span><br><span class="line">    ServerName www.example.com</span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line"><span class="comment"># 这里#号表示加在这里三个，不要照着敲，把#号都敲进去了</span></span><br><span class="line"></span><br><span class="line">[root@server0 private]<span class="comment"># systemctl restart httpd.service </span></span><br><span class="line">[root@server0 private]<span class="comment"># systemctl enable httpd.service</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>验证</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@server0 private]<span class="comment"># curl server.example.com/private/ </span></span><br><span class="line">&gt; zheshi yige web 访问控制</span><br><span class="line">&gt; <span class="comment"># 然后我们用客户端去访问</span></span><br><span class="line">&gt; root@desktop0 ~]<span class="comment"># curl server.example.com/private/</span></span><br><span class="line">&gt; &lt;!DOCTYPE HTML PUBLIC <span class="string">"-//IETF//DTD HTML 2.0//EN"</span>&gt;</span><br><span class="line">&gt; &lt;html&gt;&lt;head&gt;</span><br><span class="line">&gt; &lt;title&gt;403 Forbidden&lt;/title&gt;</span><br><span class="line">&gt; &lt;/head&gt;&lt;body&gt;</span><br><span class="line">&gt; &lt;h1&gt;Forbidden&lt;/h1&gt;</span><br><span class="line">&gt; &lt;p&gt;You don<span class="string">'t have permission to access /private/</span></span><br><span class="line"><span class="string">&gt; on this server.&lt;/p&gt;</span></span><br><span class="line"><span class="string">&gt; &lt;/body&gt;&lt;/html&gt;</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="16-在-server-上实现动态-web-内容"><a href="#16-在-server-上实现动态-web-内容" class="headerlink" title="16.在 server 上实现动态 web 内容"></a>16.在 server 上实现动态 web 内容</h4><p>动态内容由名为 alt.example.com 的虚拟主机提供虚拟主机侦听端口为 8909</p>
+<p>从 <a href="http://classroom.example.com/pub/webapp.wsgi" target="_blank" rel="noopener">http://classroom.example.com/pub/webapp.wsgi</a> 下载一个脚本,然后放在适当的位置,不要修改文件内容</p>
+<p>客户端访问 <a href="http://alt.example.com:8909" target="_blank" rel="noopener">http://alt.example.com:8909</a> 时,应该接收到动态生成的 web 页面此 <a href="http://alt.example.com:8909" target="_blank" rel="noopener">http://alt.example.com:8909</a> 必须能被 example.com 内所有的系统访问</p>
+<p><strong>server</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 private]<span class="comment"># yum install mod_wsgi.x86_64 -y</span></span><br><span class="line">[root@server0 private]<span class="comment"># cd /var/www/</span></span><br><span class="line">[root@server0 www]<span class="comment"># mkdir wsgi</span></span><br><span class="line">[root@server0 www]<span class="comment"># cd wsgi/</span></span><br><span class="line">[root@server0 wsgi]<span class="comment"># wget http://classroom.example.com/pub/webapp.wsgi</span></span><br><span class="line">[root@server0 wsgi]<span class="comment"># vim /etc/httpd/conf.d/httpd-vhosts.conf </span></span><br><span class="line">[root@server0 wsgi]<span class="comment"># tail -n 5 /etc/httpd/conf.d/httpd-vhosts.conf </span></span><br><span class="line">Listen 8909</span><br><span class="line">&lt;VirtualHost *:8909&gt;</span><br><span class="line">    WSGIScriptAlias / <span class="string">"/var/www/wsgi/webapp.wsgi"</span></span><br><span class="line">    ServerName alt.example.com:8909</span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line">[root@server0 wsgi]<span class="comment"># firewall-cmd --add-rich-rule 'rule family=ipv4 port port=8909 protocol=tcp accept' --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@server0 wsgi]<span class="comment"># firewall-cmd --reload </span></span><br><span class="line">success</span><br><span class="line">[root@server0 wsgi]<span class="comment"># curl alt.example.com:8909</span></span><br><span class="line">curl: (7) Failed connect to alt.example.com:8909; Connection refused</span><br><span class="line">[root@server0 wsgi]<span class="comment"># semanage port -l | grep http</span></span><br><span class="line">http_cache_port_t              tcp      8080, 8118, 8123, 10001-10010</span><br><span class="line">http_cache_port_t              udp      3130</span><br><span class="line">http_port_t                    tcp      80, 81, 443, 488, 8008, 8009, 8443, 9000</span><br><span class="line">pegasus_http_port_t            tcp      5988</span><br><span class="line">pegasus_https_port_t           tcp      5989</span><br><span class="line">[root@server0 wsgi]<span class="comment"># semanage port -a -t http_port_t -p tcp 8909</span></span><br><span class="line">[root@server0 wsgi]<span class="comment"># systemctl restart httpd.service </span></span><br><span class="line">[root@server0 wsgi]<span class="comment"># systemctl enable httpd.service</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>验证</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@server0 wsgi]<span class="comment"># curl http://alt.example.com:8909</span></span><br><span class="line">&gt; Hello World!</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="17-配置-server-提供一个-iSCSI-共享服务"><a href="#17-配置-server-提供一个-iSCSI-共享服务" class="headerlink" title="17.配置 server 提供一个 iSCSI 共享服务"></a>17.配置 server 提供一个 iSCSI 共享服务</h4><p>磁盘名为 iqn.2014-09.com.example:server</p>
+<p>服务端口为 3260</p>
+<p>使用 iscsi_store 作为其后端卷其大小为 3G</p>
+<p>此服务只能被 desktop.example.com 访问</p>
+<p><strong>server</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 wsgi]<span class="comment"># yum install targetcli* -y</span></span><br><span class="line">[root@server0 wsgi]<span class="comment"># lsblk </span></span><br><span class="line">NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT</span><br><span class="line">vda    253:0    0  10G  0 disk </span><br><span class="line">└─vda1 253:1    0  10G  0 part /</span><br><span class="line">vdb    253:16   0  10G  0 disk </span><br><span class="line">[root@server0 wsgi]<span class="comment"># fdisk /dev/vdb</span></span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): n</span><br><span class="line">Partition <span class="built_in">type</span>:</span><br><span class="line">   p   primary (0 primary, 0 extended, 4 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default p): p</span><br><span class="line">Partition number (1-4, default 1): </span><br><span class="line">First sector (2048-20971519, default 2048): </span><br><span class="line">Last sector, +sectors or +size&#123;K,M,G&#125; (2048-20971519, default 20971519): +3G</span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): w</span><br><span class="line">[root@server0 wsgi]<span class="comment"># partprobe </span></span><br><span class="line">[root@server0 wsgi]<span class="comment"># lsblk </span></span><br><span class="line">NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT</span><br><span class="line">vda    253:0    0  10G  0 disk </span><br><span class="line">└─vda1 253:1    0  10G  0 part /</span><br><span class="line">vdb    253:16   0  10G  0 disk </span><br><span class="line">└─vdb1 253:17   0   3G  0 part </span><br><span class="line">[root@server0 wsgi]<span class="comment"># targetcli </span></span><br><span class="line">/&gt; ls</span><br><span class="line">o- / ................................................ [...]</span><br><span class="line">  o- backstores ..................................... [...]</span><br><span class="line">  | o- block ........................................ [Storage Objects: 0]</span><br><span class="line">  | o- fileio ....................................... [Storage Objects: 0]</span><br><span class="line">  | o- pscsi ........................................ [Storage Objects: 0]</span><br><span class="line">  | o- ramdisk ...................................... [Storage Objects: 0]</span><br><span class="line">  o- iscsi .......................................... [Targets: 0]</span><br><span class="line">  o- loopback ....................................... [Targets: 0]</span><br><span class="line">/&gt; <span class="built_in">cd</span> /backstores/block </span><br><span class="line">/backstores/block&gt; create iscsi_store /dev/vdb1</span><br><span class="line">Created block storage object iscsi_store using /dev/vdb1.</span><br><span class="line">/backstores/block&gt; <span class="built_in">cd</span> /iscsi </span><br><span class="line">/iscsi&gt; create iqn.2014-09.com.example:server</span><br><span class="line">Created target iqn.2014-09.com.example:server.</span><br><span class="line">Created TPG 1.</span><br><span class="line">/iscsi&gt; ls</span><br><span class="line">o- iscsi ........................................... [Targets: 1]</span><br><span class="line">  o- iqn.2014-09.com.example:server ................ [TPGs: 1]</span><br><span class="line">    o- tpg1 ........................................ [no-gen-acls, no-auth]</span><br><span class="line">      o- acls ...................................... [ACLs: 0]</span><br><span class="line">      o- luns ...................................... [LUNs: 0]</span><br><span class="line">      o- portals ................................... [Portals: 0]</span><br><span class="line">/iscsi&gt; <span class="built_in">cd</span> iqn.2014-09.com.example:server/tpg1/acls </span><br><span class="line">/iscsi/iqn.20...ver/tpg1/acls&gt; create iqn.2014-09.com.example:desktop</span><br><span class="line">Created Node ACL <span class="keyword">for</span> iqn.2014-09.com.example:desktop</span><br><span class="line">/iscsi/iqn.20...ver/tpg1/acls&gt; <span class="built_in">cd</span> /iscsi/iqn.2014-09.com.example:server/tpg1/luns </span><br><span class="line">/iscsi/iqn.20...ver/tpg1/luns&gt; create /backstores/block/iscsi_store </span><br><span class="line">Created LUN 0.</span><br><span class="line">Created LUN 0-&gt;0 mapping <span class="keyword">in</span> node ACL iqn.2014-09.com.example:desktop</span><br><span class="line">/iscsi/iqn.20...ver/tpg1/luns&gt; <span class="built_in">cd</span> /iscsi/iqn.2014-09.com.example:server/tpg1/portals </span><br><span class="line">/iscsi/iqn.20.../tpg1/portals&gt; create 172.25.0.11 3260</span><br><span class="line">Using default IP port 3260</span><br><span class="line">Created network portal 172.25.0.11:3260.</span><br><span class="line">/iscsi/iqn.20.../tpg1/portals&gt; <span class="built_in">exit</span></span><br><span class="line">Global pref auto_save_on_exit=<span class="literal">true</span></span><br><span class="line">Last 10 configs saved <span class="keyword">in</span> /etc/target/backup.</span><br><span class="line">Configuration saved to /etc/target/saveconfig.json</span><br><span class="line"></span><br><span class="line">[root@server0 wsgi]<span class="comment"># firewall-cmd --add-rich-rule 'rule family="ipv4" source address="172.25.0.0/24" port port=3260 protocol=tcp accept' --permanent </span></span><br><span class="line">success</span><br><span class="line">[root@server0 wsgi]<span class="comment"># firewall-cmd --reload </span></span><br><span class="line">success</span><br><span class="line">[root@server0 wsgi]<span class="comment"># systemctl restart target</span></span><br><span class="line">[root@server0 wsgi]<span class="comment"># systemctl enable target</span></span><br><span class="line">ln -s <span class="string">'/usr/lib/systemd/system/target.service'</span> <span class="string">'/etc/systemd/system/multi-user.target.wants/target.service'</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这一题的验证是下一题</p>
+</blockquote>
+<h4 id="18-配置-desktop-使其能连接在-server-上提供的-iscsi"><a href="#18-配置-desktop-使其能连接在-server-上提供的-iscsi" class="headerlink" title="18.配置 desktop 使其能连接在 server 上提供的 iscsi"></a>18.配置 desktop 使其能连接在 server 上提供的 iscsi</h4><p>iSCSI 设备在系统启动的期间自动加载</p>
+<p>块设备 iSCSI 上包含一个大小 1500MiB 的分区,并格式化为 ext4</p>
+<p>此分区挂载在/mnt/netdev 上同时在系统启动的期间自动加载</p>
+<p><strong>desktop</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">[root@desktop0 ~]<span class="comment"># yum install -y iscsi-init*</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># mkdir /mnt/netdev</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># vim /etc/iscsi/initiatorname.iscsi </span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># cat /etc/iscsi/initiatorname.iscsi </span></span><br><span class="line">InitiatorName=iqn.2014-09.com.example:desktop</span><br><span class="line">[root@desktop0 ~]<span class="comment"># systemctl restart iscsi iscsid</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># systemctl enable iscsi iscsid</span></span><br><span class="line">ln -s <span class="string">'/usr/lib/systemd/system/iscsid.service'</span> <span class="string">'/etc/systemd/system/multi-user.target.wants/iscsid.service'</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># iscsiadm -m discovery -t st -p 172.25.0.11</span></span><br><span class="line">172.25.0.11:3260,1 iqn.2014-09.com.example:server</span><br><span class="line">[root@desktop0 ~]<span class="comment"># iscsiadm -m node -l</span></span><br><span class="line">Logging <span class="keyword">in</span> to [iface: default, target: iqn.2014-09.com.example:server, portal: 172.25.0.11,3260] (multiple)</span><br><span class="line">Login to [iface: default, target: iqn.2014-09.com.example:server, portal: 172.25.0.11,3260] successful.</span><br><span class="line">[root@desktop0 ~]<span class="comment"># lsblk </span></span><br><span class="line">NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT</span><br><span class="line">sda      8:0    0   3G  0 disk </span><br><span class="line">vda    253:0    0  10G  0 disk </span><br><span class="line">└─vda1 253:1    0  10G  0 part /</span><br><span class="line">vdb    253:16   0  10G  0 disk </span><br><span class="line">[root@desktop0 ~]<span class="comment"># fdisk /dev/sda</span></span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): n</span><br><span class="line">Partition <span class="built_in">type</span>:</span><br><span class="line">   p   primary (0 primary, 0 extended, 4 free)</span><br><span class="line">   e   extended</span><br><span class="line">Select (default p): p</span><br><span class="line">Partition number (1-4, default 1): </span><br><span class="line">First sector (8192-6291455, default 8192): </span><br><span class="line">Last sector, +sectors or +size&#123;K,M,G&#125; (8192-6291455, default 6291455): +1500M</span><br><span class="line">Command (m <span class="keyword">for</span> <span class="built_in">help</span>): w</span><br><span class="line">[root@desktop0 ~]<span class="comment"># partprobe</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># mkfs.ext4 /dev/sda1</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># blkid | grep sda</span></span><br><span class="line">/dev/sda1: UUID=<span class="string">"142c6ec3-0d06-4f89-91e3-8201e8186d37"</span> TYPE=<span class="string">"ext4"</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># vim /etc/fstab </span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># tail -n 1 /etc/fstab </span></span><br><span class="line">UUID=<span class="string">"142c6ec3-0d06-4f89-91e3-8201e8186d37"</span>	/mnt/netdev	ext4 defaults,_netdev 0 0</span><br><span class="line">[root@desktop0 ~]<span class="comment"># mount -a</span></span><br><span class="line">[root@desktop0 ~]<span class="comment"># df -h</span></span><br><span class="line">/dev/vda1              10G  3.1G  7.0G  31% /</span><br><span class="line">devtmpfs              906M     0  906M   0% /dev</span><br><span class="line">tmpfs                 921M   80K  921M   1% /dev/shm</span><br><span class="line">.............................</span><br><span class="line">/dev/sda1             1.5G  4.5M  1.4G   1% /mnt/netdev</span><br></pre></td></tr></table></figure>
+
+<h4 id="19-编写一个位于-root-program-的-shell-脚本"><a href="#19-编写一个位于-root-program-的-shell-脚本" class="headerlink" title="19.编写一个位于/root/program 的 shell 脚本"></a>19.编写一个位于/root/program 的 shell 脚本</h4><p>当执行/root/program tang 时,终端显示 kai</p>
+<p>当执行/root/program kai 时,终端显示 tang</p>
+<p>当仅执行/root/program 不加参数,或者加上其他参数时,终端显示标准错误输出/root/program tang|kai</p>
+<p><strong>server</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># vim /root/program</span></span><br><span class="line">[root@server0 ~]<span class="comment"># cat /root/program </span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">    tang)</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"kai"</span></span><br><span class="line">	;;</span><br><span class="line">    kai)</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"tang"</span></span><br><span class="line">	;;</span><br><span class="line">    *)</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"/root/program tang|kai"</span></span><br><span class="line">	;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line">[root@server0 ~]<span class="comment"># chmod +x /root/program</span></span><br><span class="line">[root@server0 ~]<span class="comment"># /root/program tang </span></span><br><span class="line">kai</span><br><span class="line">[root@server0 ~]<span class="comment"># /root/program kai</span></span><br><span class="line">tang</span><br><span class="line">[root@server0 ~]<span class="comment"># /root/program</span></span><br><span class="line">/root/program tang|kai</span><br></pre></td></tr></table></figure>
+
+<h4 id="20-写一个创建用户的脚本"><a href="#20-写一个创建用户的脚本" class="headerlink" title="20.写一个创建用户的脚本"></a>20.写一个创建用户的脚本</h4><p>脚本名为/root/mkuser,脚本执行时需要添加一个参数,</p>
+<p>请在 <a href="http://classroom.example.com/pub/user" target="_blank" rel="noopener">http://classroom.example.com/pub/user</a> 下载下来,这个 user 就是参数</p>
+<p>如果没有参数,将提示:Usage:/root/mkuser</p>
+<p>如果参数为不存在的文件,则提示:Input file not found</p>
+<p>如果存在,则创建用户,用户不需要设置密码,用户的 shell 为/bin/flase</p>
+<p><strong>server</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># vim /root/mkuser</span></span><br><span class="line">[root@server0 ~]<span class="comment"># cat /root/mkuser </span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> -eq 0 ];<span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Usage:/root/mkuser"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">if</span> [ -f <span class="variable">$1</span> ];<span class="keyword">then</span></span><br><span class="line">    <span class="keyword">for</span> user <span class="keyword">in</span> $(cat <span class="variable">$1</span>);<span class="keyword">do</span></span><br><span class="line">	useradd -s /bin/flase <span class="variable">$user</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">"Input file not found"</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">[root@server0 ~]<span class="comment"># chmod +x /root/mkuser </span></span><br><span class="line">[root@server0 ~]<span class="comment"># cd /root</span></span><br><span class="line">[root@server0 ~]<span class="comment"># wget http://classroom.example.com/pub/user </span></span><br><span class="line">[root@server0 ~]<span class="comment"># /root/mkuser</span></span><br><span class="line">Usage:/root/mkuser</span><br><span class="line">[root@server0 ~]<span class="comment"># /root/mkuser dfs</span></span><br><span class="line">Input file not found</span><br><span class="line">[root@server0 ~]<span class="comment"># /root/mkuser user</span></span><br><span class="line">[root@server0 ~]<span class="comment"># id user1</span></span><br><span class="line">uid=1001(user1) gid=1001(user1) groups=1001(user1)</span><br><span class="line">[root@server0 ~]<span class="comment"># id user2</span></span><br><span class="line">uid=1002(user2) gid=1002(user2) groups=1002(user2)</span><br><span class="line">[root@server0 ~]<span class="comment"># id user3</span></span><br><span class="line">uid=1003(user3) gid=1003(user3) groups=1003(user3)</span><br><span class="line">[root@server0 ~]<span class="comment"># cat user </span></span><br><span class="line">user1</span><br><span class="line">user2</span><br><span class="line">user3</span><br><span class="line">user4</span><br><span class="line">user5</span><br><span class="line">[root@server0 ~]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="21-在你的机器上创建一个-mariadb-数据库"><a href="#21-在你的机器上创建一个-mariadb-数据库" class="headerlink" title="21.在你的机器上创建一个 mariadb 数据库;"></a>21.在你的机器上创建一个 mariadb 数据库;</h4><p>数据库名为 contacts</p>
+<p>数据库应该包含来自数据库复制的内容。复制文件的 URL 为<br><a href="http://classroom.example.com/pub/user.mdb" target="_blank" rel="noopener">http://classroom.example.com/pub/user.mdb</a></p>
+<p>数据库只能被 localhost 访问</p>
+<p>除了 root 用户,此数据库只能被用户 raikon 查询,此用户密码为 redhat</p>
+<p>root 用户密码为 redhat,同时不允许空密码登陆</p>
+<p><strong>server</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[root@server0 ~]<span class="comment"># yum install mariadb* -y</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl restart mariadb</span></span><br><span class="line">[root@server0 ~]<span class="comment"># systemctl enable mariadb</span></span><br><span class="line">ln -s <span class="string">'/usr/lib/systemd/system/mariadb.service'</span> <span class="string">'/etc/systemd/system/multi-user.target.wants/mariadb.service'</span></span><br><span class="line">[root@server0 ~]<span class="comment"># mysql_secure_installation</span></span><br><span class="line">Set root password? [Y/n] y</span><br><span class="line">New password: <span class="comment">#redhat</span></span><br><span class="line">Re-enter new password: <span class="comment">#redhat</span></span><br><span class="line">Password updated successfully!</span><br><span class="line">Remove anonymous users? [Y/n] y</span><br><span class="line"> ... Success!</span><br><span class="line">Disallow root login remotely? [Y/n] n</span><br><span class="line"> ... skipping.</span><br><span class="line">Remove <span class="built_in">test</span> database and access to it? [Y/n] y</span><br><span class="line"> - Dropping <span class="built_in">test</span> database...</span><br><span class="line"> ... Success!</span><br><span class="line">Reload privilege tables now? [Y/n] y</span><br><span class="line"> ... Success!</span><br><span class="line">[root@server0 ~]<span class="comment"># wget http://classroom.example.com/pub/users.mdb</span></span><br><span class="line"></span><br><span class="line">[root@server0 ~]<span class="comment"># mysql -uroot -predhat</span></span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 11</span><br><span class="line">Server version: 5.5.35-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2013, Oracle, Monty Program Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; create database Contacts;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; use Contacts;</span><br><span class="line">Database changed</span><br><span class="line">MariaDB [Contacts]&gt; <span class="built_in">source</span> /root/user.mdb;</span><br><span class="line">MariaDB [Contacts]&gt; grant select on Contacts .* to <span class="string">'raikon@localhost'</span> identified by <span class="string">'redhat'</span>;</span><br><span class="line">MariaDB [Contacts]&gt; flush privileges;</span><br><span class="line">MariaDB [Contacts]&gt; <span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="24-数据库查询"><a href="#24-数据库查询" class="headerlink" title="24.数据库查询"></a>24.数据库查询</h4><p>在 system1 上使用数据库 Contacts ，并使用相应的 SQL 查询以回答下列问题：</p>
+<p> 密码是fadora 的人的名字是什么？</p>
+<p> 有多少人的姓名是 John ，同时居住在 Santa Clara ？</p>
+<h3 id="system1"><a href="#system1" class="headerlink" title="system1"></a>system1</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@system1 ~]<span class="comment"># mysql -u root -predhat</span></span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; use Contacts;</span><br><span class="line"></span><br><span class="line">MariaDB [Contacts]&gt; SELECT u_name.firstname FROM u_name, u_passwd WHERE u_name.userid = u_passwd.uid AND u_passwd.password = <span class="string">'fadora'</span>;</span><br><span class="line">+-----------+</span><br><span class="line">| firstname |</span><br><span class="line">+-----------+</span><br><span class="line">| John      |</span><br><span class="line">+-----------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">MariaDB [Contacts]&gt; SELECT COUNT(*) FROM u_name,u_loc WHERE u_name.userid = u_loc.uid AND u_name.firstname = <span class="string">'John'</span> AND u_loc.location = <span class="string">'Santa Clara'</span>;</span><br><span class="line">+----------+</span><br><span class="line">| COUNT(*) |</span><br><span class="line">+----------+</span><br><span class="line">|        4 |</span><br><span class="line">+----------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p><strong>密码是fadora 的人的名字是什么？</strong></p>
+<p>John</p>
+<p><strong>有多少人的姓名是 John ，同时居住在 Santa Clara ？</strong></p>
+<p> 4</p>
+<blockquote>
+<p>在这里，考者请切记，查询之后的答案记住一定要填写到所填写的正确地方。</p>
+<p>不要忘记填写进去</p>
+</blockquote>
+<p>》》》》》》》》》》》》》》》》》》》》》》</p>
+<blockquote>
+<p>以上就是本次RHCE 7 版本的认证考试参考答案，如有错误请联系博主进行更改，最后祝愿大家RHCE认证取得好成绩！！！！</p>
+</blockquote>
+
+      
+      <!-- 打赏 -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/chineselijie/2020/03/12/28.linux--RHCE 7版本认证考试练习/" data-id="ck7ooyamy003y4su6b0md9jnc"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux进阶/">linux进阶</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/03/12/29.linux--LNMP/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            LNMP
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/03/12/27.linux--ISCSI服务/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">ISCSI服务</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2020
+        Li Jie
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="Li Jie&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>喜欢就打赏吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+<script src="/js/tocbot.min.js"></script>
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>

@@ -60,7 +60,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">5.9k字</span>
+            <span class="post-count">6.8k字</span>
         </span>
     </span>
 
@@ -69,7 +69,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">26分钟</span>
+            <span class="post-count">30分钟</span>
         </span>
     </span>
 </div>
@@ -95,7 +95,14 @@
       
 
       
-      <p>[TOC]</p>
+      <blockquote>
+<p><strong>关于作者</strong></p>
+<p><strong>周李杰</strong>，最后一批90后，现居<strong>湖北武汉</strong></p>
+<p>孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。</p>
+<p>兴趣众多，然无一精通。正努力成为一个有趣的人。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>[TOC]</p>
 <h2 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h2><blockquote>
 <p><strong>学会使用Markdown进行编写文本文件<br>作为一名新时代的IT知识分子，熟悉Markdown语法至关重要<br>Markdown是一种轻量级标记语言，由于Markdown的轻量化、易读易写等特点<br>并且Markdown对于图片，图表、数学式都有支持<br>当前许多网站都在广泛地使用Markdown来撰写帮助文档或是用于论坛上发表消息<br>甚至Markdown都已经被用来撰写电子书<br>初学者可以使用Typora来写Markdown，进而提高自己的写作能力，熟悉语法之后，可尝试使用vim或者Visual Studio Code来进行编写</strong><br>这里附带一下Typora的下载链接，<a href="https://www.typora.io/#windows" target="_blank" rel="noopener">点击此处打开</a>,选择下载</p>
 <p><strong>本篇手册就基于Markdown语法编写</strong></p>
@@ -259,7 +266,17 @@
 <p><strong>git mv</strong><br>重命名文件或者文件夹</p>
 <p><strong>git rm</strong><br>删除文件或者文件夹</p>
 <p><strong>git help</strong><br>查看帮助，还有几个无关紧要的命令，请自行查看帮助</p>
-<h3 id="7-使用Github-Hexo搭建个人博客"><a href="#7-使用Github-Hexo搭建个人博客" class="headerlink" title="7-使用Github+Hexo搭建个人博客"></a>7-使用Github+Hexo搭建个人博客</h3><p><a href="https://chineselijie.github.io/" target="_blank" rel="noopener">效果可点击此处</a></p>
+<h3 id="7-git版本控制重点知识梳理"><a href="#7-git版本控制重点知识梳理" class="headerlink" title="7-git版本控制重点知识梳理"></a>7-git版本控制重点知识梳理</h3><h4 id="本地（local）"><a href="#本地（local）" class="headerlink" title="本地（local）"></a>本地（local）</h4><h5 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">全局变量：</span><br><span class="line">	git config -global user name <span class="string">"chinesejack"</span></span><br><span class="line">	git config -global email <span class="string">"18371207979@139.com"</span></span><br><span class="line">	</span><br><span class="line">初始化新版本库：git init </span><br><span class="line"></span><br><span class="line">添加新文件到版本库：</span><br><span class="line">	添加单个文件：git add somefile.txt</span><br><span class="line">	添加所有txt文件：git add *.txt</span><br><span class="line">	添加所有文件：git add</span><br></pre></td></tr></table></figure>
+
+<h5 id="日常操作"><a href="#日常操作" class="headerlink" title="日常操作"></a>日常操作</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">提交：</span><br><span class="line">	提交所有修改文件：git commit -m <span class="string">"some msg"</span> -a</span><br><span class="line">	提交单个文件：git commit -m <span class="string">"add msg to readme.txt"</span> readme.txt</span><br><span class="line">  提交增补：git commit -C head -a -amend  (此提交增补不会产生新的提交历史记录)</span><br><span class="line"></span><br><span class="line">撤销修改：</span><br><span class="line">  撤销尚未提交的修改：</span><br><span class="line">    撤销1、2个文件：git checkout head readme.txt todo.txt</span><br><span class="line">    撤销所有txt文件：git checkout head *.txt</span><br><span class="line">    撤销所有文件：git checkout head</span><br><span class="line">  撤销提交：</span><br><span class="line">    复位：</span><br><span class="line">      取消暂存：git reset head或者git reset head &lt;filename&gt;</span><br><span class="line">      复位到head之前那个版本：git reset --hard head^</span><br><span class="line">	</span><br><span class="line">分支：</span><br><span class="line">  列出本地分支：git branch</span><br><span class="line">  列出所有分支：git branch -a</span><br><span class="line">  基于当前分支的末梢创建新的分支：git branch &lt;branchname&gt;</span><br><span class="line">  检出分支：git checkout &lt;branchname&gt;</span><br><span class="line">  基于当前分支的末梢创建新分支并检出分支：git checkout &lt;branchname&gt;</span><br><span class="line">  基于某次提交、分支或标签创建新分支：git branch emputy2 emputy</span><br><span class="line">                                    git branch emputy bfe57de0 用来查看某个历史断面很方便</span><br><span class="line">合并分支：</span><br><span class="line">  普通合并：</span><br><span class="line">    合并提交：git merge &lt;branchname&gt;</span><br><span class="line">    合并但不提交：git merge --no-commit</span><br><span class="line">  压合合并：</span><br><span class="line">    压合合并后直接提交：git merge --squash &lt;branchname&gt;</span><br><span class="line">    压合合并但不提交：git merge --squash --no-commit &lt;branchname&gt;</span><br><span class="line">  拣选合并：挑选某次提交合并但不提交：git cherry-pick --no-commit 5b62b6</span><br><span class="line"></span><br><span class="line">重命名分支：</span><br><span class="line">  git branch -m &lt;branchname&gt; &lt;newname&gt; 不会覆盖已存在的同名分支</span><br><span class="line">  git branch -M &lt;branchname&gt; &lt;newname&gt; 会覆盖已存在的同名分支</span><br><span class="line">  </span><br><span class="line">删除分支：</span><br><span class="line">  git branch -d new2 如果分支没有被合并会删除失败</span><br><span class="line">  git branch -D new2 即使分支没有被合并也照删不误</span><br><span class="line"></span><br><span class="line">标签：</span><br><span class="line">  创建标签：</span><br><span class="line">    git tag 1.0 为当前分支最近一次提交创建标签</span><br><span class="line">    git tag contacts_1.1 contacts 为contacts分支最近一次提交创建标签</span><br><span class="line">    git tag 1.1 4e6861d5 为某次历史提交创建标签</span><br><span class="line">  显示标签列表：git tag</span><br><span class="line">  检出标签：git checkout 1.0</span><br><span class="line">  由标签创建分支：git branch b1.1 1.1/git chech=kout -b b1.0 1.0</span><br><span class="line">  删除标签：git tag -d 1.0</span><br><span class="line"></span><br><span class="line">查看状态：</span><br><span class="line">  当前状态：git status</span><br><span class="line">  历史记录：git <span class="built_in">log</span></span><br><span class="line">    当前分支历史记录：gitk</span><br><span class="line">    查看某分支历史记录：gitk &lt;branchname&gt;</span><br><span class="line">    查看所有分支：gitk branch -v</span><br><span class="line">  每个分支最后的提交：git branch -v</span><br><span class="line"></span><br><span class="line">导出版本库：</span><br><span class="line">  git archive --format=zip head&gt;nb.zip</span><br><span class="line">  git archive --format-zip --prefix=nb1.0/ head&gt;nb.zip</span><br></pre></td></tr></table></figure>
+
+<h4 id="远程（remote）"><a href="#远程（remote）" class="headerlink" title="远程（remote）"></a>远程（remote）</h4><h5 id="初始化-1"><a href="#初始化-1" class="headerlink" title="初始化"></a>初始化</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">克隆版本：git <span class="built_in">clone</span> &lt;url&gt;</span><br><span class="line"></span><br><span class="line">别名：</span><br><span class="line">  添加远程版本库的别名：git remote add &lt;别名&gt; &lt;远程版本库的url&gt;  </span><br><span class="line">  删除远程库的别名和相关分支：git remote rm &lt;别名&gt;</span><br><span class="line"></span><br><span class="line">创建一个无本地分支的库：git init -bare</span><br></pre></td></tr></table></figure>
+
+<h5 id="日常操作-1"><a href="#日常操作-1" class="headerlink" title="日常操作"></a>日常操作</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">分支：</span><br><span class="line">  列出远程分支：git branch -r</span><br><span class="line">  删除远程库中已经不存在的分支：git remote prune origin</span><br><span class="line">  </span><br><span class="line">从远程库获取：</span><br><span class="line">  获取但不提交：git fetch &lt;远程版本库&gt;</span><br><span class="line">  获取并提交到当前本地分支：git pull</span><br><span class="line">  </span><br><span class="line">推入远程：git push origin master</span><br></pre></td></tr></table></figure>
+
+<h4 id="生成SSH-Key"><a href="#生成SSH-Key" class="headerlink" title="生成SSH Key"></a>生成SSH Key</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">第一步：启动git Bash控制台</span><br><span class="line">第二步：生成SSH Key：ssh-keygen -t rsa -C <span class="string">"18371207979@139.com"</span></span><br><span class="line">第三步：将SSH Key添加到Github账户里</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-使用Github-Hexo搭建个人博客"><a href="#8-使用Github-Hexo搭建个人博客" class="headerlink" title="8-使用Github+Hexo搭建个人博客"></a>8-使用Github+Hexo搭建个人博客</h3><p><a href="https://chineselijie.github.io/" target="_blank" rel="noopener">效果可点击此处</a></p>
 <blockquote>
 <p>当您看到这里，我就默认你掌握了git的全部常用知识。如果还不是不懂，请返回到手册的开头，再看一遍。</p>
 </blockquote>
@@ -345,8 +362,7 @@
 
 </li>
 </ul>
-<p><strong>下一章节将讲述个性化设置以及上传博客</strong></p>
-<h3 id="8-个性化设置"><a href="#8-个性化设置" class="headerlink" title="8-个性化设置"></a>8-个性化设置</h3>
+
       
       <!-- 打赏 -->
       
@@ -356,7 +372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/chineselijie/2019/10/29/git版本控制详解手册/" data-id="ck6akysgy003j8wu6nn1j6y8l"
+      <a data-url="https://github.com/chineselijie/2019/10/29/git版本控制详解手册/" data-id="ck7ooyam3003q4su67a8tr8z6"
         class="article-share-link">分享</a>
         
       
@@ -370,10 +386,19 @@
   
   <nav class="article-nav">
     
+      <a href="/2020/03/12/1.linux--RHEL 7.4 实验环境搭建/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            RHEL 7.4 实验环境搭建
+          
+        </div>
+      </a>
     
-      <a href="/2019/09/23/9.python内置函数/" class="article-nav-link">
+    
+      <a href="/2019/08/29/16.linux--RHCSA模拟/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">python内置函数</div>
+        <div class="article-nav-title">RHCSA复习</div>
       </a>
     
   </nav>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    python实现图书管理系统的借阅 |  Li Jie&#39;s blog
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Li Jie's blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-6.python实现图书管理系统的借阅" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  python实现图书管理系统的借阅
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/12/6.python实现图书管理系统的借阅/" class="article-date">
+  <time datetime="2020-03-12T11:40:08.120Z" itemprop="datePublished">2020-03-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p><strong>关于作者</strong></p>
+<p><strong>周李杰</strong>，最后一批90后，现居<strong>湖北武汉</strong></p>
+<p>孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。</p>
+<p>兴趣众多，然无一精通。正努力成为一个有趣的人。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>[TOC]</p>
+<ul>
+<li>python实现图书管理系统的借阅</li>
+</ul>
+<h2 id="具体代码"><a href="#具体代码" class="headerlink" title="具体代码"></a>具体代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,name,author,comment,state=<span class="number">0</span>)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.author = author</span><br><span class="line">        self.comment = comment</span><br><span class="line">        self.state = state</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        status = <span class="string">'未借出'</span></span><br><span class="line">        <span class="keyword">if</span> self.state == <span class="number">1</span>:</span><br><span class="line">            status = <span class="string">'已借出'</span></span><br><span class="line">        <span class="keyword">return</span><span class="string">'名称:《%s》\t作者：%s\n推荐语：%s\n状态:%s'</span>%(self.name,self.author,self.comment,status)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookManager</span>:</span></span><br><span class="line">    books = []</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        book1 = Book(<span class="string">'小王子'</span>,<span class="string">'安托万·德·圣埃克絮佩里'</span>,<span class="string">'所述的飞行员坠机于撒哈拉沙漠的情节明显取材于圣埃克苏佩里的亲身经历。'</span>)</span><br><span class="line">        book2 = Book(<span class="string">'悲惨世界'</span>,<span class="string">'维克多·雨果'</span>,<span class="string">'描绘19世纪初20年间几个法国人物的生活背景，涵盖拿破仑战争和1832年巴黎共和党人起义等政治现象叙述。'</span>)</span><br><span class="line">        book3 = Book(<span class="string">'霍乱时期的爱情'</span>,<span class="string">'加西亚·马尔克斯'</span>,<span class="string">'讲述了一段跨越半个多世纪的爱情故事：男女主人公在二十岁的时候没能结婚，因为他们太年轻了；经过各种人生曲折之后，到了八十岁，他们还是没能结婚，因为他们太老了。'</span>)</span><br><span class="line">        self.books.append(book1)</span><br><span class="line">        self.books.append(book2)</span><br><span class="line">        self.books.append(book3)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">menu</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'欢迎使用贝多芬图书管理系统，周恩来说过：“书籍是人类进步的阶梯！”。\n'</span>) </span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>: </span><br><span class="line">            print(<span class="string">'1.查询所有书籍\n2.添加书籍\n3.借阅书籍\n4.归还书籍\n5.退出系统\n'</span>)</span><br><span class="line">            choice = int(input(<span class="string">'请输入数字选择对应功能：'</span>))</span><br><span class="line">            <span class="keyword">if</span> choice == <span class="number">1</span>:</span><br><span class="line">                self.show_all_book()</span><br><span class="line">            <span class="keyword">elif</span> choice == <span class="number">2</span>:</span><br><span class="line">                self.add_book()</span><br><span class="line">            <span class="keyword">elif</span> choice == <span class="number">3</span>:</span><br><span class="line">                self.lend_book()</span><br><span class="line">            <span class="keyword">elif</span> choice == <span class="number">4</span>:</span><br><span class="line">                self.return_book()</span><br><span class="line">            <span class="keyword">elif</span> choice == <span class="number">5</span>:</span><br><span class="line">                print(<span class="string">'欢迎下次使用，谢谢，祝您阅读愉快！'</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">show_all_book</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> book <span class="keyword">in</span> self.books:</span><br><span class="line">            print(book)</span><br><span class="line">            print(<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_book</span><span class="params">(self)</span>:</span></span><br><span class="line">        new_name = input(<span class="string">'请输入书籍名称：'</span>)</span><br><span class="line">        new_author = input(<span class="string">'请输入作者：'</span>)</span><br><span class="line">        new_comment = input(<span class="string">'请输入推荐语：'</span>)</span><br><span class="line">        new_book = Book(new_name,new_author,new_comment)</span><br><span class="line"></span><br><span class="line">        self.books.append(new_book)</span><br><span class="line">        print(<span class="string">'恭喜！书籍录入成功！\n'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">check_book</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> book <span class="keyword">in</span> self.books:</span><br><span class="line">            <span class="keyword">if</span> book.name == name:</span><br><span class="line">                <span class="keyword">return</span> book</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lend_book</span><span class="params">(self)</span>:</span></span><br><span class="line">        name = input(<span class="string">'请输入想要借阅书的书名：'</span>)</span><br><span class="line">        res = self.check_book(name)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> res != <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> res.state == <span class="number">1</span>:</span><br><span class="line">                print(<span class="string">'你来晚了一步，这本书被借走了哟！'</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(<span class="string">'借阅成功，为期一个月，请按时还书哟！'</span>)</span><br><span class="line">                res.state = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'非常抱歉，本图书馆暂时还未收纳本书！'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">return_book</span><span class="params">(self)</span>:</span></span><br><span class="line">        name = input(<span class="string">'请输入归还书籍的名称：'</span>)</span><br><span class="line">        rem = self.check_book(name)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> rem != <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> rem.state == <span class="number">1</span>:</span><br><span class="line">                print(<span class="string">'归还成功，欢迎下次借阅！'</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(<span class="string">'不需归还，请核实信息'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'这本书暂时没用在系统中！'</span>)</span><br><span class="line">manager = BookManager()</span><br><span class="line">manager.menu()</span><br></pre></td></tr></table></figure>
+
+<h2 id="实践功能"><a href="#实践功能" class="headerlink" title="实践功能"></a>实践功能</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">欢迎使用贝多芬图书管理系统，周恩来说过：“书籍是人类进步的阶梯！”</span><br><span class="line"></span><br><span class="line">1.查询所有书籍</span><br><span class="line">2.添加书籍</span><br><span class="line">3.借阅书籍</span><br><span class="line">4.归还书籍</span><br><span class="line">5.退出系统</span><br><span class="line"></span><br><span class="line">请输入数字选择对应功能：1</span><br><span class="line">名称:《小王子》 作者：安托万·德·圣埃克絮佩里</span><br><span class="line">推荐语：所述的飞行员坠机于撒哈拉沙漠的情节明显取材于圣埃克苏佩里的亲身经历。</span><br><span class="line">状态:未借出</span><br><span class="line"></span><br><span class="line">名称:《悲惨世界》       作者：维克多·雨果</span><br><span class="line">推荐语：描绘19世纪初20年间几个法国人物的生活背景，涵盖拿破仑战争和1832年巴黎共和党人起义等政治现象叙述。</span><br><span class="line">状态:未借出</span><br><span class="line"></span><br><span class="line">名称:《霍乱时期的爱情》 作者：加西亚·马尔克斯</span><br><span class="line">推荐语：讲述了一段跨越半个多世纪的爱情故事：男女主人公在二十岁的时候没能结婚，因为他们太年轻了；经过各种人生曲折之后，到了八十岁，他们还是没能结婚，</span><br><span class="line">因为他们太老了。</span><br><span class="line">状态:未借出</span><br><span class="line"></span><br><span class="line">1.查询所有书籍</span><br><span class="line">2.添加书籍</span><br><span class="line">3.借阅书籍</span><br><span class="line">4.归还书籍</span><br><span class="line">5.退出系统</span><br><span class="line"></span><br><span class="line">请输入数字选择对应功能：2</span><br><span class="line">请输入书籍名称：围城</span><br><span class="line">请输入作者：钱钟书</span><br><span class="line">请输入推荐语：是中国现代文学史上一部风格独特的讽刺小说。被誉为“新儒林外史”。</span><br><span class="line">恭喜！书籍录入成功！</span><br><span class="line"></span><br><span class="line">1.查询所有书籍</span><br><span class="line">2.添加书籍</span><br><span class="line">3.借阅书籍</span><br><span class="line">4.归还书籍</span><br><span class="line">5.退出系统</span><br><span class="line"></span><br><span class="line">请输入数字选择对应功能：1</span><br><span class="line">名称:《小王子》 作者：安托万·德·圣埃克絮佩里</span><br><span class="line">推荐语：所述的飞行员坠机于撒哈拉沙漠的情节明显取材于圣埃克苏佩里的亲身经历。</span><br><span class="line">状态:未借出</span><br><span class="line"></span><br><span class="line">名称:《悲惨世界》       作者：维克多·雨果</span><br><span class="line">推荐语：描绘19世纪初20年间几个法国人物的生活背景，涵盖拿破仑战争和1832年巴黎共和党人起义等政治现象叙述。</span><br><span class="line">状态:未借出</span><br><span class="line"></span><br><span class="line">名称:《霍乱时期的爱情》 作者：加西亚·马尔克斯</span><br><span class="line">推荐语：讲述了一段跨越半个多世纪的爱情故事：男女主人公在二十岁的时候没能结婚，因为他们太年轻了；经过各种人生曲折之后，到了八十岁，他们还是没能结婚，</span><br><span class="line">因为他们太老了。</span><br><span class="line">状态:未借出</span><br><span class="line"></span><br><span class="line">名称:《围城》   作者：钱钟书</span><br><span class="line">推荐语：是中国现代文学史上一部风格独特的讽刺小说。被誉为“新儒林外史”。</span><br><span class="line">状态:未借出</span><br><span class="line"></span><br><span class="line">1.查询所有书籍</span><br><span class="line">2.添加书籍</span><br><span class="line">3.借阅书籍</span><br><span class="line">4.归还书籍</span><br><span class="line">5.退出系统</span><br><span class="line"></span><br><span class="line">请输入数字选择对应功能：3</span><br><span class="line">请输入想要借阅书的书名：小王子</span><br><span class="line">借阅成功，为期一个月，请按时还书哟！</span><br><span class="line">1.查询所有书籍</span><br><span class="line">2.添加书籍</span><br><span class="line">3.借阅书籍</span><br><span class="line">4.归还书籍</span><br><span class="line">5.退出系统</span><br><span class="line"></span><br><span class="line">请输入数字选择对应功能：4</span><br><span class="line">请输入归还书籍的名称：shdfash</span><br><span class="line">这本书暂时没用在系统中！</span><br><span class="line">1.查询所有书籍</span><br><span class="line">2.添加书籍</span><br><span class="line">3.借阅书籍</span><br><span class="line">4.归还书籍</span><br><span class="line">5.退出系统</span><br><span class="line"></span><br><span class="line">请输入数字选择对应功能：1</span><br><span class="line">名称:《小王子》 作者：安托万·德·圣埃克絮佩里</span><br><span class="line">推荐语：所述的飞行员坠机于撒哈拉沙漠的情节明显取材于圣埃克苏佩里的亲身经历。</span><br><span class="line">状态:已借出</span><br><span class="line"></span><br><span class="line">名称:《悲惨世界》       作者：维克多·雨果</span><br><span class="line">推荐语：描绘19世纪初20年间几个法国人物的生活背景，涵盖拿破仑战争和1832年巴黎共和党人起义等政治现象叙述。</span><br><span class="line">状态:未借出</span><br><span class="line"></span><br><span class="line">名称:《霍乱时期的爱情》 作者：加西亚·马尔克斯</span><br><span class="line">推荐语：讲述了一段跨越半个多世纪的爱情故事：男女主人公在二十岁的时候没能结婚，因为他们太年轻了；经过各种人生曲折之后，到了八十岁，他们还是没能结婚，</span><br><span class="line">因为他们太老了。</span><br><span class="line">状态:未借出</span><br><span class="line"></span><br><span class="line">名称:《围城》   作者：钱钟书</span><br><span class="line">推荐语：是中国现代文学史上一部风格独特的讽刺小说。被誉为“新儒林外史”。</span><br><span class="line">状态:未借出</span><br><span class="line"></span><br><span class="line">1.查询所有书籍</span><br><span class="line">2.添加书籍</span><br><span class="line">3.借阅书籍</span><br><span class="line">4.归还书籍</span><br><span class="line">5.退出系统</span><br><span class="line"></span><br><span class="line">请输入数字选择对应功能：4</span><br><span class="line">请输入归还书籍的名称：小王子</span><br><span class="line">归还成功，欢迎下次借阅！</span><br><span class="line">1.查询所有书籍</span><br><span class="line">2.添加书籍</span><br><span class="line">3.借阅书籍</span><br><span class="line">4.归还书籍</span><br><span class="line">5.退出系统</span><br><span class="line"></span><br><span class="line">请输入数字选择对应功能：5</span><br><span class="line">欢迎下次使用，谢谢，祝您阅读愉快！</span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- 打赏 -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/chineselijie/2020/03/12/6.python实现图书管理系统的借阅/" data-id="ck7ooyaib002a4su65g7bmj39"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/03/12/1.网络--子网划分/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            子网划分
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/03/12/5.python内置函数/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">python内置函数</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2020
+        Li Jie
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="Li Jie&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>喜欢就打赏吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+<script src="/js/tocbot.min.js"></script>
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    ISCSI服务 |  Li Jie&#39;s blog
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Li Jie's blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-27.linux--ISCSI服务" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  ISCSI服务
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/12/27.linux--ISCSI服务/" class="article-date">
+  <time datetime="2020-03-12T11:38:40.262Z" itemprop="datePublished">2020-03-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux进阶/">linux进阶</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.3k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">11分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p><strong>关于作者</strong></p>
+<p><strong>周李杰</strong>，最后一批90后，现居<strong>湖北武汉</strong></p>
+<p>孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。</p>
+<p>兴趣众多，然无一精通。正努力成为一个有趣的人。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>[toc]</p>
+<h2 id="ISCSI技术概述"><a href="#ISCSI技术概述" class="headerlink" title="ISCSI技术概述"></a>ISCSI技术概述</h2><p>硬盘的接口类型</p>
+<ul>
+<li>IDE是一种成熟稳定、价格便宜的并行传输接口。</li>
+<li>SATA是一种传输速度更快、数据校验更完整的串行传输接口。</li>
+<li>SCSI是一种用于计算机和硬盘、光驱等设备之间系统级接口的通用标准，具有系统资源占用率低、转速高、传输速度快等优点。</li>
+</ul>
+<p>IBM公司开始研发ISCSI技术</p>
+<p>​        这是一种将SCSI接口与以太网技术相结合的新型存储技术，可以用来在网络中传输SCSI接口的命令和数据。</p>
+<p>iscsi = internet + scsi硬盘接口</p>
+<p>​        这样，不仅克服了传统SCSI接口设备的物理局限性，实现了跨区域的存储资源共享，还可以在不停机的状态下扩展存储容量。</p>
+<h2 id="配置ISCSI服务端"><a href="#配置ISCSI服务端" class="headerlink" title="配置ISCSI服务端"></a>配置ISCSI服务端</h2><h4 id="添加硬盘"><a href="#添加硬盘" class="headerlink" title="添加硬盘"></a>添加硬盘</h4><p>首先我们提前将虚拟机加入一块硬盘</p>
+<p>开机启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># lsblk</span></span><br><span class="line">NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span><br><span class="line">sda               8:0    0   20G  0 disk</span><br><span class="line">├─sda1            8:1    0    1G  0 part /boot</span><br><span class="line">└─sda2            8:2    0   19G  0 part</span><br><span class="line">  ├─centos-root 253:0    0   17G  0 lvm  /</span><br><span class="line">  └─centos-swap 253:1    0    2G  0 lvm  [SWAP]</span><br><span class="line">sdb               8:16   0   20G  0 disk</span><br><span class="line">sr0              11:0    1  4.2G  0 rom  /mnt/cdrom</span><br></pre></td></tr></table></figure>
+
+<h4 id="yum安装ISCSI服务端程序"><a href="#yum安装ISCSI服务端程序" class="headerlink" title="yum安装ISCSI服务端程序"></a>yum安装ISCSI服务端程序</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># yum install -y targetd targetcli</span></span><br><span class="line">[root@server222 ~]<span class="comment"># systemctl restart targetd</span></span><br><span class="line">[root@server222 ~]<span class="comment"># systemctl enable targetd</span></span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/targetd.service to /usr/lib/systemd/system/targetd.service.</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置ISCSI服务端共享资源"><a href="#配置ISCSI服务端共享资源" class="headerlink" title="配置ISCSI服务端共享资源"></a>配置ISCSI服务端共享资源</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># targetcli</span></span><br><span class="line">Warning: Could not load preferences file /root/.targetcli/prefs.bin.</span><br><span class="line">targetcli shell version 2.1.fb46</span><br><span class="line">Copyright 2011-2013 by Datera, Inc and others.</span><br><span class="line">For <span class="built_in">help</span> on commands, <span class="built_in">type</span> <span class="string">'help'</span>.</span><br><span class="line"></span><br><span class="line">/&gt; ls</span><br><span class="line">o- / ..................................................................... [...]</span><br><span class="line">  o- backstores .......................................................... [...]</span><br><span class="line">  | o- block .............................................. [Storage Objects: 0]</span><br><span class="line">  | o- fileio ............................................. [Storage Objects: 0]</span><br><span class="line">  | o- pscsi .............................................. [Storage Objects: 0]</span><br><span class="line">  | o- ramdisk ............................................ [Storage Objects: 0]</span><br><span class="line">  o- iscsi ........................................................ [Targets: 0]</span><br><span class="line">  o- loopback ..................................................... [Targets: 0]</span><br><span class="line">/&gt; <span class="built_in">cd</span> backstores/block</span><br><span class="line">/backstores/block&gt; create disk1 /dev/sdb</span><br><span class="line">Created block storage object disk1 using /dev/sdb.</span><br><span class="line">/backstores/block&gt; <span class="built_in">cd</span> /</span><br><span class="line">/&gt; ls</span><br><span class="line">o- / ..................................................................... [...]</span><br><span class="line">  o- backstores .......................................................... [...]</span><br><span class="line">  | o- block .............................................. [Storage Objects: 1]</span><br><span class="line">  | | o- disk1 ..................... [/dev/sdb (20.0GiB) write-thru deactivated]</span><br><span class="line">  | |   o- alua ............................................... [ALUA Groups: 1]</span><br><span class="line">  | |     o- default_tg_pt_gp ................... [ALUA state: Active/optimized]</span><br><span class="line">  | o- fileio ............................................. [Storage Objects: 0]</span><br><span class="line">  | o- pscsi .............................................. [Storage Objects: 0]</span><br><span class="line">  | o- ramdisk ............................................ [Storage Objects: 0]</span><br><span class="line">  o- iscsi ........................................................ [Targets: 0]</span><br><span class="line">  o- loopback ..................................................... [Targets: 0]</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建ISCSI-target名称以及配置共享资源"><a href="#创建ISCSI-target名称以及配置共享资源" class="headerlink" title="创建ISCSI target名称以及配置共享资源"></a>创建ISCSI target名称以及配置共享资源</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/&gt; <span class="built_in">cd</span> iscsi</span><br><span class="line">/iscsi&gt; .</span><br><span class="line">/iscsi&gt; create</span><br><span class="line">Created target iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab.</span><br><span class="line">Created TPG 1.</span><br><span class="line">Global pref auto_add_default_portal=<span class="literal">true</span></span><br><span class="line">Created default portal listening on all IPs (0.0.0.0), port 3260.</span><br><span class="line">/iscsi&gt; <span class="built_in">cd</span> iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab/</span><br><span class="line">/iscsi/iqn.20....c0e1179441ab&gt; ls</span><br><span class="line">o- iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab ....... [TPGs: 1]</span><br><span class="line">  o- tpg1 ............................................... [no-gen-acls, no-auth]</span><br><span class="line">    o- acls .......................................................... [ACLs: 0]</span><br><span class="line">    o- luns .......................................................... [LUNs: 0]</span><br><span class="line">    o- portals .................................................... [Portals: 1]</span><br><span class="line">      o- 0.0.0.0:3260 ..................................................... [OK]</span><br><span class="line">/iscsi/iqn.20....c0e1179441ab&gt; <span class="built_in">cd</span> tpg1/luns</span><br><span class="line">/iscsi/iqn.20...1ab/tpg1/luns&gt; create /backstores/block/disk1</span><br><span class="line">Created LUN 0.</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置访问控制列表（ACL）"><a href="#设置访问控制列表（ACL）" class="headerlink" title="设置访问控制列表（ACL）"></a>设置访问控制列表（ACL）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/iscsi/iqn.20...1ab/tpg1/luns&gt; <span class="built_in">cd</span> ..</span><br><span class="line">/iscsi/iqn.20...179441ab/tpg1&gt; ls</span><br><span class="line">o- tpg1 ................................................. [no-gen-acls, no-auth]</span><br><span class="line">  o- acls ............................................................ [ACLs: 0]</span><br><span class="line">  o- luns ............................................................ [LUNs: 1]</span><br><span class="line">  | o- lun0 ........................ [block/disk1 (/dev/sdb) (default_tg_pt_gp)]</span><br><span class="line">  o- portals ...................................................... [Portals: 1]</span><br><span class="line">    o- 0.0.0.0:3260 ....................................................... [OK]</span><br><span class="line">/iscsi/iqn.20...179441ab/tpg1&gt; <span class="built_in">cd</span> acls</span><br><span class="line">/iscsi/iqn.20...1ab/tpg1/acls&gt; create iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab:client</span><br><span class="line">Created Node ACL <span class="keyword">for</span> iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab:client</span><br><span class="line">Created mapped LUN 0.</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置ISCSI服务端的监听IP地址和端口号"><a href="#设置ISCSI服务端的监听IP地址和端口号" class="headerlink" title="设置ISCSI服务端的监听IP地址和端口号"></a>设置ISCSI服务端的监听IP地址和端口号</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/iscsi/iqn.20...1ab/tpg1/acls&gt; <span class="built_in">cd</span> ..</span><br><span class="line">/iscsi/iqn.20...179441ab/tpg1&gt; <span class="built_in">cd</span> portals/</span><br><span class="line">/iscsi/iqn.20.../tpg1/portals&gt; ls</span><br><span class="line">o- portals ........................................................ [Portals: 1]</span><br><span class="line">  o- 0.0.0.0:3260 ......................................................... [OK]</span><br><span class="line">/iscsi/iqn.20.../tpg1/portals&gt; create 192.168.176.222</span><br><span class="line">Using default IP port 3260</span><br><span class="line">Created network portal 192.168.176.222:3260.</span><br><span class="line">/iscsi/iqn.20.../tpg1/portals&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此处如果报错 请执行下面一步骤 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; /iscsi/iqn.20.../tpg1/portals&gt; create 192.168.176.222</span><br><span class="line">&gt; Using default IP port 3260</span><br><span class="line">&gt; Could not create NetworkPortal <span class="keyword">in</span> configFS</span><br><span class="line">&gt; </span><br><span class="line">&gt; /iscsi/iqn.20.../tpg1/portals&gt; delete 0.0.0.0 3260</span><br><span class="line">&gt; Deleted network portal 0.0.0.0:3260</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="检查配置信息"><a href="#检查配置信息" class="headerlink" title="检查配置信息"></a>检查配置信息</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">iscsi/iqn.20.../tpg1/portals&gt; ls /</span><br><span class="line">o- / ..................................................................... [...]</span><br><span class="line">  o- backstores .......................................................... [...]</span><br><span class="line">  | o- block .............................................. [Storage Objects: 1]</span><br><span class="line">  | | o- disk1 ....................... [/dev/sdb (20.0GiB) write-thru activated]</span><br><span class="line">  | |   o- alua ............................................... [ALUA Groups: 1]</span><br><span class="line">  | |     o- default_tg_pt_gp ................... [ALUA state: Active/optimized]</span><br><span class="line">  | o- fileio ............................................. [Storage Objects: 0]</span><br><span class="line">  | o- pscsi .............................................. [Storage Objects: 0]</span><br><span class="line">  | o- ramdisk ............................................ [Storage Objects: 0]</span><br><span class="line">  o- iscsi ........................................................ [Targets: 1]</span><br><span class="line">  | o- iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab ... [TPGs: 1]</span><br><span class="line">  |   o- tpg1 ........................................... [no-gen-acls, no-auth]</span><br><span class="line">  |     o- acls ...................................................... [ACLs: 1]</span><br><span class="line">  |     | o- iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab:client  [Mapped LUNs: 1]</span><br><span class="line">  |     |   o- mapped_lun0 ............................. [lun0 block/disk1 (rw)]</span><br><span class="line">  |     o- luns ...................................................... [LUNs: 1]</span><br><span class="line">  |     | o- lun0 .................. [block/disk1 (/dev/sdb) (default_tg_pt_gp)]</span><br><span class="line">  |     o- portals ................................................ [Portals: 1]</span><br><span class="line">  |       o- 192.168.176.222:3260 ......................................... [OK]</span><br><span class="line">  o- loopback ..................................................... [Targets: 0]</span><br><span class="line">/iscsi/iqn.20.../tpg1/portals&gt; <span class="built_in">exit</span></span><br><span class="line">Global pref auto_save_on_exit=<span class="literal">true</span></span><br><span class="line">Last 10 configs saved <span class="keyword">in</span> /etc/target/backup.</span><br><span class="line">Configuration saved to /etc/target/saveconfig.json</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置防火墙以及重启服务"><a href="#配置防火墙以及重启服务" class="headerlink" title="配置防火墙以及重启服务"></a>配置防火墙以及重启服务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 ~]<span class="comment"># systemctl restart targetd</span></span><br><span class="line">[root@server222 ~]<span class="comment"># systemctl enable targetd</span></span><br><span class="line"></span><br><span class="line">[root@server222 ~]<span class="comment"># systemctl stop firewalld</span></span><br><span class="line">[root@server222 ~]<span class="comment"># vim /etc/selinux/config</span></span><br><span class="line">[root@server222 ~]<span class="comment"># setenforce 0</span></span><br><span class="line">[root@server222 ~]<span class="comment"># getenforce</span></span><br><span class="line">Permissive</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置ISCSI客户端"><a href="#配置ISCSI客户端" class="headerlink" title="配置ISCSI客户端"></a>配置ISCSI客户端</h2><blockquote>
+<p>客户端地址：192.168.176.111</p>
+</blockquote>
+<h4 id="安装ISCSI客户端服务程序initiator"><a href="#安装ISCSI客户端服务程序initiator" class="headerlink" title="安装ISCSI客户端服务程序initiator"></a>安装ISCSI客户端服务程序initiator</h4><blockquote>
+<p>在rhel 7 系统中，ISCSI-initator-utils已经被默认安装了</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># yum install iscsi-initiator-utils</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="编辑initiatorname配置文件"><a href="#编辑initiatorname配置文件" class="headerlink" title="编辑initiatorname配置文件"></a>编辑initiatorname配置文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># vim /etc/iscsi/initiatorname.iscsi</span></span><br><span class="line">[root@client111 ~]<span class="comment"># cat /etc/iscsi/initiatorname.iscsi</span></span><br><span class="line">InitiatorName=iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab:client</span><br><span class="line"></span><br><span class="line">[root@client111 ~]<span class="comment"># systemctl restart iscsid</span></span><br><span class="line">[root@client111 ~]<span class="comment"># systemctl enable iscsid</span></span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/iscsid.service to /usr/lib/systemd/system/iscsid.service.</span><br></pre></td></tr></table></figure>
+
+<h4 id="登录iSCSI服务端"><a href="#登录iSCSI服务端" class="headerlink" title="登录iSCSI服务端"></a>登录iSCSI服务端</h4><blockquote>
+<p> iscsiadm是用于管理、查询、插入、更新或删除iSCSI数据库配置文件的命令行工具，用户需要先使用这个工具扫描发现远程iSCSI服务端，然后查看找到的服务端上有哪些可用的共享存储资源。</p>
+<p>-m discovery参数的目的是扫描并发现可用的存储资源，</p>
+<p>-t st参数为执行扫描操作的类型，</p>
+<p>-p 192.168.176.222 参数为iSCSI服务端的IP地址</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># iscsiadm -m discovery -t st -p 192.168.176.222</span></span><br><span class="line">192.168.176.222:3260,1 iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-m node参数为将客户端所在主机作为一台节点服务器，</p>
+<p>-T  iqn.2003-01.org.linux-iscsi.linuxprobe.x8664:sn.d497c356ad80参数为要使用的存储资源 (直接复制前面命令中扫描发现的结果，以免错误)</p>
+<p>-p 192.168.176.222参数依然为服务端iSCSI服务端的IP地址。</p>
+<p>–login或-l参数进行登录验证。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># iscsiadm -m node -T iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab -p 192.168.176.222 --login</span></span><br><span class="line">Logging <span class="keyword">in</span> to [iface: default, target: iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab, portal: 192.168.176.222,3260] (multiple)</span><br><span class="line">Login to [iface: default, target: iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab, portal: 192.168.176.222,3260] successful.</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此时我们lsbak看一下</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># lsblk</span></span><br><span class="line">NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span><br><span class="line">sda               8:0    0   20G  0 disk</span><br><span class="line">├─sda1            8:1    0    1G  0 part /boot</span><br><span class="line">└─sda2            8:2    0   19G  0 part</span><br><span class="line">  ├─centos-root 253:0    0   17G  0 lvm  /</span><br><span class="line">  └─centos-swap 253:1    0    2G  0 lvm  [SWAP]</span><br><span class="line">sdb               8:16   0   20G  0 disk</span><br><span class="line">sr0              11:0    1  4.2G  0 rom  /mnt/cdrom</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>发现此处多了一个/dev/sdb的设备文件</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># file /dev/sdb</span></span><br><span class="line">/dev/sdb: block special</span><br></pre></td></tr></table></figure>
+
+<h4 id="挂载设备"><a href="#挂载设备" class="headerlink" title="挂载设备"></a>挂载设备</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># file /dev/sdb</span></span><br><span class="line">/dev/sdb: block special</span><br><span class="line">[root@client111 ~]<span class="comment"># mkfs.xfs /dev/sdb</span></span><br><span class="line">meta-data=/dev/sdb               isize=512    agcount=4, agsize=1310720 blks</span><br><span class="line">         =                       sectsz=512   attr=2, projid32bit=1</span><br><span class="line">         =                       crc=1        finobt=0, sparse=0</span><br><span class="line">data     =                       bsize=4096   blocks=5242880, imaxpct=25</span><br><span class="line">         =                       sunit=0      swidth=0 blks</span><br><span class="line">naming   =version 2              bsize=4096   ascii-ci=0 ftype=1</span><br><span class="line"><span class="built_in">log</span>      =internal <span class="built_in">log</span>           bsize=4096   blocks=2560, version=2</span><br><span class="line">         =                       sectsz=512   sunit=0 blks, lazy-count=1</span><br><span class="line">realtime =none                   extsz=4096   blocks=0, rtextents=0</span><br><span class="line">[root@client111 ~]<span class="comment"># mkdir /iscsi</span></span><br><span class="line">[root@client111 ~]<span class="comment"># mount /dev/sdb /iscsi/</span></span><br><span class="line">[root@client111 ~]<span class="comment"># df -Th</span></span><br><span class="line">文件系统                类型      容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/mapper/centos-root xfs        17G  4.4G   13G   26% /</span><br><span class="line">devtmpfs                devtmpfs  977M     0  977M    0% /dev</span><br><span class="line">tmpfs                   tmpfs     993M     0  993M    0% /dev/shm</span><br><span class="line">tmpfs                   tmpfs     993M  9.0M  984M    1% /run</span><br><span class="line">tmpfs                   tmpfs     993M     0  993M    0% /sys/fs/cgroup</span><br><span class="line">/dev/sr0                iso9660   4.3G  4.3G     0  100% /mnt/cdrom</span><br><span class="line">/dev/sda1               xfs      1014M  161M  854M   16% /boot</span><br><span class="line">tmpfs                   tmpfs     199M   12K  199M    1% /run/user/42</span><br><span class="line">tmpfs                   tmpfs     199M     0  199M    0% /run/user/0</span><br><span class="line">/dev/sdb                xfs        20G   33M   20G    1% /iscsi</span><br></pre></td></tr></table></figure>
+
+<h4 id="永久挂载"><a href="#永久挂载" class="headerlink" title="永久挂载"></a>永久挂载</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># blkid | grep /dev/sdb</span></span><br><span class="line">/dev/sdb: UUID=<span class="string">"cc4c5965-a701-4534-85ad-60df267cf5d7"</span> TYPE=<span class="string">"xfs"</span></span><br><span class="line">[root@client111 ~]<span class="comment"># vim /etc/fstab</span></span><br><span class="line">[root@client111 ~]<span class="comment"># tail -n 1 /etc/fstab</span></span><br><span class="line">UUID=<span class="string">"cc4c5965-a701-4534-85ad-60df267cf5d7"</span> /iscsi xfs defaults,_netdev 0 0</span><br><span class="line">[root@client111 ~]<span class="comment"># mount -a</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="卸载ISCSI共享资源设备"><a href="#卸载ISCSI共享资源设备" class="headerlink" title="卸载ISCSI共享资源设备"></a>卸载ISCSI共享资源设备</h4><blockquote>
+<p> 可以用iscsiadm命令的-u参数将其设备卸载</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@client111 ~]<span class="comment"># umount /iscsi/</span></span><br><span class="line">[root@client111 ~]<span class="comment"># df -Th</span></span><br><span class="line">文件系统                类型      容量  已用  可用 已用% 挂载点</span><br><span class="line">/dev/mapper/centos-root xfs        17G  4.4G   13G   26% /</span><br><span class="line">devtmpfs                devtmpfs  977M     0  977M    0% /dev</span><br><span class="line">tmpfs                   tmpfs     993M     0  993M    0% /dev/shm</span><br><span class="line">tmpfs                   tmpfs     993M  9.0M  984M    1% /run</span><br><span class="line">tmpfs                   tmpfs     993M     0  993M    0% /sys/fs/cgroup</span><br><span class="line">/dev/sr0                iso9660   4.3G  4.3G     0  100% /mnt/cdrom</span><br><span class="line">/dev/sda1               xfs      1014M  161M  854M   16% /boot</span><br><span class="line">tmpfs                   tmpfs     199M   12K  199M    1% /run/user/42</span><br><span class="line">tmpfs                   tmpfs     199M     0  199M    0% /run/user/0</span><br><span class="line">[root@client111 ~]<span class="comment"># iscsiadm -m node -T iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab -u</span></span><br><span class="line">Logging out of session [sid: 1, target: iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab, portal: 192.168.176.222,3260]</span><br><span class="line">Logout of [sid: 1, target: iqn.2003-01.org.linux-iscsi.server222.x8664:sn.c0e1179441ab, portal: 192.168.176.222,3260] successful.</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>1．简述iSCSI存储技术在生产环境中的作用。</p>
+<p>2．在Linux系统中，iSCSI服务端和iSCSI客户端所使用的服务程序分别叫什么？</p>
+<p>3．在使用targetcli命令配置iSCSI服务端配置文件时，acls与portals参数目录中分别存放什么内容？</p>
+<p>4．iSCSI协议占用了服务器哪个协议和端口号？</p>
+<p>5．用户在填写fstab设备挂载配置文件时，一般会把远程存储资源的UUID（而非设备的名称）填写到配置文件中。这是为什么？</p>
+
+      
+      <!-- 打赏 -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/chineselijie/2020/03/12/27.linux--ISCSI服务/" data-id="ck7ooyah3001q4su6xj96hu7s"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux进阶/">linux进阶</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/03/12/28.linux--RHCE 7版本认证考试练习/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            RHCE 7版本认证考试练习
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/03/12/26.linux--shell脚本笔记(脚本)/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">shell脚本笔记(脚本)</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2020
+        Li Jie
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="Li Jie&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>喜欢就打赏吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+<script src="/js/tocbot.min.js"></script>
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    LAMP |  Li Jie&#39;s blog
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Li Jie's blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content">
+      <section class="outer">
+  <article id="post-32.linux--LAMP" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  LAMP
+</h1>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/12/32.linux--LAMP/" class="article-date">
+  <time datetime="2020-03-12T11:38:49.903Z" itemprop="datePublished">2020-03-12</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux运维/">linux运维</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3k字</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">14分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <blockquote>
+<p><strong>关于作者</strong></p>
+<p><strong>周李杰</strong>，最后一批90后，现居<strong>湖北武汉</strong></p>
+<p>孤独患者，懒癌中期，无脑幻想者。但却人畜无害，无需远离。</p>
+<p>兴趣众多，然无一精通。正努力成为一个有趣的人。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; print(&quot;👆以上是不完整的我&quot;) //请我吃大餐将会了解更多</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>[TOC]</p>
+<h2 id="LAMP"><a href="#LAMP" class="headerlink" title="LAMP"></a>LAMP</h2><p><strong>LAMP</strong>是指一组通常一起使用来运行动态网站或者服务器的<a href="https://baike.baidu.com/item/自由软件" target="_blank" rel="noopener">自由软件</a>名称首字母缩写。</p>
+<ul>
+<li><a href="https://baike.baidu.com/item/Linux" target="_blank" rel="noopener"><strong>L</strong>inux</a>，<a href="https://baike.baidu.com/item/操作系统" target="_blank" rel="noopener">操作系统</a></li>
+<li><a href="https://baike.baidu.com/item/Apache" target="_blank" rel="noopener"><strong>A</strong>pache</a>，网页服务器</li>
+<li><a href="https://baike.baidu.com/item/MariaDB" target="_blank" rel="noopener"><strong>M</strong>ariaDB</a>或<a href="https://baike.baidu.com/item/MySQL" target="_blank" rel="noopener"><strong>M</strong>ySQL</a>，<a href="https://baike.baidu.com/item/数据库管理系统" target="_blank" rel="noopener">数据库管理系统</a>（或者<a href="https://baike.baidu.com/item/数据库服务器" target="_blank" rel="noopener">数据库服务器</a>）</li>
+<li><a href="https://baike.baidu.com/item/PHP" target="_blank" rel="noopener"><strong>P</strong>HP</a>、<a href="https://baike.baidu.com/item/Perl" target="_blank" rel="noopener"><strong>P</strong>erl</a>或<a href="https://baike.baidu.com/item/Python" target="_blank" rel="noopener"><strong>P</strong>ython</a>，<a href="https://baike.baidu.com/item/脚本语言" target="_blank" rel="noopener">脚本语言</a></li>
+</ul>
+<p>虽然这些<a href="https://baike.baidu.com/item/开放源代码" target="_blank" rel="noopener">开放源代码</a>程序本身并不是专门设计成同另几个程序一起工作的，但由于它们的廉价和普遍，这个组合开始流行（大多数<a href="https://baike.baidu.com/item/Linux发行版本" target="_blank" rel="noopener">Linux发行版本</a>捆绑了这些软件）。当一起使用的时候，它们表现的像一个具有活力的“解决方案包”（Solution Packages）。其他的方案包有<a href="https://baike.baidu.com/item/苹果" target="_blank" rel="noopener">苹果</a>的<a href="https://baike.baidu.com/item/WebObjects" target="_blank" rel="noopener">WebObjects</a>（最初是<a href="https://baike.baidu.com/item/应用服务器" target="_blank" rel="noopener">应用服务器</a>），<a href="https://baike.baidu.com/item/Java" target="_blank" rel="noopener">Java</a>/<a href="https://baike.baidu.com/item/J2EE" target="_blank" rel="noopener">J2EE</a>和<a href="https://baike.baidu.com/item/微软" target="_blank" rel="noopener">微软</a>的<a href="https://baike.baidu.com/item/.NET" target="_blank" rel="noopener">.NET</a>架构。</p>
+<p>“LAMP包”的脚本组件中包括了<a href="https://baike.baidu.com/item/CGI" target="_blank" rel="noopener">CGI</a><a href="https://baike.baidu.com/item/web" target="_blank" rel="noopener">web</a>接口，它在90年代初期变得流行。这个技术允许<a href="https://baike.baidu.com/item/网页浏览器" target="_blank" rel="noopener">网页浏览器</a>的用户在服务器上执行一个程序，并且和接受静态的内容一样接受动态的内容。程序员使用<a href="https://baike.baidu.com/item/脚本语言" target="_blank" rel="noopener">脚本语言</a>来创建这些程序因为它们能很容易有效的操作文本流，甚至当这些文本流并非源自程序自身时也是。正是由于这个原因系统设计者经常称这些脚本语言为<a href="https://baike.baidu.com/item/胶水语言" target="_blank" rel="noopener">胶水语言</a>。</p>
+<p>Michael Kunze在一篇为德国计算机杂志《c’t》（1998，第12期，230页）而写的文章中使用了缩略语“LAMP”。这篇文章意在展示一系列的自由软件成为了商业包的替换物。由于IT世界众所周知的对缩写的爱好，Kunze提出“LAMP”这一容易被市场接受的术语来普及自由软件的使用。</p>
+<h2 id="web服务"><a href="#web服务" class="headerlink" title="web服务"></a>web服务</h2><p><strong>WEB</strong>服务器也称为WWW(WORLD WIDE WEB，万维网)服务器，主要功能是提供网上信息浏览服务。</p>
+<p><strong>常见web服务器（web）：</strong></p>
+<p> httpd（apache）、nginx+PHP</p>
+<p>tomcat：   jsp + htm</p>
+<p>win:IIS</p>
+<p>客户端：IE 、firefox、chrome、手机（浏览器）Browser</p>
+<h2 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h2><p><strong>Apache HTTPD Server</strong> 简称 Apache，是 Apache 软件基金会的一个开源的网页服务器， 可以在大多数计算机操作系统中运行，由于其多平台和安全性被广泛使用，是最流行的 Web 服务器端软件之一。它快速、可靠并且可通过简单的 API 扩展，将 Perl/Python 等解释器编 译到服务器中！Apache HTTP 服务器是一个模块化的服务器,各个功能使用模块化进行插拔！ 目前支持 Windows，Linux，Unix 等平台！</p>
+<p><strong>Apache</strong> 软件基金会（也就是 Apache Software Foundation，简称为 ASF），是专门为运 作一个开源软件项目的 Apache 的团体提供支持的非盈利性组织，这个开源软件项目就是 Apache 项目！那么我们的 HTTPD 也只是 Apache 的开源项目之一！</p>
+<p><strong>主要的开源项目</strong>：HTTP Server，Ant，DB，iBATIS，Jakarta，Logging，Maven，Struts， Tomcat，Tapestry,Hadoop 等等。只是最有名的是 HTTP Server，所以现在所说的 Apache 已 经就是 HTTPD Server 的代号了! 我们还见的比较多的是 Tomcat，Hadoop 等项目</p>
+<p>官方网站：<a href="http://www.apache.org/" target="_blank" rel="noopener">Apache</a></p>
+<p>httpd：<a href="http://httpd.apache.org/" target="_blank" rel="noopener">httpd.apache</a></p>
+<h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><p><strong>MySQL</strong>是一个关系型数据库管理系统，由瑞典 MySQL AB 公司开发，目前属于 Oracle 旗下公司，他也是最流行的关系型数据库管理系统！特别是在 WEB 应用方面！</p>
+<p><strong>关系型数据库</strong>：它通过数据、关系和对数据的约束三者组成的数据模型来存放和管理数据</p>
+<p>官方网站：<a href="http://www.mysql.com/" target="_blank" rel="noopener">mysql</a></p>
+<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><p><strong>PHP</strong>（外文名:PHP: Hypertext Preprocessor，中文名：“超文本预处理器”）是一种通 用开源脚本语言。语法吸收了 C 语言、Java 和 Perl 的特点，利于学习，使用广泛，主要适 用于 Web 开发领域。PHP 独特的语法混合了 C、Java、Perl 以及 PHP 自创的语法。它可以 比 CGI 或者 Perl 更快速地执行动态网页。用 PHP 做出的动态页面与其他的编程语言相比， PHP 是将程序嵌入到 HTML（标准通用标记语言下的一个应用）文档中去执行，执行效率比 完全生成 HTML 标记的 CGI 要高许多；PHP 还可以执行编译后代码，编译可以达到加密和 优化代码运行，使代码运行更快。</p>
+<p>简单的说，PHP 就是一个脚本解释器！ </p>
+<p>官方网站：<a href="http://php.net/" target="_blank" rel="noopener">php</a></p>
+<h2 id="LAMP工作原理"><a href="#LAMP工作原理" class="headerlink" title="LAMP工作原理"></a>LAMP工作原理</h2><p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1566921823529.png" alt="1566921823529"></p>
+<p><strong>Web 服务器的工作模式和端口</strong></p>
+<p>工作模式是：B/S 模式</p>
+<p>工作端口是：80/http 正常端口443/https SSL 端口</p>
+<p><strong>搭建网易yum源</strong></p>
+<blockquote>
+<p>准备之前我们需要搭建一下网易的yum源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; [root@server222 ~]<span class="comment"># wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo</span></span><br><span class="line">&gt; [root@server222 ~]<span class="comment"># cd /etc/yum.repos.d/</span></span><br><span class="line">&gt; [root@server222 yum.repos.d]<span class="comment"># yum clean all</span></span><br><span class="line">&gt; [root@server222 yum.repos.d]<span class="comment"># yum makecache</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="源码编译安装Apache"><a href="#源码编译安装Apache" class="headerlink" title="源码编译安装Apache"></a>源码编译安装Apache</h2><blockquote>
+<p>下载传到<code>/usr/local/src/</code>目录下面</p>
+</blockquote>
+<p><strong>安装gcc、pcre-devel</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 src]<span class="comment"># yum install gcc -y</span></span><br><span class="line">[root@server222 src]<span class="comment"># yum install pcre pcre-devel -y</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>apr源码包编译</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 src]<span class="comment"># tar -xzvf apr-1.6.5.tar.gz</span></span><br><span class="line">[root@server222 src]<span class="comment"># cd apr-1.6.5/</span></span><br><span class="line">[root@server222 apr-1.6.5]<span class="comment"># ./configure --prefix=/usr/local/apr ; make ; make install</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>apr-util源码包编译</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 apr-1.6.5]<span class="comment"># cd ..</span></span><br><span class="line">[root@server222 src]<span class="comment"># tar -xzvf apr-util-1.6.1.tar.gz</span></span><br><span class="line">[root@server222 src]<span class="comment"># cd apr-util-1.6.1/</span></span><br><span class="line">[root@server222 apr-util-1.6.1]<span class="comment"># ./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr ; make ; make install</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果在编译途中遇到这样的错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; 编译中断。</span><br><span class="line">&gt; make[1]: *** [xml/apr_xml.lo] 错误 1</span><br><span class="line">&gt; make[1]: 离开目录“/usr/<span class="built_in">local</span>/src/apr-util-1.6.1”</span><br><span class="line">&gt; make: *** [all-recursive] 错误 1</span><br><span class="line">&gt; /bin/sh /usr/<span class="built_in">local</span>/apr/build-1/libtool --silent --mode=compile gcc -g -O2 -pthread   -DHAVE_CONFIG_H  -DLINUX -D_REENTRANT -D_GNU_SOURCE   -I/usr/<span class="built_in">local</span>/src/apr-util-1.6.1/include -I/usr/<span class="built_in">local</span>/src/apr-util-1.6.1/include/private  -I/usr/<span class="built_in">local</span>/apr/include/apr-1    -o xml/apr_xml.lo -c xml/apr_xml.c &amp;&amp; touch xml/apr_xml.lo</span><br><span class="line">&gt; xml/apr_xml.c:35:19: 致命错误：expat.h：没有那个文件或目录</span><br><span class="line">&gt;  <span class="comment">#include &lt;expat.h&gt;</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>请运行<code>yum install expat-devel -y</code> 这么一个命令</p>
+<p>再次编译就好了</p>
+</blockquote>
+<p><strong>创建用户与组</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 apr-util-1.6.1]<span class="comment"># groupadd -r apache</span></span><br><span class="line">[root@server222 apr-util-1.6.1]<span class="comment"># useradd -r -g apache apache -s /sbin/nologin</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>httpd源码包编译</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 apr-util-1.6.1]<span class="comment"># cd ..</span></span><br><span class="line">[root@server222 src]<span class="comment"># tar -xzvf httpd-2.4.38.tar.gz</span></span><br><span class="line">[root@server222 src]<span class="comment"># cd httpd-2.4.38/</span></span><br><span class="line">[root@server222 httpd-2.4.38]<span class="comment"># ./configure --prefix=/usr/local/apache --sysconfdir=/etc/httpd24 --enable-so --enable-ssl --enable-cgi --enable-rewrite --with-zlib --with-pcre --with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util --enable-modules=most --enable-mpms-shared=all --with-mpm=prefork</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若遇到这种情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; configure: WARNING: OpenSSL version is too old</span><br><span class="line">&gt; no</span><br><span class="line">&gt; checking whether to <span class="built_in">enable</span> mod_ssl... configure: error: mod_ssl has been requested but can not be built due to prerequisite failures</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>请执行<code>yum install openssl-devel -y</code>一条命令</p>
+<p>再次执行上一步编译</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 httpd-2.4.38]<span class="comment"># make ; make install</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>启动服务</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 httpd-2.4.38]<span class="comment"># /usr/local/apache/bin/apachectl</span></span><br><span class="line">AH00558: httpd: Could not reliably determine the server<span class="string">'s fully qualified domain name, using fe80::1bd0:d77:f2c2:6f3. Set the '</span>ServerName<span class="string">' directive globally to suppress this message</span></span><br><span class="line"><span class="string">[root@server222 httpd-2.4.38]# /usr/local/apache/bin/apachectl</span></span><br><span class="line"><span class="string">AH00558: httpd: Could not reliably determine the server'</span>s fully qualified domain name, using fe80::1bd0:d77:f2c2:6f3. Set the <span class="string">'ServerName'</span> directive globally to suppress this message</span><br><span class="line">httpd (pid 114412) already running</span><br><span class="line"><span class="comment"># 此处出来这么一大串鬼东西，其实httpd已经在运行了</span></span><br><span class="line">[root@server222 httpd-2.4.38]<span class="comment"># netstat -antup | grep httpd</span></span><br><span class="line">tcp6       0      0 :::80                   :::*                    LISTEN      114412/httpd</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此处教一下字符界面的浏览器，命令<code>yum install elinks.x86_64 -y</code></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 httpd-2.4.38]<span class="comment"># yum install elinks.x86_64 -y</span></span><br><span class="line">[root@server222 httpd-2.4.38]<span class="comment"># elinks 192.168.176.222</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>第一次访问点击OK，之后就可以看到页面显示“<strong>It works!</strong>”，到此处 Apache搭建完成</p>
+</blockquote>
+<h2 id="添加systemd的服务脚本"><a href="#添加systemd的服务脚本" class="headerlink" title="添加systemd的服务脚本"></a>添加systemd的服务脚本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 httpd-2.4.38]<span class="comment"># cd /usr/lib/systemd/system</span></span><br><span class="line">[root@server222 system]<span class="comment"># vim httpd.service</span></span><br><span class="line">[root@server222 system]<span class="comment"># cat httpd.service</span></span><br><span class="line"><span class="comment"># 添加内容如下</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=The Apache HTTP Server</span><br><span class="line">After=network.target remote-fs.target nss-lookup.target</span><br><span class="line">Documentation=man:httpd(8)</span><br><span class="line">Documentation=man:apachectl(8)</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/usr/<span class="built_in">local</span>/apache/bin/httpd -DFOREGROUND</span><br><span class="line">ExecReload=/usr/<span class="built_in">local</span>/apache/bin/httpd -k graceful</span><br><span class="line">ExecStop=/bin/<span class="built_in">kill</span> -WINCH <span class="variable">$&#123;MAINPID&#125;</span></span><br><span class="line"></span><br><span class="line">KillSignal=SIGCONT</span><br><span class="line">PrivateTmp=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p><strong>启动服务测试</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 system]<span class="comment"># systemctl start httpd</span></span><br><span class="line">[root@server222 system]<span class="comment"># systemctl restart httpd</span></span><br><span class="line">[root@server222 system]<span class="comment"># systemctl status httpd</span></span><br><span class="line">● httpd.service - The Apache HTTP Server</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since 五 2019-08-30 20:31:20 CST; 1s ago</span><br><span class="line">     Docs: man:httpd(8)</span><br><span class="line">           man:apachectl(8)</span><br><span class="line">  Process: 114744 ExecStop=/bin/<span class="built_in">kill</span> -WINCH <span class="variable">$&#123;MAINPID&#125;</span> (code=exited, status=1/FAILURE)</span><br><span class="line"> Main PID: 114756 (httpd)</span><br><span class="line">   CGroup: /system.slice/httpd.service</span><br><span class="line">           └─114756 /usr/<span class="built_in">local</span>/apache/bin/httpd -DFOREGROUND</span><br><span class="line"></span><br><span class="line">8月 30 20:31:20 server222 systemd[1]: Started The Apache HTTP Server.</span><br><span class="line">8月 30 20:31:20 server222 systemd[1]: Starting The Apache HTTP Server...</span><br></pre></td></tr></table></figure>
+
+<h2 id="YUM安装LAMP环境"><a href="#YUM安装LAMP环境" class="headerlink" title="YUM安装LAMP环境"></a>YUM安装LAMP环境</h2><p><strong>LAMP=Linux（存在）+Apache（HTTPD   已安装）</strong>+Mysql+PHP</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 src]<span class="comment"># yum -y install httpd mariadb mariadb-server php php-mysql</span></span><br><span class="line">[root@server222 src]<span class="comment"># systemctl start mariadb.service</span></span><br><span class="line">[root@server222 src]<span class="comment"># systemctl enable mariadb.service</span></span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service to /usr/lib/systemd/system/mariadb.service.</span><br></pre></td></tr></table></figure>
+
+<p><strong><strong>初始化数据库</strong></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 src]<span class="comment"># mysql_secure_installation</span></span><br><span class="line"></span><br><span class="line">NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB</span><br><span class="line">      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!</span><br><span class="line"></span><br><span class="line">In order to <span class="built_in">log</span> into MariaDB to secure it, we<span class="string">'ll need the current</span></span><br><span class="line"><span class="string">password for the root user.  If you'</span>ve just installed MariaDB, and</span><br><span class="line">you haven<span class="string">'t set the root password yet, the password will be blank,</span></span><br><span class="line"><span class="string">so you should just press enter here.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Enter current password for root (enter for none):</span></span><br><span class="line"><span class="string">OK, successfully used password, moving on...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Setting the root password ensures that nobody can log into the MariaDB</span></span><br><span class="line"><span class="string">root user without the proper authorisation.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Set root password? [Y/n]</span></span><br><span class="line"><span class="string">New password:</span></span><br><span class="line"><span class="string">Re-enter new password:</span></span><br><span class="line"><span class="string">Password updated successfully!</span></span><br><span class="line"><span class="string">Reloading privilege tables..</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">By default, a MariaDB installation has an anonymous user, allowing anyone</span></span><br><span class="line"><span class="string">to log into MariaDB without having to have a user account created for</span></span><br><span class="line"><span class="string">them.  This is intended only for testing, and to make the installation</span></span><br><span class="line"><span class="string">go a bit smoother.  You should remove them before moving into a</span></span><br><span class="line"><span class="string">production environment.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Remove anonymous users? [Y/n]</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Normally, root should only be allowed to connect from '</span>localhost<span class="string">'.  This</span></span><br><span class="line"><span class="string">ensures that someone cannot guess at the root password from the network.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Disallow root login remotely? [Y/n]</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">By default, MariaDB comes with a database named '</span><span class="built_in">test</span><span class="string">' that anyone can</span></span><br><span class="line"><span class="string">access.  This is also intended only for testing, and should be removed</span></span><br><span class="line"><span class="string">before moving into a production environment.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Remove test database and access to it? [Y/n]</span></span><br><span class="line"><span class="string"> - Dropping test database...</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"> - Removing privileges on test database...</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Reloading the privilege tables will ensure that all changes made so far</span></span><br><span class="line"><span class="string">will take effect immediately.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Reload privilege tables now? [Y/n]</span></span><br><span class="line"><span class="string"> ... Success!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Cleaning up...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">All done!  If you'</span>ve completed all of the above steps, your MariaDB</span><br><span class="line">installation should now be secure.</span><br><span class="line"></span><br><span class="line">Thanks <span class="keyword">for</span> using MariaDB!</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试数据库</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 src]<span class="comment"># mysql -uroot -p123456</span></span><br><span class="line">Welcome to the MariaDB monitor.  Commands end with ; or \g.</span><br><span class="line">Your MariaDB connection id is 11</span><br><span class="line">Server version: 5.5.60-MariaDB MariaDB Server</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">MariaDB [(none)]&gt; <span class="built_in">exit</span></span><br><span class="line">Bye</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试apache是否支持PHP</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 src]<span class="comment"># cd /var/www/html/</span></span><br><span class="line">[root@server222 html]<span class="comment"># vim index.php</span></span><br><span class="line">[root@server222 html]<span class="comment"># cat index.php</span></span><br><span class="line">&lt;?php</span><br><span class="line">phpinfo();</span><br><span class="line">?&gt;</span><br><span class="line">[root@server222 html]<span class="comment"># systemctl restart httpd</span></span><br><span class="line">[root@server222 html]<span class="comment"># elinks 192.168.176.222</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改配置文件，实战举例"><a href="#修改配置文件，实战举例" class="headerlink" title="修改配置文件，实战举例"></a>修改配置文件，实战举例</h2><p>例1： 搭建一台测试web服务器</p>
+<p>案例：</p>
+<p>部门内部搭建一台WEB服务器，采用的IP地址和端口为192.168.0.63:80，首页采用index.html</p>
+<p>文件。管理员E-mail地址为 <a href="mailto:775531910@qq.com" target="_blank" rel="noopener">775531910@qq.com</a>，网页的编码类型采用UTF-8，所有网站资源都存放在/var/www/html目录下，并将Apache的配置文件根目录设置为/etc/httpd目录。</p>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 html]<span class="comment"># vim /etc/httpd/conf/httpd.conf</span></span><br><span class="line"> 31 ServerRoot <span class="string">"/etc/httpd"</span>  <span class="comment">#apache配置文件的根目录 </span></span><br><span class="line"> 42 Listen 80  <span class="comment">#监听的端口</span></span><br><span class="line"> 86 ServerAdmin r775531910@qq.com   <span class="comment">#设置管理员，e-mail 地址</span></span><br><span class="line"> 95 <span class="comment">#ServerName www.example.com:80   #服务器主机名</span></span><br><span class="line">119 DocumentRoot <span class="string">"/var/www/html"</span>   <span class="comment">#网站页面根目录</span></span><br><span class="line">144 Options Indexes FollowSymLinks  <span class="comment">#当一个目录没有默认首页时，允许显示此目录列表</span></span><br><span class="line">164 DirectoryIndex index.html index.php  <span class="comment">#指定默认首页</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>取消apache默认欢迎页：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 html]<span class="comment"># vim /etc/httpd/conf.d/welcome.conf</span></span><br><span class="line"><span class="comment"># 将下面的四行注释掉</span></span><br><span class="line"><span class="comment">#&lt;LocationMatch "^/+$"&gt;</span></span><br><span class="line"><span class="comment">#    Options -Indexes</span></span><br><span class="line"><span class="comment">#    ErrorDocument 403 /.noindex.html</span></span><br><span class="line"><span class="comment">#&lt;/LocationMatch&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>创建首页：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 html]<span class="comment"># systemctl restart httpd.service</span></span><br><span class="line">[root@server222 html]<span class="comment"># echo 'welcome to haahahahahah775531910'  &gt; /var/www/html/index.html</span></span><br><span class="line">[root@server222 html]<span class="comment"># systemctl restart httpd.service</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>测试</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@server222 html]<span class="comment"># elinks 192.168.176.222</span></span><br></pre></td></tr></table></figure>
+
+
+      
+      <!-- 打赏 -->
+      
+      <div id="reward-btn">
+        打赏
+      </div>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/chineselijie/2020/03/12/32.linux--LAMP/" data-id="ck7ooyakc00304su66sv8s0is"
+        class="article-share-link">分享</a>
+        
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux运维/">linux运维</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/03/12/33.linux--PXE无人值守安装服务器/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            PXE无人值守安装服务器
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/03/12/31.linux--zabbix/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">zabbix</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        notify: false,
+        verify: '',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        avatar: 'mp',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2020
+        Li Jie
+      </li>
+      <li>
+        
+          Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <ul class="list-inline">
+  <li>PV:<span id="busuanzi_value_page_pv"></span></li>
+  <li>UV:<span id="busuanzi_value_site_uv"></span></li>
+</ul>
+        
+      </li>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+    <div class="to_top">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+      </div>
+    </main>
+      <aside class="sidebar">
+        <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer.png" alt="Li Jie&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+      </aside>
+      <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>喜欢就打赏吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+      <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
+    startDelay: 0,
+    typeSpeed: 200,
+    loop: true,
+    backSpeed: 100,
+    showCursor: true
+    });
+  } catch (err) {
+  }
+  
+</script>
+
+
+
+<script src="/js/tocbot.min.js"></script>
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer:'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    onClick: (e) => {
+      $('.toc-link').removeClass('is-active-link');
+      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
+      $(e.target.hash).scrollIntoView();
+      return false;
+    }
+  });
+</script>
+
+
+<script>
+  var ayerConfig = {
+    mathjax: false
+  }
+</script>
+
+<script src="/js/ayer.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+  </div>
+</body>
+
+</html>
